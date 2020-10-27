@@ -10,7 +10,6 @@ export class UserController {
 
     public create_user(req: Request, res: Response) {
         // this check whether all the filds were send through the erquest or not
-        console.log(req.body);
         if (req.body.name && req.body.name.first_name && req.body.name.middle_name && req.body.name.last_name &&
             req.body.email &&
             req.body.phone_number &&
