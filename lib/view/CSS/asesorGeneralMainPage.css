@@ -1,0 +1,91 @@
+/*/////////////////////////////////*/
+
+
+/*       USER MAIN PAGE            */
+
+
+/*/////////////////////////////////*/
+
+body {
+    background: linear-gradient(243.18deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #546886;
+    background-attachment: fixed;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.banner {
+    position: relative;
+    left: 2%;
+    height: 100px;
+    width: 300px;
+}
+
+.boxButtonUMP {
+    position: relative;
+    width: 160px;
+    height: 460px;
+}
+
+.BUMP {
+    width: 150px;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+
+.miembroUMP {
+    width: 450px;
+    position: relative;
+    top: 10%;
+    left: 20%;
+}
+
+.select {
+    position: absolute;
+    left: 85%;
+}
+
+.selecBox {
+    position: relative;
+    width: 150px;
+    height: 50px;
+    font-family: Signika SC;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 59px;
+    text-align: center;
+    color: #546886;
+}
+
+.selecData {
+    position: relative;
+    width: 197px;
+    height: 59px;
+    left: 42px;
+    top: 93px;
+    font-family: Signika SC;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 59px;
+    text-align: center;
+    color: #546886;
+}
+
+.asesorLogo {
+    position: relative;
+    top: 5%;
+    left: 2%;
+    height: 20px;
+    width: 200px;
+}

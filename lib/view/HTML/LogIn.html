@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="../CSS/login.css">
+    <title>Home Page FEMD</title>
+</head>
+
+<body>
+
+    <!-- BANNER Y CAJA DE BOTONES -->
+    <div class="banner">
+        <img src="../resources/banner.svg" alt="">
+
+        <!-- CAJA DE BOTONES -->
+        <div class="boxButtonAbout">
+
+            <!-- BOTON ABOUT -->
+
+            <button class="about" type="submit" style="border: 0; 
+                background: transparent" class="social " onclick="location.href='/about'">
+                <img src="../resources/About.svg " alt=" ">   
+            </button>
+
+            <!-- BOTON PROJECTS -->
+
+            <button class="projects " type="submit " style="border: 0; 
+            background: transparent " class="social " onclick="location.href='/about'">
+                <img src="../resources/Projects.svg " alt=" ">
+            </button>
+
+        </div>
+
+        <!-- CAJA DE LOGING -->
+        <div class="boxLoging">
+
+            <!--LOGO -->
+            <div class="logoAbout">
+                <img src="../resources/Log.svg " alt=" ">
+            </div>
+
+            <!-- LOGO Usuario -->
+            <div class="user">
+                <img src="../resources/Usuario.svg " alt=" ">
+                <input class="myborders" type="text " placeholder="Nombre de usuario " name="uname " required>
+            </div>
+
+
+            <!-- LOGO PIN -->
+            <div class="pin">
+                <img src="../resources/Contraseña.svg " alt=" ">
+                <input class="myborders" type="password " placeholder="contraseña " name="psw " required>
+            </div>
+
+            <br>
+            <br>
+            <br>
+
+            <!-- BOTONES -->
+            <form action="asesorMain" method="post">
+                <br>
+                <br>
+                <br>
+                <!-- BOTON GENEREAL-->
+                <button class="general" type="submit " style="border: 0; 
+                background: transparent " class="social " onclick="location.href='/asesorMain'">
+                <img src="../resources/BGeneral.svg " alt=" ">
+                </button>
+            </form>
+            <form action="userMain" method="post">
+                <!-- LOGO PIN -->
+                <button class="miembro" type="submit " style="border: 0; 
+                 background: transparent " class="social " onclick="location.href='/userMain'">
+                <img src="../resources/BMiembro.svg " alt=" ">
+                </button>
+            </form>
+        </div>
+
+</body>
+
+</html>

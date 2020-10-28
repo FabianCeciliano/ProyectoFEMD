@@ -1,0 +1,118 @@
+/*/////////////////////////////////*/
+
+
+/*             LOGIN             */
+
+
+/*/////////////////////////////////*/
+
+body {
+    background: linear-gradient(180deg, #546886 0%, #d7d9dc 100%);
+    background-attachment: fixed;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.banner {
+    position: relative;
+    left: 2%;
+    height: 100px;
+    width: 300px;
+}
+
+.social {
+    position: relative;
+    left: 85%;
+    width: 200px;
+}
+
+.projects {
+    width: 200px;
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: rgb(2, 1, 1);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+
+.about {
+    width: 150px;
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+
+.boxButtonAbout {
+    position: relative;
+    width: 370px;
+    height: 50px;
+    top: -100%;
+    left: 320%;
+}
+
+.boxLoging {
+    position: relative;
+    height: 500px;
+    width: 700px;
+    top: -60%;
+    left: 90%;
+}
+
+.logoAbout {
+    position: relative;
+    width: 450px;
+    left: 30%;
+}
+
+.user {
+    position: relative;
+    width: 500px;
+    top: 10%;
+    left: 10%;
+}
+
+.pin {
+    position: relative;
+    width: 500px;
+    top: 20%;
+    left: 10%;
+}
+
+.myborders {
+    border-radius: 5px;
+    height: 50px;
+    width: 500px;
+    position: relative;
+    left: 10%;
+}
+
+.general {
+    border-radius: 5px;
+    height: 50px;
+    position: relative;
+    left: 60%;
+}
+
+.miembro {
+    border-radius: 5px;
+    height: 50px;
+    position: relative;
+    left: 60%;
+}

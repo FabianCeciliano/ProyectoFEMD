@@ -1,0 +1,75 @@
+/*/////////////////////////////////*/
+
+
+/*             ABOUT             */
+
+
+/*/////////////////////////////////*/
+
+body {
+    background: linear-gradient(180deg, #546886 0%, #d7d9dc 100%);
+    background-attachment: fixed;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.banner {
+    position: relative;
+    left: 2%;
+    height: 100px;
+    width: 300px;
+}
+
+.login {
+    width: 150px;
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+
+.projects {
+    width: 200px;
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: rgb(2, 1, 1);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+
+.boxButtonAbout {
+    position: relative;
+    width: 370px;
+    height: 50px;
+    top: -100%;
+    left: 320%;
+}
+
+.logoAbout {
+    position: relative;
+    width: 450px;
+    left: 35%;
+}
+
+.dataAbout {
+    position: relative;
+    top: 70%;
+    left: 35%;
+    width: 450px;
+}
