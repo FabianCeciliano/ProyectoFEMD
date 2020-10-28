@@ -19,21 +19,21 @@ img {
 .banner {
     position: relative;
     left: 2%;
-    height: 100px;
-    width: 300px;
+    height: 8%;
+    width: 20%;
 }
 
 .logo {
     position: relative;
     top: 50%;
-    left: 35%;
-    width: 450px;
+    left: 30%;
+    width: 40%;
 }
 
 .social {
     position: relative;
-    left: 85%;
-    width: 200px;
+    left: 78%;
+    width: 20%;
 }
 
 .boxButton {
@@ -46,10 +46,10 @@ img {
 }
 
 .login {
-    width: 150px;
+    width: 30%;
     display: inline-block;
     padding: 15px 25px;
-    font-size: 24px;
+    font-size: 30%;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
@@ -61,25 +61,24 @@ img {
 }
 
 .projects {
-    width: 200px;
+    width: 35%;
     display: inline-block;
     padding: 15px 25px;
-    font-size: 24px;
+    font-size: 30%;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
     outline: none;
-    color: rgb(2, 1, 1);
     border: none;
     border-radius: 15px;
     box-shadow: 0 9px #999;
 }
 
 .about {
-    width: 150px;
+    width: 30%;
     display: inline-block;
     padding: 15px 25px;
-    font-size: 24px;
+    font-size: 30%;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
