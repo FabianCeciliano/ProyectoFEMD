@@ -31,19 +31,19 @@ export class Composite_Level extends IComponent{
         throw new Error("Method not implemented.");
     }
     getLevelType(): StructureType {
-        throw new Error("Method not implemented.");
+        return this.levelType;
     }
     setLevelType(pDato: StructureType) {
-        throw new Error("Method not implemented.");
+        this.levelType=pDato;
     }
     getName(): String {
-        throw new Error("Method not implemented.");
+        return this.name;
     }
     setName(pDato: String): void {
-        throw new Error("Method not implemented.");
+        this.name=pDato;
     }
     addIntegrants(pDato:Member): void {
-        throw new Error("Method not implemented.");
+        this.members.push(pDato);
     }
     deleteIntegrants(pDato:Member): void {
         throw new Error("Method not implemented.");

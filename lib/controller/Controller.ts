@@ -41,24 +41,58 @@ export class Controller {
     public deleteMemberFromStructure(pIdData:number){
         this.movement.getStructure().deleteMember(pIdData);
     };
-    public consultMember (){};
-    public consultGroup(){};
-    public defineMonitor( pNombreNivel : String , pIdData : String) : any {};
-    public authorizeMember(){};
-    public assignChiefs(){};
-    public assignChief( pNombreNivel : String , pIdData : number){};
-    public moveMember(  pNuevoNivel : String,  pExNivel : String,  pIdData : number ){};
-    public configBranch( pNombreRama : String):IComponent {return null};
-    public configZone( pNombreZona : String):IComponent {return null};
-    public configGroup( pNombreGrupo : String):IComponent {return null};
+    public consultMember(){
+
+    };
+    public consultGroup(){
+
+    };
+    public defineMonitor( pNombreNivel : String , pIdData : String) : any {
+
+    };
+    public authorizeMember(){
+
+    };
+    public assignChiefs(){
+
+    };
+    public assignChief( pNombreNivel : String , pIdData : number){
+
+    };
+    public moveMember(  pNuevoNivel : String,  pExNivel : String,  pIdData : number ){
+
+    };
+    public configBranch( pNombreRama : String):IComponent {
+        return null
+    };
+    public configZone( pNombreZona : String):IComponent {
+        return null
+    };
+    public configGroup( pNombreGrupo : String):IComponent {
+        return null
+    };
     //public displayMember( pIdData : String ): Member {return null};
-    public displayMember( pIdData : number ): String{return null};
-    public showMemberLevel( pIdData : String ){};
-    public requestMemberMovement( pNuevoNivel : String, pExNivel : String, pIdData : String ){};
-    public newAffiliation(  pDatol : String, pIdData : number ){};
-    public getMemberBranch() : [Member] {return null};
-    public getMemberZone() : [Member] {return null};
-    public getMemberGroup() : [Member] {return null};
+    public displayMember( pIdData : number ): String{
+        return null
+    };
+    public showMemberLevel( pIdData : String ){
+
+    };
+    public requestMemberMovement( pNuevoNivel : String, pExNivel : String, pIdData : String ){
+
+    };
+    public newAffiliation(  pDatol : String, pIdData : number ){
+
+    };
+    public getMemberBranch() : [Member] {
+        return null
+    };
+    public getMemberZone() : [Member] {
+        return null
+    };
+    public getMemberGroup() : [Member] {
+        return null
+    };
 
 }
 
