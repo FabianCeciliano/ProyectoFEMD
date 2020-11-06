@@ -1,14 +1,21 @@
-import Member from './Member';
+import {Member} from './Member';
 import {StructureType} from './StructureType';
 
-export default abstract class IComponent{
+export abstract class IComponent{
     
     name : String;
     id: number;
     numG : number;
     levelType :  StructureType;
-    members : [Member];
+    members : Member[];
 
+    constructor(id: number, name : String,numG : number,levelType :  StructureType){
+        this.name=name;
+        this.id=id;
+        this.numG=numG;
+        this.levelType=levelType;
+        this.members=[];
+    }
 
     abstract IComponente_Nivel( pNombre: String,pNumG : number, pTipoNodo:  StructureType )
     abstract addComposite( pDato : IComponent) : void
@@ -21,7 +28,8 @@ export default abstract class IComponent{
     abstract addIntegrants( pDato : Member) : void
     abstract deleteIntegrants( pDato: Member) : void
     abstract searchIntegrants( pDato : Member) : void
-    abstract getIntegrants(pNombre : String) : [Member]
+    abstract getIntegrants() : Member[]
+    abstract getCompositeGroup():IComponent[]
 
 }
 

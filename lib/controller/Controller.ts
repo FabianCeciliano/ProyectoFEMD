@@ -1,31 +1,65 @@
-import IComponent from "model/IComponent"
-import Member from "model/Member"
+import {IComponent} from '../model/IComponent';
+import {Member} from '../model/Member';
+import {Movement} from './Movement';
+import { Composite_Level } from '../model/Composite_Level';
+import { StructureType } from '../model/StructureType';
+import {Direction} from '../model/Direction'
+import {Rol} from '../model/Rol'
+import { LeafComponent } from '../model/LeafComponent';
 
-export class UserController {
+export class Controller {
 
-    
-    public createNewZone () : void {};
-    public createNewBranch () : void {};
-    public createNewGroup () : void {};
-    public insertMember () : void {};
-    public deleteMember() : void {};
-    public consultMember () : void {};
-    public consultGroup() : void {};
+    private movement:Movement;
+
+    public createMovement(cedJuridica:number, name:String, website :String, country : String,phoneNumber: number){
+        this.movement = new Movement(cedJuridica, name, website , country ,phoneNumber)
+    }
+    public createNewZone (id:number, name:String, numG:number) : void {
+        this.movement.getStructure().addZone(new Composite_Level(id,name,numG,StructureType.Zone))
+    };
+    public createNewBranch (zoneName:String, id:number, name:String, numG:number, ) : void {
+        this.movement.getStructure().addBranch(new Composite_Level(id,name,numG,StructureType.Branch),zoneName);
+    };
+    public createNewGroup (zoneName:String, branchName:String, id:number, name:String, numG:number) : void {
+        this.movement.getStructure().addGroup(new LeafComponent(id,name,numG,StructureType.Group),zoneName,branchName);
+    };
+    public addMemberToGroup(zoneName:String, branchName:String, groupName:String, 
+        direction : Direction,rol : Rol,facilitador : boolean,id:number,name:String,email:String,telephone:number){
+        let member = new Member(direction,rol,facilitador,id,name,email,telephone);
+        this.insertMember(member);
+        this.movement.getStructure().addMember(member,zoneName,branchName,groupName);
+    };
+    public insertMember (member:Member){
+        this.movement.getMembers().addMember(member);
+    };
+    public verEstructura(){
+        this.movement.getStructure().verEstructura();
+    }
+    public deleteMember(pIdData:number){
+        this.movement.getMembers().deleteMiembro(pIdData);
+    };
+    public deleteMemberFromStructure(pIdData:number){
+        this.movement.getStructure().deleteMember(pIdData);
+    };
+    public consultMember (){};
+    public consultGroup(){};
     public defineMonitor( pNombreNivel : String , pIdData : String) : any {};
-    public authorizeMember() : void {};
-    public assignChiefs() : void {};
-    public assignChief( pNombreNivel : String , pIdData : number) : void {};
-    public moveMember(  pNuevoNivel : String,  pExNivel : String,  pIdData : number ) : void {};
+    public authorizeMember(){};
+    public assignChiefs(){};
+    public assignChief( pNombreNivel : String , pIdData : number){};
+    public moveMember(  pNuevoNivel : String,  pExNivel : String,  pIdData : number ){};
     public configBranch( pNombreRama : String):IComponent {return null};
     public configZone( pNombreZona : String):IComponent {return null};
     public configGroup( pNombreGrupo : String):IComponent {return null};
     //public displayMember( pIdData : String ): Member {return null};
     public displayMember( pIdData : number ): String{return null};
-    public showMemberLevel( pIdData : String ):void {};
-    public requestMemberMovement( pNuevoNivel : String, pExNivel : String, pIdData : String ):void {};
-    public newAffiliation(  pDatol : String, pIdData : number ):void {};
+    public showMemberLevel( pIdData : String ){};
+    public requestMemberMovement( pNuevoNivel : String, pExNivel : String, pIdData : String ){};
+    public newAffiliation(  pDatol : String, pIdData : number ){};
     public getMemberBranch() : [Member] {return null};
     public getMemberZone() : [Member] {return null};
     public getMemberGroup() : [Member] {return null};
 
 }
+
+export default new Controller();

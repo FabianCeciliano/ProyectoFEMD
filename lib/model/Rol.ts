@@ -1,5 +1,3 @@
-
-
 export enum Rol{
     BranchChief,
     zoneChief,
