@@ -3,6 +3,9 @@ import * as bodyParser from "body-parser";
 import * as mongoose from 'mongoose';
 import { TestRoutes } from "./routes/user_routes";
 import { CommonRoutes } from "./routes/common_routes";
+import { AsesorRotes } from "./routes/asesor_routes";
+import controller from './controller/Controller'
+
 
 require('dotenv').config({path: 'variables.env'});
 var path = require('path');
@@ -12,6 +15,7 @@ class App {
    public app: express.Application;
    private test_routes: TestRoutes = new TestRoutes();
    private common_routes: CommonRoutes = new CommonRoutes();
+   private asesor_routes: AsesorRotes = new AsesorRotes();
 
    constructor() {
       this.app = express();
@@ -23,6 +27,8 @@ class App {
       this.mongoSetup();
       this.test_routes.route(this.app);
       this.common_routes.route(this.app);
+      this.asesor_routes.route(this.app);
+      controller.createMovement(12345,"","","",1234);
    }
 
    private config(): void {

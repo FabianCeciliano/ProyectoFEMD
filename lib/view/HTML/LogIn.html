@@ -1,86 +1,140 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
+    <!-- d-flex justify-content-end-->
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="../CSS/login.css">
-    <title>Home Page FEMD</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="../CSS/Login.css">
+    <title>Main Page FEMD</title>
+
 </head>
 
 <body>
 
-    <!-- BANNER Y CAJA DE BOTONES -->
-    <div class="banner">
-        <img src="../resources/banner.svg" alt="">
+    <!-- BANNER Y BOTONES -->
+    <div class="container-fluid ">
 
-        <!-- CAJA DE BOTONES -->
-        <div class="boxButtonAbout">
+        <div class="row  window1 ">
 
-            <!-- BOTON ABOUT -->
+            <div class="col-6 ">
 
-            <button class="about" type="submit" style="border: 0; 
-                background: transparent" class="social " onclick="location.href='/about'">
-                <img src="../resources/About.svg " alt=" ">   
-            </button>
+                <img class="img-responsive Ibanner" src="../resources/banner.svg">
+            </div>
+            <div class="col-6">
+                <div class="row">
 
-            <!-- BOTON PROJECTS -->
+                    <div class="col-4"></div>
 
-            <button class="projects " type="submit " style="border: 0; 
-            background: transparent " class="social " onclick="location.href='/about'">
-                <img src="../resources/Projects.svg " alt=" ">
-            </button>
+                    <!-- BOTON DE ABOUT -->
+                    <div class="mx-auto d-block py-3" class="col-3">
+                        <button class="about" type="submit" onclick="location.href='/about'" style="border: 0; background: transparent" class="social ">
+                        <img class="mx-auto d-block " src="../resources/About.svg">
+                    </button>
+                    </div>
 
+                    <!-- BOTON DE PROJECTS -->
+                    <div class="mx-auto d-block py-3" class="col-4">
+                        <button class="about" type="submit" onclick="location.href='/about'" style="border: 0; background: transparent" class="social ">
+                        <img src="../resources/Projects.svg" alt="">
+                    </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- LOGO -->
+    <div class="container-fluid">
+
+        <!-- LOGO LOGING-->
+        <div class="row window2 ">
+            <div class="col-12 justify-content-start ">
+                <img class="mx-auto d-block login" src="../resources/Log In.svg">
+            </div>
         </div>
 
-        <!-- CAJA DE LOGING -->
-        <div class="boxLoging">
-
-            <!--LOGO -->
-            <div class="logoAbout">
-                <img src="../resources/Log.svg " alt=" ">
+        <!-- LOGO USUARIO-->
+        <div class="row ustify-content-start  window3 ">
+            <div class="col-12 d-flex justify-content-end">
+                <img class="IUsser" src="../resources/Usuario.svg">
             </div>
+        </div>
 
-            <!-- LOGO Usuario -->
-            <div class="user">
-                <img src="../resources/Usuario.svg " alt=" ">
+        <!-- TEXT USUARIO-->
+        <div class="row ustify-content-start  window4 ">
+            <div class="col-12 d-flex justify-content-end">
                 <input class="myborders" type="text " placeholder="Nombre de usuario " name="uname " required>
             </div>
-
-
-            <!-- LOGO PIN -->
-            <div class="pin">
-                <img src="../resources/Contraseña.svg " alt=" ">
-                <input class="myborders" type="password " placeholder="contraseña " name="psw " required>
-            </div>
-
-            <br>
-            <br>
-            <br>
-
-            <!-- BOTONES -->
-            <form action="asesorMain" method="post">
-                <br>
-                <br>
-                <br>
-                <!-- BOTON GENEREAL-->
-                <button class="general" type="submit " style="border: 0; 
-                background: transparent " class="social " onclick="location.href='/asesorMain'">
-                <img src="../resources/BGeneral.svg " alt=" ">
-                </button>
-            </form>
-            <form action="userMain" method="post">
-                <!-- LOGO PIN -->
-                <button class="miembro" type="submit " style="border: 0; 
-                 background: transparent " class="social " onclick="location.href='/userMain'">
-                <img src="../resources/BMiembro.svg " alt=" ">
-                </button>
-            </form>
         </div>
 
+        <!-- LOGO USUARIO-->
+        <div class="row ustify-content-start  window5 ">
+            <div class="col-12 d-flex justify-content-end">
+                <img class="IContra" src="../resources/Contraseña.svg">
+            </div>
+        </div>
+
+        <!-- TEXT USUARIO-->
+        <div class="row ustify-content-start  window4 ">
+            <div class="col-12 d-flex justify-content-end">
+                <input class="myborders" type="text " placeholder="Contraseña " name="uname " required>
+            </div>
+        </div>
+
+        <!-- BOTON A GENERAL-->
+        <div class="row  align-items-end  window6 ">
+            <div class="col-12 d-flex justify-content-end">
+
+                <button class="about" type="submit" onclick="location.href='/asesorMain'" style="border: 0; background: transparent" class="social ">
+                    <img class="mx-auto d-block " src="../resources/BGeneral.svg">
+                </button>
+
+            </div>
+        </div>
+
+        <!-- BOTON A GENERAL-->
+        <div class="row  align-items-end  window7 ">
+            <div class="col-12 d-flex justify-content-end">
+
+                <button class="about" type="submit" onclick="location.href='/asesorMain'" style="border: 0; background: transparent" class="social ">
+                    <img class="mx-auto d-block " src="../resources/BMiembro.svg">
+                </button>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <!-- REDES -->
+    <div class="container-fluid">
+        <div class="row  align-items-end window8">
+            <div class="col-12 d-flex justify-content-end">
+                <button class="about" type="submit" onclick="location.href='/about'" style="border: 0; background: transparent" class="social ">
+                <img src="../resources/Social.svg" alt="">
+            </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript;choose one of the two! -->
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js " integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj " crossorigin="anonymous "></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js " integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx " crossorigin="anonymous "></script>
+    <!-- Option 2: jQuery,
+        Popper.js,
+        and Bootstrap JS <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js " integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj " crossorigin="anonymous "></script><script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js
+                " integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN " crossorigin="anonymous "></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js " integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s
+                " crossorigin="anonymous "></script>-->
 </body>
 
 </html>

@@ -1,0 +1,247 @@
+/*/////////////////////////////////*/
+
+
+/*       USER MAIN PAGE            */
+
+
+/*/////////////////////////////////*/
+
+body {
+    background: linear-gradient(243.18deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #546886;
+    background-attachment: fixed;
+}
+
+.miborder3 {
+    width: 110px;
+    height: 110px;
+    overflow: auto;
+    background: rgba(255, 255, 255, 0.87);
+    border-radius: 10px;
+}
+
+.bscroll {
+    height: 26vh;
+    width: auto;
+}
+
+.bAignar {
+    height: 70vh;
+    width: auto;
+}
+
+.bFormulario {
+    height: auto;
+    width: 24%;
+}
+
+.over {
+    height: auto;
+    width: auto;
+}
+
+.nZona {
+    height: 20vh;
+    width: auto;
+}
+
+.nGrupo {
+    height: 70vh;
+    width: auto;
+}
+
+.logo {
+    height: auto;
+    width: 40%;
+}
+
+.Boton {
+    height: auto;
+    width: 52%;
+}
+
+.Boton1 {
+    height: auto;
+    width: 62%;
+}
+
+.Boton2 {
+    height: auto;
+    width: 59%;
+}
+
+.Boton3 {
+    height: auto;
+    width: 70%;
+}
+
+.Ibanner {
+    height: auto;
+    width: 30%;
+}
+
+.window0 {
+    height: 10vh;
+    width: auto;
+}
+
+.window1 {
+    height: auto;
+    width: auto;
+}
+
+.window2 {
+    height: auto;
+    width: auto;
+}
+
+.window3 {
+    height: 75vh;
+    width: auto;
+}
+
+.window4 {
+    height: 5vh;
+    width: auto;
+}
+
+.windowB {
+    height: 10vh;
+    width: 10vw;
+}
+
+#FormularioConsultasVariasUno {
+    border-radius: 10px;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.63);
+    cursor: pointer;
+}
+
+#FormularioConsultasVariasDos {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.63);
+    cursor: pointer;
+}
+
+#overlayAdmMiembros {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+#FormularioConsultasVariasTres {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.63);
+    cursor: pointer;
+}
+
+#overlayConsultasVarias {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+#overlayCrearESt {
+    border-radius: 10px;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+#FormularioGeneral1 {
+    border-radius: 10px;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.63);
+    cursor: pointer;
+}
+
+#FormularioGeneral2 {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.63);
+    cursor: pointer;
+}
+
+#FormularioInfo {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.63);
+    cursor: pointer;
+}
+
+#FormularioInfoGeneral {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.63);
+    cursor: pointer;
+}
+
+#FormularioGrupo {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.63);
+    cursor: pointer;
+}
+
+#FormularioRama {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.63);
+    cursor: pointer;
+}
+
+#FormularioJefeZone {
+    border-radius: 10px;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.63);
+    cursor: pointer;
+}
+
+#overlayCrearGrupo {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+#overlayAsignarMonitor {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+#overlayConformarCoordinacion {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+#text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: white;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+.myborders {
+    border-radius: 5px;
+    height: 50px;
+    width: 500px;
+    position: relative;
+    left: 10%;
+}
+
+.myborders2 {
+    border-radius: 5px;
+    height: 25px;
+    width: 200px;
+    position: relative;
+}
