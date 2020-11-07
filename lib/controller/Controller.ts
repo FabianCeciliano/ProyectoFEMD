@@ -41,26 +41,26 @@ export class Controller {
     public deleteMemberFromStructure(pIdData:number){
         this.movement.getStructure().deleteMember(pIdData);
     };
-    public consultMember(){
-
+    public consultMember(pIdData:number){
+        this.movement.getMembers().getMember(pIdData);
     };
-    public consultGroup(){
-
+    public consultGroup(pIdData : number ,groupName : String){
+        this.movement.getStructure().consultGroup(pIdData,groupName);
     };
-    public defineMonitor( pNombreNivel : String , pIdData : String) : any {
-
+    public defineMonitor(pIdData : number) : any {
+        this.movement.getMembers().setFacilitador(pIdData);
     };
-    public authorizeMember(){
-
+    public swapGroup(  precedenceGroup : number,  newGroup : number,  pIdData : number ){
+        this.movement.getStructure().swapGroup(precedenceGroup, newGroup, pIdData);
     };
-    public assignChiefs(){
-
+    public assignZoneManagement( zoneName : String, idZone : number, firstPersonName : String, idFirstPerson : number, secondPersonName : String, idSecondPerson : number ){
+        this.movement.getStructure().assignZoneManagement(zoneName, idZone , firstPersonName, idFirstPerson , secondPersonName, idSecondPerson);
     };
     public assignChief( pNombreNivel : String , pIdData : number){
 
     };
-    public moveMember(  pNuevoNivel : String,  pExNivel : String,  pIdData : number ){
-
+    public authorizeMember(){
+        
     };
     public configBranch( pNombreRama : String):IComponent {
         return null
