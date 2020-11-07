@@ -75,6 +75,17 @@
                 <button class="about" type="submit" onclick="BConsultas()" style="border: 0; background: transparent" class="social ">
                     <img class="windowB" src="../resources/BConsultas.svg" alt="">
                 </button>
+
+
+
+                <button class="about" type="submit" onclick="BMovimiento()" style="border: 0; background: transparent" class="social ">
+                    <img class="windowB" src="../resources/BMovimiento.svg" alt="">
+                </button>
+                <button class="about" type="submit" onclick="BConsultas()" style="border: 0; background: transparent" class="social ">
+                    <img class="windowB" src="../resources/BAgregarMIembro.svg" alt="">
+                </button>
+
+
             </div>
 
 
@@ -84,6 +95,133 @@
             <!-- //////////////////////////////////////////////////////////////////// -->
 
             <div class="col-10">
+
+
+                 <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!--                              MOVIMIENTO                              -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <div id="overlayMovimiento">
+
+                    <div class="row window0 p-2">
+                        <div class="col-12">
+                            <img class="mx-auto d-block over" src="../resources/Crear Movimiento.svg">
+                        </div>
+                    </div>
+
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                              CED JURIDICA                          -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="row  justify-content-center p-3">
+                        <div class="col-6">
+                            <img class="mx-auto d-block over" src="../resources/Ced. Juridica.svg">
+                        </div>
+                        <div class="col-6">
+                            <input class="myborders3" id="-------------------------------" type="text " placeholder="Ced Juridica" required>
+                        </div>
+                    </div>
+                   
+
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                                  NOMBRE                              -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="row  justify-content-center p-3">
+                        <div class="col-6">
+                            <img class="mx-auto d-block over" src="../resources/Nombre.svg">
+                        </div>
+                        <div class="col-6">
+                            <input class="myborders3" id="-------------------------------" type="text " placeholder="Nombre" required>
+                        </div>
+                    </div>
+
+                     <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                               DIRECCION WEB                           -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="row  justify-content-center p-3">
+                        <div class="col-6">
+                            <img class="mx-auto d-block over" src="../resources/Direccion Web.svg">
+                        </div>
+                        <div class="col-6">
+                            <input class="myborders3" id="-------------------------------" type="text " placeholder="Dir Web" required>
+                        </div>
+                    </div>
+
+
+                      <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                               PAIS                         -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="row  justify-content-center p-3">
+                        <div class="col-6">
+                            <img class="mx-auto d-block over" src="../resources/Pais.svg">
+                        </div>
+                        <div class="col-6">
+                            <input class="myborders3" id="-------------------------------" type="text " placeholder="Pais" required>
+                        </div>
+                    </div>
+
+                      <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                               TELEFONO                                 -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="row  justify-content-center p-3">
+                        <div class="col-6">
+                            <img class="mx-auto d-block over" src="../resources/Telefono.svg">
+                        </div>
+                        <div class="col-6">
+                            <input class="myborders3" id="-------------------------------" type="text " placeholder="Telf" required>
+                        </div>
+                    </div>
+                   
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                                BOTONES                               -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+
+                    <div class="row justify-content-center p-3">
+                        <button class="about" type="submit" onclick="location.href='/about'" style="border: 0; background: transparent" class="social ">
+                            <img class="mx-auto d-block "  src="../resources/Faceptar.svg" alt="">
+                        </button>
+                    </div>
+                </div>
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!--                             FIN DEL BOTON                            -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                 <!-- //////////////////////////////////////////////////////////////////// -->
@@ -1494,6 +1632,15 @@
             document.getElementById("overlayConformarCoordinacion").style.display = "none ";
             document.getElementById("overlayAdmMiembros").style.display = "none";
             document.getElementById("overlayConsultasVarias").style.display = "block";
+        }
+        function BMovimiento() {
+            document.getElementById("overlayCrearESt").style.display = "none ";
+            document.getElementById("overlayCrearGrupo").style.display = "none ";
+            document.getElementById("overlayAsignarMonitor").style.display = "none ";
+            document.getElementById("overlayConformarCoordinacion").style.display = "none ";
+            document.getElementById("overlayAdmMiembros").style.display = "none";
+            document.getElementById("overlayConsultasVarias").style.display = "none";
+            document.getElementById("overlayMovimiento").style.display = "block";
         }
 
 

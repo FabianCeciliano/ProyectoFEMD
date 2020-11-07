@@ -123,6 +123,15 @@ body {
     cursor: pointer;
 }
 
+
+
+#overlayMovimiento{
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(88, 89, 90, 0.199);
+    cursor: pointer;
+}
+
 #overlayAdmMiembros {
     border-radius: 10px;
     display: none;
