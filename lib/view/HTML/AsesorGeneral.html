@@ -872,7 +872,7 @@
                                         <!--                                AREA TEXTO                            -->
                                         <!-- //////////////////////////////////////////////////////////////////// -->
                                         <div class="row  justify-content-center p-1">
-                                            <input class="myborders2" id="jefeZonaP2Id" type="text "
+                                            <input class="myborders2" id="jefeZonaP1Id" type="text "
                                                 placeholder="ID Persona1" required>
                                         </div>
 
@@ -891,7 +891,7 @@
                                 <!--                                 BOTON                                -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <div class="row justify-content-center p-1">
-                                    <button class="about" type="submit" onclick="location.href='/about'"
+                                    <button class="about" id="acepAsigZona" type="submit" onclick="aceptarAsignacionZona()"
                                         style="border: 0; background: transparent" class="social ">
                                         <img class="mx-auto d-block Boton" src="../resources/Faceptar.svg" alt="">
                                     </button>
@@ -1041,7 +1041,7 @@
                                 <!--                                BOTONES                             -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <div class="row justify-content-center p-1">
-                                    <button class="about" type="submit" onclick="location.href='/about'"
+                                    <button class="about" id="acepAsigGrupo" type="submit" onclick="aceptarAsignacionGrupo()"
                                         style="border: 0; background: transparent" class="social ">
                                         <img class="mx-auto d-block Boton" src="../resources/Faceptar.svg" alt="">
                                     </button>
@@ -1191,7 +1191,7 @@
                                 <!--                                BOTON                                -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <div class="row justify-content-center p-1">
-                                    <button class="about" type="submit" onclick="location.href='/about'"
+                                    <button class="about" id="acepAsigRama" type="submit" onclick="aceptarAsignacionRama()"
                                         style="border: 0; background: transparent" class="social ">
                                         <img class="mx-auto d-block Boton" src="../resources/Faceptar.svg" alt="">
                                     </button>
@@ -2215,6 +2215,8 @@
             document.getElementById("overlayAsignarMonitor").style.display = "none ";
             document.getElementById("overlayAdmMiembros").style.display = "none ";
             document.getElementById("overlayConformarCoordinacion").style.display = "block ";
+            document.getElementById("acepAsigZona").disabled = true;
+            limpiarCoordinacion();
         }
 
         function BAdmMiembro() {
@@ -2285,6 +2287,7 @@
             document.getElementById("FormularioGrupo").style.display = "none ";
             document.getElementById("FormularioJefeZone").style.display = "block ";
             document.getElementById("acepAsigZona").disabled = true;
+            limpiarCoordinacion();
         }
 
         function BFormularioRama() {
@@ -2292,6 +2295,7 @@
             document.getElementById("FormularioGrupo").style.display = "none ";
             document.getElementById("FormularioRama").style.display = "block ";
             document.getElementById("acepAsigRama").disabled = true;
+            limpiarCoordinacion();
         }
 
         function BFormularioGrupo() {
@@ -2299,7 +2303,7 @@
             document.getElementById("FormularioRama").style.display = "none ";
             document.getElementById("FormularioGrupo").style.display = "block ";
             document.getElementById("acepAsigGrupo").disabled = true;
-
+            limpiarCoordinacion();
         }
 
 
