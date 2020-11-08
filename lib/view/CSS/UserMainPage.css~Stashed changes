@@ -1,0 +1,88 @@
+/*/////////////////////////////////*/
+
+
+/*       USER MAIN PAGE            */
+
+
+/*/////////////////////////////////*/
+
+body {
+    background: linear-gradient(243.18deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #546886;
+    background-attachment: fixed;
+}
+
+.over {
+    height: auto;
+    width: auto;
+}
+
+.nZona {
+    height: 20vh;
+    width: auto;
+}
+
+.logo {
+    height: auto;
+    width: 40%;
+}
+
+.Ibanner {
+    height: auto;
+    width: 30%;
+}
+
+.window0 {
+    height: 10vh;
+    width: auto;
+}
+
+.window1 {
+    height: auto;
+    width: auto;
+}
+
+.window2 {
+    height: auto;
+    width: auto;
+}
+
+.window3 {
+    height: 75vh;
+    width: auto;
+}
+
+.window4 {
+    height: 5vh;
+    width: auto;
+}
+
+.windowB {
+    height: 10vh;
+    width: 10vw;
+}
+
+#overlay2 {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    width: auto;
+}
+
+#text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: white;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+.myborders {
+    border-radius: 5px;
+    height: 50px;
+    width: 500px;
+    position: relative;
+    left: 10%;
+}
