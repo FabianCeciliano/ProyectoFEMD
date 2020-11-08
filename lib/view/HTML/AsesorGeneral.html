@@ -475,11 +475,11 @@
                             <!--                                LISTA 1                                -->
                             <!-- //////////////////////////////////////////////////////////////////// -->
                             <div class="row justify-content-center p-2">
-                              
-                              
-                                <!-- 1 ////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-                              
-
+                                <div class="select">
+                                    <select class="selecBox" id="grupoZList" type="submit "
+                                        style="border: 0; background: transparent ">
+                                    </select>
+                                </div>
                             </div>
 
 
@@ -672,11 +672,10 @@
                                         required>
                                 </div>
                             </div>
-                          
+
                             <!-- //////////////////////////////////////////////////////////////////// -->
                             <!--                               BOTON                                  -->
                             <!-- //////////////////////////////////////////////////////////////////// -->
-
                             <div class="row bAignar justify-content-center p-2">
                                 <button class="about" type="submit" onclick="asigAsignar()"
                                     style="border: 0; background: transparent" class="social ">
@@ -872,9 +871,10 @@
                                         <!-- //////////////////////////////////////////////////////////////////// -->
                                         <!--                                AREA TEXTO                            -->
                                         <!-- //////////////////////////////////////////////////////////////////// -->
-                                      
-                                       <!--2                               //////////////////// //////////////////////////////////////////////////////////////////// -->
-                                       
+                                        <div class="row  justify-content-center p-1">
+                                            <input class="myborders2" id="jefeZonaP2Id" type="text "
+                                                placeholder="ID Persona1" required>
+                                        </div>
 
                                         <!-- //////////////////////////////////////////////////////////////////// -->
                                         <!--                                AREA TEXTO                            -->
@@ -891,9 +891,11 @@
                                 <!--                                 BOTON                                -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <div class="row justify-content-center p-1">
-                                   <!--3                               //////////////////// //////////////////////////////////////////////////////////////////// -->
-                                      
-
+                                    <button class="about" type="submit" onclick="location.href='/about'"
+                                        style="border: 0; background: transparent" class="social ">
+                                        <img class="mx-auto d-block Boton" src="../resources/Faceptar.svg" alt="">
+                                    </button>
+                                </div>
 
                             </div>
                             <!-- //////////////////////////////////////////////////////////////////// -->
@@ -1039,8 +1041,10 @@
                                 <!--                                BOTONES                             -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <div class="row justify-content-center p-1">
-                                  
-                                  <!--                            //////////////////////////////////////////////////////////////////// ->
+                                    <button class="about" type="submit" onclick="location.href='/about'"
+                                        style="border: 0; background: transparent" class="social ">
+                                        <img class="mx-auto d-block Boton" src="../resources/Faceptar.svg" alt="">
+                                    </button>
                                 </div>
 
                             </div>
@@ -1187,9 +1191,10 @@
                                 <!--                                BOTON                                -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <div class="row justify-content-center p-1">
-   <!-- //////////////////////////////////////////////////////////////////// -->
-                                    <!-- //////////////////////////////////////////////////////////////////// -->
-                                    <!-- //////////////////////////////////////////////////////////////////// -->
+                                    <button class="about" type="submit" onclick="location.href='/about'"
+                                        style="border: 0; background: transparent" class="social ">
+                                        <img class="mx-auto d-block Boton" src="../resources/Faceptar.svg" alt="">
+                                    </button>
                                 </div>
 
                             </div>
@@ -2180,10 +2185,6 @@
             document.getElementById("overlayCrearESt").style.display = "none ";
             document.getElementById("overlayAdmMiembros").style.display = "none ";
             document.getElementById("overlayCrearGrupo").style.display = "block ";
-            
-            actualizarZonas();
-            actualizarMonitoresDisponibles();
-
         }
 
         function BAsignarMonior() {
@@ -2264,21 +2265,18 @@
             document.getElementById("FormularioRama").style.display = "none ";
             document.getElementById("FormularioGrupo").style.display = "none ";
             document.getElementById("FormularioJefeZone").style.display = "block ";
-            document.getElementById("acepAsigZona").disabled = true;
         }
 
         function BFormularioRama() {
             document.getElementById("FormularioJefeZone").style.display = "none ";
             document.getElementById("FormularioGrupo").style.display = "none ";
             document.getElementById("FormularioRama").style.display = "block ";
-            document.getElementById("acepAsigRama").disabled = true;
         }
 
         function BFormularioGrupo() {
             document.getElementById("FormularioJefeZone").style.display = "none ";
             document.getElementById("FormularioRama").style.display = "none ";
             document.getElementById("FormularioGrupo").style.display = "block ";
-            document.getElementById("acepAsigGrupo").disabled = true;
 
         }
 
@@ -2346,6 +2344,52 @@
             document.getElementById("FormularioConsultasVariasTres").style.display = "block ";
         }
     </script>
+
+    <script>
+
+        function agregarRama() {
+            if (ment.getElementById("structRName").value != "") {
+                var text = document.getElementById("structRName").value;
+                var option = "<option style='border: 0; background: transparent'>" + text + "</option>"
+                document.getElementById("structRList").innerHTML += option;
+                document.getElementById("structRName").value = "";
+            } else {
+                alert('Ingrese una rama');
+            }
+        }
+
+        function agregarRama() {
+            var zonaName = document.getElementById("structZName").value;
+            var list = []
+            $('#structRList > option').each(function () {
+                list.push($(this).val())
+            })
+
+            if (zonaName != "" & list.length > 0) {
+                $.ajax({
+                    url: '/crearEstructura',
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    cache: false,
+                    data: JSON.stringify({ 'zonaName': zonaName, 'branches': list }),
+                    success: function (data) {
+
+                    }
+                    /*, error: function(jqXHR, textStatus, err){
+                        alert('text status '+textStatus+', err '+err)
+                    }*/
+                })
+                document.getElementById("zoneName").value = "";
+                $("#branchList > option").remove();
+            } else {
+                alert('Recuerde ingresar la zona y al menos una rama');
+            }
+
+        }
+
+    </script>
+
     <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js " integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj " crossorigin="anonymous "></script>-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js "
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx "
