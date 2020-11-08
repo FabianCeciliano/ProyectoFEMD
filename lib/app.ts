@@ -22,6 +22,7 @@ class App {
       //this.app.use(express.static(path.resolve(__dirname+'../../view')));
       this.app.use(express.static(path.resolve(__dirname+'../..')));
       this.app.use(express.static(path.resolve(__dirname+'../../lib/view')));
+      this.app.use(express.static(path.resolve(__dirname+'../../lib/view/HTML')));
       this.app.engine('html', require('ejs').renderFile);
       this.config();
       this.mongoSetup();
