@@ -1,4 +1,5 @@
 import controller from './controller/Controller'
+
 controller.createMovement(123,"FEMD","www.femd.com","Costa Rica",123467);
 //---------------------------------------------------------
 //controller.swapGroup(2,3,5);controller.swapGroup(2,3,5);
@@ -54,6 +55,7 @@ controller.verEstructura();*/
 
 
 //--------------------Insertar Jefatura de Zona-------------------------------------
-controller.assignZoneManagement("Zona2",2,"Fabian",1, "Armando",6);
-
+//controller.assignZoneManagement("Zona2",2,"Fabian",1, "Armando",6);
+//controller.assignBranchManagement("Rama2",2,"Valeria",2, "Armando",3);
+controller.assignGroupManagement("Grupo1",7,"Fabian",7,"Armando",9);
 controller.verEstructura();

@@ -56,6 +56,13 @@ export class Controller {
     public assignZoneManagement( zoneName : String, idZone : number, firstPersonName : String, idFirstPerson : number, secondPersonName : String, idSecondPerson : number ){
         this.movement.getStructure().assignZoneManagement(zoneName, idZone , firstPersonName, idFirstPerson , secondPersonName, idSecondPerson);
     };
+    public assignBranchManagement( branchName : String, idBranch : number, firstPersonName : String, idFirstPerson : number, secondPersonName : String, idSecondPerson : number ){
+        this.movement.getStructure().assignBranchManagement(branchName, idBranch , firstPersonName, idFirstPerson , secondPersonName, idSecondPerson);
+    };
+    public assignGroupManagement( groupName : String, idGroup : number, firstPersonName : String, idFirstPerson : number, secondPersonName : String, idSecondPerson : number ){
+        this.movement.getStructure().assignGroupManagement(groupName, idGroup , firstPersonName, idFirstPerson , secondPersonName, idSecondPerson);
+    };
+
     public assignChief( pNombreNivel : String , pIdData : number){
 
     };
@@ -71,7 +78,6 @@ export class Controller {
     public configGroup( pNombreGrupo : String):IComponent {
         return null
     };
-    //public displayMember( pIdData : String ): Member {return null};
     public displayMember( pIdData : number ): String{
         return null
     };
@@ -83,15 +89,6 @@ export class Controller {
     };
     public newAffiliation(  pDatol : String, pIdData : number ){
 
-    };
-    public getMemberBranch() : [Member] {
-        return null
-    };
-    public getMemberZone() : [Member] {
-        return null
-    };
-    public getMemberGroup() : [Member] {
-        return null
     };
 
 }
