@@ -74,6 +74,12 @@ body {
     width: 70%;
 }
 
+
+.Boton4 {
+    height: auto;
+    width: 120%;
+}
+
 .Ibanner {
     height: auto;
     width: 30%;
@@ -120,6 +126,20 @@ body {
     border-radius: 10px;
     display: none;
     background-color: rgba(0, 0, 0, 0.63);
+    cursor: pointer;
+}
+
+#overlayAgregarMiembro{
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(88, 89, 90, 0.199);
+    cursor: pointer;
+}
+
+#overlayMovimiento{
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(88, 89, 90, 0.199);
     cursor: pointer;
 }
 
