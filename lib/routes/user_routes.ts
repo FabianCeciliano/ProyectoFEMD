@@ -1,26 +1,26 @@
 import { Application, Request, Response } from 'express';
-import { UserController } from '../Db/controllers/userController';
+import { dbController } from '../Db/db_controllers/databaseController';
 
 export class TestRoutes {
 
-    private user_controller: UserController = new UserController();
+    private dbController: dbController = new dbController();
 
     public route(app: Application) {
         
         app.post('/api/user', (req: Request, res: Response) => {
-            this.user_controller.create_user(req, res);
+            this.dbController.create_user(req, res);
         });
 
         app.get('/api/user/:id', (req: Request, res: Response) => {
-            this.user_controller.get_user(req, res);
+            this.dbController.get_user(req, res);
         });
 
         app.put('/api/user/:id', (req: Request, res: Response) => {
-            this.user_controller.update_user(req, res);
+            this.dbController.update_user(req, res);
         });
 
         app.delete('/api/user/:id', (req: Request, res: Response) => {
-            this.user_controller.delete_user(req, res);
+            this.dbController.delete_user(req, res);
         });
 
     }

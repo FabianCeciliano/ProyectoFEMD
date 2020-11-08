@@ -3,7 +3,7 @@ import {Member} from '../model/Member';
 import {Movement} from './Movement';
 import { Composite_Level } from '../model/Composite_Level';
 import { StructureType } from '../model/StructureType';
-import {Direction} from '../model/Direction'
+import { Direction } from '../model/Direction'
 import {Rol} from '../model/Rol'
 import { LeafComponent } from '../model/LeafComponent';
 
