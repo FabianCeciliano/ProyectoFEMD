@@ -5,11 +5,16 @@
 
 
 /*/////////////////////////////////*/
-
 body {
-    background: linear-gradient(243.18deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #546886;
+    background: linear-gradient(180deg, #005ca7 0%, #d7d9dc 90%);
     background-attachment: fixed;
 }
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #005ca7;
+  }
 
 img {
     max-width: 100%;

@@ -6,10 +6,20 @@
 
 /*/////////////////////////////////*/
 
-body {
+/* body {
     background: linear-gradient(243.18deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #546886;
     background-attachment: fixed;
+} */
+body {
+    background: linear-gradient(180deg, #005ca7 0%, #d7d9dc 90%);
+    background-attachment: fixed;
 }
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #005ca7;
+  }
 
 .miborder3 {
     width: 110px;
@@ -54,6 +64,15 @@ body {
     width: 40%;
 }
 
+
+
+/* BOTONES */
+
+.BotonPlus {
+    height: 50;
+    width: 52%;
+}
+
 .Boton {
     height: auto;
     width: 52%;
@@ -78,6 +97,12 @@ body {
 .Boton4 {
     height: auto;
     width: 120%;
+}
+
+
+.Boton5 {
+    height: auto;
+    width: auto;
 }
 
 .Ibanner {
@@ -115,129 +140,137 @@ body {
     width: 10vw;
 }
 
-#FormularioConsultasVariasUno {
-    border-radius: 10px;
-    display: block;
-    background-color: rgba(0, 0, 0, 0.63);
-    cursor: pointer;
-}
-
-#FormularioConsultasVariasDos {
-    border-radius: 10px;
-    display: none;
-    background-color: rgba(0, 0, 0, 0.63);
-    cursor: pointer;
-}
 
 #overlayAgregarMiembro{
     border-radius: 10px;
     display: none;
-    background-color: rgba(88, 89, 90, 0.199);
+    background-color: rgba(82, 96, 99, 0.425);
     cursor: pointer;
 }
 
 #overlayMovimiento{
     border-radius: 10px;
     display: none;
-    background-color: rgba(88, 89, 90, 0.199);
+    background-color: rgba(82, 96, 99, 0.425);
     cursor: pointer;
 }
 
-#overlayAdmMiembros {
-    border-radius: 10px;
-    display: none;
-    background-color: rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-}
-
-#FormularioConsultasVariasTres {
-    border-radius: 10px;
-    display: none;
-    background-color: rgba(0, 0, 0, 0.63);
-    cursor: pointer;
-}
-
-#overlayConsultasVarias {
-    border-radius: 10px;
-    display: none;
-    background-color: rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-}
 
 #overlayCrearESt {
     border-radius: 10px;
     display: block;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(82, 96, 99, 0.425);
     cursor: pointer;
 }
 
-#FormularioGeneral1 {
-    border-radius: 10px;
-    display: block;
-    background-color: rgba(0, 0, 0, 0.63);
-    cursor: pointer;
-}
-
-#FormularioGeneral2 {
-    border-radius: 10px;
-    display: none;
-    background-color: rgba(0, 0, 0, 0.63);
-    cursor: pointer;
-}
-
-#FormularioInfo {
-    border-radius: 10px;
-    display: none;
-    background-color: rgba(0, 0, 0, 0.63);
-    cursor: pointer;
-}
-
-#FormularioInfoGeneral {
-    border-radius: 10px;
-    display: none;
-    background-color: rgba(0, 0, 0, 0.63);
-    cursor: pointer;
-}
-
-#FormularioGrupo {
-    border-radius: 10px;
-    display: none;
-    background-color: rgba(0, 0, 0, 0.63);
-    cursor: pointer;
-}
-
-#FormularioRama {
-    border-radius: 10px;
-    display: none;
-    background-color: rgba(0, 0, 0, 0.63);
-    cursor: pointer;
-}
-
-#FormularioJefeZone {
-    border-radius: 10px;
-    display: block;
-    background-color: rgba(0, 0, 0, 0.63);
-    cursor: pointer;
-}
 
 #overlayCrearGrupo {
     border-radius: 10px;
     display: none;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(82, 96, 99, 0.425);
     cursor: pointer;
 }
 
 #overlayAsignarMonitor {
     border-radius: 10px;
     display: none;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(82, 96, 99, 0.425);
     cursor: pointer;
 }
 
 #overlayConformarCoordinacion {
     border-radius: 10px;
     display: none;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(82, 96, 99, 0.425);
+    cursor: pointer;
+}
+
+#overlayAdmMiembros {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(82, 96, 99, 0.425);
+    cursor: pointer;
+}
+
+
+#overlayConsultasVarias {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(82, 96, 99, 0.425);
+    cursor: pointer;
+}
+
+
+
+
+
+#FormularioConsultasVariasUno {
+    border-radius: 10px;
+    display: block;
+    background-color: rgba(255, 240, 240, 0.199);
+    cursor: pointer;
+}
+
+#FormularioConsultasVariasDos {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(255, 240, 240, 0.199);
+    cursor: pointer;
+}
+
+#FormularioConsultasVariasTres {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(255, 240, 240, 0.199);
+    cursor: pointer;
+}
+
+#FormularioGeneral1 {
+    border-radius: 10px;
+    display: block;
+    background-color: rgba(255, 240, 240, 0.199);
+    cursor: pointer;
+}
+
+#FormularioGeneral2 {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(255, 240, 240, 0.199);
+    cursor: pointer;
+}
+
+#FormularioInfo {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(255, 240, 240, 0.199);
+    cursor: pointer;
+}
+
+#FormularioInfoGeneral {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(255, 240, 240, 0.199);
+    cursor: pointer;
+}
+
+#FormularioGrupo {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(255, 240, 240, 0.199);
+    cursor: pointer;
+}
+
+#FormularioRama {
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(255, 240, 240, 0.199);
+    cursor: pointer;
+}
+
+#FormularioJefeZone {
+    border-radius: 10px;
+    display: block;
+    background-color: rgba(255, 240, 240, 0.199);
     cursor: pointer;
 }
 
@@ -250,6 +283,19 @@ body {
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
 }
+
+
+.myborders0 {
+    border-radius: 5px;
+    height: 50px;
+    width: 300px;
+    position: relative;
+    left: 10%;
+}
+
+
+
+
 
 .myborders {
     border-radius: 5px;
@@ -265,3 +311,113 @@ body {
     width: 200px;
     position: relative;
 }
+
+
+/* body {
+    margin: 0;
+    padding: 0;
+    background-color: #004882;
+  } */
+  
+  .box {
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+  
+  .box select {
+    background-color: #0563af;
+    color: white;
+    padding: 12px; 
+    width: 250px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+  }
+  
+  .box::before {
+    content: "\f13a";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    font-size: 28px;
+    line-height: 45px;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+  }
+  
+  .box:hover::before {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .box select option {
+    padding: 30px;
+  }
+
+
+
+
+
+
+  .boxMin {
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+  
+  .boxMin select {
+    background-color: #0563af;
+    color: white;
+    padding: 5px; 
+    width: 200px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+  }
+  
+  .boxMin::before {
+    content: "\f13a";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    font-size: 28px;
+    line-height: 45px;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+  }
+  
+  .boxMin:hover::before {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .boxMin select option {
+    padding: 30px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+

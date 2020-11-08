@@ -6,11 +6,6 @@
 
 /*/////////////////////////////////*/
 
-body {
-    background: linear-gradient(243.18deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #546886;
-    background-attachment: fixed;
-}
-
 .logo {
     height: auto;
     width: 40%;
