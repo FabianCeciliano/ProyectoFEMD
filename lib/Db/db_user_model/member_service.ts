@@ -1,8 +1,8 @@
-import { IUser } from './model';
-import users from './schema';
+import { IUser } from './member_model';
+import users from './member_schema';
 
 export default class UserService {
-    
+
     public createUser(user_params: IUser, callback: any) {
         const _session = new users(user_params);
         _session.save(callback);
@@ -13,11 +13,11 @@ export default class UserService {
     }
 
     public updateUser(user_params: IUser, callback: any) {
-        const query = { _id: user_params._id };
+        const query = { _id: user_params.cedula };
         users.findOneAndUpdate(query, user_params, callback);
     }
     
-    public deleteUser(_id: String, callback: any) {
+    public deleteUser(_id: Number, callback: any) {
         const query = { _id: _id };
         users.deleteOne(query, callback);
     }
