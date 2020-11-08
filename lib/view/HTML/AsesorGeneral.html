@@ -105,7 +105,7 @@
                 <!-- //////////////////////////////////////////////////////////////////// -->
                 <!-- //////////////////////////////////////////////////////////////////// -->
                 <!-- //////////////////////////////////////////////////////////////////// -->
-                <!--                              MOVIMIENTO                              -->
+                <!--                              AGREGAR MIEMBRO                         -->
                 <!-- //////////////////////////////////////////////////////////////////// -->
                 <!-- //////////////////////////////////////////////////////////////////// -->
                 <!-- //////////////////////////////////////////////////////////////////// -->
@@ -125,7 +125,7 @@
                             <img class="mx-auto d-block over" src="../resources/AGId Miembro.svg">
                         </div>
                         <div class="col-6">
-                            <input class="myborders3" id="-------------------------------" type="text "
+                            <input class="myborders3" id="agregarMiembroId" type="text "
                                 placeholder="Id miembro" required>
                         </div>
                     </div>
@@ -139,7 +139,7 @@
                             <img class="mx-auto d-block over" src="../resources/AGZona.svg">
                         </div>
                         <div class="col-6">
-                            <input class="myborders3" id="-------------------------------" type="text "
+                            <input class="myborders3" id="agregarMiembroZonaName" type="text "
                                 placeholder="Zona" required>
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                             <img class="mx-auto d-block over" src="../resources/AGRama.svg">
                         </div>
                         <div class="col-6">
-                            <input class="myborders3" id="-------------------------------" type="text "
+                            <input class="myborders3" id="agregarMiembroRamaName" type="text "
                                 placeholder="Rama" required>
                         </div>
                     </div>
@@ -166,7 +166,7 @@
                             <img class="mx-auto d-block over" src="../resources/AGGrupo.svg">
                         </div>
                         <div class="col-6">
-                            <input class="myborders3" id="-------------------------------" type="text "
+                            <input class="myborders3" id="agregarMiembroGrupoName" type="text "
                                 placeholder="Grupo" required>
                         </div>
                     </div>
@@ -177,7 +177,7 @@
                     <!--                                BOTONES                               -->
                     <!-- //////////////////////////////////////////////////////////////////// -->
                     <div class="row justify-content-center p-4">
-                        <button class="about" type="submit" onclick="location.href='/about'"
+                        <button class="about" type="submit" onclick="agregarMiembroAGrupo()"
                             style="border: 0; background: transparent" class="social ">
                             <img class="mx-auto d-block " src="../resources/Faceptar.svg" alt="">
                         </button>
@@ -215,7 +215,7 @@
                             <img class="mx-auto d-block over" src="../resources/Ced. Juridica.svg">
                         </div>
                         <div class="col-6">
-                            <input class="myborders3" id="-------------------------------" type="text "
+                            <input class="myborders3" id="movimientoCedula" type="text "
                                 placeholder="Ced Juridica" required>
                         </div>
                     </div>
@@ -229,7 +229,7 @@
                             <img class="mx-auto d-block over" src="../resources/Nombre.svg">
                         </div>
                         <div class="col-6">
-                            <input class="myborders3" id="-------------------------------" type="text "
+                            <input class="myborders3" id="movimientoNombre" type="text "
                                 placeholder="Nombre" required>
                         </div>
                     </div>
@@ -242,7 +242,7 @@
                             <img class="mx-auto d-block over" src="../resources/Direccion Web.svg">
                         </div>
                         <div class="col-6">
-                            <input class="myborders3" id="-------------------------------" type="text "
+                            <input class="myborders3" id="movimientoWeb" type="text "
                                 placeholder="Dir Web" required>
                         </div>
                     </div>
@@ -256,7 +256,7 @@
                             <img class="mx-auto d-block over" src="../resources/Pais.svg">
                         </div>
                         <div class="col-6">
-                            <input class="myborders3" id="-------------------------------" type="text "
+                            <input class="myborders3" id="movimientoPais" type="text "
                                 placeholder="Pais" required>
                         </div>
                     </div>
@@ -269,7 +269,7 @@
                             <img class="mx-auto d-block over" src="../resources/Telefono.svg">
                         </div>
                         <div class="col-6">
-                            <input class="myborders3" id="-------------------------------" type="text "
+                            <input class="myborders3" id="movimientoTelefono" type="text "
                                 placeholder="Telf" required>
                         </div>
                     </div>
@@ -279,7 +279,7 @@
                     <!-- //////////////////////////////////////////////////////////////////// -->
 
                     <div class="row justify-content-center p-3">
-                        <button class="about" type="submit" onclick="location.href='/about'"
+                        <button class="about" type="submit" onclick="crearMovimiento()"
                             style="border: 0; background: transparent" class="social ">
                             <img class="mx-auto d-block " src="../resources/Faceptar.svg" alt="">
                         </button>
@@ -2059,8 +2059,11 @@
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <div class="row justify-content-center p-2">
                                     <div class="select">
-                                        <select class="selecBox" id="consulGrupoGList" type="submit "
+                                        <select class="selecBox" id="consulnivelList" type="submit "
                                             style="border: 0; background: transparent ">
+                                            <option value="zona">Zona</option>
+                                            <option value="rama">Rama</option>
+                                            <option value="grupo">Grupo</option>
                                         </select>
                                     </div>
                                 </div>
@@ -2079,8 +2082,8 @@
                                 <!--                                TEXT AREA                              -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <div class="row justify-content-center p-2">
-                                    <input class="myborders2" id="consulMiembroId" type="text "
-                                        placeholder="Id Miembro " required>
+                                    <input class="myborders2" id="consulNivelMiembroId" type="text "
+                                        placeholder="Id Nivel" required>
                                 </div>
 
 
@@ -2091,7 +2094,7 @@
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <div class="row justify-content-center p-4">
                                     <div class="select">
-                                        <select class="selecBox" id="consulGrupoGList" type="submit "
+                                        <select class="selecBox" id="consulMembersList" type="submit "
                                             style="border: 0; background: transparent ">
                                         </select>
                                     </div>
@@ -2174,6 +2177,7 @@
             document.getElementById("overlayAdmMiembros").style.display = "none ";
             document.getElementById("overlayCrearGrupo").style.display = "none ";
             document.getElementById("overlayCrearESt").style.display = "block ";
+            
         }
 
         function BCreterup() {
@@ -2243,6 +2247,12 @@
             document.getElementById("overlayAdmMiembros").style.display = "none";
             document.getElementById("overlayConsultasVarias").style.display = "none";
             document.getElementById("overlayMovimiento").style.display = "block";
+            //Limpiar casillas
+            document.getElementById("movimientoCedula").value="";
+            document.getElementById("movimientoNombre").value="";
+            document.getElementById("movimientoWeb").value="";
+            document.getElementById("movimientoPais").value="";
+            document.getElementById("movimientoTelefono").value="";
         }
 
         function BAgregar() {
@@ -2254,6 +2264,11 @@
             document.getElementById("overlayConsultasVarias").style.display = "none";
             document.getElementById("overlayMovimiento").style.display = "none";
             document.getElementById("overlayAgregarMiembro").style.display = "block";
+            //Limpiar casillas
+            document.getElementById("agregarMiembroId").value="";
+            document.getElementById("agregarMiembroZonaName").value="";
+            document.getElementById("agregarMiembroRamaName").value="";
+            document.getElementById("agregarMiembroGrupoName").value="";
         }
 
 
@@ -2349,6 +2364,7 @@
             document.getElementById("FormularioConsultasVariasDos").style.display = "none ";
             document.getElementById("FormularioConsultasVariasUno").style.display = "none";
             document.getElementById("FormularioConsultasVariasTres").style.display = "block ";
+            $("#consulMembersList > option").remove();
         }
     </script>
 
