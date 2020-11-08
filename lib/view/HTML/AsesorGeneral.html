@@ -75,13 +75,10 @@
                 <button class="about" type="submit" onclick="BConsultas()" style="border: 0; background: transparent" class="social ">
                     <img class="windowB" src="../resources/BConsultas.svg" alt="">
                 </button>
-
-
-
                 <button class="about" type="submit" onclick="BMovimiento()" style="border: 0; background: transparent" class="social ">
                     <img class="windowB" src="../resources/BMovimiento.svg" alt="">
                 </button>
-                <button class="about" type="submit" onclick="BConsultas()" style="border: 0; background: transparent" class="social ">
+                <button class="about" type="submit" onclick="BAgregar()" style="border: 0; background: transparent" class="social ">
                     <img class="windowB" src="../resources/BAgregarMIembro.svg" alt="">
                 </button>
 
@@ -95,6 +92,109 @@
             <!-- //////////////////////////////////////////////////////////////////// -->
 
             <div class="col-10">
+
+
+
+                 <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!--                              MOVIMIENTO                              -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <div id="overlayAgregarMiembro">
+
+                    <div class="row window0 p-2">
+                        <div class="col-12">
+                            <img class="mx-auto d-block over" src="../resources/AGAgregar Miembro.svg">
+                        </div>
+                    </div>
+
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                              ID MIEMBRO                          -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="row  justify-content-center p-4">
+                        <div class="col-6">
+                            <img class="mx-auto d-block over" src="../resources/AGId Miembro.svg">
+                        </div>
+                        <div class="col-6">
+                            <input class="myborders3" id="-------------------------------" type="text " placeholder="Id miembro" required>
+                        </div>
+                    </div>
+                   
+
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                                  ZONA                              -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="row  justify-content-center p-4">
+                        <div class="col-6">
+                            <img class="mx-auto d-block over" src="../resources/AGZona.svg">
+                        </div>
+                        <div class="col-6">
+                            <input class="myborders3" id="-------------------------------" type="text " placeholder="Zona" required>
+                        </div>
+                    </div>
+
+                     <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                               RAMA                           -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="row  justify-content-center p-4">
+                        <div class="col-6">
+                            <img class="mx-auto d-block over" src="../resources/AGRama.svg">
+                        </div>
+                        <div class="col-6">
+                            <input class="myborders3" id="-------------------------------" type="text " placeholder="Rama" required>
+                        </div>
+                    </div>
+
+
+                      <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                                  GRUPO                               -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="row  justify-content-center p-4">
+                        <div class="col-6">
+                            <img class="mx-auto d-block over" src="../resources/AGGrupo.svg">
+                        </div>
+                        <div class="col-6">
+                            <input class="myborders3" id="-------------------------------" type="text " placeholder="Grupo" required>
+                        </div>
+                    </div>
+
+                   
+                   
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                                BOTONES                               -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+
+                    <div class="row justify-content-center p-4">
+                        <button class="about" type="submit" onclick="location.href='/about'" style="border: 0; background: transparent" class="social ">
+                            <img class="mx-auto d-block "  src="../resources/Faceptar.svg" alt="">
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!--                             FIN DEL BOTON                            -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                  <!-- //////////////////////////////////////////////////////////////////// -->
@@ -1581,6 +1681,8 @@
         //////////////////////////////////////////////////////////////////// 
         //////////////////////////////////////////////////////////////////// 
         function BCreateEstructura() {
+            document.getElementById("overlayAgregarMiembro").style.display = "none";
+            document.getElementById("overlayMovimiento").style.display = "none";
             document.getElementById("overlayConsultasVarias").style.display = "none ";
             document.getElementById("overlayConformarCoordinacion").style.display = "none ";
             document.getElementById("overlayAsignarMonitor").style.display = "none ";
@@ -1590,6 +1692,8 @@
         }
 
         function BCreterup() {
+            document.getElementById("overlayAgregarMiembro").style.display = "none";
+            document.getElementById("overlayMovimiento").style.display = "none";
             document.getElementById("overlayConsultasVarias").style.display = "none ";
             document.getElementById("overlayConformarCoordinacion").style.display = "none ";
             document.getElementById("overlayAsignarMonitor").style.display = "none ";
@@ -1599,6 +1703,8 @@
         }
 
         function BAsignarMonior() {
+            document.getElementById("overlayAgregarMiembro").style.display = "none";
+            document.getElementById("overlayMovimiento").style.display = "none";
             document.getElementById("overlayConsultasVarias").style.display = "none ";
             document.getElementById("overlayConformarCoordinacion").style.display = "none ";
             document.getElementById("overlayCrearESt").style.display = "none ";
@@ -1608,6 +1714,8 @@
         }
 
         function BConformarCoordinacion() {
+            document.getElementById("overlayAgregarMiembro").style.display = "none";
+            document.getElementById("overlayMovimiento").style.display = "none";
             document.getElementById("overlayConsultasVarias").style.display = "none ";
             document.getElementById("overlayCrearESt").style.display = "none ";
             document.getElementById("overlayCrearGrupo").style.display = "none ";
@@ -1617,6 +1725,8 @@
         }
 
         function BAdmMiembro() {
+            document.getElementById("overlayAgregarMiembro").style.display = "none";
+            document.getElementById("overlayMovimiento").style.display = "none";
             document.getElementById("overlayConsultasVarias").style.display = "none ";
             document.getElementById("overlayCrearESt").style.display = "none ";
             document.getElementById("overlayCrearGrupo").style.display = "none ";
@@ -1626,6 +1736,8 @@
         }
 
         function BConsultas() {
+            document.getElementById("overlayAgregarMiembro").style.display = "none";
+            document.getElementById("overlayMovimiento").style.display = "none";
             document.getElementById("overlayCrearESt").style.display = "none ";
             document.getElementById("overlayCrearGrupo").style.display = "none ";
             document.getElementById("overlayAsignarMonitor").style.display = "none ";
@@ -1634,6 +1746,7 @@
             document.getElementById("overlayConsultasVarias").style.display = "block";
         }
         function BMovimiento() {
+            document.getElementById("overlayAgregarMiembro").style.display = "none";
             document.getElementById("overlayCrearESt").style.display = "none ";
             document.getElementById("overlayCrearGrupo").style.display = "none ";
             document.getElementById("overlayAsignarMonitor").style.display = "none ";
@@ -1641,6 +1754,17 @@
             document.getElementById("overlayAdmMiembros").style.display = "none";
             document.getElementById("overlayConsultasVarias").style.display = "none";
             document.getElementById("overlayMovimiento").style.display = "block";
+        }
+
+        function BAgregar() {
+            document.getElementById("overlayCrearESt").style.display = "none ";
+            document.getElementById("overlayCrearGrupo").style.display = "none ";
+            document.getElementById("overlayAsignarMonitor").style.display = "none ";
+            document.getElementById("overlayConformarCoordinacion").style.display = "none ";
+            document.getElementById("overlayAdmMiembros").style.display = "none";
+            document.getElementById("overlayConsultasVarias").style.display = "none";
+            document.getElementById("overlayMovimiento").style.display = "none";
+            document.getElementById("overlayAgregarMiembro").style.display = "block";
         }
 
 
