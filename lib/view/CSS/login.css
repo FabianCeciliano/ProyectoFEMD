@@ -7,9 +7,15 @@
 /*/////////////////////////////////*/
 
 body {
-    background: linear-gradient(180deg, #546886 0%, #d7d9dc 100%);
+    background: linear-gradient(180deg, #005ca7 0%, #d7d9dc 90%);
     background-attachment: fixed;
 }
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #005ca7;
+  }
 
 .Ibanner {
     height: auto;
