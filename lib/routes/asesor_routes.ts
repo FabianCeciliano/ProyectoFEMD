@@ -48,9 +48,6 @@ export class AsesorRotes {
             console.log(req.body)
         })
 
-
-                
-
         //Conformacion de coordinacion
         //----------------------------------------------------------------------------Para asignarZonas
         app.post('/consultarExistenciaZona',function (req: Request, res: Response){
@@ -108,8 +105,35 @@ export class AsesorRotes {
             res.send({status:1});
         })
 
-        
+        // Para consultas varias
 
+        app.post('/getGrupo',function (req: Request, res: Response){
+            console.log(req.body)
+            res.send({status:1,zona:"zonaX",rama:"ramaX"});
+        })
+
+        app.post('/getParticipacion',function (req: Request, res: Response){
+            console.log(req.body)//aqui se obtiene el id del miembro
+            res.send({status:1,zonas:["zona1","zona2"],ramas:["rama1","rama2"],grupos:["grupo1","grupo2"]});
+        })
+
+        app.post('/getMiembrosNivel',function (req: Request, res: Response){
+            console.log(req.body)//aqui se obtiene el tipo de nivel, y el id de ese nivel
+            res.send({status:1,miembros:["juan","pedro","juanito"]});
+        })
+
+        //Agregar miembro a grupo
+        app.post('/agregarMiembroAGrupo',function (req: Request, res: Response){
+            console.log(req.body)//aqui se obtiene toda la info del mae
+            res.send({status:1});
+        })
+        
+        //Crear Movimiento
+        app.post('/crearMovimiento',function (req: Request, res: Response){
+            console.log(req.body)//aqui se obtiene toda la info del movimiento
+            //ademas verificar si el movimiento ya existe, sino lo crea y retorna 1. Si existe retorna 0
+            res.send({status:1});
+        })
         
 
         
