@@ -303,7 +303,7 @@
 
                 <div id="overlayCrearESt">
 
-                    <!-- //////////////////////////////////////////////////////////////////// -->
+                 <!-- //////////////////////////////////////////////////////////////////// -->
                     <!--                                TITULO                                -->
                     <!-- //////////////////////////////////////////////////////////////////// -->
                     <div class="row window0 p-2">
@@ -358,18 +358,14 @@
 
 
                     <div class="row justify-content-center nZona">
-                        <div class="col-2 align-self-center">
-                            <!-- //////////////////////////////////////////////////////////////////// -->
-                             <!--                             NUEVO                                    -->
-                             <!-- //////////////////////////////////////////////////////////////////// -->
-                            <input class="myborders2" id="structRId" type="text " placeholder="Id Rama"
-                            required>
+                        <div class="col-1 align-self-center">
+                            <input class="mybordersId" id="structRName" type="text " placeholder="Id" required>
                         </div>
 
                         <!-- //////////////////////////////////////////////////////////////////// -->
                         <!--                               TEXTO 2                                -->
                         <!-- //////////////////////////////////////////////////////////////////// -->
-                        <div class="col-5 align-self-center">
+                        <div class="col-2 align-self-center">
                             <input class="myborders" id="structRName" type="text " placeholder="Ramas por Zona"
                                 required>
                         </div>
@@ -378,7 +374,7 @@
                         <!-- //////////////////////////////////////////////////////////////////// -->
                         <!--                               BOTON                                 -->
                         <!-- //////////////////////////////////////////////////////////////////// -->
-                        <div class="col-2 d-flex justify-content-end BotonPlus">
+                        <div class="col-5 d-flex justify-content-end BotonPlus">
                             <button type="submit" onclick="agregarRama()" style="border: 0; background: transparent">
                                 <img class="mx-auto d-block " src="../resources/bMas.svg">
                             </button>
@@ -388,7 +384,7 @@
                         <!-- //////////////////////////////////////////////////////////////////// -->
                         <!--                               IMAGEN                               -->
                         <!-- //////////////////////////////////////////////////////////////////// -->
-                        <div class="col-3 ">
+                        <div class="col-1">
                             <img class="over" src="../resources/Vector 4.svg">
                         </div>
                     </div>
@@ -398,16 +394,7 @@
                     <!--                                LISTA                                 -->
                     <!-- //////////////////////////////////////////////////////////////////// -->
                     <div class="row justify-content-center p-2">
-                        <div class="col-3 align-self-center">
-                            <div class="box">
-                                <select class="selecBox" id="structRIdList" type="submit "
-                                    style="border: 0; background: transparent ">
-                                </select>
-                            </div>
-                        </div>
-                
-                    <!-- /////////////////////////////SEGUNDO/////////////////////////////////////// -->
-                        <div class="col-4 align-self-center">
+                        <div class="col-1 align-self-center">
                             <div class="box">
                                 <select class="selecBox" id="structRList" type="submit "
                                     style="border: 0; background: transparent ">
@@ -441,7 +428,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <!-- //////////////////////////////////////////////////////////////////// -->
                 <!-- //////////////////////////////////////////////////////////////////// -->
                 <!-- //////////////////////////////////////////////////////////////////// -->
                 <!--                             FIN DEL BOTON                            -->
@@ -1303,7 +1290,6 @@
                             <!-- //////////////////////////////////////////////////////////////////// -->
                             <div id="FormularioGeneral1">
 
-
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <!--                                TITULO                                -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
@@ -1406,11 +1392,22 @@
                                 <!--                            BOTON                                     -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <div class="row justify-content-center p-3">
-                                    <button class="about" type="submit" onclick="agregarUsuario()"
-                                        style="border: 0; background: transparent" class="social ">
-                                        <img class="mx-auto d-block Boton1" src="../resources/FAAgregar.svg" alt="">
-                                    </button>
+
+                                    <div class="col-6">
+                                        <button class="about" type="submit" onclick="agregarUsuario()"
+                                            style="border: 0; background: transparent" class="social ">
+                                            <img class="mx-auto d-block Boton1" src="../resources/FAAgregar.svg" alt="">
+                                        </button>
+                                    </div>
+                                    <!-- ///////////////////////////////////////////////////////////////////////////////////////////// -->
+                                    <div class="col-6">
+                                        <img class="over" src="../resources/Es Monitor.svg">
+                                        <input type="checkbox" id="esMonitor" src="../resources/Es Monitor.svg">
+                                    </div>
+
                                 </div>
+
+
 
                             </div>
                             <!-- //////////////////////////////////////////////////////////////////// -->
@@ -1689,15 +1686,26 @@
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <div class="row  p-2">
                                     <div class="col-12">
-                                        <img class="mx-auto d-block over" src="../resources/Grupo de Procedencia.svg">
+                                        <img class="mx-auto d-block over" src="../resources/XDatos procedencia.svg">
                                     </div>
                                 </div>
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <!--                            TEXT AREA                                 -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
-                                <div class="row  justify-content-center">
-                                    <input class="myborders2" id="moverUserProcedenciaId" type="text"
-                                        placeholder="ID Grupo Procedencia" required>
+
+                                <div class="row">
+                                    <div class="col-2  align-self-center"></div>
+                                    <div class="col-10">
+                                        <input class="mybordersmin" id="moverUserProcedenciaId" type="text"
+                                            placeholder="ID Grupo Procedencia" required>
+
+                                        <input class="mybordersmin" id="moverUserDestinoId" type="text"
+                                            placeholder="ID " required>
+
+                                        <input class="mybordersmin" id="moverUserDestinoId" type="text"
+                                            placeholder="ID Grupo a Mover" required>
+                                    </div>
+
                                 </div>
 
 
@@ -1706,16 +1714,27 @@
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <div class="row  p-2">
                                     <div class="col-12">
-                                        <img class="mx-auto d-block over" src="../resources/Grupo al que se mueve.svg">
+                                        <img class="mx-auto d-block over" src="../resources/XDatos Destino.svg">
                                     </div>
                                 </div>
 
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <!--                            TEXT AREA                                 -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
-                                <div class="row  justify-content-center">
-                                    <input class="myborders2" id="moverUserDestinoId" type="text"
-                                        placeholder="ID Grupo a Mover" required>
+                                <div class="row">
+                                    <div class="col-2  align-self-center"></div>
+                                    <div class="col-10 ">
+                                        <input class="mybordersmin" id="moverUserDestinoId" type="text"
+                                            placeholder="ID " required>
+
+                                        <input class="mybordersmin" id="moverUserDestinoId" type="text"
+                                            placeholder="ID " required>
+
+                                        <input class="mybordersmin" id="moverUserDestinoId" type="text"
+                                            placeholder="ID Grupo a Mover" required>
+                                    </div>
+
+
                                 </div>
 
 
@@ -1730,6 +1749,7 @@
                                 </div>
 
                             </div>
+
                             <!-- //////////////////////////////////////////////////////////////////// -->
                             <!--                                FIN DE FORMULARIO                     -->
                             <!-- //////////////////////////////////////////////////////////////////// -->
