@@ -14,7 +14,11 @@ export class Member extends Person{
         super(id,name,email,telephone);
         this.direction=direction;
         this.rol=rol;
-        this.facilitador=false;
+        this.facilitador=facilitador;
+    }
+
+    public clone():Member{
+        return new Member(this.direction,this.rol,this.facilitador,this.id,this.name,this.email,this.telephone);
     }
 
     public getName(){

@@ -18,6 +18,7 @@ export class AsesorRotes {
         //----------------------------------------------------------------Creacion de estructura
         app.post('/crearEstructura', function (req: Request, res: Response) {
             console.log(req.body);
+            console.log("Verificando que hace ajax1");
             var created: Boolean = controller.createNewZone(null, req.body.zonaName);
             //manda a la base...
             var notCreated: String[] = [];
@@ -135,18 +136,17 @@ export class AsesorRotes {
         //----------------------------------------------------------------Asignacion de Jefaturas
         app.post('/asignarJefesZona', function (req: Request, res: Response) {
             var zoneName = req.body.jefeZonaZName;
-            var zoneId = req.body.jefeZonaZId;
             var first_Chief_Name = req.body.jefeZonaP1Name;
             var first_Chief_Id = req.body.jefeZonaP1Id;
             var second_Chief_Name = req.body.jefeZonaP2Name;
             var second_Chief_Id = req.body.jefeZonaP2Id;
-            let result = controller.assignZoneManagement(zoneName, Number(zoneId), first_Chief_Name, first_Chief_Id, second_Chief_Name, second_Chief_Id);
-            if (result) {
-                res.send({ status: 1 });
-            } else {
+            let result = controller.consultZoneManagement(zoneName);
+            if (result>=2) {
                 res.send({ status: 0 });
+            } else{
+                controller.assignZoneManagement(zoneName,first_Chief_Name,first_Chief_Id,second_Chief_Name,second_Chief_Id);
+                res.send({ status: 1 });
             }
-
         })
 
         app.post('/asignarJefesRama', function (req: Request, res: Response) {
@@ -185,7 +185,7 @@ export class AsesorRotes {
         //----------------------------------------------------------------Para la administracion de miembros
         app.post('/agregarUsuario',function (req: Request, res: Response){
             //console.log(req.body)
-            controller.addMember(Number(req.body.id),req.body.name,Number(req.body.celular),req.body.mail,req.body.direccion)
+            controller.addMember(Number(req.body.id),req.body.name,Number(req.body.celular),req.body.mail,req.body.direccion,Boolean(req.body.esMonitor))
             controller.printMembers();
             res.send({status:1});
         })
@@ -205,12 +205,21 @@ export class AsesorRotes {
         })
 
         app.post('/moverUsuario',  function (req: Request, res: Response){
-            var data = req.body;
-            var idProcedencia = String(data.idProcedencia).split('-', 3)
-            var idDestino = String(data.idDestino).split('-', 3)
+            var data = req.body.id;            
+            var procedenciaZonaName = req.body.procedenciaZonaName;
+            var procedenciaIdRama = req.body.procedenciaIdRama;
+            var procedenciaidGrupo = req.body.procedenciaidGrupo;
             
-            controller.swapGroup(idProcedencia[0],Number(idProcedencia[1]),Number(idProcedencia[2]),data.id,idDestino[0],Number(idDestino[1]),Number(idDestino[2]));
-            res.send({status:1});
+            var destinoZonaName = req.body.destinoZonaName;
+            var destinoIdRama = req.body.destinoIdRama;
+            var destinoidGrupo = req.body.destinoidGrupo;
+            
+            var swaped = controller.swapGroup(procedenciaZonaName,Number(procedenciaIdRama),Number(procedenciaidGrupo),Number(data),destinoZonaName,Number(destinoIdRama),Number(destinoidGrupo));
+            if (swaped) {
+                res.send({status:1});
+            } else {
+                res.send({ status: 0 });
+            }
         })
 
         //----------------------------------------------------------------Para consultas varias
@@ -227,7 +236,7 @@ export class AsesorRotes {
 
         app.post('/getParticipacion', function (req: Request, res: Response){
             console.log(req.body)//aqui se obtiene el id del miembro
-            var data = controller.consultMemberParticipation(req.body.id);
+            var data = controller.consultMemberParticipation(Number(req.body.id));
 
             if(data.zonas.length>0 && data.ramas.length>0,data.grupos.length>0){
                 res.send({status:1,zonas:data.zonas,ramas:data.ramas,grupos:data.grupos});

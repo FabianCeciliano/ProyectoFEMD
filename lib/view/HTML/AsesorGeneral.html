@@ -359,7 +359,7 @@
 
                     <div class="row justify-content-center nZona">
                         <div class="col-1 align-self-center">
-                            <input class="mybordersId" id="structRName" type="text " placeholder="Id" required>
+                            <input class="mybordersId" id="structRId" type="text " placeholder="Id" required>
                         </div>
 
                         <!-- //////////////////////////////////////////////////////////////////// -->
@@ -394,14 +394,25 @@
                     <!--                                LISTA                                 -->
                     <!-- //////////////////////////////////////////////////////////////////// -->
                     <div class="row justify-content-center p-2">
-                        <div class="col-1 align-self-center">
+                        <div class="col-3 align-self-center">
+                            <div class="box">
+                                <select class="selecBox" id="structRIdList" type="submit "
+                                    style="border: 0; background: transparent ">
+                                </select>
+                            </div>
+                        </div>
+                
+                    <!-- /////////////////////////////SEGUNDO/////////////////////////////////////// -->
+                        <div class="col-4 align-self-center">
                             <div class="box">
                                 <select class="selecBox" id="structRList" type="submit "
                                     style="border: 0; background: transparent ">
                                 </select>
                             </div>
-                        </div>
+                        </div>  
                     </div>
+
+                    
 
                     <!-- //////////////////////////////////////////////////////////////////// -->
                     <!--                        LOS ULTIMOS DOS  BOTONES                      -->
@@ -828,7 +839,7 @@
                                 <div class="row justify-content-center p-4">
                                     <div class="col-1 align-self-center">
                                         <div class="boxMin">
-                                            <select class="selecBox" id="consulGrupoZList" type="submit "
+                                            <select class="selecBox" id="jefe1ZonaList" type="submit "
                                                 style="border: 0; background: transparent ">
                                             </select>
                                         </div>
@@ -842,7 +853,7 @@
                                 <div class="row justify-content-center p-4">
                                     <div class="col-1 align-self-center">
                                         <div class="boxMin">
-                                            <select class="selecBox" id="consulGrupoZList" type="submit "
+                                            <select class="selecBox" id="jefe2ZonaList" type="submit "
                                                 style="border: 0; background: transparent ">
                                             </select>
                                         </div>
@@ -902,7 +913,7 @@
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <div class="row  justify-content-center">
                                     <input class="myborders2" id="jefeGrupoGName" type="text "
-                                        placeholder="Nombre Grupo" required>
+                                        placeholder="Nombre Zona" required>
                                 </div>
 
 
@@ -923,14 +934,14 @@
                                 <div class="row">
                                     <div class="col-2  align-self-center"></div>
                                     <div class="col-10">
-                                        <input class="mybordersmin" id="moverUserProcedenciaId" type="text"
-                                            placeholder="ID Grupo Procedencia" required>
+                                        <input class="mybordersmin" id="jefeGrupoRId" type="text"
+                                            placeholder="ID Rama" required>
 
-                                        <input class="mybordersmin" id="moverUserDestinoId" type="text"
-                                            placeholder="ID " required>
+                                        <input class="mybordersmin" id="jefeGrupoGId" type="text"
+                                            placeholder="ID Grupo" required>
 
-                                        <input class="mybordersmin" id="moverUserDestinoId" type="text"
-                                            placeholder="ID Grupo a Mover" required>
+                                        <!--<input class="mybordersmin" id="moverUserDestinoId" type="text"
+                                            placeholder="ID Grupo a Mover" required>-->
                                     </div>
 
                                 </div>
@@ -973,7 +984,7 @@
                                 <div class="row justify-content-center p-4">
                                     <div class="col-1 align-self-center">
                                         <div class="boxMin">
-                                            <select class="selecBox" id="consulGrupoZList" type="submit "
+                                            <select class="selecBox" id="jefe1GrupoList" type="submit "
                                                 style="border: 0; background: transparent ">
                                             </select>
                                         </div>
@@ -987,7 +998,7 @@
                                 <div class="row justify-content-center p-4">
                                     <div class="col-1 align-self-center">
                                         <div class="boxMin">
-                                            <select class="selecBox" id="consulGrupoZList" type="submit "
+                                            <select class="selecBox" id="jefe2GrupoList" type="submit "
                                                 style="border: 0; background: transparent ">
                                             </select>
                                         </div>
@@ -1045,7 +1056,7 @@
                                 <!--                                TEXT AREA                             -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <div class="row  justify-content-center">
-                                    <input class="myborders2" id="jefeRamaRName" type="text " placeholder="Nombre Rama"
+                                    <input class="myborders2" id="jefeRamaZName" type="text " placeholder="Nombre Zona"
                                         required>
                                 </div>
 
@@ -1104,7 +1115,7 @@
                                 <div class="row justify-content-center p-4">
                                     <div class="col-1 align-self-center">
                                         <div class="boxMin">
-                                            <select class="selecBox" id="consulGrupoZList" type="submit "
+                                            <select class="selecBox" id="jefe1RamaList" type="submit "
                                                 style="border: 0; background: transparent ">
                                             </select>
                                         </div>
@@ -1118,7 +1129,7 @@
                                 <div class="row justify-content-center p-4">
                                     <div class="col-1 align-self-center">
                                         <div class="boxMin">
-                                            <select class="selecBox" id="consulGrupoZList" type="submit "
+                                            <select class="selecBox" id="jefe2RamaList" type="submit "
                                                 style="border: 0; background: transparent ">
                                             </select>
                                         </div>
@@ -1340,7 +1351,7 @@
                                     <!-- ///////////////////////////////////////////////////////////////////////////////////////////// -->
                                     <div class="col-6">
                                         <img class="over" src="../resources/Es Monitor.svg">
-                                        <input type="checkbox" id="esMonitor" src="../resources/Es Monitor.svg">
+                                        <input type="checkbox" id="esMonitorAgregar" src="../resources/Es Monitor.svg">
                                     </div>
 
                                 </div>
@@ -1634,14 +1645,14 @@
                                 <div class="row">
                                     <div class="col-2  align-self-center"></div>
                                     <div class="col-10">
-                                        <input class="mybordersmin" id="moverUserProcedenciaId" type="text"
-                                            placeholder="ID Grupo Procedencia" required>
+                                        <input class="mybordersmin" id="procedenciaZonaName" type="text"
+                                            placeholder="Nombre Zona" required>
 
-                                        <input class="mybordersmin" id="moverUserDestinoId" type="text"
-                                            placeholder="ID " required>
+                                        <input class="mybordersmin" id="procedenciaRamaId" type="text"
+                                            placeholder="ID Rama" required>
 
-                                        <input class="mybordersmin" id="moverUserDestinoId" type="text"
-                                            placeholder="ID Grupo a Mover" required>
+                                        <input class="mybordersmin" id="procedenciaGrupoId" type="text"
+                                            placeholder="ID Grupo" required>
                                     </div>
 
                                 </div>
@@ -1662,14 +1673,14 @@
                                 <div class="row">
                                     <div class="col-2  align-self-center"></div>
                                     <div class="col-10 ">
-                                        <input class="mybordersmin" id="moverUserDestinoId" type="text"
-                                            placeholder="ID " required>
+                                        <input class="mybordersmin" id="destinoZonaName" type="text"
+                                            placeholder="Nombre Zona" required>
 
-                                        <input class="mybordersmin" id="moverUserDestinoId" type="text"
-                                            placeholder="ID " required>
+                                        <input class="mybordersmin" id="destinoRamaId" type="text"
+                                            placeholder="ID Rama" required>
 
-                                        <input class="mybordersmin" id="moverUserDestinoId" type="text"
-                                            placeholder="ID Grupo a Mover" required>
+                                        <input class="mybordersmin" id="destinoGrupoId" type="text"
+                                            placeholder="ID Grupo" required>
                                     </div>
 
 

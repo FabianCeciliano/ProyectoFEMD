@@ -172,10 +172,21 @@ export class Gestor{
         }
     }
 
+    public deleteObject(list:Member[], pIdData:number){
+        for(let i=0; i<list.length;i++){
+            if(list[i].id==pIdData){
+            list.splice(i,1);
+            }
+        }
+    }
+
     public deleteMember(pIdData:number) {
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
+            this.deleteObject(this.structure.groupComposite[zindex].members,pIdData);
             for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
+                this.deleteObject(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members,pIdData);
                 for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
+                    this.deleteObject(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members,pIdData)
                     for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++) {
                         if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].id==pIdData){
                             let member = this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex];
@@ -269,10 +280,10 @@ export class Gestor{
         }
     };
 
-    public assignZoneManagement( zoneName : String, idZone : number, firstPersonName : String, idFirstPerson : number, secondPersonName : String, idSecondPerson : number ){
+    public assignZoneManagement( zoneName : String, firstPersonName : String, idFirstPerson : number, secondPersonName : String, idSecondPerson : number ){
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) { 
-            if(this.structure.groupComposite[zindex].name == zoneName && this.structure.groupComposite[zindex].id == idZone){
-                if(this.structure.groupComposite[zindex].members.length == 0){
+            if(this.structure.groupComposite[zindex].name == zoneName){
+                /*if(this.structure.groupComposite[zindex].members.length == 1 && (firstPersonName!="" && idFirstPerson!="")){
                     console.log("Esta zona ya cuenta con jefatura.");
                 }else{
                     console.log("Insertando jefatura de Zona");
@@ -282,7 +293,7 @@ export class Gestor{
                     //secondManager.set_rol(Rol.zoneChief);
                     this.structure.groupComposite[zindex].members.push(firstManager);
                     this.structure.groupComposite[zindex].members.push(secondManager);
-                }
+                }*/
             }
         }
     };

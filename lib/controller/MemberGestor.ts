@@ -17,8 +17,13 @@ export class MemberGestor{
     public getDirection() : Direction {return null};
 
 
-    public addMember(id:number, name:String, telephone:number, mail:String, direction:String){
-        this.members.push(new Member(direction,Rol.groupMember,false,id,name,mail,telephone));
+    public addMember(id:number, name:String, telephone:number, mail:String, direction:String,esMonitor:boolean){
+        var member:Member = new Member(direction,Rol.groupMember,false,id,name,mail,telephone)
+        member.set_facilitador(esMonitor);
+        if(esMonitor){
+            member.set_rol(Rol.monitor);
+        }
+        this.members.push(member);
     }
     public updateMember (id:number,name:String,celular:number,mail:String,direccion:String,esMonitor:boolean) :Boolean {
         for(let index = 0 ; index < this.members.length ; index++){

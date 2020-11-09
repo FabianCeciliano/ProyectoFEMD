@@ -57,6 +57,7 @@ export class Controller {
     }
     public deleteMember(pIdData:number){
         this.movement.getMembers().deleteMiembro(pIdData);
+        this.deleteMemberFromStructure(pIdData);
     };
     public deleteMemberFromStructure(pIdData:number){
         this.movement.getStructure().deleteMember(pIdData);
@@ -81,8 +82,14 @@ export class Controller {
     };
     public defineMonitor(coachId : number, zoneName:String, ramaId : number) : Boolean {
 
-        console.log("Id:",coachId," Zona:",zoneName,"Rama:",ramaId)
-        var coach:Member = this.movement.getMembers().getMember(coachId);
+        //console.log("Id:",coachId," Zona:",zoneName,"Rama:",ramaId)
+        var coach:Member = this.movement.getMembers().getMember(coachId).clone();
+        console.log("Clone Antes de cambiar:", coach);
+
+        this.movement.getMembers().getMember(coachId).set_rol(Rol.zoneChief);
+
+        console.log("Original:",this.movement.getMembers().getMember(coachId),"\n\n\n");
+        console.log("Clone despues:", coach);
 
         if(coach.get_facilitador()==true){
             return this.movement.getStructure().addCoach(coach,zoneName,ramaId);
@@ -99,9 +106,9 @@ export class Controller {
     public swapGroup( preceZone:String,preceBranch:number,preceGroup:number,idMember:number,
         newZone:String,newBranch:number,newGroup:number):Boolean{
         var member:Member = this.movement.getStructure().deleteMemberFromGroup(preceZone,preceBranch,preceGroup,idMember);
+        console.log("Eliminado:",member)
         if(member!=null){
-            this.movement.getStructure().addMember(member,newZone,newBranch,newGroup);
-            return true;
+            return this.movement.getStructure().addMember(member,newZone,newBranch,newGroup);
         }
         return false;
         //this.movement.getStructure().swapGroup(precedenceGroup, newGroup, pIdData);
@@ -118,8 +125,8 @@ export class Controller {
         let management = this.movement.getStructure().consultGroupManagement(groupId);
         return management; 
     }
-    public assignZoneManagement( zoneName : String, idZone : number, firstPersonName : String, idFirstPerson : number, secondPersonName : String, idSecondPerson : number ) :Boolean{
-        this.movement.getStructure().assignZoneManagement(zoneName, idZone , firstPersonName, idFirstPerson , secondPersonName, idSecondPerson);
+    public assignZoneManagement( zoneName : String, firstPersonName : String, idFirstPerson : number, secondPersonName : String, idSecondPerson : number ) :Boolean{
+        this.movement.getStructure().assignZoneManagement(zoneName , firstPersonName, idFirstPerson , secondPersonName, idSecondPerson);
         return true;
     };
     public assignBranchManagement( branchName : String, idBranch : number, firstPersonName : String, idFirstPerson : number, secondPersonName : String, idSecondPerson : number ) :Boolean{
@@ -155,8 +162,8 @@ export class Controller {
         return monitors;
     }
 
-    public addMember(id:number,name:String,telephone:number,mail:String,direction:String){
-        this.movement.getMembers().addMember(id, name,telephone,mail, direction);
+    public addMember(id:number,name:String,telephone:number,mail:String,direction:String,esMonitor:boolean){
+        this.movement.getMembers().addMember(id, name,telephone,mail, direction,esMonitor);
     }
 
     public assignChief( pNombreNivel : String , pIdData : number){
