@@ -5,16 +5,16 @@ import {Person} from './Person';
 
 
 export class Member extends Person{
-    private direction : Direction;
+    private direction : String;
     private rol: Rol;
     private facilitador: boolean;
     
 
-    constructor(direction : Direction,rol : Rol,facilitador : boolean,id:number,name:String,email:String,telephone:number){
+    constructor(direction : String,rol : Rol,facilitador : boolean,id:number,name:String,email:String,telephone:number){
         super(id,name,email,telephone);
         this.direction=direction;
         this.rol=rol;
-        this.facilitador=facilitador;
+        this.facilitador=false;
     }
 
     public getName(){
@@ -22,6 +22,12 @@ export class Member extends Person{
     }
     public getEmail(){
         return this.email;
+    }
+    public getDirection():String{
+        return this.direction;
+    }
+    public set_Direction(value:String) {
+        this.direction = value;
     }
     public getId(){
         return this.id;

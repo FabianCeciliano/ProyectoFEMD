@@ -3,11 +3,11 @@ import {IComponent} from './IComponent';
 import { Member } from './Member';
 
 export class Composite_Level extends IComponent{
-    
+       
     groupComposite : IComponent[];
 
-    constructor(id: number, name : String,numG : number,levelType :  StructureType){
-        super(id, name, numG, levelType);
+    constructor(id: number, name : String,levelType :  StructureType){
+        super(id, name, levelType);
         this.groupComposite=[];
     }
 
@@ -53,6 +53,8 @@ export class Composite_Level extends IComponent{
     }
     getIntegrants(): Member[] {
         return this.members;
+    }
+    addMonitor(monitor: Member): void {
     }
 
 }

@@ -358,7 +358,13 @@
 
 
                     <div class="row justify-content-center nZona">
-                        <div class="col-2 align-self-center"></div>
+                        <div class="col-2 align-self-center">
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                             <!--                             NUEVO                                    -->
+                             <!-- //////////////////////////////////////////////////////////////////// -->
+                            <input class="myborders2" id="structRId" type="text " placeholder="Id Rama"
+                            required>
+                        </div>
 
                         <!-- //////////////////////////////////////////////////////////////////// -->
                         <!--                               TEXTO 2                                -->
@@ -392,7 +398,16 @@
                     <!--                                LISTA                                 -->
                     <!-- //////////////////////////////////////////////////////////////////// -->
                     <div class="row justify-content-center p-2">
-                        <div class="col-1 align-self-center">
+                        <div class="col-3 align-self-center">
+                            <div class="box">
+                                <select class="selecBox" id="structRIdList" type="submit "
+                                    style="border: 0; background: transparent ">
+                                </select>
+                            </div>
+                        </div>
+                
+                    <!-- /////////////////////////////SEGUNDO/////////////////////////////////////// -->
+                        <div class="col-4 align-self-center">
                             <div class="box">
                                 <select class="selecBox" id="structRList" type="submit "
                                     style="border: 0; background: transparent ">
@@ -498,7 +513,7 @@
                             <div class="row justify-content-center p-4">
                                 <div class="col-1 align-self-center">
                                     <div class="box">
-                                        <select class="selecBox" id="grupoRList" type="submit "
+                                        <select class="selecBox" id="grupoRList" onchange="actualizarMonitoresDisponibles(this);" type="submit "
                                             style="border: 0; background: transparent ">
                                         </select>
                                     </div>
@@ -618,18 +633,7 @@
                 <!-- //////////////////////////////////////////////////////////////////// -->
                 <!-- //////////////////////////////////////////////////////////////////// -->
                 <div id="overlayAsignarMonitor">
-
-
-                    <!-- //////////////////////////////////////////////////////////////////// -->
-                    <!--                               TITULO                                 -->
-                    <!-- //////////////////////////////////////////////////////////////////// -->
-                    <div class="row window0 p-2">
-                        <div class="col-12">
-                            <img class="mx-auto d-block over" src="../resources/Crear Nuevo Grupo.svg">
-                        </div>
-                    </div>
-
-
+                    <br><br>
                     <!-- //////////////////////////////////////////////////////////////////// -->
                     <!--                                COLUMNA UNO                            -->
                     <!-- //////////////////////////////////////////////////////////////////// -->
@@ -2218,7 +2222,7 @@
             document.getElementById("overlayCrearGrupo").style.display = "block ";
 
             actualizarZonas();
-            actualizarMonitoresDisponibles();
+            //actualizarMonitoresDisponibles();
 
         }
 

@@ -5,14 +5,12 @@ export abstract class IComponent{
     
     name : String;
     id: number;
-    numG : number;
     levelType :  StructureType;
     members : Member[];
 
-    constructor(id: number, name : String,numG : number,levelType :  StructureType){
+    constructor(id: number, name : String,levelType :  StructureType){
         this.name=name;
         this.id=id;
-        this.numG=numG;
         this.levelType=levelType;
         this.members=[];
     }

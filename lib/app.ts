@@ -29,7 +29,6 @@ class App {
       this.test_routes.route(this.app);
       this.common_routes.route(this.app);
       this.asesor_routes.route(this.app);
-      controller.createMovement(12345,"","","",1234);
    }
 
    private config(): void {

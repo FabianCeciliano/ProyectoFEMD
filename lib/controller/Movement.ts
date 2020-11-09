@@ -34,4 +34,8 @@ export class Movement{
         return this.gMembers;
     }
 
+    getMember(idMember:number){
+        return this.gMembers.getMember(idMember);
+    }
+
 }

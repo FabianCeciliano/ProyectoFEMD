@@ -4,11 +4,12 @@ import { Member } from "./Member";
 
 
 export class LeafComponent extends IComponent{
-        
+          
     private quantity: number;
+    monitors : Member[];
 
-    constructor(id: number, name : String,numG : number,levelType :  StructureType){
-        super(id, name, numG, levelType);
+    constructor(id: number, name : String,levelType :  StructureType){
+        super(id, name, levelType);
         this.quantity=0;
     }
 
@@ -57,6 +58,9 @@ export class LeafComponent extends IComponent{
     }
     getIntegrants():Member[]{
         return this.members;
+    }
+    addMonitor(monitor: Member): void {
+        this.monitors.push(monitor);
     }
     
 }
