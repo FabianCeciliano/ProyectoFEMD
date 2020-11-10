@@ -21,7 +21,7 @@ export class AsesorRotes {
             //console.log(req.body);
             var created: Boolean = controller.createNewZone(null, req.body.zonaName);
             ///                                             ///
-            dbController.insertZoneTree(req.body.zonaName)
+            //dbController.insertZoneTree(req.body.zonaName)
             ///                                             ///
             var notCreated: String[] = [];
 
@@ -32,7 +32,7 @@ export class AsesorRotes {
                         notCreated.push(req.body.branches[index]);
                     }else{
                         ///                                                                                             ///
-                        dbController.insertBranchTree(req.body.zonaName, req.body.ids[index], req.body.branches[index])
+                        //dbController.insertBranchTree(req.body.zonaName, req.body.ids[index], req.body.branches[index])
                         ///                                                                                             ///
                     }
                 }
@@ -97,7 +97,7 @@ export class AsesorRotes {
                 controller.addMonitor(req.body.zona,Number(idRama[1]),Number(req.body.idGrupo),Number(idMonitor[1]));
                 controller.verEstructura();
                 ///                                                                                             ///
-                dbController.insertGroupTree(req.body.zona, idRama[1], req.body.grupo, req.body.idGrupo, idMonitor[1])
+                //dbController.insertGroupTree(req.body.zona, idRama, req.body.grupo, req.body.idGrupo, idMonitor)
                 ///                                                                                             ///
                 res.send({ status: 1 });
             } else {
@@ -115,7 +115,7 @@ export class AsesorRotes {
             let result = controller.defineMonitor(Number(coachId), idDestino[0],Number(idDestino[1]));
             if (result) {
                 ///                                                                      ///
-                dbController.insertMonitorBranch(idDestino[0], idDestino[1], coachId)
+                // dbController.insertMonitorBranch(idDestino[0], idDestino[1], coachId)
                 ///                                                                      ///
                 res.send({ status: 1 });
             } else {
@@ -176,7 +176,7 @@ export class AsesorRotes {
                 var result = controller.assignZoneManagement(zoneName, Number( String(first_Chief_Id).split("-",2)[1] ) );
                 if(result){
                     ///                                                                      ///
-                    dbController.assignBossZone(zoneName, String(first_Chief_Id).split("-",2)[1],"") 
+                    //assignBossZone(zoneName, String(first_Chief_Id).split("-",2)[1],"") 
                     ///                                                                      ///
                     res.send({ status: 1 });
                 }else{
@@ -188,7 +188,7 @@ export class AsesorRotes {
                 var result2 = controller.assignZoneManagement(zoneName, Number( String(second_Chief_Id).split("-",2)[1] ) );
                 if(result && result2){
                     ///                                                                      ///
-                    dbController.assignBossZone(zoneName, String(first_Chief_Id).split("-",2)[1], String(second_Chief_Id).split("-",2)[1]) 
+                    //assignBossZone(zoneName, String(first_Chief_Id).split("-",2)[1], String(second_Chief_Id).split("-",2)[1]) 
                     ///                                                                      ///
                     res.send({ status: 1 });
                 }else{
@@ -220,7 +220,7 @@ export class AsesorRotes {
                 var result = controller.assignBranchManagement(zoneName, Number(branchId) ,Number( String(first_Chief_Id).split("-",2)[1] ) );
                 if(result){
                     ///                                                                      ///
-                    dbController.assignBossBranch(zoneName, branchId, String(first_Chief_Id).split("-",2)[1], "")
+                    //dbController.assignBossBranch(zoneName, branchId, String(first_Chief_Id).split("-",2)[1], "")
                     ///                                                                      ///
                     res.send({ status: 1 });
                 }else{
@@ -231,7 +231,7 @@ export class AsesorRotes {
                 var result2 = controller.assignBranchManagement(zoneName, Number(branchId), Number( String(second_Chief_Id).split("-",2)[1] ) );
                 if(result && result2){
                     ///                                                                      ///
-                    dbController.assignBossBranch(zoneName, branchId, String(first_Chief_Id).split("-",2)[1], String(second_Chief_Id).split("-",2)[1]) 
+                    //dbController.assignBossBranch(zoneName, branchId, String(first_Chief_Id).split("-",2)[1], String(second_Chief_Id).split("-",2)[1]) 
                     ///                                                                      ///
                     res.send({ status: 1 });
                 }else{
@@ -265,7 +265,7 @@ export class AsesorRotes {
                 var result = controller.assignGroupManagement(zoneName, Number(branchId), Number(groupId) ,Number( String(first_Chief_Id).split("-",2)[1] ) );
                 if(result){
                     ///                                                                      ///
-                    dbController.assignBossGroup(zoneName, branchId, groupId, String(first_Chief_Id).split("-",2)[1], "") 
+                    //dbController.assignBossGroup(zoneName, branchId, groupId, String(first_Chief_Id).split("-",2)[1], "") 
                     ///                                                                      ///
                     res.send({ status: 1 });
                 }else{
@@ -277,7 +277,7 @@ export class AsesorRotes {
                 var result2 = controller.assignGroupManagement(zoneName, Number(branchId), Number(groupId), Number( String(second_Chief_Id).split("-",2)[1] ) );
                 if(result && result2){
                     ///                                                                      ///
-                    dbController.assignBossGroup(zoneName, branchId, groupId, String(first_Chief_Id).split("-",2)[1], String(second_Chief_Id).split("-",2)[1]) 
+                    //dbController.assignBossGroup(zoneName, branchId, groupId, String(first_Chief_Id).split("-",2)[1], String(second_Chief_Id).split("-",2)[1]) 
                     ///                                                                      ///
                     res.send({ status: 1 });
                 }else{
@@ -301,25 +301,27 @@ export class AsesorRotes {
             controller.addMember(Number(req.body.id),req.body.name,Number(req.body.celular),req.body.mail,req.body.direccion,Boolean(req.body.esMonitor))
             controller.printMembers();
             ///                              ///
-            dbController.create_user(req)
+            // dbController.create_user(req)
             ///                              ///
             res.send({status:1});
         })
 
         app.post('/actualizarUsuario',function (req: Request, res: Response){
+            //console.log(req.body)
             controller.upDateMember(Number(req.body.id),req.body.name,req.body.celular,req.body.mail,req.body.direccion,Boolean(req.body.esMonitor))
             controller.printMembers();
             ///                              ///
-            //dbController.update_user(req)
+            // dbController.update_user(req)
             ///                              ///
             res.send({status:1});
         })
 
         app.post('/borrarUsuario'  ,function (req: Request, res: Response){
+            //console.log(req.body)
             controller.deleteMember(Number(req.body.id));
             controller.printMembers();
             ///                              ///
-            dbController.delete_user(req)
+            // dbController.delete_user(req)
             ///                              ///
             res.send({status:1});
         })
@@ -337,8 +339,8 @@ export class AsesorRotes {
             var swaped = controller.swapGroup(procedenciaZonaName,Number(procedenciaIdRama),Number(procedenciaidGrupo),Number(data),destinoZonaName,Number(destinoIdRama),Number(destinoidGrupo));
             if (swaped) {
                 ///                                                                                 ///
-                dbController.moveMemberGroups(procedenciaZonaName, procedenciaIdRama, procedenciaidGrupo,
-                    destinoZonaName, destinoIdRama, destinoidGrupo, data)
+                // dbController.moveMemberGroupsImp(procedenciaZonaName, procedenciaIdRama, procedenciaidGrupo,
+                //    destinoZonaName, destinoIdRama, destinoidGrupo, data)
                 ///                                                                                 ///
                 res.send({status:1});
             } else {
@@ -397,7 +399,7 @@ export class AsesorRotes {
             if (agregado) {
                 controller.verEstructura();
                 ///                                                                                 ///
-                dbController.insertMemberGroup(req.body.zona,req.body.rama,req.body.grupo,req.body.idMiembro)
+                // dbController.moveMemberGroupsImp(req.body.zona,req.body.rama,req.body.grupo,req.body.idMiembro)
                 ///                                                                                 ///
                 res.send({status:1});
             } else {
@@ -409,18 +411,154 @@ export class AsesorRotes {
         //----------------------------------------------------------------Crear Movimiento
         app.post('/crearMovimiento'  ,function (req: Request, res: Response){
             //console.log(req.body)
-            var status:boolean = controller.createMovement(Number(req.body.cedulaJuridica),
-                req.body.nombre,req.body.web,req.body.pais,Number(req.body.telefono));
+            var status:boolean = controller.createMovement(Number(req.body.cedulaJuridica),req.body.nombre,req.body.web,req.body.pais,Number(req.body.telefono));
+
             if (status == true) {
-                ///                                                                                 ///
-                dbController.createOrganization(req.body.nombre, req.body.pais, req.body.cedulaJuridica,
-                    req.body.web, req.body.telefono)
-                ///                                                                                 ///
                 res.send({status:1});
             } else {
                    res.send({status:0});
             }
 
         })
+        
+
+        
+
+        //-----------------------------------------------------------------
+        /*
+                app.get('/', function (req: Request, res: Response) {
+                    //res.send({ message: 'Hola amigos'});
+                    res.render("hi");
+                });
+        
+                app.get('/main', function (req: Request, res: Response) {
+                    //res.send({ message: 'Hola amigos'});
+                    res.render(path.resolve(htmlPath+'mainPage.html'));
+                });
+        
+                app.get('/login', function (req: Request, res: Response) {
+                    //res.send({ message: 'Hola amigos'});
+                    res.render(path.resolve(htmlPath+'LogIn.html'));
+                });
+                
+                app.get('/about', function (req: Request, res: Response) {
+                    //res.send({ message: 'Hola amigos'});
+                    res.render(path.resolve(htmlPath+'about.html'));
+                });
+        
+                app.get('/asesorMain', function (req: Request, res: Response) {
+                    //res.send({ message: 'Hola amigos'});
+                    res.render(path.resolve(htmlPath+'AsesorGeneral.html'));
+                });
+        
+                app.post('/asesorMain', function (req: Request, res: Response) {
+                    //res.send({ message: 'Hola amigos'});
+                    //res.sendFile(path.resolve(htmlPath+'asesorGeneralMainPage.html'));
+                    console.log(req.body);
+                    console.log(req.body.zonaName);
+                    console.log(req.body.branches);
+                    res.send("jeje");
+                });
+        
+                app.post('/userMain', function (req: Request, res: Response) {
+                    //res.send({ message: 'Hola amigos'});
+                    res.sendFile(path.resolve(htmlPath+'userMainPage.html'));
+                });
+        
+                app.get('/hi', function (req: Request, res: Response) {
+                    res.sendFile(path.resolve(htmlPath+'index.html'));
+                });*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
