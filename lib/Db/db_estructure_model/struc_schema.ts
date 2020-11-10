@@ -5,6 +5,7 @@ import * as mongoose from 'mongoose';
 const strucSchema = mongoose.Schema;
 
 const schema = new strucSchema({
+    _id : Number,
     name: String,
     coutry: String,
     cedulaJuridica: String,
@@ -14,4 +15,4 @@ const schema = new strucSchema({
     zonas: [IZoneC],
 });
 
-export default mongoose.model('structure', schema);
+export default mongoose.model('structures', schema);
