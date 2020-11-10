@@ -2,6 +2,7 @@ import { Application, Request, Response } from 'express';
 var path = require('path');
 const htmlPath = __dirname + '../../../lib/view/HTML/';
 import controller from '../controller/Controller'
+import dbController from '../Db/db_controllers/databaseController'
 
 export class AsesorRotes {
     public route(app: Application) {
@@ -20,7 +21,9 @@ export class AsesorRotes {
             console.log(req.body);
             console.log("Verificando que hace ajax1");
             var created: Boolean = controller.createNewZone(null, req.body.zonaName);
-            //manda a la base...
+            ///                                             ///
+            //dbController.insertZoneTree(req.body.zonaName)
+            ///                                             ///
             var notCreated: String[] = [];
 
             if (created) {
@@ -28,6 +31,10 @@ export class AsesorRotes {
                     var createdBranch: Boolean = controller.createNewBranch(req.body.zonaName, Number(req.body.ids[index]), req.body.branches[index]);
                     if (!createdBranch) {
                         notCreated.push(req.body.branches[index]);
+                    }else{
+                        ///                                                                                             ///
+                        //dbController.insertBranchTree(req.body.zonaName, req.body.ids[index], req.body.branches[index])
+                        ///                                                                                             ///
                     }
                 }
                 if (notCreated.length > 0) {
@@ -90,6 +97,9 @@ export class AsesorRotes {
             if (created) {
                 controller.addMonitor(req.body.zona,Number(idRama[1]),Number(req.body.idGrupo),Number(idMonitor));
                 controller.verEstructura();
+                ///                                                                                             ///
+                //dbController.insertGroupTree(req.body.zona, idRama, req.body.grupo, req.body.idGrupo, idMonitor)
+                ///                                                                                             ///
                 res.send({ status: 1 });
             } else {
                 res.send({ status: 0 });
@@ -105,6 +115,9 @@ export class AsesorRotes {
             
             let result = controller.defineMonitor(Number(coachId), idDestino[0],Number(idDestino[1]));
             if (result) {
+                ///                                                                      ///
+                // dbController.insertMonitorBranch(idDestino[0], idDestino[1], coachId)
+                ///                                                                      ///
                 res.send({ status: 1 });
             } else {
                 res.send({ status: 0 });
@@ -114,71 +127,172 @@ export class AsesorRotes {
         //Conformacion de coordinacion
         //----------------------------------------------------------------Consulta de Jefaturas
         app.post('/consultarExistenciaZona', function (req: Request, res: Response) {
+            var zoneName = req.body.nombreZona;
 
-            var zoneName = req.body.jefeZonaZName;
             let result = controller.consultZoneManagement(zoneName);
-            res.send({ status: result });
+            console.log(result);
+            if(result.listBranchChief.length>0){
+                res.send({ status: 1, listZoneChief:result.listZoneChief, listBranchChief:result.listBranchChief});
+            }else{
+                res.send({ status: 0 });
+            }
+
+            
         })
 
         app.post('/consultarExistenciaRama', function (req: Request, res: Response) {
+            var zoneName = req.body.zonaName;
+            var branchId = req.body.idRama;
 
-            var branchId = req.body.jefeRamaRId;
-            let result = controller.consultBranchManagement(branchId);
-            res.send({ status: result });
+            let result = controller.consultBranchManagement(zoneName,Number(branchId));
+            
+            if(result.listGroupChief.length>0){
+                res.send({ status: 1,listBranchChief:result.listBranchChief, listGroupChief:result.listGroupChief});
+            }else{
+                res.send({ status: 0 });
+            }
         })
 
         app.post('/consultarExistenciaGrupo', function (req: Request, res: Response) {
+            var zoneName = req.body.zonaName;
+            var branchId = req.body.ramaId;
+            var groupId = req.body.grupoId;
 
-            var groupId = req.body.jefeGrupoGId;
-            let result = controller.consultGroupManagement(groupId);
-            res.send({ status: result });
+            let result = controller.consultGroupManagement(zoneName,Number(branchId), Number(groupId));
+            if(result.listMembersChief.length>0){
+                res.send({ status: 1,listGroupChief:result.listGroupChief,listMembersChief:result.listMembersChief});
+            }else{
+                res.send({ status: 0 });
+            }
         })
         //----------------------------------------------------------------Asignacion de Jefaturas
         app.post('/asignarJefesZona', function (req: Request, res: Response) {
-            var zoneName = req.body.jefeZonaZName;
-            var first_Chief_Name = req.body.jefeZonaP1Name;
-            var first_Chief_Id = req.body.jefeZonaP1Id;
-            var second_Chief_Name = req.body.jefeZonaP2Name;
-            var second_Chief_Id = req.body.jefeZonaP2Id;
-            let result = controller.consultZoneManagement(zoneName);
+            var zoneName = req.body.nombreZona;
+            var first_Chief_Id = req.body.jefe1;
+            var second_Chief_Id = req.body.jefe2;
+
+            if(first_Chief_Id=="" && second_Chief_Id==""){
+                res.send({ status: 2 });//no puede asignar
+            }else if((first_Chief_Id!="" && second_Chief_Id=="")||(first_Chief_Id == second_Chief_Id)){  
+                var result = controller.assignZoneManagement(zoneName, Number( String(first_Chief_Id).split("-",2)[1] ) );
+                if(result){
+                    ///                                                                      ///
+                    //assignBossZone(zoneName, String(first_Chief_Id).split("-",2)[1],"") 
+                    ///                                                                      ///
+                    res.send({ status: 1 });
+                }else{
+                    res.send({ status: 0 });
+                }
+            }else{
+
+                var result = controller.assignZoneManagement(zoneName, Number( String(first_Chief_Id).split("-",2)[1] ) );
+                var result2 = controller.assignZoneManagement(zoneName, Number( String(second_Chief_Id).split("-",2)[1] ) );
+                if(result && result2){
+                    ///                                                                      ///
+                    //assignBossZone(zoneName, String(first_Chief_Id).split("-",2)[1], String(second_Chief_Id).split("-",2)[1]) 
+                    ///                                                                      ///
+                    res.send({ status: 1 });
+                }else{
+                    res.send({ status: 0 });
+                }
+                
+            }
+
+            
+
+            /*let result = controller.consultZoneManagement(zoneName);
             if (result>=2) {
                 res.send({ status: 0 });
             } else{
                 controller.assignZoneManagement(zoneName,first_Chief_Name,first_Chief_Id,second_Chief_Name,second_Chief_Id);
                 res.send({ status: 1 });
-            }
+            }*/
         })
 
         app.post('/asignarJefesRama', function (req: Request, res: Response) {
-            var branchName = req.body.jefeRamaRName;
-            var branchId = req.body.jefeRamaRId;
-            var first_Chief_Name = req.body.jefeRamaP1Name;
-            var first_Chief_Id = req.body.jefeRamaP1Id;
-            var second_Chief_Name = req.body.jefeRamaP2Name;
-            var second_Chief_Id = req.body.jefeRamaP2Id;
-            let result = controller.assignBranchManagement(branchName, Number(branchId), first_Chief_Name, first_Chief_Id, second_Chief_Name, second_Chief_Id);
+            var zoneName = req.body.nombreZona;
+            var branchId = req.body.idRama;
+            var first_Chief_Id = req.body.jefe1;
+            var second_Chief_Id = req.body.jefe2;
+
+            if(first_Chief_Id=="" && second_Chief_Id==""){
+                res.send({ status: 2 });//no puede asignar
+            }else if((first_Chief_Id!="" && second_Chief_Id=="")||(first_Chief_Id == second_Chief_Id)){  
+                var result = controller.assignBranchManagement(zoneName, Number(branchId) ,Number( String(first_Chief_Id).split("-",2)[1] ) );
+                if(result){
+                    ///                                                                      ///
+                    //dbController.assignBossBranch(zoneName, branchId, String(first_Chief_Id).split("-",2)[1], "")
+                    ///                                                                      ///
+                    res.send({ status: 1 });
+                }else{
+                    res.send({ status: 0 });
+                }
+            }else{
+                var result = controller.assignBranchManagement(zoneName, Number(branchId),  Number( String(first_Chief_Id).split("-",2)[1] ) );
+                var result2 = controller.assignBranchManagement(zoneName, Number(branchId), Number( String(second_Chief_Id).split("-",2)[1] ) );
+                if(result && result2){
+                    ///                                                                      ///
+                    //dbController.assignBossBranch(zoneName, branchId, String(first_Chief_Id).split("-",2)[1], String(second_Chief_Id).split("-",2)[1]) 
+                    ///                                                                      ///
+                    res.send({ status: 1 });
+                }else{
+                    res.send({ status: 0 });
+                }
+            }
+
+            /*let result = controller.assignBranchManagement(branchName, Number(branchId), first_Chief_Name, first_Chief_Id, second_Chief_Name, second_Chief_Id);
             if (result) {
                 res.send({ status: 1 });
             } else {
                 res.send({ status: 0 });
             }
-            res.send({ status: 1 });
+            res.send({ status: 1 });*/
         })
 
         app.post('/asignarJefesGrupo', function (req: Request, res: Response) {
-            var groupName = req.body.jefeGrupoGName;
-            var groupId = req.body.jefeGrupoGId;
-            var first_Chief_Name = req.body.jefeGrupoP1Name;
-            var first_Chief_Id = req.body.jefeGrupoP1Id;
-            var second_Chief_Name = req.body.jefeGrupoP2Name;
-            var second_Chief_Id = req.body.jefeGrupoP2Id;
-            let result = controller.assignGroupManagement(groupName, Number(groupId), first_Chief_Name, first_Chief_Id, second_Chief_Name, second_Chief_Id);
+            var zoneName = req.body.nombreZona;
+            var branchId = req.body.idRama;
+            var groupId = req.body.idGrupo;
+            var first_Chief_Id = req.body.jefe1;
+            var second_Chief_Id = req.body.jefe2;
+
+            console.log("Entra a ruta")
+
+            if(first_Chief_Id=="" && second_Chief_Id==""){
+                console.log("Entra 1")
+                res.send({ status: 2 });//no puede asignar
+            }else if((first_Chief_Id!="" && second_Chief_Id=="")||(first_Chief_Id == second_Chief_Id)){
+                console.log("Entra 2")  
+                var result = controller.assignGroupManagement(zoneName, Number(branchId), Number(groupId) ,Number( String(first_Chief_Id).split("-",2)[1] ) );
+                if(result){
+                    ///                                                                      ///
+                    //dbController.assignBossGroup(zoneName, branchId, groupId, String(first_Chief_Id).split("-",2)[1], "") 
+                    ///                                                                      ///
+                    res.send({ status: 1 });
+                }else{
+                    res.send({ status: 0 });
+                }
+            }else{
+                console.log("Entra 3")
+                var result = controller.assignGroupManagement(zoneName, Number(branchId), Number(groupId),  Number( String(first_Chief_Id).split("-",2)[1] ) );
+                var result2 = controller.assignGroupManagement(zoneName, Number(branchId), Number(groupId), Number( String(second_Chief_Id).split("-",2)[1] ) );
+                if(result && result2){
+                    ///                                                                      ///
+                    //dbController.assignBossGroup(zoneName, branchId, groupId, String(first_Chief_Id).split("-",2)[1], String(second_Chief_Id).split("-",2)[1]) 
+                    ///                                                                      ///
+                    res.send({ status: 1 });
+                }else{
+                    res.send({ status: 0 });
+                }
+            }
+
+            /*let result = controller.assignGroupManagement(groupName, Number(groupId), first_Chief_Name, first_Chief_Id, second_Chief_Name, second_Chief_Id);
             if (result) {
                 res.send({ status: 1 });
             } else {
                 res.send({ status: 0 });
             }
-            res.send({ status: 1 });
+            res.send({ status: 1 });*/
         })
 
 
@@ -187,6 +301,9 @@ export class AsesorRotes {
             //console.log(req.body)
             controller.addMember(Number(req.body.id),req.body.name,Number(req.body.celular),req.body.mail,req.body.direccion,Boolean(req.body.esMonitor))
             controller.printMembers();
+            ///                              ///
+            // dbController.create_user(req)
+            ///                              ///
             res.send({status:1});
         })
 
@@ -194,6 +311,9 @@ export class AsesorRotes {
             //console.log(req.body)
             controller.upDateMember(Number(req.body.id),req.body.name,req.body.celular,req.body.mail,req.body.direccion,Boolean(req.body.esMonitor))
             controller.printMembers();
+            ///                              ///
+            // dbController.update_user(req)
+            ///                              ///
             res.send({status:1});
         })
 
@@ -201,6 +321,9 @@ export class AsesorRotes {
             //console.log(req.body)
             controller.deleteMember(Number(req.body.id));
             controller.printMembers();
+            ///                              ///
+            // dbController.delete_user(req)
+            ///                              ///
             res.send({status:1});
         })
 
@@ -216,6 +339,10 @@ export class AsesorRotes {
             
             var swaped = controller.swapGroup(procedenciaZonaName,Number(procedenciaIdRama),Number(procedenciaidGrupo),Number(data),destinoZonaName,Number(destinoIdRama),Number(destinoidGrupo));
             if (swaped) {
+                ///                                                                                 ///
+                // dbController.moveMemberGroupsImp(procedenciaZonaName, procedenciaIdRama, procedenciaidGrupo,
+                //    destinoZonaName, destinoIdRama, destinoidGrupo)
+                ///                                                                                 ///
                 res.send({status:1});
             } else {
                 res.send({ status: 0 });

@@ -84,12 +84,12 @@ export class Controller {
 
         //console.log("Id:",coachId," Zona:",zoneName,"Rama:",ramaId)
         var coach:Member = this.movement.getMembers().getMember(coachId).clone();
-        console.log("Clone Antes de cambiar:", coach);
+        //console.log("Clone Antes de cambiar:", coach);
 
-        this.movement.getMembers().getMember(coachId).set_rol(Rol.zoneChief);
+        //this.movement.getMembers().getMember(coachId).set_rol(Rol.zoneChief);
 
-        console.log("Original:",this.movement.getMembers().getMember(coachId),"\n\n\n");
-        console.log("Clone despues:", coach);
+        //console.log("Original:",this.movement.getMembers().getMember(coachId),"\n\n\n");
+        //console.log("Clone despues:", coach);
 
         if(coach.get_facilitador()==true){
             return this.movement.getStructure().addCoach(coach,zoneName,ramaId);
@@ -113,29 +113,40 @@ export class Controller {
         return false;
         //this.movement.getStructure().swapGroup(precedenceGroup, newGroup, pIdData);
     };
-    public consultZoneManagement(zoneName : String) : Number{
-        let management = this.movement.getStructure().consultZoneManagement(zoneName);
-        return management;
+    public consultZoneManagement(zoneName : String) {
+        return this.movement.getStructure().consultZoneManagement(zoneName);
     }
-    public consultBranchManagement(branchId : Number) : Number{
-        let management = this.movement.getStructure().consultBranchManagement(branchId);
-        return management;
+    public consultBranchManagement(zoneName : String, branchId : Number){
+        return this.movement.getStructure().consultBranchManagement(zoneName,branchId);
     }
-    public consultGroupManagement(groupId : Number) : Number{
-        let management = this.movement.getStructure().consultGroupManagement(groupId);
-        return management; 
+    public consultGroupManagement(zoneName : String, branchId : Number, groupId : Number){
+        return this.movement.getStructure().consultGroupManagement(zoneName,branchId,groupId); 
     }
-    public assignZoneManagement( zoneName : String, firstPersonName : String, idFirstPerson : number, secondPersonName : String, idSecondPerson : number ) :Boolean{
-        this.movement.getStructure().assignZoneManagement(zoneName , firstPersonName, idFirstPerson , secondPersonName, idSecondPerson);
-        return true;
+    public assignZoneManagement( zoneName : String, idMember:number) :Boolean{
+
+        return this.movement.getStructure().assignZoneManagement(zoneName,idMember);
+
+        //this.movement.getStructure().assignZoneManagement(zoneName , firstPersonName, idFirstPerson , secondPersonName, idSecondPerson);
+        //return true;
     };
-    public assignBranchManagement( branchName : String, idBranch : number, firstPersonName : String, idFirstPerson : number, secondPersonName : String, idSecondPerson : number ) :Boolean{
-        this.movement.getStructure().assignBranchManagement(branchName, idBranch , firstPersonName, idFirstPerson , secondPersonName, idSecondPerson);
-        return true;
+    public assignBranchManagement( zoneName : String, idBranch : number, idMember:number ) :Boolean{
+        var member:Member = this.movement.getMembers().getMember(idMember).clone();
+        member.set_rol(Rol.BranchChief);
+        
+        return this.movement.getStructure().assignBranchManagement(zoneName,idBranch,member);
+
+        //this.movement.getStructure().assignBranchManagement(branchName, idBranch , firstPersonName, idFirstPerson , secondPersonName, idSecondPerson);
+        //return true;
     };
-    public assignGroupManagement( groupName : String, idGroup : number, firstPersonName : String, idFirstPerson : number, secondPersonName : String, idSecondPerson : number ) :Boolean{
-        this.movement.getStructure().assignGroupManagement(groupName, idGroup , firstPersonName, idFirstPerson , secondPersonName, idSecondPerson);
-        return true;
+    public assignGroupManagement( zoneName : String, idBranch : number, idGroup:number, idMember:number ) :Boolean{
+        
+        var member:Member = this.movement.getMembers().getMember(idMember).clone();
+        member.set_rol(Rol.groupChief);
+        
+        return this.movement.getStructure().assignGroupManagement(zoneName, idBranch, idGroup, member);
+        
+        //this.movement.getStructure().assignGroupManagement(groupName, idGroup , firstPersonName, idFirstPerson , secondPersonName, idSecondPerson);
+        //return true;
     };
     public getZoneManagement(zoneName:String): String[]{
         return this.movement.getStructure().getZoneManagement(zoneName);

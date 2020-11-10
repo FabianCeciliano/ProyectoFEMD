@@ -1,33 +1,19 @@
-import { Rol } from "../../model/Rol";
-
 export interface IUser {
-    cedula: number;
+    memberId: String;
     name: String;
     email: String;
-    telephone: number;
-    facilitador: boolean;
-    is_deleted: boolean;
+    telephone: String;
+    facilitator: String;
     rol: String;
-    direction: {
-        details: String;
-        canton: String;
-        district: String;
-        province: String;
-    }
+    direction: String;
 }
 
 export const IUserC = {
-    cedula: Number,
+    memberId: String,
     name: String,
     email: String,
-    telephone: Number,
-    facilitador: Boolean,
-    is_deleted: Boolean,
+    telephone: String,
+    facilitator: String,
     rol: String,
-    direction: {
-        details: String,
-        canton: String,
-        district: String,
-        province: String,
-    }
+    direction: String
 }

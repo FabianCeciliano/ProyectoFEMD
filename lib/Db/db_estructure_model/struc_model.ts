@@ -6,7 +6,7 @@ export interface IStructure {
     coutry: String;
     cedulaJuridica: String;
     webDirection: String;
-    phone: Number;
-    jefes: String[];
+    phone: String;
+    miembros: String[];
     zonas: IZone[];
 }

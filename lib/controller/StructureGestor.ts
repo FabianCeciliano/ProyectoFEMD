@@ -280,58 +280,58 @@ export class Gestor{
         }
     };
 
-    public assignZoneManagement( zoneName : String, firstPersonName : String, idFirstPerson : number, secondPersonName : String, idSecondPerson : number ){
-        for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) { 
-            if(this.structure.groupComposite[zindex].name == zoneName){
-                /*if(this.structure.groupComposite[zindex].members.length == 1 && (firstPersonName!="" && idFirstPerson!="")){
-                    console.log("Esta zona ya cuenta con jefatura.");
-                }else{
-                    console.log("Insertando jefatura de Zona");
-                    let firstManager = this.getMember(idFirstPerson);
-                    let secondManager = this.getMember(idSecondPerson);
-                    //firstManager.set_rol(Rol.zoneChief);
-                    //secondManager.set_rol(Rol.zoneChief);
-                    this.structure.groupComposite[zindex].members.push(firstManager);
-                    this.structure.groupComposite[zindex].members.push(secondManager);
-                }*/
-            }
-        }
-    };
-    public assignBranchManagement( branchName : String, idBranch : number, firstPersonName : String, idFirstPerson : number, secondPersonName : String, idSecondPerson : number ){
+    public assignZoneManagement( zoneName : String, idMember:number ){
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
-            for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
-                if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].name == branchName && this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id == idBranch){
-                    if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.length != 0){
-                        console.log("Esta rama ya cuenta con jefatura.");  
-                    }else{
-                        console.log("Insertando jefatura de Rama");
-                        let firstManager = this.getMember(idFirstPerson);
-                        let secondManager = this.getMember(idSecondPerson);
-                        //firstManager.set_rol(Rol.BranchChief);
-                        //secondManager.set_rol(Rol.BranchChief);
-                        this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.push(firstManager);
-                        this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.push(secondManager);
-                    }
-                }   
-            }         
-        }
-    };
-    public assignGroupManagement( groupName : String, idGroup: number, firstPersonName : String, idFirstPerson : number, secondPersonName : String, idSecondPerson : number ){
-        for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) { 
-            for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
-                    for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
-                        if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id ==idGroup){ 
-                            console.log("Insertando jefatura de Grupo");
-                            let firstManager = this.getMember(idFirstPerson);
-                            let secondManager = this.getMember(idSecondPerson);
-                            //firstManager.set_rol(Rol.groupChief);
-                            //secondManager.set_rol(Rol.groupChief);
-                            this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.push(firstManager);   
-                            this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.push(secondManager);
+            if(this.structure.groupComposite[zindex].name == zoneName){
+                for (let mindex = 0; mindex < this.structure.groupComposite[zindex].members.length; mindex++) {
+                    if(this.structure.groupComposite[zindex].members[mindex].id==idMember){
+                        this.structure.groupComposite[zindex].members[mindex].set_rol(Rol.zoneChief);
+                        return true;
                     }
                 }
             }
         }
+        return false;
+    };
+    public assignBranchManagement( zoneName : String, idBranch : number, member:Member){
+        for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) { 
+            if(this.structure.groupComposite[zindex].name=zoneName){
+                this.structure.groupComposite[zindex].members.push(member);
+                for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
+                    if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id=idBranch){
+                        for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.length; mindex++) {
+                            if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[mindex].id==member.id){
+                                this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[mindex].set_rol(Rol.BranchChief);
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    };
+    public assignGroupManagement( zoneName : String, idBranch : number, idGroup:number, member:Member ){
+        for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) { 
+            if(this.structure.groupComposite[zindex].name=zoneName){
+                for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
+                    if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id=idBranch){
+                        this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.push(member);
+                        for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
+                            if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id==idGroup){
+                                for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++) {
+                                    if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].id==member.id){
+                                        this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].set_rol(Rol.groupChief);
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
     
     public addCoach(coach : Member, zoneName:String, ramaId : number) : Boolean{
@@ -380,53 +380,71 @@ export class Gestor{
             }
         }
     }
-    public consultZoneManagement (zoneName : String) : Number {
+    public consultZoneManagement (zoneName : String){
+        var listZoneChief:String[]=[];
+        var listBranchChief:String[]=[];
+
+        for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
+            console.log("Original:",this.structure.groupComposite[zindex].name,"\n","entra:",zoneName);
+            if(this.structure.groupComposite[zindex].name==zoneName){
+                console.log("Miembros desde estructura: ",this.structure.groupComposite[zindex].members);
+                for (let mindex = 0; mindex < this.structure.groupComposite[zindex].members.length; mindex++) {
+                    if(this.structure.groupComposite[zindex].members[mindex].get_rol()==Rol.zoneChief){
+                        listZoneChief.push(this.structure.groupComposite[zindex].members[mindex].name+"-"+this.structure.groupComposite[zindex].members[mindex].id);
+                    }
+                    listBranchChief.push(this.structure.groupComposite[zindex].members[mindex].name+"-"+this.structure.groupComposite[zindex].members[mindex].id)
+                }
+            }
+        }
+        return {listZoneChief:listZoneChief,listBranchChief:listBranchChief}
+    }
+    public consultBranchManagement(zoneName : String, branchId : Number) {
+        var listBranchChief:String[]=[];
+        var listGroupChief:String[]=[];
+
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
             if(this.structure.groupComposite[zindex].name==zoneName){
-                if(this.structure.groupComposite[zindex].members.length ==0){
-                    return 0;
-                }else if (this.structure.groupComposite[zindex].members.length ==1){
-                    return 1;
-                }else{
-                    return 2;
-                }
-            }
-        }
-        return 2; 
-    }
-    public consultBranchManagement(branchId : Number) : Number{
-        for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
-            for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
-                if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id==branchId){
-                    if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.length ==0){
-                        return 0;
-                    }else if (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.length ==1){
-                        return 1;
-                    }else{
-                        return 2;
+                for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
+                    if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id==branchId){
+                        for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.length; mindex++) {
+                            if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[mindex].get_rol()==Rol.BranchChief){
+                                listBranchChief.push(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[mindex].name+"-"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[mindex].id);
+                            }
+                            if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[mindex].get_facilitador()!=true || this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[mindex].get_rol()!=Rol.monitor){
+                                listGroupChief.push(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[mindex].name+"-"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[mindex].id);
+                            }
+                        }
                     }
                 }
             }
         }
-        return 2; 
+        return {listBranchChief:listBranchChief,listGroupChief:listGroupChief}
     }
 
-    public consultGroupManagement (groupId : Number) : Number{
-        let managerCounter : Number = 0; 
-        for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) { 
-            for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
-                    for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
-                        if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id ==groupId){
-                            for(let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length;mindex++){
-                                if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].get_facilitador()==true){
-                                    //managerCounter+=1;
+    public consultGroupManagement (zoneName : String, branchId : Number, groupId : Number){
+        var listGroupChief:String[]=[];
+        var listMembersChief:String[]=[];
+
+        for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
+            if(this.structure.groupComposite[zindex].name==zoneName){
+                for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
+                    if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id==branchId){
+                        for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
+                            if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id==groupId){
+                                for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++) {
+                                    if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].get_rol()==Rol.groupChief){
+                                        listGroupChief.push(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].name+"-"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].id);
+                                    }else if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].get_rol()!=Rol.monitor){
+                                        listMembersChief.push(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].name+"-"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].id);
+                                    }
                                 }
                             }
+                        }
                     }
                 }
             }
         }
-        return managerCounter;
+        return {listGroupChief:listGroupChief,listMembersChief:listMembersChief};
     }
 
     public getZoneManagement(zoneName : String) :String[]{

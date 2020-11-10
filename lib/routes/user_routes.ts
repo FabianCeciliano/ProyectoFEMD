@@ -8,19 +8,19 @@ export class TestRoutes {
     public route(app: Application) {
         
         app.post('/api/user', (req: Request, res: Response) => {
-            this.dbController.create_user(req, res);
+            this.dbController.create_user(req);
         });
 
         app.get('/api/user/:id', (req: Request, res: Response) => {
-            this.dbController.get_user(req, res);
+            this.dbController.get_user(req);
         });
 
         app.put('/api/user/:id', (req: Request, res: Response) => {
-            this.dbController.update_user(req, res);
+            this.dbController.update_user(req);
         });
 
         app.delete('/api/user/:id', (req: Request, res: Response) => {
-            this.dbController.delete_user(req, res);
+            this.dbController.delete_user(req);
         });
 
     }
