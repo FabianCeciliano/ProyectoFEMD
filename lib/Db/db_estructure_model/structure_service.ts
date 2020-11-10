@@ -65,6 +65,7 @@ export default class StructureService {
     console.log(" -- Prueba Miembro en Grupo --");
     console.log(zoneName, branchId, groupId, memberId)
     structures.update(
+
       {},
       {
         $push: {
@@ -76,6 +77,7 @@ export default class StructureService {
           { "elem.name": { $eq: zoneName } },
           { "rma.id": { $eq: branchId } },
           { "grp.id": { $eq: groupId } },
+
         ],
         multi: true,
       },callback
@@ -103,6 +105,7 @@ export default class StructureService {
           { "elem.name": { $eq: zoneName } },
           { "rma.id": { $eq: branchId } },
           { "grp.id": { $eq: groupId } },
+
         ],
         multi: true,
       },callback

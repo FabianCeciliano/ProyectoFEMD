@@ -18,8 +18,7 @@ export class AsesorRotes {
 
         //----------------------------------------------------------------Creacion de estructura
         app.post('/crearEstructura', function (req: Request, res: Response) {
-            console.log(req.body);
-            console.log("Verificando que hace ajax1");
+            //console.log(req.body);
             var created: Boolean = controller.createNewZone(null, req.body.zonaName);
             ///                                             ///
             dbController.insertZoneTree(req.body.zonaName)
@@ -375,12 +374,17 @@ export class AsesorRotes {
         app.post('/getMiembrosNivel', function (req: Request, res: Response) {
             console.log(req.body)//aqui se obtiene el tipo de nivel, y el id de ese nivel
             var data:String[] = [];
-            if(req.body.nivel=="Zona"){
-                data=controller.getZoneManagement(req.body.id);
-            }else if(req.body.nivel=="Rama"){
-                data=controller.getBranchManagement(Number(req.body.id));
+            if(String(req.body.nivel)=="zona"){
+                data=controller.getZoneManagement();
+            }else if(String(req.body.nivel)=="rama"){
+                data=controller.getBranchManagement();
             }else{
-                data=controller.getGroupManagement(Number(req.body.id));
+                data=controller.getGroupManagement();
+            }
+            if(data.length>0){
+                res.send({ status: 1, miembros:data });
+            }else{
+                res.send({ status: 0 });
             }
             //res.send({status:1,miembros:["juan","pedro","juanito"]});
         })
