@@ -1,33 +1,33 @@
 import { IRama } from "./rama_model";
 import { IZone } from "./zone_model";
 import { IStructure } from "./struc_model";
-import structure from "./struc_schema";
+import structures from "./struc_schema";
 import { IGroup } from "./grupo_model";
-import { Request, Response } from "express";
+import { Request, response, Response } from "express";
 
 export default class StructureService {
   /*
-    Method used to create the basic structure in the 
+    Method used to create the basic structures in the 
     database and just setting the parameters of the 
     organization.
     */
   public setOrganizationParams(orgParams: IStructure) {
-    const _session = new structure(orgParams);
+    const _session = new structures(orgParams);
     _session.save();
   }
 
-  public insertZone(someParams: IZone) {
+  public insertZone(someParams: IZone, callback: any){
     console.log("Prueba");
-    structure.updateOne({}, { $push: { zonas: someParams } });
+    structures.updateOne({}, {$push: { zonas: someParams  } },callback);
     console.log("Despues");
-  }
+}
 
-  public insertBranch(someParams: IRama, nombreZona: String) {
+  public insertBranch(someParams: IRama, nombreZona: String, callback: any) {
     console.log("Prueba");
-    structure.update(
+    structures.update(
       {},
       { $push: { "zonas.$[elem].ramas": someParams } },
-      { arrayFilters: [{ "elem.name": { $eq: nombreZona } }], multi: true }
+      { arrayFilters: [{ "elem.name": { $eq: nombreZona } }], multi: true },callback
     );
 
     console.log("Despues");
@@ -36,19 +36,20 @@ export default class StructureService {
   public insertGroup(
     someParams: IGroup,
     nombreZona: String,
-    nombreRama: String
+    branchId: String,
+    callback: any
   ) {
     console.log(" -- DB --> Insertar Grupo --");
-    structure.update(
+    structures.update(
       {},
       { $push: { "zonas.$[elem].ramas.$[rma].grupos": someParams } },
       {
         arrayFilters: [
           { "elem.name": { $eq: nombreZona } },
-          { "rma.name": { $eq: nombreRama } },
+          { "rma.id": { $eq: branchId } },
         ],
         multi: true,
-      }
+      },callback
     );
 
     console.log(" -- DB --> Grupo Insertado -- ");
@@ -56,13 +57,14 @@ export default class StructureService {
 
   public insertMemberGroupImp(
     zoneName: String,
-    branchName: String,
-    groupName: String,
-    memberId: String
+    branchId: String,
+    groupId: String,
+    memberId: String,
+    callback: any
   ) {
     console.log(" -- Prueba Miembro en Grupo --");
-    console.log(zoneName, branchName, groupName, memberId)
-    structure.update(
+    console.log(zoneName, branchId, groupId, memberId)
+    structures.update(
       {},
       {
         $push: {
@@ -72,23 +74,24 @@ export default class StructureService {
       {
         arrayFilters: [
           { "elem.name": { $eq: zoneName } },
-          { "rma.name": { $eq: branchName } },
-          { "grp.name ": { $eq: groupName } },
+          { "rma.id": { $eq: branchId } },
+          { "grp.id": { $eq: groupId } },
         ],
         multi: true,
-      }
+      },callback
     );
     console.log(" -- Miembro Insertado -- ");
   }
 
   public insertMonitorGroupImp(
     zoneName: String,
-    branchName: String,
-    groupName: String,
-    memberId: String
+    branchId: String,
+    groupId: String,
+    memberId: String,
+    callback: any
   ) {
     console.log(" -- Prueba Miembro en Grupo --");
-    structure.update(
+    structures.update(
       {},
       {
         $push: {
@@ -98,31 +101,32 @@ export default class StructureService {
       {
         arrayFilters: [
           { "elem.name": { $eq: zoneName } },
-          { "rma.name": { $eq: branchName } },
-          { "grp.name ": { $eq: groupName } },
+          { "rma.id": { $eq: branchId } },
+          { "grp.id": { $eq: groupId } },
         ],
         multi: true,
-      }
+      },callback
     );
     console.log(" -- Miembro Insertado -- ");
   }
 
   public insertMonitorBranchImp(
     zoneName: String,
-    branchName: String,
-    memberId: String
+    branchId: String,
+    memberId: String,
+    callback: any
   ) {
     console.log(" -- Prueba Miembro en Grupo --");
-    structure.update(
+    structures.update(
       {},
       { $push: { "zonas.$[elem].ramas.$[rma].monitores": memberId } },
       {
         arrayFilters: [
           { "elem.name": { $eq: zoneName } },
-          { "rma.name": { $eq: branchName } },
+          { "rma.id": { $eq: branchId } },
         ],
         multi: true,
-      }
+      },callback
     );
     console.log(" -- Miembro Insertado -- ");
   }
@@ -131,22 +135,23 @@ export default class StructureService {
     zoneName: String,
     branchId: String,
     groupId: String,
-    memberId: String
+    memberId: String,
+    callback: any
   ) {
     console.log(" -- Prueba Jefe en Grupo --");
-    structure.update(
+    structures.update(
       {},
       { $push: { "zonas.$[elem].ramas.$[rma].grupos.$[grp].jefes": memberId } },
       {
         arrayFilters: [
           { "elem.name": { $eq: zoneName } },
           { "rma.id": { $eq: branchId } },
-          { "grp.id ": { $eq: groupId } },
+          { "grp.id": { $eq: groupId } },
         ],
         multi: true,
-      }
+      },callback
     );
-    structure.update(
+    structures.update(
       {},
       { $push: { "zonas.$[elem].ramas.$[rma].miembros": memberId } },
       {
@@ -155,7 +160,7 @@ export default class StructureService {
           { "rma.id": { $eq: branchId } },
         ],
         multi: true,
-      }
+      },callback
     );
     console.log(" -- Jefe Insertado -- ");
   }
@@ -163,10 +168,11 @@ export default class StructureService {
   public assignBossBranchImp(
     zoneName: String,
     branchId: String,
-    memberId: String
+    memberId: String,
+    callback: any
   ) {
     console.log(" -- Prueba Jefe en Rama --");
-    structure.update(
+    structures.update(
       {},
       { $push: { "zonas.$[elem].ramas.$[rma].jefes": memberId } },
       {
@@ -175,9 +181,9 @@ export default class StructureService {
           { "rma.id": { $eq: branchId } },
         ],
         multi: true,
-      }
+      },callback
     );
-    structure.update(
+    structures.update(
       {},
       { $push: { "zonas.$[elem].miembros": memberId } },
       {
@@ -185,17 +191,17 @@ export default class StructureService {
           { "elem.name": { $eq: zoneName } },
         ],
         multi: true,
-      }
+      },callback
     );
     console.log(" -- Jefe Insertado -- ");
   }
 
-  public assignBossZoneImp(zoneName: String, memberId: String) {
+  public assignBossZoneImp(zoneName: String, memberId: String, callback: any) {
     console.log(" -- Prueba Jefe en Grupo --");
-    structure.update(
+    structures.update(
       {},
       { $push: { "zonas.$[elem].jefes": memberId } },
-      { arrayFilters: [{ "elem.name": { $eq: zoneName } }], multi: true }
+      { arrayFilters: [{ "elem.name": { $eq: zoneName } }], multi: true },callback
     );
     console.log(" -- Jefe Insertado -- ");
   }
@@ -207,10 +213,11 @@ export default class StructureService {
     newbranchId: String,
     oldGroupId: String,
     newGroupId: String,
-    memberId: String
+    memberId: String,
+    callback: any
   ) {
     console.log(" -- BD: Prueba Movimiento de Miembro en Grupos --");
-    structure.update(
+    structures.update(
       {},
       {
         $push: {
@@ -221,12 +228,12 @@ export default class StructureService {
         arrayFilters: [
           { "elem.name": { $eq: newzoneName } },
           { "rma.id": { $eq: newbranchId } },
-          { "grp.id ": { $eq: newGroupId } },
+          { "grp.id": { $eq: newGroupId } },
         ],
         multi: true,
-      }
+      },callback
     );
-    structure.update(
+    structures.update(
         {},
         {
           $pull: {
@@ -237,10 +244,10 @@ export default class StructureService {
           arrayFilters: [
             { "elem.name": { $eq: oldzoneName } },
             { "rma.id": { $eq: oldbranchId } },
-            { "grp.id ": { $eq: oldGroupId } },
+            { "grp.id": { $eq: oldGroupId } },
           ],
           multi: true,
-        }
+        },callback
       );
     console.log(" -- BD: Miembro Movido -- ");
   }
