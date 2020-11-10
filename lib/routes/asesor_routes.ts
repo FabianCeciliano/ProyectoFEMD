@@ -18,7 +18,8 @@ export class AsesorRotes {
 
         //----------------------------------------------------------------Creacion de estructura
         app.post('/crearEstructura', function (req: Request, res: Response) {
-            //console.log(req.body);
+            console.log(req.body);
+            console.log("Verificando que hace ajax1");
             var created: Boolean = controller.createNewZone(null, req.body.zonaName);
             ///                                             ///
             //dbController.insertZoneTree(req.body.zonaName)
@@ -94,7 +95,7 @@ export class AsesorRotes {
             var created: Boolean = controller.createNewGroup(req.body.zona, Number(idRama[1]), Number(req.body.idGrupo), req.body.grupo)
 
             if (created) {
-                controller.addMonitor(req.body.zona,Number(idRama[1]),Number(req.body.idGrupo),Number(idMonitor[1]));
+                controller.addMonitor(req.body.zona,Number(idRama[1]),Number(req.body.idGrupo),Number(idMonitor));
                 controller.verEstructura();
                 ///                                                                                             ///
                 //dbController.insertGroupTree(req.body.zona, idRama, req.body.grupo, req.body.idGrupo, idMonitor)
@@ -376,17 +377,12 @@ export class AsesorRotes {
         app.post('/getMiembrosNivel', function (req: Request, res: Response) {
             console.log(req.body)//aqui se obtiene el tipo de nivel, y el id de ese nivel
             var data:String[] = [];
-            if(String(req.body.nivel)=="zona"){
-                data=controller.getZoneManagement();
-            }else if(String(req.body.nivel)=="rama"){
-                data=controller.getBranchManagement();
+            if(req.body.nivel=="Zona"){
+                data=controller.getZoneManagement(req.body.id);
+            }else if(req.body.nivel=="Rama"){
+                data=controller.getBranchManagement(Number(req.body.id));
             }else{
-                data=controller.getGroupManagement();
-            }
-            if(data.length>0){
-                res.send({ status: 1, miembros:data });
-            }else{
-                res.send({ status: 0 });
+                data=controller.getGroupManagement(Number(req.body.id));
             }
             //res.send({status:1,miembros:["juan","pedro","juanito"]});
         })

@@ -115,7 +115,7 @@ export class Gestor{
                     if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id==branchId){
                         for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
                             if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id==idGroup){
-                                this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.push(monitor);//.addMonitor(monitor);
+                                //this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].addMonitor(monitor);
                             }
                         }
                     }
@@ -259,7 +259,7 @@ export class Gestor{
         return {zonas:ZoneList,ramas:BranchList,grupos:groupList};
     }
 
-    /*public swapGroup( precedenceGroup : number,  newGroup : number,  pIdData : number ){
+    public swapGroup( precedenceGroup : number,  newGroup : number,  pIdData : number ){
         let member = this.deleteMember(pIdData);
         if(member!=null){
             let ZoneName;
@@ -280,7 +280,7 @@ export class Gestor{
         }else{
             console.log("No se pudo eliminar. Usuario no encontrado");
         }
-    };*/
+    };
 
     public assignZoneManagement( zoneName : String, idMember:number ){
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
@@ -387,7 +387,9 @@ export class Gestor{
         var listBranchChief:String[]=[];
 
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
+            console.log("Original:",this.structure.groupComposite[zindex].name,"\n","entra:",zoneName);
             if(this.structure.groupComposite[zindex].name==zoneName){
+                console.log("Miembros desde estructura: ",this.structure.groupComposite[zindex].members);
                 for (let mindex = 0; mindex < this.structure.groupComposite[zindex].members.length; mindex++) {
                     if(this.structure.groupComposite[zindex].members[mindex].get_rol()==Rol.zoneChief){
                         listZoneChief.push(this.structure.groupComposite[zindex].members[mindex].name+"-"+this.structure.groupComposite[zindex].members[mindex].id);
@@ -447,47 +449,45 @@ export class Gestor{
         return {listGroupChief:listGroupChief,listMembersChief:listMembersChief};
     }
 
-    public getZoneManagement() :String[]{
-        let zoneNames : String []=[];
+    public getZoneManagement(zoneName : String) :String[]{
+        let zoneNames : String [];
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
-            //if(this.structure.groupComposite[zindex].name == zoneName){
-            for(let jindex = 0 ; jindex < this.structure.groupComposite[zindex].members.length;jindex++){
-                zoneNames.push(this.structure.groupComposite[zindex].members[jindex].name+"-"+this.structure.groupComposite[zindex].members[jindex].id+"-"+this.structure.groupComposite[zindex].members[jindex].get_rol().toString());        
+            if(this.structure.groupComposite[zindex].name == zoneName){
+                for(let jindex = 0 ; jindex < this.structure.groupComposite[zindex].members.length;jindex++){
+                    zoneNames.push(this.structure.groupComposite[zindex].members[jindex].name);        
+                }
             }
-            //}
         }
         return zoneNames;
     }
     
-    public getBranchManagement() :String[]{
-        let brachNames : String []=[];
+    public getBranchManagement(pIdBrach : number) :String[]{
+        let brachNames : String [];
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
             for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
-                //if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id==pIdBrach){
-                for(let jindex = 0 ; jindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.length;jindex++){
-                    brachNames.push(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[jindex].name+"-"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[jindex].id+""+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[jindex].get_rol().toString());        
+                if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id==pIdBrach){
+                    for(let jindex = 0 ; jindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.length;jindex++){
+                        brachNames.push(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[jindex].name);        
+                    }
                 }
-                //}
             }
         }
         return brachNames;
     }
 
-    public getGroupManagement() :String[]{
-        let groupNames : String []=[];
+    public getGroupManagement(pIdGroup : number) :String[]{
+        let groupNames : String [];
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
             for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
                 for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
-                    //if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id ==pIdGroup){
-                    for(let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length;mindex++){
-                        //if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].get_facilitador()==true ||
-                        //this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].get_rol()==Rol.groupChief){
-                            groupNames.push(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].name
-                            +"-"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].id
-                            +"-"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].get_rol().toString());
-                        //}
+                    if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id ==pIdGroup){
+                        for(let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length;mindex++){
+                            if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].get_facilitador()==true ||
+                            this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].get_rol()==Rol.groupChief){
+                                groupNames.push(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].name);
+                            }
+                        }
                     }
-                    //}
                 }    
             }
         }
