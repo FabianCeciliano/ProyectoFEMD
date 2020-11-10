@@ -7,7 +7,10 @@ const schema = new userSchema({
     name: String,
     email: String,
     telephone: Number,
-    facilitator: String,
+    facilitador: {
+        type: String,
+        default: "false"
+    },
     is_deleted: {
         type: String,
         default: "false"

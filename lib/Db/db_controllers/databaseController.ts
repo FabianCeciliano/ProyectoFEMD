@@ -16,7 +16,7 @@ import { IGroup } from "../db_estructure_model/grupo_model";
 
 export class dbController {
   private user: UserService = new UserService();
-  private structures: StructureService = new StructureService();
+  private structure: StructureService = new StructureService();
 
   ////                                                                                 ////
   ////                                                                                 ////
@@ -30,35 +30,25 @@ export class dbController {
   public create_user(req: Request) {
     // this check whether all the filds were send through the erquest or not
     if (
-      req.body.name &&
+      req.body.nombre &&
       req.body.mail &&
       req.body.celular &&
       req.body.id &&
       req.body.direccion &&
       req.body.esMonitor
     ) {
-      console.log(req)
       const user_params: IUser = {
         memberId: req.body.id,
-        name: req.body.name,
+        name: req.body.nombre,
         email: req.body.mail,
         telephone: req.body.celular,
-        facilitator: String(req.body.esMonitor),
+        facilitator: req.body.esMonitor,
         rol: "groupMember",
         direction: req.body.direccion,
       };
-      this.user.createUser(user_params,
-        (err: any, data: JSON) => {
-          if (err) {
-            console.log("Error en mongo");
-            //mongoError(err, res);
-          } else {
-            console.log(" Success !!!");
-            //successResponse("Zona Creada", data, res);
-          }
-        });
+      this.user.createUser(user_params);
     } else {
-      console.log(" -- BD : Parametros insuficientes -- ");
+      console.log(" -- BD : Parametros insuficientes -- ")
       // error response if some fields are missing in request body
       //insufficientParameters(res);
     }
@@ -67,18 +57,10 @@ export class dbController {
   public get_user(req: Request) {
     if (req.body.id) {
       const user_filter = { memberId: req.body.id };
-      this.user.filterUser(user_filter,
-        (err: any, data: JSON) => {
-          if (err) {
-            console.log("Error en mongo");
-            //mongoError(err, res);
-          } else {
-            console.log(" Success !!!");
-            //successResponse("Zona Creada", data, res);
-          }
-        });
+      this.user.filterUser(user_filter, (err: any, user_data: IUser) => {
+      });
     } else {
-      console.log(" -- BD : Parametros insuficientes -- ");
+      console.log(" -- BD : Parametros insuficientes -- ")
       //insufficientParameters(res);
     }
   }
@@ -88,13 +70,14 @@ export class dbController {
   ///                                                                                   ///
   public update_user(req: Request) {
     if (
-      req.body.id && (req.body.name ||
+      (req.body.id && req.body.nombre) ||
+      req.body.nombre ||
       req.body.mail ||
       req.body.celular ||
       req.body.esMonitor ||
       req.body.direccion ||
       req.body.rol ||
-      req.body.isDeleted)
+      req.body.isDeleted
     ) {
       const user_filter = { memberId: req.body.id };
       let previous: IUser;
@@ -104,7 +87,7 @@ export class dbController {
       if (previous.name != "") {
         const user_params: IUser = {
           memberId: req.body.id,
-          name: req.body.name ? req.body.name : previous.name,
+          name: req.body.nombre ? req.body.nombre : previous.name,
           email: req.body.mail ? req.body.mail : previous.email,
           telephone: req.body.celular ? req.body.celular : previous.telephone,
           direction: req.body.direccion
@@ -115,16 +98,7 @@ export class dbController {
             : previous.facilitator,
           rol: req.body.rol ? req.body.rol : previous.rol,
         };
-        this.user.updateUser(user_params,
-          (err: any, data: JSON) => {
-            if (err) {
-              console.log("Error en mongo");
-              //mongoError(err, res);
-            } else {
-              console.log(" Success !!!");
-              //successResponse("Zona Creada", data, res);
-            }
-          });
+        this.user.updateUser(user_params);
       } else {
         console.log("Not user found");
       }
@@ -140,16 +114,7 @@ export class dbController {
   ///                                                                   ///
   public delete_user(req: Request) {
     if (req.body.id) {
-      this.user.deleteUser(req.body.id,
-        (err: any, data: JSON) => {
-          if (err) {
-            console.log("Error en mongo");
-            //mongoError(err, res);
-          } else {
-            console.log(" Success !!!");
-            //successResponse("Zona Creada", data, res);
-          }
-        });
+      this.user.deleteUser(req.body.id);
     } else {
       console.log("Insuficient parameters: User not Deleted");
       //insufficientParameters(res)
@@ -180,7 +145,6 @@ export class dbController {
       pPhone != ""
     ) {
       const someParams: IStructure = {
-        _id: 1,
         name: name,
         coutry: coutry,
         cedulaJuridica: cedulaJuridica,
@@ -189,12 +153,10 @@ export class dbController {
         miembros: [],
         zonas: [],
       };
-      this.structures.setOrganizationParams(someParams);
-      console.log(" -- BD : Estructura creada con exito -- ");
+      this.structure.setOrganizationParams(someParams);
+      console.log(" -- BD : Estructura creada con exito -- ")
     } else {
-      console.log(
-        " -- BD : Parametros insuficientes /n Fallo de registro de Organizacion -- "
-      );
+      console.log(" -- BD : Parametros insuficientes /n Fallo de registro de Organizacion -- ")
       //insufficientParameters(res)
     }
   }
@@ -234,7 +196,7 @@ export class dbController {
   //dbController.insertZone(req.body.zonaName, req.body.zonaName)
   public insertZoneTree(zoneName: String) {
     console.log("Creando zona");
-    if (zoneName) {
+    if (zoneName ) {
       const someParams: IZone = {
         name: zoneName,
         id: zoneName,
@@ -242,20 +204,10 @@ export class dbController {
         jefes: [],
         ramas: [],
       };
-      this.structures.insertZone(someParams, (err: any, data: IZone) => {
-        if (err) {
-          console.log("Error en mongo");
-          //mongoError(err, res);
-        } else {
-          console.log("Zona insertada");
-          //successResponse("Zona Creada", data, res);
-        }
-      });
-      console.log(" -- BD : Zona creada con exito -- ");
+      this.structure.insertZone(someParams);
+      console.log(" -- BD : Zona creada con exito -- ")
     } else {
-      console.log(
-        " -- BD : Parametros insuficientes /n Fallo de registro de zona -- "
-      );
+      console.log(" -- BD : Parametros insuficientes /n Fallo de registro de zona -- ")
     }
   }
   ////                                                                            ////
@@ -275,24 +227,10 @@ export class dbController {
         jefes: [],
         grupos: [],
       };
-      console.log(" -- BD : Rama creada con exito -- ");
-      this.structures.insertBranch(
-        someParams,
-        nombreZona,
-        (err: any, data: IRama) => {
-          if (err) {
-            console.log("Error en mongo");
-            //mongoError(err, res);
-          } else {
-            console.log("Rama insertada");
-            //successResponse("Zona Creada", data, res);
-          }
-        }
-      );
+      console.log(" -- BD : Rama creada con exito -- ")
+      this.structure.insertBranch(someParams, nombreZona);
     } else {
-      console.log(
-        " -- BD : Parametros insuficientes /n Fallo de registro de Rama -- "
-      );
+      console.log(" -- BD : Parametros insuficientes /n Fallo de registro de Rama -- ")
       //insufficientParameters(res)
     }
   }
@@ -324,20 +262,7 @@ export class dbController {
         miembros: [],
       };
       console.log("Insertando grupo");
-      this.structures.insertGroup(
-        someParams,
-        pZona,
-        pRama,
-        (err: any, data: IGroup) => {
-          if (err) {
-            console.log("Error en mongo");
-            //mongoError(err, res);
-          } else {
-            console.log("Grupo insertado");
-            //successResponse("Zona Creada", data, res);
-          }
-        }
-      );
+      this.structure.insertGroup(someParams, pZona, pRama);
     } else {
       console.log("Insuficient parameters: Group not Created");
       //insufficientParameters(res)
@@ -364,21 +289,11 @@ export class dbController {
       memberId != ""
     ) {
       console.log("Insertando Miembro");
-      this.structures.insertMemberGroupImp(
+      this.structure.insertMemberGroupImp(
         zoneName,
         branchId,
         groupId,
-        memberId,
-        (err: any, data: JSON) => {
-          if (err) {
-            console.log("Error en mongo");
-            //mongoError(err, res);
-          } else {
-            console.log("Miembro insertada");
-            //successResponse("Zona Creada", data, res);
-          }
-        }
-
+        memberId
       );
     } else {
       console.log("insuficient parameters: miembro no insertado");
@@ -406,20 +321,11 @@ export class dbController {
       memberId != ""
     ) {
       console.log("Insertando Miembro");
-      this.structures.insertMonitorGroupImp(
+      this.structure.insertMonitorGroupImp(
         zoneName,
         branchName,
         groupName,
-        memberId,
-        (err: any, data: JSON) => {
-          if (err) {
-            console.log("Error en mongo");
-            //mongoError(err, res);
-          } else {
-            console.log(" Success !!!");
-            //successResponse("Zona Creada", data, res);
-          }
-        }
+        memberId
       );
     } else {
       console.log("insuficient parameters: monitor no insertado");
@@ -441,20 +347,7 @@ export class dbController {
     console.log("Verificando Info");
     if (zoneName != "" && branchName != "" && memberId != "") {
       console.log("Insertando Miembro");
-      this.structures.insertMonitorBranchImp(
-        zoneName,
-        branchName,
-        memberId,
-        (err: any, data: JSON) => {
-          if (err) {
-            console.log("Error en mongo");
-            //mongoError(err, res);
-          } else {
-            console.log(" Success !!!");
-            //successResponse("Zona Creada", data, res);
-          }
-        }
-      );
+      this.structure.insertMonitorBranchImp(zoneName, branchName, memberId);
     } else {
       console.log("insuficient parameters: monitor no insertado");
       //insufficientParameters(res)
@@ -484,38 +377,20 @@ export class dbController {
     if (zoneName != "" && branchId != "" && groupId != "") {
       if (memberId != "") {
         console.log("Insertando Jefe en Grupo");
-        this.structures.assignBossGroupImp(
+        this.structure.assignBossGroupImp(
           zoneName,
           branchId,
           groupId,
-          memberId,
-          (err: any, data: JSON) => {
-            if (err) {
-              console.log("Error en mongo");
-              //mongoError(err, res);
-            } else {
-              console.log(" Success !!!");
-              //successResponse("Zona Creada", data, res);
-            }
-          }
+          memberId
         );
       }
       if (memberId2 != "") {
         console.log("Insertando Jefe2 en Grupo");
-        this.structures.assignBossGroupImp(
+        this.structure.assignBossGroupImp(
           zoneName,
           branchId,
           groupId,
-          memberId2,
-          (err: any, data: JSON) => {
-            if (err) {
-              console.log("Error en mongo");
-              //mongoError(err, res);
-            } else {
-              console.log(" Success !!!");
-              //successResponse("Zona Creada", data, res);
-            }
-          }
+          memberId2
         );
       }
     } else {
@@ -540,37 +415,11 @@ export class dbController {
     if (zoneName != "" && branchId != "") {
       if (memberId != "") {
         console.log("Insertando Jefe en Rama");
-        this.structures.assignBossBranchImp(
-          zoneName,
-          branchId,
-          memberId,
-          (err: any, data: JSON) => {
-            if (err) {
-              console.log("Error en mongo");
-              //mongoError(err, res);
-            } else {
-              console.log(" Success !!!");
-              //successResponse("Zona Creada", data, res);
-            }
-          }
-        );
+        this.structure.assignBossBranchImp(zoneName, branchId, memberId);
       }
       if (memberId2 != "") {
         console.log("Insertando Jefe en Rama");
-        this.structures.assignBossBranchImp(
-          zoneName,
-          branchId,
-          memberId2,
-          (err: any, data: JSON) => {
-            if (err) {
-              console.log("Error en mongo");
-              //mongoError(err, res);
-            } else {
-              console.log(" Success !!!");
-              //successResponse("Zona Creada", data, res);
-            }
-          }
-        );
+        this.structure.assignBossBranchImp(zoneName, branchId, memberId2);
       }
     } else {
       console.log("insuficient parameters: Jefes no insertados");
@@ -587,44 +436,21 @@ export class dbController {
     console.log("Verificando Info");
     if (zoneName != "" && memberId != "") {
       console.log("Insertando grupo");
-      this.structures.assignBossZoneImp(
-        zoneName,
-        memberId,
-        (err: any, data: JSON) => {
-          if (err) {
-            console.log("Error en mongo");
-            //mongoError(err, res);
-          } else {
-            console.log(" Success !!!");
-            //successResponse("Zona Creada", data, res);
-          }
-        }
-      );
+      this.structure.assignBossZoneImp(zoneName, memberId);
     }
     if (memberId2 != "" && zoneName != "") {
-      this.structures.assignBossZoneImp(
-        zoneName,
-        memberId2,
-        (err: any, data: JSON) => {
-          if (err) {
-            console.log("Error en mongo");
-            //mongoError(err, res);
-          } else {
-            console.log(" Success !!!");
-            //successResponse("Zona Creada", data, res);
-          }
-        }
-      );
+      this.structure.assignBossZoneImp(zoneName, memberId2);
     }
   }
 
   ////                                                                                 ////
   ////                                                                                 ////
-  //                                  Movimientos                                      //
+   //                                  Movimientos                                      //
   ////                                                                                 ////
   ////                                                                                 ////
 
-  public moveMemberGroups(
+  
+  public moveMemberGroupsImp(
     zoneName: String,
     oldbrachId: String,
     oldGroupId: String,
@@ -634,37 +460,15 @@ export class dbController {
     memberId: String
   ) {
     console.log("Verificando Info");
-    if (
-      zoneName != "" &&
-      oldbrachId != "" &&
-      newGroupId != "" &&
-      newbrachId != "" &&
-      oldGroupId != "" &&
-      zoneNameNew != ""
-    ) {
-      if (memberId != "") {
-        console.log("Moviendo Miembro");
-        this.structures.moveMemberGroupsImp(
-          zoneName,
-          zoneNameNew,
-          oldbrachId,
-          newbrachId,
-          oldGroupId,
-          newGroupId,
-          memberId,
-          (err: any, data: JSON) => {
-            if (err) {
-              console.log("Error en mongo");
-              //mongoError(err, res);
-            } else {
-              console.log(" Success !!!");
-              //successResponse("Zona Creada", data, res);
-            }
-          }
-        );
-      }
+    if (zoneName != "" && oldbrachId != "" && newGroupId != "" && newbrachId != "" && oldGroupId != "" && zoneNameNew != "") {
+    if (memberId != "") {
+      console.log("Moviendo Miembro");
+      this.structure.moveMemberGroupsImp(zoneName, zoneNameNew, oldbrachId, 
+        newbrachId, oldGroupId, newGroupId, memberId);
+    }
     }
   }
+
 }
 
 export default new dbController();
