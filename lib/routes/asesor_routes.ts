@@ -341,7 +341,7 @@ export class AsesorRotes {
             if (swaped) {
                 ///                                                                                 ///
                 // dbController.moveMemberGroupsImp(procedenciaZonaName, procedenciaIdRama, procedenciaidGrupo,
-                //    destinoZonaName, destinoIdRama, destinoidGrupo)
+                //    destinoZonaName, destinoIdRama, destinoidGrupo, data)
                 ///                                                                                 ///
                 res.send({status:1});
             } else {
@@ -394,6 +394,9 @@ export class AsesorRotes {
             
             if (agregado) {
                 controller.verEstructura();
+                ///                                                                                 ///
+                // dbController.moveMemberGroupsImp(req.body.zona,req.body.rama,req.body.grupo,req.body.idMiembro)
+                ///                                                                                 ///
                 res.send({status:1});
             } else {
                 res.send({status:0});

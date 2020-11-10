@@ -459,15 +459,14 @@ export class dbController {
     newGroupId: String,
     memberId: String
   ) {
-/*
     console.log("Verificando Info");
-    if (zoneName != "" && oldbranchId != "" && newGroupId != "" && newbranchId != "" && oldGroupId != "") {
+    if (zoneName != "" && oldbrachId != "" && newGroupId != "" && newbrachId != "" && oldGroupId != "" && zoneNameNew != "") {
     if (memberId != "") {
       console.log("Moviendo Miembro");
-      this.structure.moveMemberGroupsImp(zoneNamez, zoneNameNew, oldbrachId, 
+      this.structure.moveMemberGroupsImp(zoneName, zoneNameNew, oldbrachId, 
         newbrachId, oldGroupId, newGroupId, memberId);
     }
-    }*/
+    }
   }
 
 }

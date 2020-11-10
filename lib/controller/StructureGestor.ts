@@ -106,6 +106,8 @@ export class Gestor{
         return false;
     }
 
+    
+
     public addMonitor(zoneName:String, branchId:number, idGroup:number,monitor:Member){
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
             if(this.structure.groupComposite[zindex].name==zoneName){
