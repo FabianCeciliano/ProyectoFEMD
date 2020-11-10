@@ -56,12 +56,11 @@ export default class StructureService {
 
   public insertMemberGroupImp(
     zoneName: String,
-    branchName: String,
-    groupName: String,
+    branchId: String,
+    groupId: String,
     memberId: String
   ) {
-    console.log(" -- Prueba Miembro en Grupo --");
-    console.log(zoneName, branchName, groupName, memberId)
+    console.log(" -- DB: Insertar Miembro en Grupo --");
     structure.update(
       {},
       {
@@ -72,8 +71,8 @@ export default class StructureService {
       {
         arrayFilters: [
           { "elem.name": { $eq: zoneName } },
-          { "rma.name": { $eq: branchName } },
-          { "grp.name ": { $eq: groupName } },
+          { "rma.id": { $eq: branchId } },
+          { "grp.id ": { $eq: groupId } },
         ],
         multi: true,
       }
@@ -83,8 +82,8 @@ export default class StructureService {
 
   public insertMonitorGroupImp(
     zoneName: String,
-    branchName: String,
-    groupName: String,
+    branchId: String,
+    groupId: String,
     memberId: String
   ) {
     console.log(" -- Prueba Miembro en Grupo --");
@@ -98,8 +97,8 @@ export default class StructureService {
       {
         arrayFilters: [
           { "elem.name": { $eq: zoneName } },
-          { "rma.name": { $eq: branchName } },
-          { "grp.name ": { $eq: groupName } },
+          { "rma.id": { $eq: branchId } },
+          { "grp.id ": { $eq: groupId } },
         ],
         multi: true,
       }

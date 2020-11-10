@@ -277,22 +277,22 @@ export class dbController {
   ////                                                                            ////
   public insertMemberGroup(
     zoneName: String,
-    branchName: String,
-    groupName: String,
+    branchId: String,
+    groupId: String,
     memberId: String
   ) {
     console.log("Verificando Info");
     if (
       zoneName != "" &&
-      branchName != "" &&
-      groupName != "" &&
+      branchId != "" &&
+      groupId != "" &&
       memberId != ""
     ) {
       console.log("Insertando Miembro");
       this.structure.insertMemberGroupImp(
         zoneName,
-        branchName,
-        groupName,
+        branchId,
+        groupId,
         memberId
       );
     } else {

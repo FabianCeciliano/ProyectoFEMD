@@ -30,7 +30,7 @@ export class Controller {
     };
 
     public addMonitor(zoneName:String, branchId:number, idGroup:number, idMonitor:number){
-        var monitor:Member = this.movement.getMember(idMonitor);
+        var monitor:Member = this.movement.getMember(idMonitor).clone();
         this.movement.getStructure().addMonitor(zoneName, branchId, idGroup,monitor);
     }
 
@@ -148,14 +148,14 @@ export class Controller {
         //this.movement.getStructure().assignGroupManagement(groupName, idGroup , firstPersonName, idFirstPerson , secondPersonName, idSecondPerson);
         //return true;
     };
-    public getZoneManagement(zoneName:String): String[]{
-        return this.movement.getStructure().getZoneManagement(zoneName);
+    public getZoneManagement(): String[]{
+        return this.movement.getStructure().getZoneManagement();
     }
-    public getBranchManagement(idBranch:number): String[]{
-        return this.movement.getStructure().getBranchManagement(idBranch);
+    public getBranchManagement(): String[]{
+        return this.movement.getStructure().getBranchManagement();
     }
-    public getGroupManagement(idGroup:number): String[]{
-        return this.movement.getStructure().getGroupManagement(idGroup);
+    public getGroupManagement(): String[]{
+        return this.movement.getStructure().getGroupManagement();
     } 
     
     public getZones(): String[]{
