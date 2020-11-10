@@ -30,23 +30,33 @@ export class dbController {
   public create_user(req: Request) {
     // this check whether all the filds were send through the erquest or not
     if (
-      req.body.nombre &&
+      req.body.name &&
       req.body.mail &&
       req.body.celular &&
       req.body.id &&
       req.body.direccion &&
       req.body.esMonitor
     ) {
+      console.log(req)
       const user_params: IUser = {
         memberId: req.body.id,
-        name: req.body.nombre,
+        name: req.body.name,
         email: req.body.mail,
         telephone: req.body.celular,
-        facilitator: req.body.esMonitor,
+        facilitator: String(req.body.esMonitor),
         rol: "groupMember",
         direction: req.body.direccion,
       };
-      this.user.createUser(user_params);
+      this.user.createUser(user_params,
+        (err: any, data: JSON) => {
+          if (err) {
+            console.log("Error en mongo");
+            //mongoError(err, res);
+          } else {
+            console.log(" Success !!!");
+            //successResponse("Zona Creada", data, res);
+          }
+        });
     } else {
       console.log(" -- BD : Parametros insuficientes -- ");
       // error response if some fields are missing in request body
@@ -57,7 +67,16 @@ export class dbController {
   public get_user(req: Request) {
     if (req.body.id) {
       const user_filter = { memberId: req.body.id };
-      this.user.filterUser(user_filter, (err: any, user_data: IUser) => {});
+      this.user.filterUser(user_filter,
+        (err: any, data: JSON) => {
+          if (err) {
+            console.log("Error en mongo");
+            //mongoError(err, res);
+          } else {
+            console.log(" Success !!!");
+            //successResponse("Zona Creada", data, res);
+          }
+        });
     } else {
       console.log(" -- BD : Parametros insuficientes -- ");
       //insufficientParameters(res);
@@ -69,14 +88,13 @@ export class dbController {
   ///                                                                                   ///
   public update_user(req: Request) {
     if (
-      (req.body.id && req.body.nombre) ||
-      req.body.nombre ||
+      req.body.id && (req.body.name ||
       req.body.mail ||
       req.body.celular ||
       req.body.esMonitor ||
       req.body.direccion ||
       req.body.rol ||
-      req.body.isDeleted
+      req.body.isDeleted)
     ) {
       const user_filter = { memberId: req.body.id };
       let previous: IUser;
@@ -86,7 +104,7 @@ export class dbController {
       if (previous.name != "") {
         const user_params: IUser = {
           memberId: req.body.id,
-          name: req.body.nombre ? req.body.nombre : previous.name,
+          name: req.body.name ? req.body.name : previous.name,
           email: req.body.mail ? req.body.mail : previous.email,
           telephone: req.body.celular ? req.body.celular : previous.telephone,
           direction: req.body.direccion
@@ -97,7 +115,16 @@ export class dbController {
             : previous.facilitator,
           rol: req.body.rol ? req.body.rol : previous.rol,
         };
-        this.user.updateUser(user_params);
+        this.user.updateUser(user_params,
+          (err: any, data: JSON) => {
+            if (err) {
+              console.log("Error en mongo");
+              //mongoError(err, res);
+            } else {
+              console.log(" Success !!!");
+              //successResponse("Zona Creada", data, res);
+            }
+          });
       } else {
         console.log("Not user found");
       }
@@ -113,7 +140,16 @@ export class dbController {
   ///                                                                   ///
   public delete_user(req: Request) {
     if (req.body.id) {
-      this.user.deleteUser(req.body.id);
+      this.user.deleteUser(req.body.id,
+        (err: any, data: JSON) => {
+          if (err) {
+            console.log("Error en mongo");
+            //mongoError(err, res);
+          } else {
+            console.log(" Success !!!");
+            //successResponse("Zona Creada", data, res);
+          }
+        });
     } else {
       console.log("Insuficient parameters: User not Deleted");
       //insufficientParameters(res)

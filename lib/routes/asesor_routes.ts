@@ -311,7 +311,7 @@ export class AsesorRotes {
             controller.upDateMember(Number(req.body.id),req.body.name,req.body.celular,req.body.mail,req.body.direccion,Boolean(req.body.esMonitor))
             controller.printMembers();
             ///                              ///
-            dbController.update_user(req)
+            //dbController.update_user(req)
             ///                              ///
             res.send({status:1});
         })
