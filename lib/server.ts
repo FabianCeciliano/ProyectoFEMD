@@ -1,7 +1,7 @@
 import app from "./app";
 
 const host = process.env.HOST || '0.0.0.0';
-const port = process.env.PORT || 3030;
+const port = process.env.PORT || 3000;
 //console.log(__dirname);
 
 app.listen(Number(port), host, () => {
