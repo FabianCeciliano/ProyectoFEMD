@@ -598,5 +598,141 @@ export class AsesorRotes {
         res.send({ status: 0 });
       }
     });
+
+
+    //////////////////////////////////////////////////////////////////// 
+    ////////////////////////////////////////////////////////////////////
+    //                        FUNCIONES NUEVAS                        // 
+    ////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////// 
+
+
+    ////////////////////////////////////////////////////////////////////
+    //               FUNCIONES PARA AGREGAR MIEMBOR                   // 
+    ///////////////////////////////////////////////////////////////////
+
+
+    ////////////////////////////////////////////////////////////////////
+    //            MUESTRA LOS DATOS DE LA ZONA, RAMA Y GRUPO          //
+    //               EN AGREGAR MIEMBRO   AL INICIO                   //
+    ////////////////////////////////////////////////////////////////////
+    app.post('/getShowDataMember', function (req: Request, res: Response) {
+      var dataZone = controller.getZones();
+      var dataBrach = controller.getBranches(dataZone[0]);
+      if (dataZone.length > 0) {
+        res.send({ status: 1, zonas: dataZone, ramas: dataBrach });
+      } else {
+        res.send({ status: 0, zonas: dataZone, ramas: dataBrach });
+      }
+
+    });
+
+    ////////////////////////////////////////////////////////////////////
+    //    ACTUALIZA LAS LISTAS DE RAMAS DEPUES DE SELECCIONAR         //
+    //                           UNA ZONA                             //
+    ////////////////////////////////////////////////////////////////////
+    app.post('/getShowRamasMember', function (req: Request, res: Response) {
+      var dataBrach = controller.getBranches(req.body.id);
+      if (dataBrach.length > 0) {
+        res.send({ status: 1, ramas: dataBrach });
+      } else {
+        res.send({ status: 0, ramas: dataBrach });
+      }
+
+    });
+
+
+
+    ////////////////////////////////////////////////////////////////////
+    //                 FUNCIONES PARA CREAR GRUPO                     // 
+    ////////////////////////////////////////////////////////////////////
+
+
+    ////////////////////////////////////////////////////////////////////
+    //         MUESTRA LOS DATOS DE LA ZONA, RAMA Y MONITOR           //
+    //                EN CRAERA GRUPO  AL INICIO                      //
+    ////////////////////////////////////////////////////////////////////
+
+    app.post('/getShowDataCrearGrupo', function (req: Request, res: Response) {
+
+      var dataZone = controller.getZones();
+      var dataBrach = controller.getBranches(dataZone[0]);
+
+      var idRama = String(dataBrach[0]).split("-", 2);
+
+      var listaMonitores = controller.getMonitors(dataZone[0], Number(idRama[1]));
+
+      if (dataZone.length > 0) {
+        res.send({ status: 1, zonas: dataZone, ramas: dataBrach, monitores: listaMonitores });
+      } else {
+        res.send({ status: 0, zonas: dataZone, ramas: dataBrach, monitores: listaMonitores });
+      }
+
+    });
+
+
+
+
+    ////////////////////////////////////////////////////////////////////
+    //            FUNCIONES PARA CONFORMAR COORDINACION               // 
+    ////////////////////////////////////////////////////////////////////
+
+
+    ////////////////////////////////////////////////////////////////////
+    //                CARGA LA LISTA DE ZONAS EN EL                   //
+    //           FORMULARIO 1 DE CONFORMAR COORDINACION               // 
+    ////////////////////////////////////////////////////////////////////
+    app.post('/getShowDataCCF1', function (req: Request, res: Response) {
+      var dataZone = controller.getZones();
+      if (dataZone.length > 0) {
+        res.send({ status: 1, zonas: dataZone });
+      } else {
+        res.send({ status: 0, zonas: dataZone });
+      }
+    });
+
+    ////////////////////////////////////////////////////////////////////
+    //            CARGA LA LISTA DE ZONAS  Y RAMAS EN EL              //
+    //           FORMULARIO 2 DE CONFORMAR COORDINACION               // 
+    ////////////////////////////////////////////////////////////////////
+    app.post('/getShowDataCCF2', function (req: Request, res: Response) {
+      var dataZone = controller.getZones();
+      var dataBrach = controller.getBranches(dataZone[0]);
+      if(dataZone.length > 0){
+        res.send({ status: 1, zonas: dataZone, ramas: dataBrach });
+      }else{
+        res.send({ status: 0, zonas: dataZone, ramas: dataBrach });
+      }
+     
+    });
+
+    ////////////////////////////////////////////////////////////////////
+    //    ACTUALIZA LAS LISTAS DE RAMAS DEPUES DE SELECCIONAR         //
+    //                           UNA ZONA                             //
+    ////////////////////////////////////////////////////////////////////
+    app.post('/getShowRamasCCF2', function (req: Request, res: Response) {
+      var dataBrach = controller.getBranches(req.body.id);
+      if (dataBrach.length > 0) {
+        res.send({ status: 1, ramas: dataBrach });
+      } else {
+        res.send({ status: 0, ramas: dataBrach });
+      }
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
   }
 }
+
+
+

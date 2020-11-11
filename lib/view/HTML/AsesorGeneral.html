@@ -127,11 +127,12 @@
                     <!-- //////////////////////////////////////////////////////////////////// -->
                     <!--                              ID MIEMBRO                          -->
                     <!-- //////////////////////////////////////////////////////////////////// -->
-                    <div class="row  justify-content-center p-4">
-                        <div class="col-6">
+                    <div class="row ustify-content-center p-3">
+                        <div class="col-2 align-self-center"></div>
+                        <div class="col-3 align-self-center">
                             <img class="mx-auto d-block over" src="../resources/AGId Miembro.svg">
                         </div>
-                        <div class="col-6">
+                        <div class="col-1 align-self-center">
                             <input class="myborders3" id="agregarMiembroId" type="text " placeholder="Id miembro"
                                 required>
                         </div>
@@ -141,27 +142,40 @@
                     <!-- //////////////////////////////////////////////////////////////////// -->
                     <!--                                  ZONA                              -->
                     <!-- //////////////////////////////////////////////////////////////////// -->
-                    <div class="row  justify-content-center p-4">
-                        <div class="col-6">
+                    <div class="row  justify-content-center p-3">
+                        
+                        <div class="col-6 align-self-center">
                             <img class="mx-auto d-block over" src="../resources/AGZona.svg">
                         </div>
-                        <div class="col-6">
-                            <input class="myborders3" id="agregarMiembroZonaName" type="text " placeholder="Zona"
-                                required>
+
+                        <div class="col-6 align-self-center">
+                            <div class="boxMin">
+                                <select onclick="showRamasMember()" class="selecBox" id="zonaMiembro1"  type="submit " 
+                                    style="border: 0; background: transparent ">
+                                </select>
+                            </div>
                         </div>
+
                     </div>
 
                     <!-- //////////////////////////////////////////////////////////////////// -->
                     <!--                               RAMA                           -->
                     <!-- //////////////////////////////////////////////////////////////////// -->
-                    <div class="row  justify-content-center p-4">
-                        <div class="col-6">
+                    <div class="row  justify-content-center p-3">
+                       
+                        <div class="col-6 align-self-center">
                             <img class="mx-auto d-block over" src="../resources/AGRama.svg">
                         </div>
-                        <div class="col-6">
-                            <input class="myborders3" id="agregarMiembroRamaName" type="text " placeholder="Rama"
-                                required>
+
+
+                        <div class="col-6 align-self-center">
+                            <div class="boxMin">
+                                <select class="selecBox" id="ramaMiembro1" type="submit "
+                                    style="border: 0; background: transparent ">
+                                </select>
+                            </div>
                         </div>
+
                     </div>
 
 
@@ -172,12 +186,16 @@
                         <div class="col-6">
                             <img class="mx-auto d-block over" src="../resources/AGGrupo.svg">
                         </div>
-                        <div class="col-6">
-                            <input class="myborders3" id="agregarMiembroGrupoName" type="text " placeholder="Grupo"
-                                required>
+                        <div class="col-6 align-self-center">
+                            <div class="boxMin">
+                                <select class="selecBox" id="grupoMiembro1" type="submit "
+                                    style="border: 0; background: transparent ">
+                                </select>
+                            </div>
                         </div>
                     </div>
 
+                   
 
 
                     <!-- //////////////////////////////////////////////////////////////////// -->
@@ -397,11 +415,13 @@
                     </div>
 
 
-                    <!-- //////////////////////////////////////////////////////////////////// -->
+                  <!-- //////////////////////////////////////////////////////////////////// -->
                     <!--                                LISTA                                 -->
                     <!-- //////////////////////////////////////////////////////////////////// -->
-                    <div class="row justify-content-center p-2">
-                        <div class="col-3 align-self-center">
+                    <div class="row">
+                        <div class="col-4 p-2">
+                        </div>
+                        <div class="col-3 p-2">
                             <div class="box">
                                 <select class="selecBox" id="structRIdList" type="submit "
                                     style="border: 0; background: transparent ">
@@ -410,7 +430,7 @@
                         </div>
                 
                     <!-- /////////////////////////////SEGUNDO/////////////////////////////////////// -->
-                        <div class="col-4 align-self-center">
+                        <div class="col-1  p-2">
                             <div class="box">
                                 <select class="selecBox" id="structRList" type="submit "
                                     style="border: 0; background: transparent ">
@@ -418,6 +438,7 @@
                             </div>
                         </div>  
                     </div>
+
 
                     
 
@@ -804,9 +825,14 @@
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <!--                               TEXT AREA                              -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
-                                <div class="row  justify-content-center">
-                                    <input class="myborders2" id="jefeZonaZName" type="text " placeholder="Nombre Zona"
-                                        required>
+                                <div class="row justify-content-center p-4">
+                                    <div class="col-1 align-self-center">
+                                        <div class="boxMin">
+                                            <select class="selecBox" id="jefeZonaZName" type="submit "
+                                                style="border: 0; background: transparent ">
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
 
 
@@ -831,14 +857,6 @@
                                 </div>
 
 
-                                <!-- //////////////////////////////////////////////////////////////////// -->
-                                <!-- //////////////////////////////////////////////////////////////////// -->
-                                <!-- //////////////////////////////////////////////////////////////////// -->
-                                <!-- //////////////////////////////////////////////////////////////////// -->
-                                <!-- //////////////////////////////////////////////////////////////////// -->
-                                <!-- //////////////////////////////////////////////////////////////////// -->
-                                <!-- //////////////////////////////////////////////////////////////////// -->
-                                <!-- //////////////////////////////////////////////////////////////////// -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <!--                                TEXT AREA                              -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
@@ -1062,10 +1080,17 @@
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <!--                                TEXT AREA                             -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
-                                <div class="row  justify-content-center">
-                                    <input class="myborders2" id="jefeRamaZName" type="text " placeholder="Nombre Zona"
-                                        required>
+                                  
+                                <div class="row justify-content-center p-4">
+                                    <div class="col-1 align-self-center">
+                                        <div class="boxMin">
+                                            <select class="selecBox" id="jefeRamaZName" onclick ="showRamasCCF2()" type="submit "
+                                                style="border: 0; background: transparent ">
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
+
 
 
                                 <!-- //////////////////////////////////////////////////////////////////// -->
@@ -1081,9 +1106,14 @@
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <!--                                TEXT AREA                             -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
-                                <div class="row  justify-content-center">
-                                    <input class="myborders2" id="jefeRamaRId" type="text " placeholder="ID Rama"
-                                        required>
+                                <div class="row justify-content-center p-4">
+                                    <div class="col-1 align-self-center">
+                                        <div class="boxMin">
+                                            <select class="selecBox" id="jefeRamaRId" type="submit "
+                                                style="border: 0; background: transparent ">
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
 
 
@@ -2165,220 +2195,6 @@
     <!-- //////////////////////////////////////////////////////////////////// -->
 
     </div>
-
-
-    <script>
-        ////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////
-        //                FUNCIONES DE LOS BOTONES DEL LADO IZQ          //
-        ////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////// 
-        //////////////////////////////////////////////////////////////////// 
-        function BCreateEstructura() {
-            document.getElementById("overlayAgregarMiembro").style.display = "none";
-            document.getElementById("overlayMovimiento").style.display = "none";
-            document.getElementById("overlayConsultasVarias").style.display = "none ";
-            document.getElementById("overlayConformarCoordinacion").style.display = "none ";
-            document.getElementById("overlayAsignarMonitor").style.display = "none ";
-            document.getElementById("overlayAdmMiembros").style.display = "none ";
-            document.getElementById("overlayCrearGrupo").style.display = "none ";
-            document.getElementById("overlayCrearESt").style.display = "block ";
-
-        }
-
-        function BCreterup() {
-            document.getElementById("overlayAgregarMiembro").style.display = "none";
-            document.getElementById("overlayMovimiento").style.display = "none";
-            document.getElementById("overlayConsultasVarias").style.display = "none ";
-            document.getElementById("overlayConformarCoordinacion").style.display = "none ";
-            document.getElementById("overlayAsignarMonitor").style.display = "none ";
-            document.getElementById("overlayCrearESt").style.display = "none ";
-            document.getElementById("overlayAdmMiembros").style.display = "none ";
-            document.getElementById("overlayCrearGrupo").style.display = "block ";
-
-            actualizarZonas();
-            //actualizarMonitoresDisponibles();
-
-        }
-
-        function BAsignarMonior() {
-            document.getElementById("overlayAgregarMiembro").style.display = "none";
-            document.getElementById("overlayMovimiento").style.display = "none";
-            document.getElementById("overlayConsultasVarias").style.display = "none ";
-            document.getElementById("overlayConformarCoordinacion").style.display = "none ";
-            document.getElementById("overlayCrearESt").style.display = "none ";
-            document.getElementById("overlayCrearGrupo").style.display = "none ";
-            document.getElementById("overlayAdmMiembros").style.display = "none ";
-            document.getElementById("overlayAsignarMonitor").style.display = "block ";
-        }
-
-        function BConformarCoordinacion() {
-            document.getElementById("overlayAgregarMiembro").style.display = "none";
-            document.getElementById("overlayMovimiento").style.display = "none";
-            document.getElementById("overlayConsultasVarias").style.display = "none ";
-            document.getElementById("overlayCrearESt").style.display = "none ";
-            document.getElementById("overlayCrearGrupo").style.display = "none ";
-            document.getElementById("overlayAsignarMonitor").style.display = "none ";
-            document.getElementById("overlayAdmMiembros").style.display = "none ";
-            document.getElementById("overlayConformarCoordinacion").style.display = "block ";
-            //document.getElementById("acepAsigZona").disabled = true;
-            limpiarCoordinacion();
-        }
-
-        function BAdmMiembro() {
-            document.getElementById("overlayAgregarMiembro").style.display = "none";
-            document.getElementById("overlayMovimiento").style.display = "none";
-            document.getElementById("overlayConsultasVarias").style.display = "none ";
-            document.getElementById("overlayCrearESt").style.display = "none ";
-            document.getElementById("overlayCrearGrupo").style.display = "none ";
-            document.getElementById("overlayAsignarMonitor").style.display = "none ";
-            document.getElementById("overlayConformarCoordinacion").style.display = "none ";
-            document.getElementById("overlayAdmMiembros").style.display = "block ";
-        }
-
-        function BConsultas() {
-            document.getElementById("overlayAgregarMiembro").style.display = "none";
-            document.getElementById("overlayMovimiento").style.display = "none";
-            document.getElementById("overlayCrearESt").style.display = "none ";
-            document.getElementById("overlayCrearGrupo").style.display = "none ";
-            document.getElementById("overlayAsignarMonitor").style.display = "none ";
-            document.getElementById("overlayConformarCoordinacion").style.display = "none ";
-            document.getElementById("overlayAdmMiembros").style.display = "none";
-            document.getElementById("overlayConsultasVarias").style.display = "block";
-        }
-        function BMovimiento() {
-            document.getElementById("overlayAgregarMiembro").style.display = "none";
-            document.getElementById("overlayCrearESt").style.display = "none ";
-            document.getElementById("overlayCrearGrupo").style.display = "none ";
-            document.getElementById("overlayAsignarMonitor").style.display = "none ";
-            document.getElementById("overlayConformarCoordinacion").style.display = "none ";
-            document.getElementById("overlayAdmMiembros").style.display = "none";
-            document.getElementById("overlayConsultasVarias").style.display = "none";
-            document.getElementById("overlayMovimiento").style.display = "block";
-            //Limpiar casillas
-            document.getElementById("movimientoCedula").value = "";
-            document.getElementById("movimientoNombre").value = "";
-            document.getElementById("movimientoWeb").value = "";
-            document.getElementById("movimientoPais").value = "";
-            document.getElementById("movimientoTelefono").value = "";
-        }
-
-        function BAgregar() {
-            document.getElementById("overlayCrearESt").style.display = "none ";
-            document.getElementById("overlayCrearGrupo").style.display = "none ";
-            document.getElementById("overlayAsignarMonitor").style.display = "none ";
-            document.getElementById("overlayConformarCoordinacion").style.display = "none ";
-            document.getElementById("overlayAdmMiembros").style.display = "none";
-            document.getElementById("overlayConsultasVarias").style.display = "none";
-            document.getElementById("overlayMovimiento").style.display = "none";
-            document.getElementById("overlayAgregarMiembro").style.display = "block";
-            //Limpiar casillas
-            document.getElementById("agregarMiembroId").value = "";
-            document.getElementById("agregarMiembroZonaName").value = "";
-            document.getElementById("agregarMiembroRamaName").value = "";
-            document.getElementById("agregarMiembroGrupoName").value = "";
-        }
-
-
-
-        ////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////
-        //          FUNCIONES DE LOS FORMULARIOS PARA COORDINACION        //
-        ////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////// 
-        //////////////////////////////////////////////////////////////////// 
-        function BFormularioJefeZone() {
-            document.getElementById("FormularioRama").style.display = "none ";
-            document.getElementById("FormularioGrupo").style.display = "none ";
-            document.getElementById("FormularioJefeZone").style.display = "block ";
-            // /document.getElementById("acepAsigZona").disabled = true;
-            limpiarCoordinacion();
-        }
-
-        function BFormularioRama() {
-            document.getElementById("FormularioJefeZone").style.display = "none ";
-            document.getElementById("FormularioGrupo").style.display = "none ";
-            document.getElementById("FormularioRama").style.display = "block ";
-            //document.getElementById("acepAsigRama").disabled = true;
-            limpiarCoordinacion();
-        }
-
-        function BFormularioGrupo() {
-            document.getElementById("FormularioJefeZone").style.display = "none ";
-            document.getElementById("FormularioRama").style.display = "none ";
-            document.getElementById("FormularioGrupo").style.display = "block ";
-            //document.getElementById("acepAsigGrupo").disabled = true;
-            limpiarCoordinacion();
-        }
-
-
-        ////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////
-        //          FUNCIONES DE LOS FORMULARIOS PARA ADM MIEMBRO         //
-        ////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////// 
-        //////////////////////////////////////////////////////////////////// 
-        function BFormularioADm1() {
-            document.getElementById("FormularioInfoGeneral").style.display = "none ";
-            document.getElementById("FormularioInfo").style.display = "none ";
-            document.getElementById("FormularioGeneral2").style.display = "none ";
-            document.getElementById("FormularioGeneral1").style.display = "block ";
-
-        }
-
-        function BFormularioADm2() {
-            document.getElementById("FormularioInfoGeneral").style.display = "none ";
-            document.getElementById("FormularioInfo").style.display = "none ";
-            document.getElementById("FormularioGeneral1").style.display = "none ";
-            document.getElementById("FormularioGeneral2").style.display = "block ";
-
-        }
-
-        function BFormularioInfo() {
-            document.getElementById("FormularioInfoGeneral").style.display = "none ";
-            document.getElementById("FormularioGeneral1").style.display = "none ";
-            document.getElementById("FormularioGeneral2").style.display = "none ";
-            document.getElementById("FormularioInfo").style.display = "block ";
-        }
-
-        function BFormularioInfG() {
-            document.getElementById("FormularioInfo").style.display = "none ";
-            document.getElementById("FormularioGeneral1").style.display = "none ";
-            document.getElementById("FormularioGeneral2").style.display = "none ";
-            document.getElementById("FormularioInfoGeneral").style.display = "block ";
-        }
-
-        ////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////
-        //       FUNCIONES DE LOS FORMULARIOS PARA CONSULTAS VARIAS       //
-        ////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////// 
-        //////////////////////////////////////////////////////////////////// 
-        //FormularioConsultasVariasUno FormularioConsultasVariasDos FormularioConsultasVariasTres
-        function BFormularioConsultaUNo() {
-            document.getElementById("FormularioConsultasVariasDos").style.display = "none ";
-            document.getElementById("FormularioConsultasVariasTres").style.display = "none ";
-            document.getElementById("FormularioConsultasVariasUno").style.display = "block ";
-        }
-
-        function BFormularioConsultaDos() {
-            document.getElementById("FormularioConsultasVariasTres").style.display = "none ";
-            document.getElementById("FormularioConsultasVariasUno").style.display = "none ";
-            document.getElementById("FormularioConsultasVariasDos").style.display = "block ";
-        }
-
-        function BFormularioConsultaTres() {
-            document.getElementById("FormularioConsultasVariasDos").style.display = "none ";
-            document.getElementById("FormularioConsultasVariasUno").style.display = "none";
-            document.getElementById("FormularioConsultasVariasTres").style.display = "block ";
-            $("#consulMembersList > option").remove();
-        }
-    </script>
-
     <script type="text/javascript" src="./backendFunctions.js"></script>
 
     
