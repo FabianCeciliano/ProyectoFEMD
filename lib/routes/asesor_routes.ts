@@ -4,18 +4,25 @@ const htmlPath = __dirname + "../../../lib/view/HTML/";
 import controller from "../controller/Controller";
 import dbController from "../Db/db_controllers/databaseController";
 
+
 export class AsesorRotes {
   public route(app: Application) {
-    // Mismatch URL
-    /*app.all('*', function (req: Request, res: Response) {
-            res.status(404).send({ error: true, message: 'Check your URL please' });
-        });*/
 
-    app.get("/asesorMain", function (req: Request, res: Response) {
-      res.render(path.resolve(htmlPath + "AsesorGeneral.html"));
-    });
 
-    //----------------------------------------------------------------Creacion de estructura
+
+    //////////////////////////////////////////////////////////////////// 
+    ////////////////////////////////////////////////////////////////////
+    //                  RUTAS  EN ORDEN DE MENU                    // 
+    ////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////// 
+
+    //*****************************************************************//
+
+    ////////////////////////////////////////////////////////////////////
+    //            FUNCIONES PARA CREAR UNA ESTRUCTURA                 // 
+    ////////////////////////////////////////////////////////////////////
+
+    //*****************************************************************//
     app.post("/crearEstructura", function (req: Request, res: Response) {
       console.log(req.body);
       console.log("Verificando que hace ajax1");
@@ -54,48 +61,42 @@ export class AsesorRotes {
       }
     });
 
-    //----------------------------------------------------------------Crear Grupo
-    app.post("/obtenerZonas", function (req: Request, res: Response) {
-      //res.send({zonas:[1,2,3]});
-      var listaZona: String[] = controller.getZones();
 
-      if (listaZona.length > 0) {
-        res.send({ status: 1, zonas: listaZona });
+
+
+    //*****************************************************************//
+
+    ////////////////////////////////////////////////////////////////////
+    //                 FUNCIONES PARA CREAR GRUPO                     // 
+    ////////////////////////////////////////////////////////////////////
+
+    //*****************************************************************//
+
+    ////////////////////////////////////////////////////////////////////
+    //         MUESTRA LOS DATOS DE LA ZONA, RAMA Y MONITOR           //
+    //                EN CRAERA GRUPO  AL INICIO                      //
+    ////////////////////////////////////////////////////////////////////
+
+    app.post('/getShowDataCrearGrupo', function (req: Request, res: Response) {
+
+      var dataZone = controller.getZones();
+      var dataBrach = controller.getBranches(dataZone[0]);
+
+      var idRama = String(dataBrach[0]).split("-", 2);
+
+      var listaMonitores = controller.getMonitors(dataZone[0], Number(idRama[1]));
+
+      if (dataZone.length > 0) {
+        res.send({ status: 1, zonas: dataZone, ramas: dataBrach, monitores: listaMonitores });
       } else {
-        res.send({ status: 0, zonas: listaZona });
-      }
-    });
-
-    app.post("/obtenerRamas", function (req: Request, res: Response) {
-      console.log(req.body.zona); //aqui viene la zona que hay que buscar las ramas
-      var listaBranches: String[] = controller.getBranches(req.body.zona);
-      console.log(listaBranches);
-      if (listaBranches.length > 0) {
-        res.send({ status: 1, branches: listaBranches });
-      } else {
-        res.send({ status: 0, branches: listaBranches });
-      }
-      //res.send({ramas:["hola","mundo"]});
-    });
-
-    app.post("/obtenerMonitoresDisponibles", function (
-      req: Request,
-      res: Response
-    ) {
-      var listaMonitores: String[] = controller.getMonitors(
-        req.body.zona,
-        Number(req.body.ramaId)
-      );
-
-      if (listaMonitores.length > 0) {
-        res.send({ status: 1, monitores: listaMonitores });
-      } else {
-        res.send({ status: 0, monitores: listaMonitores });
+        res.send({ status: 0, zonas: dataZone, ramas: dataBrach, monitores: listaMonitores });
       }
 
-      //res.send({monitores:["juan","perez"]});
     });
 
+    ////////////////////////////////////////////////////////////////////
+    //                        CREA EL GRUPO                           //
+    ////////////////////////////////////////////////////////////////////
     app.post("/crearGrupo", function (req: Request, res: Response) {
       console.log(req.body);
       //zona:zona,rama:rama,monitor:monitor,grupo:grupo,idGrupo:idGrupo
@@ -132,6 +133,23 @@ export class AsesorRotes {
       }
     });
 
+
+
+
+
+
+    //*****************************************************************//
+
+    ////////////////////////////////////////////////////////////////////
+    //              FUNCIONES PARA ASIGNAR MONITORES                  // 
+    ////////////////////////////////////////////////////////////////////
+
+    //*****************************************************************//
+
+
+    ////////////////////////////////////////////////////////////////////
+    //                       ASIGNA EL MONITOR                        // 
+    ////////////////////////////////////////////////////////////////////
     //----------------------------------------------------------------Asignacion de monitores
     app.post("/asignarCoach", function (req: Request, res: Response) {
       var coachId = req.body.coach;
@@ -152,8 +170,40 @@ export class AsesorRotes {
       }
     });
 
-    //Conformacion de coordinacion
-    //----------------------------------------------------------------Consulta de Jefaturas
+
+
+
+
+    //*****************************************************************//
+
+    ////////////////////////////////////////////////////////////////////
+    //            FUNCIONES PARA CONFORMAR COORDINACION               // 
+    ////////////////////////////////////////////////////////////////////
+
+    //*****************************************************************//
+
+
+    ////////////////////////////////////////////////////////////////////
+    //                        FORMULARIO UNO                          // 
+    ////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////////////
+    //                CARGA LA LISTA DE ZONAS EN EL                   //
+    //           FORMULARIO 1 DE CONFORMAR COORDINACION               // 
+    ////////////////////////////////////////////////////////////////////
+    app.post('/getShowDataCCF1', function (req: Request, res: Response) {
+      var dataZone = controller.getZones();
+      if (dataZone.length > 0) {
+        res.send({ status: 1, zonas: dataZone });
+      } else {
+        res.send({ status: 0, zonas: dataZone });
+      }
+    });
+
+    ////////////////////////////////////////////////////////////////////
+    //                         CONSULTA ZONA                          //
+    //                       FUNCION DEL BOTON                        // 
+    ////////////////////////////////////////////////////////////////////
     app.post("/consultarExistenciaZona", function (
       req: Request,
       res: Response
@@ -173,52 +223,10 @@ export class AsesorRotes {
       }
     });
 
-    app.post("/consultarExistenciaRama", function (
-      req: Request,
-      res: Response
-    ) {
-      var zoneName = req.body.zonaName;
-      var branchId = req.body.idRama;
-
-      let result = controller.consultBranchManagement(
-        zoneName,
-        Number(branchId)
-      );
-
-      if (result.listGroupChief.length > 0) {
-        res.send({
-          status: 1,
-          listBranchChief: result.listBranchChief,
-          listGroupChief: result.listGroupChief,
-        });
-      } else {
-        res.send({ status: 0 });
-      }
-    });
-
-    app.post("/consultarExistenciaGrupo", function (
-      req: Request,
-      res: Response
-    ) {
-      var zoneName = req.body.zonaName;
-      var branchId = req.body.ramaId;
-      var groupId = req.body.grupoId;
-
-      let result = controller.consultGroupManagement(
-        zoneName,
-        Number(branchId),
-        Number(groupId)
-      );
-      if (result.listMembersChief.length > 0) {
-        res.send({
-          status: 1,
-          listGroupChief: result.listGroupChief,
-          listMembersChief: result.listMembersChief,
-        });
-      } else {
-        res.send({ status: 0 });
-      }
-    });
+    ////////////////////////////////////////////////////////////////////
+    //                        ACEPTAR LOS JEFES                       //
+    //                       FUNCION DEL BOTON                        // 
+    ////////////////////////////////////////////////////////////////////
     //----------------------------------------------------------------Asignacion de Jefaturas
     app.post("/asignarJefesZona", function (req: Request, res: Response) {
       var zoneName = req.body.nombreZona;
@@ -279,6 +287,73 @@ export class AsesorRotes {
             }*/
     });
 
+
+
+
+    ////////////////////////////////////////////////////////////////////
+    //                        FORMULARIO DOS                          // 
+    ////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////////////
+    //                CARGA LA LISTA DE ZONAS Y RAMAS EN EL           //
+    //           FORMULARIO 2 DE CONFORMAR COORDINACION               // 
+    ////////////////////////////////////////////////////////////////////
+    app.post('/getShowDataCCF2', function (req: Request, res: Response) {
+      var dataZone = controller.getZones();
+      var dataBrach = controller.getBranches(dataZone[0]);
+      if (dataZone.length > 0) {
+        res.send({ status: 1, zonas: dataZone, ramas: dataBrach });
+      } else {
+        res.send({ status: 0, zonas: dataZone, ramas: dataBrach });
+      }
+    });
+
+    ////////////////////////////////////////////////////////////////////
+    //    ACTUALIZA LAS LISTAS DE RAMAS DEPUES DE SELECCIONAR         //
+    //                           UNA ZONA                             //
+    ////////////////////////////////////////////////////////////////////
+    app.post('/getShowRamasCCF2', function (req: Request, res: Response) {
+      var dataBrach = controller.getBranches(req.body.id);
+      if (dataBrach.length > 0) {
+        res.send({ status: 1, ramas: dataBrach });
+      } else {
+        res.send({ status: 0, ramas: dataBrach });
+      }
+
+    });
+
+    ////////////////////////////////////////////////////////////////////
+    //                CONSULTA LA RAMA EN BUSCA DE JEFES              //
+    //                     FUNCION DEL BOTON                          //
+    ////////////////////////////////////////////////////////////////////
+    app.post("/consultarExistenciaRama", function (
+      req: Request,
+      res: Response
+    ) {
+      var zoneName = req.body.zonaName;
+      var branchId = req.body.idRama;
+
+      let result = controller.consultBranchManagement(
+        zoneName,
+        Number(branchId)
+      );
+
+      if (result.listGroupChief.length > 0) {
+        res.send({
+          status: 1,
+          listBranchChief: result.listBranchChief,
+          listGroupChief: result.listGroupChief,
+        });
+      } else {
+        res.send({ status: 0 });
+      }
+    });
+
+
+    ////////////////////////////////////////////////////////////////////
+    //        ACEPTA LA CONSULTA LA RAMA EN BUSCA DE JEFES            //
+    //                     FUNCION DEL BOTON                          //
+    ////////////////////////////////////////////////////////////////////
     app.post("/asignarJefesRama", function (req: Request, res: Response) {
       var zoneName = req.body.nombreZona;
       var branchId = req.body.idRama;
@@ -344,6 +419,44 @@ export class AsesorRotes {
             res.send({ status: 1 });*/
     });
 
+
+
+    ////////////////////////////////////////////////////////////////////
+    //                        FORMULARIO TRES                         // 
+    ////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////////////
+    //             CONSULTA EL GRUPO EN BUSCA DE JEFES                //
+    //                     FUNCION DEL BOTON                          //
+    ////////////////////////////////////////////////////////////////////
+    app.post("/consultarExistenciaGrupo", function (
+      req: Request,
+      res: Response
+    ) {
+      var zoneName = req.body.zonaName;
+      var branchId = req.body.ramaId;
+      var groupId = req.body.grupoId;
+
+      let result = controller.consultGroupManagement(
+        zoneName,
+        Number(branchId),
+        Number(groupId)
+      );
+      if (result.listMembersChief.length > 0) {
+        res.send({
+          status: 1,
+          listGroupChief: result.listGroupChief,
+          listMembersChief: result.listMembersChief,
+        });
+      } else {
+        res.send({ status: 0 });
+      }
+    });
+
+    ////////////////////////////////////////////////////////////////////
+    //        ACEPTA LA CONSULTA LOS GRUPOS EN BUSCA DE JEFES         //
+    //                     FUNCION DEL BOTON                          //
+    ////////////////////////////////////////////////////////////////////
     app.post("/asignarJefesGrupo", function (req: Request, res: Response) {
       var zoneName = req.body.nombreZona;
       var branchId = req.body.idRama;
@@ -420,7 +533,28 @@ export class AsesorRotes {
             res.send({ status: 1 });*/
     });
 
-    //----------------------------------------------------------------Para la administracion de miembros
+
+
+
+
+
+    //*****************************************************************//
+
+    ////////////////////////////////////////////////////////////////////
+    //            FUNCIONES PARA ADMINISTRAR MIEMBROS                 // 
+    ////////////////////////////////////////////////////////////////////
+
+    //*****************************************************************//
+
+
+
+    ////////////////////////////////////////////////////////////////////
+    //                        FORMULARIO UNO                          // 
+    ////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////////////
+    //                      AGREGAR UN NUEVO USUARIO                  // 
+    ////////////////////////////////////////////////////////////////////
     app.post("/agregarUsuario", function (req: Request, res: Response) {
       //console.log(req.body)
       controller.addMember(
@@ -438,6 +572,34 @@ export class AsesorRotes {
       res.send({ status: 1 });
     });
 
+
+    ////////////////////////////////////////////////////////////////////
+    //                        FORMULARIO DOS                          // 
+    ////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////////////
+    //                    ELIMINAR A CIERTO USUARIO                   // 
+    ////////////////////////////////////////////////////////////////////
+
+    app.post("/borrarUsuario", function (req: Request, res: Response) {
+      //console.log(req.body)
+      controller.deleteMember(Number(req.body.id));
+      controller.printMembers();
+      ///                              ///
+      dbController.delete_user(req);
+      ///                              ///
+      res.send({ status: 1 });
+    });
+
+
+
+    ////////////////////////////////////////////////////////////////////
+    //                        FORMULARIO TRES                         // 
+    ////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////////////
+    //                   MODIFICAR A CIERTO USUARIO                   // 
+    ////////////////////////////////////////////////////////////////////
     app.post("/actualizarUsuario", function (req: Request, res: Response) {
       //console.log(req.body)
       controller.upDateMember(
@@ -455,16 +617,15 @@ export class AsesorRotes {
       res.send({ status: 1 });
     });
 
-    app.post("/borrarUsuario", function (req: Request, res: Response) {
-      //console.log(req.body)
-      controller.deleteMember(Number(req.body.id));
-      controller.printMembers();
-      ///                              ///
-      dbController.delete_user(req);
-      ///                              ///
-      res.send({ status: 1 });
-    });
 
+
+    ////////////////////////////////////////////////////////////////////
+    //                        FORMULARIO CUATRO                        // 
+    ////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////////////
+    //                       AUTORIZAR MOVIMIENTO                     // 
+    ////////////////////////////////////////////////////////////////////
     app.post("/moverUsuario", function (req: Request, res: Response) {
       var data = req.body.id;
       var procedenciaZonaName = req.body.procedenciaZonaName;
@@ -502,7 +663,27 @@ export class AsesorRotes {
       }
     });
 
-    //----------------------------------------------------------------Para consultas varias
+
+
+
+
+
+    //*****************************************************************//
+
+    ////////////////////////////////////////////////////////////////////
+    //               FUNCIONES PARA CONSULTAS VARIAS                  // 
+    ////////////////////////////////////////////////////////////////////
+
+    //*****************************************************************//
+
+
+    ////////////////////////////////////////////////////////////////////
+    //                        FORMULARIO UNO                         // 
+    ////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////////////
+    //                       POSICION DE UN GRUPO                     // 
+    ////////////////////////////////////////////////////////////////////
     app.post("/getGrupo", function (req: Request, res: Response) {
       console.log(req.body);
       var data = controller.consultGroup(Number(req.body.id), req.body.nombre);
@@ -513,6 +694,15 @@ export class AsesorRotes {
       }
     });
 
+
+
+    ////////////////////////////////////////////////////////////////////
+    //                        FORMULARIO DOS                         // 
+    ////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////////////
+    //                 PARTICIPACION DE UN MIEMBOR                    // 
+    ////////////////////////////////////////////////////////////////////
     app.post("/getParticipacion", function (req: Request, res: Response) {
       console.log(req.body); //aqui se obtiene el id del miembro
       var data = controller.consultMemberParticipation(Number(req.body.id));
@@ -533,6 +723,15 @@ export class AsesorRotes {
       //res.send({status:1,zonas:["zona1","zona2"],ramas:["rama1","rama2"],grupos:["grupo1","grupo2"]});
     });
 
+
+
+    ////////////////////////////////////////////////////////////////////
+    //                        FORMULARIO TRES                        // 
+    ////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////////////
+    //                     MIEMBRO POR ELEMENTO                       // 
+    ////////////////////////////////////////////////////////////////////
     app.post("/getMiembrosNivel", function (req: Request, res: Response) {
       console.log(req.body); //aqui se obtiene el tipo de nivel, y el id de ese nivel
       var data: String[] = [];
@@ -546,33 +745,23 @@ export class AsesorRotes {
       //res.send({status:1,miembros:["juan","pedro","juanito"]});
     });
 
-    //----------------------------------------------------------------Agregar miembro a grupo
-    app.post("/agregarMiembroAGrupo", function (req: Request, res: Response) {
-      console.log(req.body); //aqui se obtiene toda la info del mae
-      var agregado = controller.addMemberToGroup(
-        req.body.zona,
-        Number(req.body.rama),
-        Number(req.body.grupo),
-        Number(req.body.idMiembro)
-      );
 
-      if (agregado) {
-        controller.verEstructura();
-        ///                                                                                 ///
-        dbController.insertMemberGroup(
-          req.body.zona,
-          req.body.rama,
-          req.body.grupo,
-          req.body.idMiembro
-        );
-        ///                                                                                 ///
-        res.send({ status: 1 });
-      } else {
-        res.send({ status: 0 });
-      }
-    });
 
-    //----------------------------------------------------------------Crear Movimiento
+
+
+
+
+
+    //*****************************************************************//
+    ////////////////////////////////////////////////////////////////////
+    //              FUNCIONES PARA CREAR MOVIMIENTO                   // 
+    ////////////////////////////////////////////////////////////////////
+    //*****************************************************************//
+
+    ////////////////////////////////////////////////////////////////////
+    //                      CREAR MOVIMIENTO                          //
+    //                     FUNCION DEL BOTON                          //
+    ////////////////////////////////////////////////////////////////////
     app.post("/crearMovimiento", function (req: Request, res: Response) {
       //console.log(req.body)
       var status: boolean = controller.createMovement(
@@ -600,16 +789,16 @@ export class AsesorRotes {
     });
 
 
-    //////////////////////////////////////////////////////////////////// 
-    ////////////////////////////////////////////////////////////////////
-    //                        FUNCIONES NUEVAS                        // 
-    ////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////// 
 
 
+
+
+
+    //*****************************************************************//
     ////////////////////////////////////////////////////////////////////
     //               FUNCIONES PARA AGREGAR MIEMBOR                   // 
-    ///////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////
+    //*****************************************************************//
 
 
     ////////////////////////////////////////////////////////////////////
@@ -627,6 +816,7 @@ export class AsesorRotes {
 
     });
 
+
     ////////////////////////////////////////////////////////////////////
     //    ACTUALIZA LAS LISTAS DE RAMAS DEPUES DE SELECCIONAR         //
     //                           UNA ZONA                             //
@@ -642,113 +832,97 @@ export class AsesorRotes {
     });
 
 
-
     ////////////////////////////////////////////////////////////////////
-    //                 FUNCIONES PARA CREAR GRUPO                     // 
-    ////////////////////////////////////////////////////////////////////
-
-
-    ////////////////////////////////////////////////////////////////////
-    //         MUESTRA LOS DATOS DE LA ZONA, RAMA Y MONITOR           //
-    //                EN CRAERA GRUPO  AL INICIO                      //
+    //    ACTUALIZA LAS LISTAS DE GRUPOS DEPUES DE SELECCIONAR        //
+    //                     UNA ZONA Y UNA RAMA                        //
     ////////////////////////////////////////////////////////////////////
 
-    app.post('/getShowDataCrearGrupo', function (req: Request, res: Response) {
 
-      var dataZone = controller.getZones();
-      var dataBrach = controller.getBranches(dataZone[0]);
+    ////////////////////////////////////////////////////////////////////
+    //                    AGREGAR MIEMBRO A GRUPO                     //
+    //                     FUNCION DEL BOTON                          //
+    ////////////////////////////////////////////////////////////////////
+    app.post("/agregarMiembroAGrupo", function (req: Request, res: Response) {
+      console.log(req.body); //aqui se obtiene toda la info del mae
+      var agregado = controller.addMemberToGroup(
+        req.body.zona,
+        Number(req.body.rama),
+        Number(req.body.grupo),
+        Number(req.body.idMiembro)
+      );
 
-      var idRama = String(dataBrach[0]).split("-", 2);
-
-      var listaMonitores = controller.getMonitors(dataZone[0], Number(idRama[1]));
-
-      if (dataZone.length > 0) {
-        res.send({ status: 1, zonas: dataZone, ramas: dataBrach, monitores: listaMonitores });
+      if (agregado) {
+        controller.verEstructura();
+        ///                                                                                 ///
+        dbController.insertMemberGroup(
+          req.body.zona,
+          req.body.rama,
+          req.body.grupo,
+          req.body.idMiembro
+        );
+        ///                                                                                 ///
+        res.send({ status: 1 });
       } else {
-        res.send({ status: 0, zonas: dataZone, ramas: dataBrach, monitores: listaMonitores });
-      }
-
-    });
-
-
-
-
-    ////////////////////////////////////////////////////////////////////
-    //            FUNCIONES PARA CONFORMAR COORDINACION               // 
-    ////////////////////////////////////////////////////////////////////
-
-
-    ////////////////////////////////////////////////////////////////////
-    //                        FORMULARIO UNO                          // 
-    ////////////////////////////////////////////////////////////////////
-
-
-    ////////////////////////////////////////////////////////////////////
-    //                CARGA LA LISTA DE ZONAS EN EL                   //
-    //           FORMULARIO 1 DE CONFORMAR COORDINACION               // 
-    ////////////////////////////////////////////////////////////////////
-    app.post('/getShowDataCCF1', function (req: Request, res: Response) {
-      var dataZone = controller.getZones();
-      if (dataZone.length > 0) {
-        res.send({ status: 1, zonas: dataZone });
-      } else {
-        res.send({ status: 0, zonas: dataZone });
+        res.send({ status: 0 });
       }
     });
 
-    ////////////////////////////////////////////////////////////////////
-    //                        FORMULARIO DOS                          // 
-    ////////////////////////////////////////////////////////////////////
 
 
-    ////////////////////////////////////////////////////////////////////
-    //            CARGA LA LISTA DE ZONAS  Y RAMAS EN EL              //
-    //           FORMULARIO 2 DE CONFORMAR COORDINACION               // 
-    ////////////////////////////////////////////////////////////////////
-    app.post('/getShowDataCCF2', function (req: Request, res: Response) {
-      var dataZone = controller.getZones();
-      var dataBrach = controller.getBranches(dataZone[0]);
-      if (dataZone.length > 0) {
-        res.send({ status: 1, zonas: dataZone, ramas: dataBrach });
-      } else {
-        res.send({ status: 0, zonas: dataZone, ramas: dataBrach });
-      }
 
+
+    //*****************************************************************//
+
+    ////////////////////////////////////////////////////////////////////
+    //                      FUNCIONES AUXILIARES                      // 
+    ////////////////////////////////////////////////////////////////////
+
+    //*****************************************************************//
+
+    app.get("/asesorMain", function (req: Request, res: Response) {
+      res.render(path.resolve(htmlPath + "AsesorGeneral.html"));
     });
 
-    ////////////////////////////////////////////////////////////////////
-    //    ACTUALIZA LAS LISTAS DE RAMAS DEPUES DE SELECCIONAR         //
-    //                           UNA ZONA                             //
-    ////////////////////////////////////////////////////////////////////
-    app.post('/getShowRamasCCF2', function (req: Request, res: Response) {
-      var dataBrach = controller.getBranches(req.body.id);
-      if (dataBrach.length > 0) {
-        res.send({ status: 1, ramas: dataBrach });
-      } else {
-        res.send({ status: 0, ramas: dataBrach });
-      }
+    app.post("/obtenerZonas", function (req: Request, res: Response) {
+      //res.send({zonas:[1,2,3]});
+      var listaZona: String[] = controller.getZones();
 
+      if (listaZona.length > 0) {
+        res.send({ status: 1, zonas: listaZona });
+      } else {
+        res.send({ status: 0, zonas: listaZona });
+      }
     });
 
+    app.post("/obtenerRamas", function (req: Request, res: Response) {
+      console.log(req.body.zona); //aqui viene la zona que hay que buscar las ramas
+      var listaBranches: String[] = controller.getBranches(req.body.zona);
+      console.log(listaBranches);
+      if (listaBranches.length > 0) {
+        res.send({ status: 1, branches: listaBranches });
+      } else {
+        res.send({ status: 0, branches: listaBranches });
+      }
+      //res.send({ramas:["hola","mundo"]});
+    });
 
-    ////////////////////////////////////////////////////////////////////
-    //                        FORMULARIO TRES                         // 
-    ////////////////////////////////////////////////////////////////////
+    app.post("/obtenerMonitoresDisponibles", function (
+      req: Request,
+      res: Response
+    ) {
+      var listaMonitores: String[] = controller.getMonitors(
+        req.body.zona,
+        Number(req.body.ramaId)
+      );
 
-    ////////////////////////////////////////////////////////////////////
-    //        CARGA LA LISTA DE ZONAS RAMAS Y GRUPOS EN EL            //
-    //           FORMULARIO 2 DE CONFORMAR COORDINACION               // 
-    ////////////////////////////////////////////////////////////////////
+      if (listaMonitores.length > 0) {
+        res.send({ status: 1, monitores: listaMonitores });
+      } else {
+        res.send({ status: 0, monitores: listaMonitores });
+      }
 
-
-
-
-
-
-
-
-
-
+      //res.send({monitores:["juan","perez"]});
+    });
 
   }
 }
