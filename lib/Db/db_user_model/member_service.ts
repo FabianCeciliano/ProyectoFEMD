@@ -22,4 +22,13 @@ export default class UserService {
         users.deleteOne(query, callback);
     }
 
+    public getAllMembersImp(callback: any){
+        users.find(function(err, result) {
+            if (err) {
+                console.log(err); 
+            } else {
+            console.log(result);
+            }
+        })
+    }
 }

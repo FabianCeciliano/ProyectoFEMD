@@ -11,6 +11,13 @@ export class Controller {
 
     private movement:Movement;
 
+    public movementIsCreated():boolean{
+        if(this.movement==null){
+            return true;
+        }
+        return false;
+    }
+
     public createMovement(cedJuridica:number, name:String, website :String, country : String,phoneNumber: number):boolean{
         if(this.movement==null){
             this.movement = new Movement(cedJuridica, name, website , country ,phoneNumber);
@@ -30,9 +37,11 @@ export class Controller {
     };
 
     public addMonitor(zoneName:String, branchId:number, idGroup:number, idMonitor:number){
-        var monitor:Member = this.movement.getMember(idMonitor);
+        var monitor:Member = this.movement.getMember(idMonitor).clone();
+        monitor.set_facilitador(true);
+        monitor.set_rol(Rol.monitor);
         this.movement.getStructure().addMonitor(zoneName, branchId, idGroup,monitor);
-    }
+    };
 
     public addMemberToGroup(zoneName:String, branchId:number, groupId:number, idMember:number):Boolean{
         let member = this.movement.getMembers().getMember(idMember);
@@ -113,6 +122,9 @@ export class Controller {
         return false;
         //this.movement.getStructure().swapGroup(precedenceGroup, newGroup, pIdData);
     };
+    public changeToMonitor(zoneName:String, branchId:number, idGroup:number, idMonitor:number){
+        this.movement.getStructure().changeToMonitor(zoneName,branchId,idGroup,idMonitor);
+    }
     public consultZoneManagement(zoneName : String) {
         return this.movement.getStructure().consultZoneManagement(zoneName);
     }
@@ -172,6 +184,25 @@ export class Controller {
         let monitors:String[] = this.movement.getStructure().getMonitors(zoneName,ramaId);
         return monitors;
     }
+    
+    public getAllMonitors():String[]{
+        let monitors:String[] = [];
+        monitors = this.movement.getMembers().getMonitors();
+        return monitors;
+    }
+
+    public getAllBranchesInNeed() : String[]{
+        let branchesInNeed = this.movement.getStructure().getBranchesInNeed();
+        console.log(branchesInNeed);
+        return branchesInNeed;
+    }
+
+    
+    public getGroups(zoneName : String, branchId : number): String[]{
+        let groups: String[] = this.movement.getStructure().getGroups(zoneName, branchId);
+        console.log(groups);
+        return groups;
+    } 
 
     public addMember(id:number,name:String,telephone:number,mail:String,direction:String,esMonitor:boolean){
         this.movement.getMembers().addMember(id, name,telephone,mail, direction,esMonitor);

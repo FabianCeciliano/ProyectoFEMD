@@ -124,6 +124,28 @@ export class Gestor{
         }
     }
 
+    public changeToMonitor(zoneName:String, branchId:number, idGroup:number,idMonitor:number){
+        for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
+            if(this.structure.groupComposite[zindex].name==zoneName){
+                for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
+                    if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id==branchId){
+                        for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
+                            if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id==idGroup){
+                                for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++) {
+                                    if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].id==idMonitor){
+                                        this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].set_facilitador(true);
+                                        this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].set_rol(Rol.monitor);
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     public deleteMemberFromGroup(zoneName:String, branchId:number, idGroup:number,pIdData:number):Member{
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
             if(this.structure.groupComposite[zindex].name==zoneName){
@@ -492,6 +514,44 @@ export class Gestor{
             }
         }
         return groupNames;
+    }
+
+    public getBranchesInNeed() : String[]{
+        let branches : String[] = [];
+        let branchInNeed : Boolean = true;
+
+        for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
+            for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
+                for(let jindex = 0; jindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.length;jindex++){
+                    if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[jindex].get_facilitador()==true){
+                        console.log("Esta rama no necesita coach");
+                        branchInNeed = false;
+                    }
+                }
+                if(branchInNeed == true){
+                    branches.push(this.structure.groupComposite[zindex].name+"-"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].name +"-"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id);
+                }
+                branchInNeed = true;
+            }
+        }
+
+        return branches;
+    }
+
+    public getGroups(zoneName : String, branchId : number): String[]{ 
+        let groups : String[]=[];
+        for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
+            if(this.structure.groupComposite[zindex].name==zoneName){
+                for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
+                    if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id==branchId){
+                        for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
+                            groups.push(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].name+"-"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id);
+                        }
+                    }
+                }
+            }
+        }
+        return groups;
     }
 
     public add( pDato : IComponent) : void {};

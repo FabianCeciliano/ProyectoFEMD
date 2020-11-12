@@ -67,7 +67,7 @@ export class MemberGestor{
     };
 
     public getMonitors() : String[]{
-        let monitors : String[];
+        let monitors : String[] = [];
         for (let index = 0; index < this.members.length; index++) {
             if(this.members[index].get_facilitador()==true){
                 monitors.push(this.members[index].name +"-"+ this.members[index].id);

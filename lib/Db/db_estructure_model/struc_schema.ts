@@ -4,6 +4,12 @@ import * as mongoose from 'mongoose';
 
 const strucSchema = mongoose.Schema;
 
+  ////                                                                                 ////
+  ////                                                                                 ////
+  //                               STRUCTURE SCHEMA                                      //
+  ////                                                                                 ////
+  ////                                                                                 ////
+
 const schema = new strucSchema({
     _id : Number,
     name: String,
