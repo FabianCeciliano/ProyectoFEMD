@@ -12,7 +12,7 @@ export class Controller {
     private movement:Movement;
 
     public movementIsCreated():boolean{
-        if(this.movement==null){
+        if(this.movement!=null){
             return true;
         }
         return false;
@@ -44,7 +44,7 @@ export class Controller {
     };
 
     public addMemberToGroup(zoneName:String, branchId:number, groupId:number, idMember:number):Boolean{
-        let member = this.movement.getMembers().getMember(idMember);
+        let member = this.movement.getMembers().getMember(idMember).clone();
 
         if(member!=null){
             return this.movement.getStructure().addMember(member,zoneName,branchId,groupId);
