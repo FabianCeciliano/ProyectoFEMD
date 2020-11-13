@@ -14,6 +14,9 @@ img {
     max-height: 100%;
 }
 
+p{
+    font-family: 'Roboto', sans-serif;
+}
 
 .eye{
     height: auto;
@@ -231,6 +234,8 @@ img {
     height:108%;
 }
 
+
+
 /*------------------------------------BOTONES---------------------------------*/
 .Boton {
     height: auto;
@@ -242,14 +247,70 @@ img {
     width: 52%;
 }
 
+/*-------------------------------ERRORES---------------------------*/
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    padding: 10%;
+  }
+
+  h2.headertekst {
+    text-align: center;
+  }
+  
+  #errorBG{
+    display: none;
+    position:absolute;
+    top:0;
+    left:0;
+    width: 100%;
+     z-index:1;
+     height: 100%;
+     background-color: rgba(49, 45, 68, 0.801);
+}
 
 
+#error{
+    display: none;
+    margin: auto;
+    border-radius: 20px;
+    position: absolute;
+    top: 50px; 
+    left: 280px;
+    bottom: 50px; 
+    right: 280px;
+    background-color: #000;
+    color: #FFF;
+    z-index:5;
+}
 
 
-
-
-
-
+/*-------------------------------MENSAJES---------------------------*/
+#msgBG{
+    display: none;
+    position:absolute;
+    top:0;
+    left:0;
+    width: 100%;
+     z-index:1;
+     height: 100%;
+     background-color: rgba(158, 148, 207, 0.801);
+}
+#msg{
+    display: none;
+    margin: auto;
+    border-radius: 20px;
+    position: absolute;
+    top: 50px; 
+    left: 280px;
+    bottom: 50px; 
+    right: 280px;
+    background-color: rgba(255, 255, 255, 0.616);
+    color: rgb(0, 0, 0);
+    z-index:5;
+}
 
 
 
@@ -387,3 +448,11 @@ img {
   .box select option {
     padding: 30px;
   }
+
+
+
+
+
+
+
+  
