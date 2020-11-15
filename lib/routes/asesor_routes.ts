@@ -19,7 +19,6 @@ export class AsesorRotes {
       var isCreated = controller.movementIsCreated();
       if (!isCreated) {
         console.log("Aun no instanciada");
-
         var movementFromDb:IStructure=null;
         var membersFromDb:IUser[]=[];
 
@@ -115,7 +114,6 @@ export class AsesorRotes {
       }
       next();
     }
-
 
     //////////////////////////////////////////////////////////////////// 
     ////////////////////////////////////////////////////////////////////
@@ -264,11 +262,11 @@ export class AsesorRotes {
     app.post("/getShowDataAsigMonitor", function (req: Request, res: Response) {
       var branches = controller.getAllBranchesInNeed();// NOMB-ID
       var monitores = controller.getAllMonitors();
-     
-      if (branches.length>0) {
-        res.send({ status: 1, ramas:branches, monitor: monitores });
+
+      if (branches.length > 0) {
+        res.send({ status: 1, ramas: branches, monitor: monitores });
       } else {
-        res.send({ status: 0, ramas:branches, monitor: monitores });
+        res.send({ status: 0, ramas: branches, monitor: monitores });
       }
     });
 
@@ -699,6 +697,19 @@ export class AsesorRotes {
     //                        FORMULARIO DOS                          // 
     ////////////////////////////////////////////////////////////////////
 
+    app.post("/getShowUser", function (req: Request, res: Response) {
+      ////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////
+    });
+
+
+
+
+
+
     ////////////////////////////////////////////////////////////////////
     //                    ELIMINAR A CIERTO USUARIO                   // 
     ////////////////////////////////////////////////////////////////////
@@ -930,13 +941,13 @@ export class AsesorRotes {
     app.post('/getShowDataMember', function (req: Request, res: Response) {
       var dataZone = controller.getZones();
       var dataBrach = controller.getBranches(dataZone[0]);
-      var idBrach =   String(dataBrach[0]).split("-", 2);
+      var idBrach = String(dataBrach[0]).split("-", 2);
       var dataGrup = controller.getGroups(dataZone[0], Number(idBrach[1]));
 
       if (dataZone.length > 0) {
-        res.send({ status: 1, zonas: dataZone, ramas: dataBrach , grupos:dataGrup});
+        res.send({ status: 1, zonas: dataZone, ramas: dataBrach, grupos: dataGrup });
       } else {
-        res.send({ status: 0, zonas: dataZone, ramas: dataBrach, grupos:dataGrup });
+        res.send({ status: 0, zonas: dataZone, ramas: dataBrach, grupos: dataGrup });
       }
 
     });
@@ -962,12 +973,14 @@ export class AsesorRotes {
     //                     UNA ZONA Y UNA RAMA                        //
     ////////////////////////////////////////////////////////////////////
     app.post('/getShowGruposMember', function (req: Request, res: Response) {
-      var dataGroup = controller.getGroups(req.body.idZ,req.body.idZR);
+
+      var idBrach = String(req.body.idR).split("-", 2);
+      var dataGroup = controller.getGroups(req.body.idZ, Number(idBrach[1]));
 
       if (dataGroup.length > 0) {
-        res.send({ status: 1, grupos:dataGroup});
+        res.send({ status: 1, grupos: dataGroup });
       } else {
-        res.send({ status: 0, grupos:dataGroup });
+        res.send({ status: 0, grupos: dataGroup });
       }
 
     });
