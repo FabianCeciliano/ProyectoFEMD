@@ -141,6 +141,11 @@ export class Controller {
         //this.movement.getStructure().assignZoneManagement(zoneName , firstPersonName, idFirstPerson , secondPersonName, idSecondPerson);
         //return true;
     };
+    public getMemberParticipation(pIData: number) : String[]{
+        let memberParticipation :String[] = this.movement.getStructure().getMemberParticipation(pIData);
+        console.log("gooooooood papi");
+        return memberParticipation;
+    }
     public assignBranchManagement( zoneName : String, idBranch : number, idMember:number ) :Boolean{
         var member:Member = this.movement.getMembers().getMember(idMember).clone();
         member.set_rol(Rol.BranchChief);
@@ -189,6 +194,12 @@ export class Controller {
         let monitors:String[] = [];
         monitors = this.movement.getMembers().getMonitors();
         return monitors;
+    }
+
+    public getAllMembers():String[]{
+        let members:String[] = [];
+        members = this.movement.getMembers().getAllMembers();
+        return members;
     }
 
     public getAllBranchesInNeed() : String[]{

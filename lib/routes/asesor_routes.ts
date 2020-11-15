@@ -15,29 +15,29 @@ export class AsesorRotes {
     //            VALIDACION DEL MOVIMIENTO CREADO                    // 
     ////////////////////////////////////////////////////////////////////
 
-    const movementValidation = async (req: Request, res: Response, next: any):Promise<void> => {
+    const movementValidation = async (req: Request, res: Response, next: any): Promise<void> => {
       var isCreated = controller.movementIsCreated();
       if (!isCreated) {
         console.log("Aun no instanciada");
-        var movementFromDb:IStructure=null;
-        var membersFromDb:IUser[]=[];
+        var movementFromDb: IStructure = null;
+        var membersFromDb: IUser[] = [];
 
-        await dbController.getOrganization().then((value)=>{
-          movementFromDb=value;
+        await dbController.getOrganization().then((value) => {
+          movementFromDb = value;
         })
 
-        await dbController.getAllMember().then((value)=>{
-          membersFromDb=value;
+        await dbController.getAllMember().then((value) => {
+          membersFromDb = value;
         })
-        
-        if(movementFromDb!=null){
+
+        if (movementFromDb != null) {
           var status: boolean = controller.createMovement(Number(movementFromDb.cedulaJuridica), movementFromDb.name, movementFromDb.webDirection, movementFromDb.coutry, Number(movementFromDb.phone));
-          if (membersFromDb.length>0) {//iterar e insertar en el gestor de miembros
+          if (membersFromDb.length > 0) {//iterar e insertar en el gestor de miembros
             console.log("Levantando miembros");
             membersFromDb.forEach(element => {
-              var facilitator=false;
-              if(element.facilitator=="true"){
-                facilitator=true;
+              var facilitator = false;
+              if (element.facilitator == "true") {
+                facilitator = true;
               }
               controller.addMember(Number(element.memberId), element.name, Number(element.telephone), element.email, element.direction, facilitator);
             })
@@ -47,7 +47,7 @@ export class AsesorRotes {
                 controller.createNewBranch(movementFromDb.zonas[zindex].name, Number(movementFromDb.zonas[zindex].ramas[bindex].id), movementFromDb.zonas[zindex].ramas[bindex].name);
                 for (let gindex = 0; gindex < movementFromDb.zonas[zindex].ramas[bindex].grupos.length; gindex++) {
                   controller.createNewGroup(movementFromDb.zonas[zindex].name, Number(movementFromDb.zonas[zindex].ramas[bindex].id), Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id), movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].name);
-                  
+
                   console.log("Asignando Los Miembros");
                   movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].miembros.forEach(element => {
                     controller.addMemberToGroup(
@@ -65,7 +65,7 @@ export class AsesorRotes {
                       Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id),
                       Number(element))
                   });
-                  
+
                   console.log("Asignando Los monitores");
                   movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].monitores.forEach(element => {
                     controller.changeToMonitor(
@@ -74,9 +74,9 @@ export class AsesorRotes {
                       Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id),
                       Number(element))
                   });
-  
+
                 }
-  
+
                 movementFromDb.zonas[zindex].ramas[bindex].jefes.forEach(element => {
                   controller.assignBranchManagement(
                     movementFromDb.zonas[zindex].name,
@@ -84,7 +84,7 @@ export class AsesorRotes {
                     Number(element)
                   )
                 })
-  
+
                 movementFromDb.zonas[zindex].ramas[bindex].monitores.forEach(element => {
                   controller.defineMonitor(
                     Number(element),
@@ -92,7 +92,7 @@ export class AsesorRotes {
                     Number(movementFromDb.zonas[zindex].ramas[bindex].id)
                   );
                 })
-  
+
               }
               movementFromDb.zonas[zindex].jefes.forEach(element => {
                 controller.assignZoneManagement(
@@ -100,16 +100,16 @@ export class AsesorRotes {
                   Number(element)
                 )
               })
-  
+
             }
-          }else{
+          } else {
             console.log("No levanto nada de los miembros")
           }
-        }else{
+        } else {
           console.log("No levanto nada de la estructura")
         }
 
-      }else{
+      } else {
         console.log("Estructura ya instanciada");
       }
       next();
@@ -422,8 +422,9 @@ export class AsesorRotes {
     //           FORMULARIO 2 DE CONFORMAR COORDINACION               // 
     ////////////////////////////////////////////////////////////////////
     app.post('/getShowDataCCF2', function (req: Request, res: Response) {
-      var dataZone = controller.getZones();
+      var dataZone = controller.getZones(); ///[ ZONA1,ZONA2....]
       var dataBrach = controller.getBranches(dataZone[0]);
+      console.log("NAN------------>",dataBrach)//[ "rama-1" ,rama-2....]
       if (dataZone.length > 0) {
         res.send({ status: 1, zonas: dataZone, ramas: dataBrach });
       } else {
@@ -476,7 +477,7 @@ export class AsesorRotes {
     ////////////////////////////////////////////////////////////////////
     app.post("/asignarJefesRama", function (req: Request, res: Response) {
       var zoneName = req.body.nombreZona;
-      var branchId = req.body.idRama;
+      var branchId =  String(req.body.idRama).split("-", 2)[1]
       var first_Chief_Id = req.body.jefe1;
       var second_Chief_Id = req.body.jefe2;
 
@@ -556,6 +557,7 @@ export class AsesorRotes {
       var zoneName = req.body.zonaName;
       var branchId = req.body.ramaId;
       var groupId = req.body.grupoId;
+      console.log(  "Body : ", req.body)
 
       let result = controller.consultGroupManagement(
         zoneName,
@@ -579,8 +581,11 @@ export class AsesorRotes {
     ////////////////////////////////////////////////////////////////////
     app.post("/asignarJefesGrupo", function (req: Request, res: Response) {
       var zoneName = req.body.nombreZona;
-      var branchId = req.body.idRama;
-      var groupId = req.body.idGrupo;
+      var branchId = String(req.body.idRama).split("-", 2)[1]
+      var groupId = String(req.body.idGrupo).split("-", 2)[1]
+
+
+      
       var first_Chief_Id = req.body.jefe1;
       var second_Chief_Id = req.body.jefe2;
 
@@ -698,11 +703,13 @@ export class AsesorRotes {
     ////////////////////////////////////////////////////////////////////
 
     app.post("/getShowUser", function (req: Request, res: Response) {
-      ////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////
+      var dataMember = controller.getAllMembers();
+      if (dataMember.length > 0) {
+        res.send({ status: 1, dataM: dataMember });
+      } else {
+        res.send({ status: 0, dataM: dataMember });
+      }
+
     });
 
 
@@ -755,6 +762,54 @@ export class AsesorRotes {
     ////////////////////////////////////////////////////////////////////
     //                        FORMULARIO CUATRO                        // 
     ////////////////////////////////////////////////////////////////////
+
+
+
+
+    ////////////////////////////////////////////////////////////////////
+    //                        MOSTRAR LOS DATOS                        // 
+    ////////////////////////////////////////////////////////////////////
+    app.post("/getShowDataMove", function (req: Request, res: Response) {
+    
+      var dataMember = controller.getAllMembers();
+      var idBrach = String(dataMember[0]).split("-", 2);
+      var dataPrecedence = controller.consultMemberParticipation(Number (idBrach[1]));
+    
+      console.log(dataPrecedence);
+
+      if (dataMember.length > 0) {
+        res.send({ status: 1, dataM: dataMember , dataP:dataPrecedence});
+      } else {
+        res.send({ status: 0, dataM: dataMember, dataP:dataPrecedence });
+      }
+
+    });
+
+////////////////////////////////////////////////////////////////////
+    //                        MOSTRAR LOS DATOS                        // 
+    ////////////////////////////////////////////////////////////////////
+    app.post("/getShowDataProcedence", function (req: Request, res: Response) {
+      var idBrach = String(req.body.id).split("-", 2);
+      var dataPrecedence = controller.getMemberParticipation(Number (idBrach[1]));
+      console.log( dataPrecedence);
+      if (dataPrecedence.length > 0) {
+        res.send({ status: 1, dataP:dataPrecedence});
+      } else {
+        res.send({ status: 0, dataP:dataPrecedence });
+      }
+
+    });
+   
+
+
+
+
+
+
+
+
+
+
 
     ////////////////////////////////////////////////////////////////////
     //                       AUTORIZAR MOVIMIENTO                     // 
@@ -1031,7 +1086,7 @@ export class AsesorRotes {
 
     //*****************************************************************//
 
-    app.get("/asesorMain", movementValidation, function (req: Request, res: Response) {
+    app.get("/asesorMain", function (req: Request, res: Response) {
       res.render(path.resolve(htmlPath + "AsesorGeneral.html"));
     });
 

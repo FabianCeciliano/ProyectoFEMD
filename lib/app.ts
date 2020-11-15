@@ -40,8 +40,8 @@ class App {
 
    private mongoSetup(): void {
       console.log("DB_URL: "+process.env.DB_URL);
-      mongoose.connect("mongodb+srv://root:root@cluster0.batrc.mongodb.net/organization?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
-      .then(db => console.log('db connected')).catch(err => console.log(err)); //useFindAndModify: false
+      //mongoose.connect("mongodb+srv://root:root@cluster0.batrc.mongodb.net/organization?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+      //.then(db => console.log('db connected')).catch(err => console.log(err)); //useFindAndModify: false
    }
 
 }

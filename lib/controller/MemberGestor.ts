@@ -11,7 +11,15 @@ export class MemberGestor{
     constructor(){
         this.members=[];
     }
-    public getRolMembers() : [Member] {return null};
+    
+    public getAllMembers() : String[] {
+        let values : String [] = [];
+        for(let index = 0 ; index < this.members.length ; index++){
+            let member = this.members[index].name + "-" + this.members[index].id;
+            values.push(member);
+        }
+        return values;
+    };
     public setRol(value : StructureType) : void {};
     public setDirection(direction : Direction) : void {};
     public getDirection() : Direction {return null};

@@ -48,7 +48,9 @@ export class Gestor{
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
             if(this.structure.groupComposite[zindex].name==zoneName){
                 for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
+                    //console.log("ANTES ID : ---------------------> ", this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id)
                     branches.push(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].name+"-"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id);
+                    //console.log("ANTES ID : ---------------------> ", this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id)
                 }
             }
         }
@@ -270,15 +272,34 @@ export class Gestor{
                 for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
                     for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++) {                        
                         if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].id=pIdData){
-                            ZoneList=this.isIncluded(ZoneList,this.structure.groupComposite[zindex].name+"-"+this.structure.groupComposite[zindex].id);
+                            ZoneList=this.isIncluded(ZoneList,this.structure.groupComposite[zindex].name+"-");
                             BranchList=this.isIncluded(BranchList,this.structure.groupComposite[zindex].getCompositeGroup()[bindex].name+"-"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id);
                             groupList=this.isIncluded(groupList,this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].name+"-"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id);   
+                          
                         }
                     }
                 }
             }
-        }
+                                     
+        }   
         return {zonas:ZoneList,ramas:BranchList,grupos:groupList};
+    }
+
+    public getMemberParticipation(pIdData :  number) : String[]{
+        let memberParticipation:String[]=[];
+        for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) { 
+            for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
+                for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
+                    for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++) {                        
+                        if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].id=pIdData){
+                            memberParticipation.push(this.structure.groupComposite[zindex].name+"-"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].name+"-"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id+"-"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].name+"-"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id);
+                        }
+                    }
+                }
+            }    
+            // [  "zona1-rama-idR-grupo-id","zona1-rama-idR-grupo-idg" ......                          ]
+        }   // [ [zona1,zona2] ,[rama1 rama2], [ g1 ,g2 ] ]
+        return memberParticipation;
     }
 
     public swapGroup( precedenceGroup : number,  newGroup : number,  pIdData : number ){
