@@ -994,15 +994,16 @@ export class AsesorRotes {
     //               EN AGREGAR MIEMBRO   AL INICIO                   //
     ////////////////////////////////////////////////////////////////////
     app.post('/getShowDataMember', function (req: Request, res: Response) {
+      var dataMM = controller.getAllMembers();
       var dataZone = controller.getZones();
       var dataBrach = controller.getBranches(dataZone[0]);
       var idBrach = String(dataBrach[0]).split("-", 2);
       var dataGrup = controller.getGroups(dataZone[0], Number(idBrach[1]));
 
-      if (dataZone.length > 0) {
-        res.send({ status: 1, zonas: dataZone, ramas: dataBrach, grupos: dataGrup });
+      if (dataMM.length > 0) {
+        res.send({ status: 1, zonas: dataZone, ramas: dataBrach, grupos: dataGrup,dataM:dataMM });
       } else {
-        res.send({ status: 0, zonas: dataZone, ramas: dataBrach, grupos: dataGrup });
+        res.send({ status: 0, zonas: dataZone, ramas: dataBrach, grupos: dataGrup,dataM:dataMM });
       }
 
     });
