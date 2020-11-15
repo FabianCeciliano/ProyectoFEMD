@@ -41,79 +41,87 @@ export class AsesorRotes {
               }
               controller.addMember(Number(element.memberId), element.name, Number(element.telephone), element.email, element.direction, facilitator);
             })
-            for (let zindex = 0; zindex < movementFromDb.zonas.length; zindex++) {
-              controller.createNewZone(Number(movementFromDb.zonas[zindex].id), movementFromDb.zonas[zindex].name);
-              for (let bindex = 0; bindex < movementFromDb.zonas[zindex].ramas.length; bindex++) {
-                controller.createNewBranch(movementFromDb.zonas[zindex].name, Number(movementFromDb.zonas[zindex].ramas[bindex].id), movementFromDb.zonas[zindex].ramas[bindex].name);
-                for (let gindex = 0; gindex < movementFromDb.zonas[zindex].ramas[bindex].grupos.length; gindex++) {
-                  controller.createNewGroup(movementFromDb.zonas[zindex].name, Number(movementFromDb.zonas[zindex].ramas[bindex].id), Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id), movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].name);
-                  
-                  console.log("Asignando Los Miembros");
-                  movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].miembros.forEach(element => {
-                    controller.addMemberToGroup(
-                      movementFromDb.zonas[zindex].name,
-                      Number(movementFromDb.zonas[zindex].ramas[bindex].id),
-                      Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id),
-                      Number(element))
-                  });
-
-                  console.log("Asignando Los Jefes");
-                  movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].jefes.forEach(element => {
-                    controller.assignGroupManagement(
-                      movementFromDb.zonas[zindex].name,
-                      Number(movementFromDb.zonas[zindex].ramas[bindex].id),
-                      Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id),
-                      Number(element))
-                  });
-                  
-                  console.log("Asignando Los monitores");
-                  movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].monitores.forEach(element => {
-                    controller.changeToMonitor(
-                      movementFromDb.zonas[zindex].name,
-                      Number(movementFromDb.zonas[zindex].ramas[bindex].id),
-                      Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id),
-                      Number(element))
-                  });
-  
-                }
-  
-                movementFromDb.zonas[zindex].ramas[bindex].jefes.forEach(element => {
-                  controller.assignBranchManagement(
+          }else{
+            console.log("No levanto nada de los miembros");
+          }
+          
+          for (let zindex = 0; zindex < movementFromDb.zonas.length; zindex++) {
+            controller.createNewZone(Number(movementFromDb.zonas[zindex].id), movementFromDb.zonas[zindex].name);
+            for (let bindex = 0; bindex < movementFromDb.zonas[zindex].ramas.length; bindex++) {
+              controller.createNewBranch(movementFromDb.zonas[zindex].name, Number(movementFromDb.zonas[zindex].ramas[bindex].id), movementFromDb.zonas[zindex].ramas[bindex].name);
+              for (let gindex = 0; gindex < movementFromDb.zonas[zindex].ramas[bindex].grupos.length; gindex++) {
+                controller.createNewGroup(movementFromDb.zonas[zindex].name, Number(movementFromDb.zonas[zindex].ramas[bindex].id), Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id), movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].name);
+                
+                console.log("Asignando Los Miembros");
+                movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].miembros.forEach(element => {
+                  controller.addMemberToGroup(
                     movementFromDb.zonas[zindex].name,
                     Number(movementFromDb.zonas[zindex].ramas[bindex].id),
-                    Number(element)
-                  )
-                })
-  
-                movementFromDb.zonas[zindex].ramas[bindex].monitores.forEach(element => {
-                  controller.defineMonitor(
-                    Number(element),
+                    Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id),
+                    Number(element))
+                });
+
+                console.log("Asignando Los Jefes");
+                movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].jefes.forEach(element => {
+                  controller.assignGroupManagement(
                     movementFromDb.zonas[zindex].name,
-                    Number(movementFromDb.zonas[zindex].ramas[bindex].id)
-                  );
-                })
-  
+                    Number(movementFromDb.zonas[zindex].ramas[bindex].id),
+                    Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id),
+                    Number(element))
+                });
+                
+                console.log("Asignando Los monitores");
+                movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].monitores.forEach(element => {
+                  controller.changeToMonitor(
+                    movementFromDb.zonas[zindex].name,
+                    Number(movementFromDb.zonas[zindex].ramas[bindex].id),
+                    Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id),
+                    Number(element))
+                });
+
               }
-              movementFromDb.zonas[zindex].jefes.forEach(element => {
-                controller.assignZoneManagement(
+
+              movementFromDb.zonas[zindex].ramas[bindex].jefes.forEach(element => {
+                controller.assignBranchManagement(
                   movementFromDb.zonas[zindex].name,
+                  Number(movementFromDb.zonas[zindex].ramas[bindex].id),
                   Number(element)
                 )
               })
-  
+
+              movementFromDb.zonas[zindex].ramas[bindex].monitores.forEach(element => {
+                controller.defineMonitor(
+                  Number(element),
+                  movementFromDb.zonas[zindex].name,
+                  Number(movementFromDb.zonas[zindex].ramas[bindex].id)
+                );
+              })
+
             }
-          }else{
-            console.log("No levanto nada de los miembros")
+            movementFromDb.zonas[zindex].jefes.forEach(element => {
+              controller.assignZoneManagement(
+                movementFromDb.zonas[zindex].name,
+                Number(element)
+              )
+            })
+
           }
+          res.send({status:1});
         }else{
-          console.log("No levanto nada de la estructura")
+          console.log("No levanto nada de la estructura");
+          res.send({status:0});
         }
 
       }else{
         console.log("Estructura ya instanciada");
+        res.send({status:1});
       }
       next();
     }
+
+    app.post("/loadStructure", movementValidation, function (req: Request, res: Response) {
+      //Esta ruta se ejecuta apenas carga el asesor... y ademas llama a la funcion que validad
+    });
 
     //////////////////////////////////////////////////////////////////// 
     ////////////////////////////////////////////////////////////////////
@@ -131,39 +139,42 @@ export class AsesorRotes {
     app.post("/crearEstructura", function (req: Request, res: Response) {
       console.log(req.body);
       console.log("Verificando que hace ajax1");
-      var created: Boolean = controller.createNewZone(null, req.body.zonaName);
-      ///                                             ///
-      dbController.insertZoneTree(req.body.zonaName);
-      ///                                             ///
+
+      var created: Boolean = controller.existZone(req.body.zonaName);
+
+      if(!created){
+        controller.createNewZone(null, req.body.zonaName);
+        ///                                             ///
+        dbController.insertZoneTree(req.body.zonaName);
+        ///                                             ///
+      }      
+      
       var notCreated: String[] = [];
 
-      if (created) {
-        for (let index = 0; index < req.body.branches.length; index++) {
-          var createdBranch: Boolean = controller.createNewBranch(
+      for (let index = 0; index < req.body.branches.length; index++) {
+        var createdBranch: Boolean = controller.createNewBranch(
+          req.body.zonaName,
+          Number(req.body.ids[index]),
+          req.body.branches[index]
+        );
+        if (!createdBranch) {
+          notCreated.push(req.body.branches[index]);
+        } else {
+          ///                                                                                             ///
+          dbController.insertBranchTree(
             req.body.zonaName,
-            Number(req.body.ids[index]),
+            req.body.ids[index],
             req.body.branches[index]
           );
-          if (!createdBranch) {
-            notCreated.push(req.body.branches[index]);
-          } else {
-            ///                                                                                             ///
-            dbController.insertBranchTree(
-              req.body.zonaName,
-              req.body.ids[index],
-              req.body.branches[index]
-            );
-            ///                                                                                             ///
-          }
+          ///                                                                                             ///
         }
-        if (notCreated.length > 0) {
-          res.send({ status: 2, notCreated: notCreated });
-        } else {
-          res.send({ status: 1 });
-        }
-      } else {
-        res.send({ status: 0 }).end();
       }
+      if (notCreated.length > 0) {
+        res.send({ status: 2, notCreated: notCreated });
+      } else {
+        res.send({ status: 1 });
+      }
+      
     });
 
 
@@ -1031,7 +1042,7 @@ export class AsesorRotes {
 
     //*****************************************************************//
 
-    app.get("/asesorMain", movementValidation, function (req: Request, res: Response) {
+    app.get("/asesorMain", function (req: Request, res: Response) {
       res.render(path.resolve(htmlPath + "AsesorGeneral.html"));
     });
 

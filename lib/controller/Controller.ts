@@ -35,6 +35,11 @@ export class Controller {
     public createNewGroup (zoneName:String, branchId:number, id:number, name:String) : Boolean {
         return this.movement.getStructure().addGroup(new LeafComponent(id,name,StructureType.Group),zoneName,branchId);
     };
+    
+    public existZone (name:String) : Boolean {
+        let result = this.movement.getStructure().existZone(name);
+        return result;
+    };
 
     public addMonitor(zoneName:String, branchId:number, idGroup:number, idMonitor:number){
         var monitor:Member = this.movement.getMember(idMonitor).clone();

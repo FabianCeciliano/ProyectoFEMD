@@ -19,6 +19,7 @@ const schema = new strucSchema({
     phone: String,
     miembros: [String],
     zonas: [IZoneC],
+    image: [String],
 });
 
 export default mongoose.model('structures', schema);

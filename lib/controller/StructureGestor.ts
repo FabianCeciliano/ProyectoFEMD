@@ -12,6 +12,16 @@ export class Gestor{
     constructor(){
         this.structure = new Composite_Level(1,"Coordinacion",StructureType.Coordination);
     }
+
+    public existZone (name:String){
+        for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
+            if(this.structure.groupComposite[zindex].name==name){
+                return true;
+            }
+            
+        }
+        return false;
+    }
     
     public addZone(pDato : IComponent) : Boolean{
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
