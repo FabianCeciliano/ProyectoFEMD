@@ -2,6 +2,7 @@ import { Application, Request, Response } from 'express';
 var path = require('path');
 const htmlPath = __dirname+'../../../lib/view/HTML/';
 import controller from '../controller/Controller'
+import dbController from "../Db/db_controllers/databaseController";
 
 export class CommonRoutes {
     public route(app: Application) {
@@ -10,6 +11,30 @@ export class CommonRoutes {
         /*app.all('*', function (req: Request, res: Response) {
             res.status(404).send({ error: true, message: 'Check your URL please' });
         });*/
+
+        app.get('/prueba', function (req: Request, res: Response) {
+            //res.send({ message: 'Hola amigos'});
+            var promise=dbController.getAllMember();
+            promise.then((value)=>{
+                if(value.length>0){
+                    console.log(value);
+                }else{
+                    console.log("vacio");
+                }
+            })
+        });
+
+        app.get('/prueba2', function (req: Request, res: Response) {
+            //res.send({ message: 'Hola amigos'});
+            var promise=dbController.getOrganization();
+            promise.then((value)=>{
+                if(value!=null){
+                    console.log(value);
+                }else{
+                    console.log("no hay estructura");
+                }
+            })
+        });
 
         app.get('/', function (req: Request, res: Response) {
             //res.send({ message: 'Hola amigos'});

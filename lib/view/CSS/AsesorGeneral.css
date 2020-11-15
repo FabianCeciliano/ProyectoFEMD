@@ -1,15 +1,3 @@
-/*/////////////////////////////////*/
-
-
-/*       USER MAIN PAGE            */
-
-
-/*/////////////////////////////////*/
-
-/* body {
-    background: linear-gradient(243.18deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #546886;
-    background-attachment: fixed;
-} */
 body {
     background: linear-gradient(180deg, #005ca7 0%, #d7d9dc 90%);
     background-attachment: fixed;
@@ -21,281 +9,314 @@ body {
     background-color: #005ca7;
   }
 
-.miborder3 {
-    width: 110px;
-    height: 110px;
-    overflow: auto;
-    background: rgba(255, 255, 255, 0.87);
-    border-radius: 10px;
+img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
-.bscroll {
-    height: 26vh;
-    width: auto;
+p{
+    font-family: 'Roboto', sans-serif;
 }
 
-.bAignar {
-    height: 70vh;
-    width: auto;
-}
-
-.bFormulario {
+.eye{
     height: auto;
-    width: 24%;
-}
-
-.over {
-    height: auto;
-    width: auto;
-}
-
-.nZona {
-    height: 20vh;
-    width: auto;
-}
-
-.nGrupo {
-    height: 70vh;
-    width: auto;
-}
-
-.logo {
-    height: auto;
-    width: 40%;
+    width: 38%;
+    position: relative;
+    left: 20%;
 }
 
 
-
-/* BOTONES */
-
-.BotonPlus {
-    height: 50;
-    width: 52%;
+.banner {
+    position: relative;
+    left: 2%;
+    height: 100px;
+    width: 300px;
 }
 
-.Boton {
-    height: auto;
-    width: 52%;
-}
-
-.Boton1 {
-    height: auto;
-    width: 62%;
-}
-
-.Boton2 {
-    height: auto;
-    width: 59%;
-}
-
-.Boton3 {
-    height: auto;
-    width: 70%;
-}
-
-
-.Boton4 {
-    height: auto;
-    width: 120%;
-}
-
-
-.Boton5 {
+.bannerbuttonList{
     height: auto;
     width: auto;
 }
 
-.Ibanner {
-    height: auto;
-    width: 30%;
-}
-
-.window0 {
-    height: 10vh;
-    width: auto;
-}
-
-.window1 {
-    height: auto;
-    width: auto;
-}
-
-.window2 {
-    height: auto;
-    width: auto;
-}
-
-.window3 {
-    height: 75vh;
-    width: auto;
-}
-
-.window4 {
-    height: 5vh;
-    width: auto;
-}
-
-.windowB {
+.buttonList{
     height: 10vh;
     width: 10vw;
 }
 
 
+/*---------------------------OVERLAYS PRINCIPALES--------------------------*/
 #overlayAgregarMiembro{
+    padding: 2%;
     border-radius: 10px;
     display: none;
     background-color: rgba(82, 96, 99, 0.425);
     cursor: pointer;
+    width: auto;
+    height: 90%;
 }
+
+
 
 #overlayMovimiento{
-    border-radius: 10px;
-    display: none;
-    background-color: rgba(82, 96, 99, 0.425);
-    cursor: pointer;
-}
-
-
-#overlayCrearESt {
+    padding: 2%;
     border-radius: 10px;
     display: block;
     background-color: rgba(82, 96, 99, 0.425);
     cursor: pointer;
+    width: auto;
+    height: 90%;
 }
 
-
-#overlayCrearGrupo {
+#overlayCrearESt{
+    padding: 2%;
     border-radius: 10px;
     display: none;
     background-color: rgba(82, 96, 99, 0.425);
     cursor: pointer;
+    width: auto;
+    height: 90%;
 }
 
-#overlayAsignarMonitor {
+
+#overlayCrearGrupo{
+    padding: 2%;
     border-radius: 10px;
     display: none;
     background-color: rgba(82, 96, 99, 0.425);
     cursor: pointer;
+    width: auto;
+    height: 90%;
 }
 
-#overlayConformarCoordinacion {
+
+#overlayAsignarMonitor{
+    padding: 2%;
     border-radius: 10px;
     display: none;
     background-color: rgba(82, 96, 99, 0.425);
     cursor: pointer;
-}
+    width: auto;
+    height: 90%;
 
-#overlayAdmMiembros {
+}
+#overlayConformarCoordinacion{
+    padding: 2%;
     border-radius: 10px;
     display: none;
     background-color: rgba(82, 96, 99, 0.425);
     cursor: pointer;
+    width: auto;
+    height: 90%;
 }
 
-
-#overlayConsultasVarias {
+#overlayAdmMiembros{
+    padding: 2%;
     border-radius: 10px;
     display: none;
     background-color: rgba(82, 96, 99, 0.425);
     cursor: pointer;
+    width: auto;
+    height: 90%;
 }
 
-
-
-
-
-#FormularioConsultasVariasUno {
-    border-radius: 10px;
-    display: block;
-    background-color: rgba(255, 240, 240, 0.199);
-    cursor: pointer;
-}
-
-#FormularioConsultasVariasDos {
+#overlayConsultasVarias{
+    padding: 2%;
     border-radius: 10px;
     display: none;
-    background-color: rgba(255, 240, 240, 0.199);
+    background-color: rgba(82, 96, 99, 0.425);
     cursor: pointer;
+    width: auto;
+    height: 90%;
 }
 
-#FormularioConsultasVariasTres {
-    border-radius: 10px;
-    display: none;
-    background-color: rgba(255, 240, 240, 0.199);
-    cursor: pointer;
-}
-
-#FormularioGeneral1 {
-    border-radius: 10px;
-    display: block;
-    background-color: rgba(255, 240, 240, 0.199);
-    cursor: pointer;
-}
-
-#FormularioGeneral2 {
-    border-radius: 10px;
-    display: none;
-    background-color: rgba(255, 240, 240, 0.199);
-    cursor: pointer;
-}
-
-#FormularioInfo {
-    border-radius: 10px;
-    display: none;
-    background-color: rgba(255, 240, 240, 0.199);
-    cursor: pointer;
-}
-
-#FormularioInfoGeneral {
-    border-radius: 10px;
-    display: none;
-    background-color: rgba(255, 240, 240, 0.199);
-    cursor: pointer;
-}
-
-#FormularioGrupo {
-    border-radius: 10px;
-    display: none;
-    background-color: rgba(255, 240, 240, 0.199);
-    cursor: pointer;
-}
-
-#FormularioRama {
-    border-radius: 10px;
-    display: none;
-    background-color: rgba(255, 240, 240, 0.199);
-    cursor: pointer;
-}
-
+/*---------------------------OVERLAYS FORMULARIOS--------------------------*/
 #FormularioJefeZone {
+    border-radius: 20px;
+    display: block;
+    background-color: rgba(255, 240, 240, 0.199);
+    cursor: pointer;
+    width: auto;
+    height:108%;
+}
+
+#FormularioGrupo{
+    padding: 1%;
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(255, 240, 240, 0.199);
+    cursor: pointer;
+    width: auto;
+    height:108%;
+}
+
+#FormularioRama{
+    padding: 1%;
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(255, 240, 240, 0.199);
+    cursor: pointer;
+    width: auto;
+    height:108%;
+}
+
+
+/* AGREGAR MIEMBRO */
+#FormularioGeneral1{
+    padding: 1%;
     border-radius: 10px;
     display: block;
     background-color: rgba(255, 240, 240, 0.199);
     cursor: pointer;
+    width: auto;
+    height:108%;
 }
 
-#text {
+#FormularioGeneral2{
+    padding: 1%;
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(255, 240, 240, 0.199);
+    cursor: pointer;
+    width: auto;
+    height:108%;
+}
+
+
+#FormularioInfo{
+    padding: 1%;
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(255, 240, 240, 0.199);
+    cursor: pointer;
+    width: auto;
+    height:112%;
+}
+
+#FormularioInfoGeneral{
+    padding: 1%;
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(255, 240, 240, 0.199);
+    cursor: pointer;
+    width: auto;
+    height:112%;
+
+}
+
+#FormularioConsultasVariasUno{
+    padding: 1%;
+    border-radius: 10px;
+    display: block;
+    background-color: rgba(255, 240, 240, 0.199);
+    cursor: pointer;
+    width: auto;
+    height:108%;
+}
+
+#FormularioConsultasVariasDos{
+    padding: 1%;
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(255, 240, 240, 0.199);
+    cursor: pointer;
+    width: auto;
+    height:108%;
+}
+
+
+#FormularioConsultasVariasTres{
+    padding: 1%;
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(255, 240, 240, 0.199);
+    cursor: pointer;
+    width: auto;
+    height:108%;
+}
+
+
+
+/*------------------------------------BOTONES---------------------------------*/
+.Boton {
+    height: auto;
+    width: 52%;
+}
+
+.BotonM{
+    height: auto;
+    width: 52%;
+}
+
+/*-------------------------------ERRORES---------------------------*/
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    padding: 10%;
+  }
+
+  h2.headertekst {
+    text-align: center;
+  }
+  
+  #errorBG{
+    display: none;
+    position:absolute;
+    top:0;
+    left:0;
+    width: 100%;
+     z-index:1;
+     height: 100%;
+     background-color: rgba(49, 45, 68, 0.801);
+}
+
+
+#error{
+    display: none;
+    margin: auto;
+    border-radius: 20px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 50px;
-    color: white;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
+    top: 50px; 
+    left: 280px;
+    bottom: 50px; 
+    right: 280px;
+    background-color: #000;
+    color: #FFF;
+    z-index:5;
 }
 
 
-.myborders0 {
-    border-radius: 5px;
-    height: 50px;
-    width: 300px;
-    position: relative;
-    left: 10%;
+/*-------------------------------MENSAJES---------------------------*/
+#msgBG{
+    display: none;
+    position:absolute;
+    top:0;
+    left:0;
+    width: 100%;
+     z-index:1;
+     height: 100%;
+     background-color: rgba(158, 148, 207, 0.801);
+}
+#msg{
+    display: none;
+    margin: auto;
+    border-radius: 20px;
+    position: absolute;
+    top: 50px; 
+    left: 280px;
+    bottom: 50px; 
+    right: 280px;
+    background-color: rgba(255, 255, 255, 0.616);
+    color: rgb(0, 0, 0);
+    z-index:5;
 }
 
 
 
 
+
+/*-----------------------------BORDES--------------------------*/
 
 .myborders {
     border-radius: 5px;
@@ -305,11 +326,26 @@ body {
     left: 10%;
 }
 
-.myborders2 {
+.myborderMedium {
     border-radius: 5px;
-    height: 25px;
+    height: 50px;
     width: 200px;
+    left: 10%;
+}
+
+.myborderMedium-S {
+    border-radius: 5px;
+    height: 35px;
+    width: 200px;
+    left: 10%;
+}
+
+.mybordersmin {
+    border-radius: 5px;
+    height: 35px;
+    width: 80px;
     position: relative;
+    left: 10%;
 }
 
 .mybordersId {
@@ -320,22 +356,56 @@ body {
     left: 10%;
 }
 
-.mybordersmin {
-    border-radius: 5px;
-    height: 25px;
-    width: 80px;
-    position: relative;
-    left: 10%;
-}
 
 
 
-/* body {
-    margin: 0;
-    padding: 0;
-    background-color: #004882;
-  } */
+/*--------------------------SELECT BOX------------------------*/
+.boxMin {
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
   
+  .boxMin select {
+    background-color: #0563af;
+    color: white;
+    padding: 5px; 
+    width: 200px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+  }
+  
+  .boxMin::before {
+    content: "\f13a";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    font-size: 28px;
+    line-height: 45px;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+  }
+  
+  .boxMin:hover::before {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .boxMin select option {
+    padding: 30px;
+  }
+
+
+
+
   .box {
     position: absolute;
     transform: translate(-50%, -50%);
@@ -384,57 +454,5 @@ body {
 
 
 
-  .boxMin {
-    position: absolute;
-    transform: translate(-50%, -50%);
-  }
+
   
-  .boxMin select {
-    background-color: #0563af;
-    color: white;
-    padding: 5px; 
-    width: 200px;
-    border: none;
-    font-size: 20px;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-    -webkit-appearance: button;
-    appearance: button;
-    outline: none;
-  }
-  
-  .boxMin::before {
-    content: "\f13a";
-    font-family: FontAwesome;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 20%;
-    height: 100%;
-    text-align: center;
-    font-size: 28px;
-    line-height: 45px;
-    color: rgba(255, 255, 255, 0.5);
-    background-color: rgba(255, 255, 255, 0.1);
-    pointer-events: none;
-  }
-  
-  .boxMin:hover::before {
-    color: rgba(255, 255, 255, 0.6);
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-  
-  .boxMin select option {
-    padding: 30px;
-  }
-
-
-
-
-
-
-
-
-
-
-
-

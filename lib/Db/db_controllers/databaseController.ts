@@ -20,12 +20,36 @@ export class dbController {
 
   ////                                                                                 ////
   ////                                                                                 ////
-  //                               User Handling                                     //
+  //                               User Handling                                         //
   ////                                                                                 ////
   ////                                                                                 ////
   ///                                                                   ///
-  //     Create User    //
-  // dbController.create_user(req)
+  //                          Create User                                //
+  //                  dbController.create_user(req)                      //
+  ///                                                                   ///
+  
+  public async getAllMember():Promise<IUser[]>{
+    var usersFromDB:IUser[]=null;
+    var promise=this.user.getAllMembersImp();
+    await promise.then((value)=>{
+      usersFromDB = value
+    })
+    return usersFromDB;
+  }
+
+  public async getOrganization():Promise<IStructure>{
+    var structureFromDB:IStructure=null;
+    var promise=this.structures.getOrganization();
+    await promise.then((value)=>{
+      structureFromDB = value
+    })
+    return structureFromDB;
+  }
+  
+
+  ///                                                                   ///
+  //                          Create User                                //
+  //                  dbController.create_user(req)                      //
   ///                                                                   ///
   public create_user(req: Request) {
     // this check whether all the filds were send through the erquest or not
@@ -35,9 +59,9 @@ export class dbController {
       req.body.celular &&
       req.body.id &&
       req.body.direccion &&
-      req.body.esMonitor
+      req.body.esMonitor!=null
     ) {
-      console.log(req)
+      //console.log(req)
       const user_params: IUser = {
         memberId: req.body.id,
         name: req.body.name,
@@ -47,6 +71,7 @@ export class dbController {
         rol: "groupMember",
         direction: req.body.direccion,
       };
+      //console.log("Aqui1");
       this.user.createUser(user_params,
         (err: any, data: JSON) => {
           if (err) {
@@ -83,7 +108,7 @@ export class dbController {
     }
   }
 
-  ///                                                                   ///
+  ///                                                                                   ///
   //                        Cambia lo que ud le meta del miembro                         //
   ///                                                                                   ///
   public update_user(req: Request) {
@@ -134,9 +159,8 @@ export class dbController {
   }
 
   ///                                                                   ///
-  //     Delete User
-  // params: req.body.id,
-  // dbController.delete_user(req)
+  //                         Delete User                                 //
+  //                  dbController.delete_user(req)                      //
   ///                                                                   ///
   public delete_user(req: Request) {
     if (req.body.id) {
@@ -158,13 +182,16 @@ export class dbController {
 
   ////                                                                                 ////
   ////                                                                                 ////
-  //                            Organization Methods                                 //
-  ////                                                                                ////
+  //                            Organization Methods                                     //
+  ////                                                                                 ////
   ////                                                                                 ////
 
-  // Create Orgaization ...................................Ejemplo Func
-  //dbController.createOrganization(req.body.name, req.body.coutry,
-  //    req.body.cedulaJuridica, req.body.webDirection, req.body.phone)
+
+  ////                                                                                 ////
+  //                             Create Orgaization                                      //
+  //          dbController.createOrganization(req.body.name, req.body.coutry,            //
+  //            req.body.cedulaJuridica, req.body.webDirection, req.body.phone)          //
+  ////                                                                                 ////
   public createOrganization(
     name: String,
     coutry: String,
@@ -198,40 +225,14 @@ export class dbController {
       //insufficientParameters(res)
     }
   }
-  ///                                                                  ///
-  /* Crear Estructura // Ejemplo de funcionamiento //
-    {
-      "nombreOrg": "AlianzaAfrica",
-      "zone": {
-          "name": "CostaRica",
-          "id": "Pan588",
-          "ramas":[
-          {
-              "name": "Pabajo",
-              "id": "Pro"
-          },
-          {
-              "name": "CesoLento",
-              "id": "psle"
-          }
-          ]
-      }
-    }
-  //                                  Explicacion                                   //
-  Hay que llamar a las dos siguientes funciones de base de datos que hacen los insert
-          app.post('/api/crearEstructura', (req: Request, res: Response) => {
-              
-              // Database //
-              this.dbController.insertZone(req.body.zonaName, req.body.zonaName) 
-              for(var _i = 0  _i < req.body.zone.ramas.length  _i++){
-                  console.log("Elemento nuevo de rama ----"+_i) 
-                  this.dbController.insertBranchTree(req.body.zonaName, 
-                    req.body.ids[index], req.body.branches[index]) 
-              } 
-          }) 
-  */
+
+  ////                                                                                 ////
+  //                           Create / Insert New Zone                                  //
+  //                      //
+  //                      //
+  ////                                                                                 ////
   /* Crear Estructura .. Insertar Zona ............................................. */
-  //dbController.insertZone(req.body.zonaName, req.body.zonaName)
+  // dbController.insertZone(req.body.zonaName, req.body.zonaName)
   public insertZoneTree(zoneName: String) {
     console.log("Creando zona");
     if (zoneName) {
