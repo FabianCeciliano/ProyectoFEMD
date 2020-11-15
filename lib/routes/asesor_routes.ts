@@ -263,7 +263,7 @@ export class AsesorRotes {
       var branches = controller.getAllBranchesInNeed();// NOMB-ID
       var monitores = controller.getAllMonitors();
 
-      if (branches.length > 0) {
+      if ( branches.length > 0 && monitores.length > 0) {
         res.send({ status: 1, ramas: branches, monitor: monitores });
       } else {
         res.send({ status: 0, ramas: branches, monitor: monitores });
