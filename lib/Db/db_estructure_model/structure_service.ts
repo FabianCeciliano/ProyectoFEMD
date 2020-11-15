@@ -11,6 +11,19 @@ export default class StructureService {
     database and just setting the parameters of the 
     organization.
     */
+  
+  public async getOrganization():Promise<IStructure>{
+    var structureFromDB:IStructure=null;
+    await structures.findOne({"_id":1},function(err, result:IStructure) {
+        if (err) {
+            console.log(err); 
+        } else {
+        structureFromDB=result;
+        }
+    })
+    return structureFromDB;
+  }
+
   public setOrganizationParams(orgParams: IStructure) {
     const _session = new structures(orgParams);
     _session.save();

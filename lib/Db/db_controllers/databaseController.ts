@@ -28,8 +28,22 @@ export class dbController {
   //                  dbController.create_user(req)                      //
   ///                                                                   ///
   
-  public getAllMember(req:Request){
-    //this.user.getAllMembersImp();
+  public async getAllMember():Promise<IUser[]>{
+    var usersFromDB:IUser[]=null;
+    var promise=this.user.getAllMembersImp();
+    await promise.then((value)=>{
+      usersFromDB = value
+    })
+    return usersFromDB;
+  }
+
+  public async getOrganization():Promise<IStructure>{
+    var structureFromDB:IStructure=null;
+    var promise=this.structures.getOrganization();
+    await promise.then((value)=>{
+      structureFromDB = value
+    })
+    return structureFromDB;
   }
   
 
@@ -45,9 +59,9 @@ export class dbController {
       req.body.celular &&
       req.body.id &&
       req.body.direccion &&
-      req.body.esMonitor
+      req.body.esMonitor!=null
     ) {
-      console.log(req)
+      //console.log(req)
       const user_params: IUser = {
         memberId: req.body.id,
         name: req.body.name,
@@ -57,6 +71,7 @@ export class dbController {
         rol: "groupMember",
         direction: req.body.direccion,
       };
+      //console.log("Aqui1");
       this.user.createUser(user_params,
         (err: any, data: JSON) => {
           if (err) {

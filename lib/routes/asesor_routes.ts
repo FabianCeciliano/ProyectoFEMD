@@ -15,76 +15,102 @@ export class AsesorRotes {
     //            VALIDACION DEL MOVIMIENTO CREADO                    // 
     ////////////////////////////////////////////////////////////////////
 
-    const movementValidation = (req: Request, res: Response, next: any) => {
+    const movementValidation = async (req: Request, res: Response, next: any):Promise<void> => {
       var isCreated = controller.movementIsCreated();
       if (!isCreated) {
-        var movementFromDb: IStructure;
-        var miembros: IUser[];
-        if (miembros != null) {//iterar e insertar en el gestor de miembros
-          miembros.forEach(element => {
-            controller.addMember(Number(element.memberId), element.name, Number(element.telephone), element.email, element.direction, Boolean(element.facilitator))
-          })
-        }
-        if (movementFromDb != null) { //si no esta instanciada y ademas en la base de datos YA esta creada... se debe cargar.. 
+        console.log("Aun no instanciada");
+        var movementFromDb:IStructure=null;
+        var membersFromDb:IUser[]=[];
+
+        await dbController.getOrganization().then((value)=>{
+          movementFromDb=value;
+        })
+
+        await dbController.getAllMember().then((value)=>{
+          membersFromDb=value;
+        })
+        
+        if(movementFromDb!=null){
           var status: boolean = controller.createMovement(Number(movementFromDb.cedulaJuridica), movementFromDb.name, movementFromDb.webDirection, movementFromDb.coutry, Number(movementFromDb.phone));
-          for (let zindex = 0; zindex < movementFromDb.zonas.length; zindex++) {
-            controller.createNewZone(Number(movementFromDb.zonas[zindex].id), movementFromDb.zonas[zindex].name);
-            for (let bindex = 0; bindex < movementFromDb.zonas[zindex].ramas.length; bindex++) {
-              controller.createNewBranch(movementFromDb.zonas[zindex].name, Number(movementFromDb.zonas[zindex].ramas[bindex].id), movementFromDb.zonas[zindex].ramas[bindex].name);
-              for (let gindex = 0; gindex < movementFromDb.zonas[zindex].ramas[bindex].grupos.length; gindex++) {
-                controller.createNewGroup(movementFromDb.zonas[zindex].name, Number(movementFromDb.zonas[zindex].ramas[bindex].id), Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id), movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].name);
-                movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].miembros.forEach(element => {
-                  controller.addMemberToGroup(
-                    movementFromDb.zonas[zindex].name,
-                    Number(movementFromDb.zonas[zindex].ramas[bindex].id),
-                    Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id),
-                    Number(element))
-                });
-
-                movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].jefes.forEach(element => {
-                  controller.assignGroupManagement(
-                    movementFromDb.zonas[zindex].name,
-                    Number(movementFromDb.zonas[zindex].ramas[bindex].id),
-                    Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id),
-                    Number(element))
-                });
-
-                movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].monitores.forEach(element => {
-                  controller.changeToMonitor(
-                    movementFromDb.zonas[zindex].name,
-                    Number(movementFromDb.zonas[zindex].ramas[bindex].id),
-                    Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id),
-                    Number(element))
-                });
-
+          if (membersFromDb.length>0) {//iterar e insertar en el gestor de miembros
+            console.log("Levantando miembros");
+            membersFromDb.forEach(element => {
+              var facilitator=false;
+              if(element.facilitator=="true"){
+                facilitator=true;
               }
+              controller.addMember(Number(element.memberId), element.name, Number(element.telephone), element.email, element.direction, facilitator);
+            })
+            for (let zindex = 0; zindex < movementFromDb.zonas.length; zindex++) {
+              controller.createNewZone(Number(movementFromDb.zonas[zindex].id), movementFromDb.zonas[zindex].name);
+              for (let bindex = 0; bindex < movementFromDb.zonas[zindex].ramas.length; bindex++) {
+                controller.createNewBranch(movementFromDb.zonas[zindex].name, Number(movementFromDb.zonas[zindex].ramas[bindex].id), movementFromDb.zonas[zindex].ramas[bindex].name);
+                for (let gindex = 0; gindex < movementFromDb.zonas[zindex].ramas[bindex].grupos.length; gindex++) {
+                  controller.createNewGroup(movementFromDb.zonas[zindex].name, Number(movementFromDb.zonas[zindex].ramas[bindex].id), Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id), movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].name);
+                  
+                  console.log("Asignando Los Miembros");
+                  movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].miembros.forEach(element => {
+                    controller.addMemberToGroup(
+                      movementFromDb.zonas[zindex].name,
+                      Number(movementFromDb.zonas[zindex].ramas[bindex].id),
+                      Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id),
+                      Number(element))
+                  });
 
-              movementFromDb.zonas[zindex].ramas[bindex].jefes.forEach(element => {
-                controller.assignBranchManagement(
+                  console.log("Asignando Los Jefes");
+                  movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].jefes.forEach(element => {
+                    controller.assignGroupManagement(
+                      movementFromDb.zonas[zindex].name,
+                      Number(movementFromDb.zonas[zindex].ramas[bindex].id),
+                      Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id),
+                      Number(element))
+                  });
+                  
+                  console.log("Asignando Los monitores");
+                  movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].monitores.forEach(element => {
+                    controller.changeToMonitor(
+                      movementFromDb.zonas[zindex].name,
+                      Number(movementFromDb.zonas[zindex].ramas[bindex].id),
+                      Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id),
+                      Number(element))
+                  });
+  
+                }
+  
+                movementFromDb.zonas[zindex].ramas[bindex].jefes.forEach(element => {
+                  controller.assignBranchManagement(
+                    movementFromDb.zonas[zindex].name,
+                    Number(movementFromDb.zonas[zindex].ramas[bindex].id),
+                    Number(element)
+                  )
+                })
+  
+                movementFromDb.zonas[zindex].ramas[bindex].monitores.forEach(element => {
+                  controller.defineMonitor(
+                    Number(element),
+                    movementFromDb.zonas[zindex].name,
+                    Number(movementFromDb.zonas[zindex].ramas[bindex].id)
+                  );
+                })
+  
+              }
+              movementFromDb.zonas[zindex].jefes.forEach(element => {
+                controller.assignZoneManagement(
                   movementFromDb.zonas[zindex].name,
-                  Number(movementFromDb.zonas[zindex].ramas[bindex].id),
                   Number(element)
                 )
               })
-
-              movementFromDb.zonas[zindex].ramas[bindex].monitores.forEach(element => {
-                controller.defineMonitor(
-                  Number(element),
-                  movementFromDb.zonas[zindex].name,
-                  Number(movementFromDb.zonas[zindex].ramas[bindex].id)
-                );
-              })
-
+  
             }
-            movementFromDb.zonas[zindex].jefes.forEach(element => {
-              controller.assignZoneManagement(
-                movementFromDb.zonas[zindex].name,
-                Number(element)
-              )
-            })
-
+          }else{
+            console.log("No levanto nada de los miembros")
           }
+        }else{
+          console.log("No levanto nada de la estructura")
         }
+
+      }else{
+        console.log("Estructura ya instanciada");
       }
       next();
     }
@@ -1005,7 +1031,7 @@ export class AsesorRotes {
 
     //*****************************************************************//
 
-    app.get("/asesorMain", /*movementValidation,*/ function (req: Request, res: Response) {
+    app.get("/asesorMain", movementValidation, function (req: Request, res: Response) {
       res.render(path.resolve(htmlPath + "AsesorGeneral.html"));
     });
 
