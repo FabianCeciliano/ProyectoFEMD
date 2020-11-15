@@ -1,4 +1,4 @@
- <!-- hola -->
+<!-- hola -->
 <!doctype html>
 <html lang="en">
 
@@ -23,35 +23,45 @@
 
 <body>
 
-<!-- /// -->
+
+    <!-- //////////////////////////////////////////////////////////////////// -->
+    <!--                   MUESTRA LOS MENSAJES DE ERROR                       -->
+    <!-- //////////////////////////////////////////////////////////////////// -->
     <div id="errorBG" onclick="off()">
         <div id="error" onclick="off()">
             <h2 class="headertekst">Error</h2>
             <img src="https://www.nicepng.com/png/full/225-2255762_error404-error-404-icono-png.png" alt="Paris"
                 class="center">
-            <h2  id="msgError" class="headertekst">NADA</h2>
+            <h2 id="msgError" class="headertekst">NADA</h2>
         </div>
     </div>
 
-    
 
 
-
-
+    <!-- //////////////////////////////////////////////////////////////////// -->
+    <!--                    MUESTRA LAS NOTIFICACION                          -->
+    <!-- //////////////////////////////////////////////////////////////////// -->
     <div id="msgBG" onclick="off()">
         <div id="msg" onclick="off()">
             <h2 class="headertekst">Mensaje</h2>
             <img src="https://www.shareicon.net/data/512x512/2016/10/25/847515_happy_512x512.png" alt="Paris"
                 class="center">
-            <h2  id="msgText" class="headertekst">NADA</h2>
+            <h2 id="msgText" class="headertekst">NADA</h2>
         </div>
-
-
-
-
-
-
     </div>
+
+    <!-- //////////////////////////////////////////////////////////////////// -->
+    <!--                      MUESTRA LA ESTRUCTURA                           -->
+    <!-- //////////////////////////////////////////////////////////////////// -->
+    <div id="showEstBG" onclick="off()">
+        <div id="showEst" onclick="off()">
+            <h2 class="headertekst">Estructura</h2>
+            <h2 id="msgData" class="headertekst"></h2>
+        </div>
+    </div>
+
+
+
 
 
 
@@ -65,7 +75,7 @@
                 <!-- //////////////////////////////////////////////////////////////////// -->
                 <!--                        BANNER Y BOTONES                              -->
                 <!-- //////////////////////////////////////////////////////////////////// -->
-                <img onclick="BCreateEstructura()" class="img-responsive eye p-3"
+                <img onclick="showEst()" class="img-responsive eye p-3"
                     src="https://www.vippng.com/png/full/90-907924_icono-lupa-home-11-icono-de-una-lupa.png">
 
 
@@ -1289,7 +1299,7 @@
                                     style="border: 0; background: transparent" class="social ">
                                     <img class="mx-auto d-block Boton" src="../resources/FU5.svg" alt="">
                                 </button>
-                            </div> 
+                            </div>
 
                         </div>
 
@@ -1657,8 +1667,8 @@
                                 <div class="row justify-content-center p-4">
                                     <div class="col-1 align-self-center">
                                         <div class="boxMin">
-                                            <select onclick="showDataProcedence()" class="selecBox" id="moverUserId" type="submit "
-                                                style="border: 0; background: transparent ">
+                                            <select onclick="showDataProcedence()" class="selecBox" id="moverUserId"
+                                                type="submit " style="border: 0; background: transparent ">
                                             </select>
                                         </div>
                                     </div>
