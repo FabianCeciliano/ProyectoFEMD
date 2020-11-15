@@ -132,7 +132,7 @@ p{
 /*---------------------------OVERLAYS FORMULARIOS--------------------------*/
 #FormularioJefeZone {
     border-radius: 20px;
-    display: block;
+    display: none;
     background-color: rgba(255, 240, 240, 0.199);
     cursor: pointer;
     width: auto;
@@ -206,7 +206,7 @@ p{
 #FormularioConsultasVariasUno{
     padding: 1%;
     border-radius: 10px;
-    display: block;
+    display: none;
     background-color: rgba(255, 240, 240, 0.199);
     cursor: pointer;
     width: auto;
