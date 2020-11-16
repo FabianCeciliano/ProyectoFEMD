@@ -257,6 +257,7 @@ p{
   }
 
   h2.headertekst {
+    font-family: 'Roboto', sans-serif;
     text-align: center;
   }
   
@@ -470,8 +471,8 @@ p{
     background-color: rgba(158, 148, 207, 0.801);
 }
 #showEst{
-    overflow-y: scroll;
-    overflow-x: scroll;
+    overflow-y: auto;
+    overflow-x: auto;
     display: none;
     margin: auto;
     border-radius: 20px;
@@ -486,23 +487,13 @@ p{
 }
 
 
-h3.headertekst {
-    color: rgb(214, 93, 22);
-    text-align: center;
-}
-
-
-h4.headertekst {
-    color: rgb(111, 4, 161);
-    text-align: center;
-}
-
-h5.headertekst {
-    color: Green;
-    text-align: center;
-}
-
-h6.headertekst {
-    color: rgb(7, 23, 168);
-    text-align: center;
+pre.myTXT {
+    /* font-family: 'Roboto', sans-serif; */
+    overflow-x:auto;
+    font-size: 35px;
+    overflow-y: auto;
+    overflow-x: auto;
+    border-radius: 20px;
+    position: absolute;
+    padding: 5%;
 }

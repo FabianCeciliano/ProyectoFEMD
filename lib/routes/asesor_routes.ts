@@ -263,7 +263,7 @@ export class AsesorRotes {
       var branches = controller.getAllBranchesInNeed();// NOMB-ID
       var monitores = controller.getAllMonitors();
 
-      if ( branches.length > 0 && monitores.length > 0) {
+      if (branches.length > 0 && monitores.length > 0) {
         res.send({ status: 1, ramas: branches, monitor: monitores });
       } else {
         res.send({ status: 0, ramas: branches, monitor: monitores });
@@ -424,7 +424,7 @@ export class AsesorRotes {
     app.post('/getShowDataCCF2', function (req: Request, res: Response) {
       var dataZone = controller.getZones(); ///[ ZONA1,ZONA2....]
       var dataBrach = controller.getBranches(dataZone[0]);
-      console.log("NAN------------>",dataBrach)//[ "rama-1" ,rama-2....]
+      console.log("NAN------------>", dataBrach)//[ "rama-1" ,rama-2....]
       if (dataZone.length > 0) {
         res.send({ status: 1, zonas: dataZone, ramas: dataBrach });
       } else {
@@ -477,7 +477,7 @@ export class AsesorRotes {
     ////////////////////////////////////////////////////////////////////
     app.post("/asignarJefesRama", function (req: Request, res: Response) {
       var zoneName = req.body.nombreZona;
-      var branchId =  String(req.body.idRama).split("-", 2)[1]
+      var branchId = String(req.body.idRama).split("-", 2)[1]
       var first_Chief_Id = req.body.jefe1;
       var second_Chief_Id = req.body.jefe2;
 
@@ -557,7 +557,7 @@ export class AsesorRotes {
       var zoneName = req.body.zonaName;
       var branchId = req.body.ramaId;
       var groupId = req.body.grupoId;
-      console.log(  "Body : ", req.body)
+      console.log("Body : ", req.body)
 
       let result = controller.consultGroupManagement(
         zoneName,
@@ -585,7 +585,7 @@ export class AsesorRotes {
       var groupId = String(req.body.idGrupo).split("-", 2)[1]
 
 
-      
+
       var first_Chief_Id = req.body.jefe1;
       var second_Chief_Id = req.body.jefe2;
 
@@ -722,13 +722,21 @@ export class AsesorRotes {
     ////////////////////////////////////////////////////////////////////
 
     app.post("/borrarUsuario", function (req: Request, res: Response) {
-      //console.log(req.body)
       controller.deleteMember(Number(req.body.id));
-      controller.printMembers();
-      ///                              ///
-      dbController.delete_user(req);
-      ///                              ///
-      res.send({ status: 1 });
+      if(req.body.zonaCheck){
+
+      }
+      else if(req.body.ramaCheck ){
+        
+      }
+      else if(req.body.grupoCheck ){
+        
+      }else{
+        controller.printMembers();
+        dbController.delete_user(req);
+        res.send({ status: 1 });
+      }
+    
     });
 
 
@@ -770,36 +778,36 @@ export class AsesorRotes {
     //                        MOSTRAR LOS DATOS                        // 
     ////////////////////////////////////////////////////////////////////
     app.post("/getShowDataMove", function (req: Request, res: Response) {
-    
+
       var dataMember = controller.getAllMembers();
       var idBrach = String(dataMember[0]).split("-", 2);
-      var dataPrecedence = controller.consultMemberParticipation(Number (idBrach[1]));
-    
+      var dataPrecedence = controller.consultMemberParticipation(Number(idBrach[1]));
+
       console.log(dataPrecedence);
 
       if (dataMember.length > 0) {
-        res.send({ status: 1, dataM: dataMember , dataP:dataPrecedence});
+        res.send({ status: 1, dataM: dataMember, dataP: dataPrecedence });
       } else {
-        res.send({ status: 0, dataM: dataMember, dataP:dataPrecedence });
+        res.send({ status: 0, dataM: dataMember, dataP: dataPrecedence });
       }
 
     });
 
-////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////
     //                        MOSTRAR LOS DATOS                        // 
     ////////////////////////////////////////////////////////////////////
     app.post("/getShowDataProcedence", function (req: Request, res: Response) {
       var idBrach = String(req.body.id).split("-", 2);
-      var dataPrecedence = controller.getMemberParticipation(Number (idBrach[1]));
-      console.log( dataPrecedence);
+      var dataPrecedence = controller.getMemberParticipation(Number(idBrach[1]));
+      console.log(dataPrecedence);
       if (dataPrecedence.length > 0) {
-        res.send({ status: 1, dataP:dataPrecedence});
+        res.send({ status: 1, dataP: dataPrecedence });
       } else {
-        res.send({ status: 0, dataP:dataPrecedence });
+        res.send({ status: 0, dataP: dataPrecedence });
       }
 
     });
-   
+
 
 
 
@@ -887,6 +895,23 @@ export class AsesorRotes {
     ////////////////////////////////////////////////////////////////////
     //                        FORMULARIO DOS                         // 
     ////////////////////////////////////////////////////////////////////
+
+
+
+
+    ////////////////////////////////////////////////////////////////////
+    //                    SHOW DATA EN FORMULARIO 2                   // 
+    ////////////////////////////////////////////////////////////////////
+    app.post("/getShowMemberConsult", function (req: Request, res: Response) {
+      var dataM = controller.getAllMembers();
+      if (dataM.length > 0){
+        res.send({status: 1,dataP:dataM});
+      } else {
+        res.send({ status: 0 });
+      }
+    });
+
+
 
     ////////////////////////////////////////////////////////////////////
     //                 PARTICIPACION DE UN MIEMBOR                    // 
@@ -1001,9 +1026,9 @@ export class AsesorRotes {
       var dataGrup = controller.getGroups(dataZone[0], Number(idBrach[1]));
 
       if (dataMM.length > 0) {
-        res.send({ status: 1, zonas: dataZone, ramas: dataBrach, grupos: dataGrup,dataM:dataMM });
+        res.send({ status: 1, zonas: dataZone, ramas: dataBrach, grupos: dataGrup, dataM: dataMM });
       } else {
-        res.send({ status: 0, zonas: dataZone, ramas: dataBrach, grupos: dataGrup,dataM:dataMM });
+        res.send({ status: 0, zonas: dataZone, ramas: dataBrach, grupos: dataGrup, dataM: dataMM });
       }
 
     });
@@ -1132,15 +1157,19 @@ export class AsesorRotes {
       //res.send({monitores:["juan","perez"]});
     });
 
+    app.post("/getshowEst", function (req: Request, res: Response) {
+
+      var listaEst = controller.showEstruc();
+
+      if (listaEst.length > 0) {
+        res.send({ status: 1, dataE: listaEst });
+      } else {
+        res.send({ status: 0, dataE: listaEst });
+      }
+    });
+
+
   }
-
-
-
-
-
-
-
-
 }
 
 

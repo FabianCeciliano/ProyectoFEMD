@@ -8,6 +8,9 @@ import {Rol} from '../model/Rol'
 import { LeafComponent } from '../model/LeafComponent';
 
 export class Controller {
+    controller(): String[] {
+      throw new Error("Method not implemented.");
+    }
 
     private movement:Movement;
 
@@ -64,6 +67,11 @@ export class Controller {
     public verEstructura(){
         this.movement.getStructure().verEstructura();
     }
+
+    public showEstruc(){
+        return this.movement.getStructure().getEst();
+    }
+
     public deleteMember(pIdData:number){
         this.movement.getMembers().deleteMiembro(pIdData);
         this.deleteMemberFromStructure(pIdData);

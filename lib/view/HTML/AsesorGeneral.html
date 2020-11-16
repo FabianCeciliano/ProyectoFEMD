@@ -56,7 +56,7 @@
     <div id="showEstBG" onclick="off()">
         <div id="showEst" onclick="off()">
             <h2 class="headertekst">Estructura</h2>
-            <h2 id="msgData"></h2>
+            <pre class="myTXT" id="msgData"></pre>
         </div>
     </div>
 
@@ -77,8 +77,6 @@
                 <!-- //////////////////////////////////////////////////////////////////// -->
                 <img onclick="showEst()" class="img-responsive eye p-3"
                     src="https://www.vippng.com/png/full/90-907924_icono-lupa-home-11-icono-de-una-lupa.png">
-
-
 
 
                 <!-- //////////////////////////////////////////////////////////////////// -->
@@ -345,7 +343,6 @@
                             </button>
                         </div>
                     </div>
-
 
 
                 </div>
@@ -1597,22 +1594,24 @@
                                     </div>
                                 </div>
 
+
                                 <!-- //////////////////////////////////////////////////////////////////// -->
-                                <!--                                TITULO                                -->
+                                <!--                                TITULO                                 -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
-                                <div class="row  p-5">
-                                    <div class="col-12">
-                                        <img class="mx-auto d-block Boton" src="../resources/FAIdentificación.svg">
+                                <div class="row p-2 ">
+                                    <div class="col-12 ">
+                                        <img class="mx-auto d-block over " src="../resources/ffId Miembro_.svg">
                                     </div>
                                 </div>
 
+
                                 <!-- //////////////////////////////////////////////////////////////////// -->
-                                <!--                            TEXT AREA                                 -->
+                                <!--                                TEXT AREA                              -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
-                                <div class="row justify-content-center p-4">
+                                <div class="row justify-content-center p-3">
                                     <div class="col-1 align-self-center">
-                                        <div class="box">
-                                            <select class="selecBox" id="borrarUserId" type="submit "
+                                        <div class="boxMin">
+                                            <select class="selecBox" id="consulMiembroIdEliminar" type="submit "
                                                 style="border: 0; background: transparent ">
                                             </select>
                                         </div>
@@ -1621,20 +1620,118 @@
 
 
                                 <!-- //////////////////////////////////////////////////////////////////// -->
-                                <!--                            BOTONES                                 -->
+                                <!--                               BOTON                                 -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
-                                <div class="row justify-content-center p-5">
-                                    <button class="about" type="submit" onclick="borrarUsuario()"
-                                        style="border: 0; background: transparent" class="social ">
-                                        <img class="mx-auto d-block " src="../resources/FAAgregar.svg" alt="">
+                                <div class="row justify-content-center p-2">
+                                    <button class="about " type="submit " onclick="consulMiembroFun()"
+                                        style="border: 0; background: transparent " class="social ">
+                                        <img class="mx-auto d-block Boton" src="../resources/FBoton.svg " alt=" ">
                                     </button>
                                 </div>
 
+
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <!--                                TEXT AREA                              -->
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <div class="row justify-content-center p-3">
+                                    <div class="col-3"></div>
+                                    <div class="col-1 align-self-center">
+                                        <div class="boxMin">
+                                            <select class="selecBox" id="consulGrupoZListE" type="submit "
+                                                style="border: 0; background: transparent ">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-3"></div>
+                                    <div class="col-5">
+                                        <img class="over" src="../resources/DeleteZona.svg">
+                                        <input type="checkbox" id="deleteZona" src="../resources/Es Monitor.svg">
+                                    </div>
+                                </div>
+
+
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <!--                                TEXT AREA                              -->
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <div class="row justify-content-center p-3">
+                                    <div class="col-3"></div>
+                                    <div class="col-1 align-self-center">
+                                        <div class="boxMin">
+                                            <select class="selecBox" id="consulGrupoRListE" type="submit "
+                                                style="border: 0; background: transparent ">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-3"></div>
+                                    <div class="col-5">
+                                        <img class="over" src="../resources/DeleteRama.svg">
+                                        <input type="checkbox" id="deleteRama" src="../resources/Es Monitor.svg">
+                                    </div>
+                                </div>
+
+
+
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <!--                                TEXT AREA                              -->
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <div class="row justify-content-center p-1">
+                                    <div class="col-3"></div>
+                                    <div class="col-1 align-self-center">
+                                        <div class="boxMin">
+                                            <select class="selecBox" id="consulGrupoGListE" type="submit "
+                                                style="border: 0; background: transparent ">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-3"></div>
+                                    <div class="col-5">
+                                        <img class="over" src="../resources/DeleteGrupo.svg">
+                                        <input type="checkbox" id="deleteGrupo" src="../resources/Es Monitor.svg">
+                                    </div>
+                                </div>
+
+
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <!--                            BOTONES                                 -->
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <div class="row justify-content-center p-1">
+                                    <button class="about" type="submit" onclick="borrarUsuario()"
+                                        style="border: 0; background: transparent" class="social ">
+                                        <img class="mx-auto d-block Boton" src="../resources/FAAgregar.svg" alt="">
+                                    </button>
+                                </div>
 
                             </div>
                             <!-- //////////////////////////////////////////////////////////////////// -->
                             <!--                                FIN DE FORMULARIO                     -->
                             <!-- //////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                             <!-- //////////////////////////////////////////////////////////////////// -->
@@ -1949,10 +2046,14 @@
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <!--                                TEXT AREA                              -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
-
-                                <div class="row justify-content-center p-1">
-                                    <input class="myborderMedium-S" id="consulMiembroId" type="text "
-                                        placeholder="Id Miembro " required>
+                                <div class="row justify-content-center p-3">
+                                    <div class="col-1 align-self-center">
+                                        <div class="boxMin">
+                                            <select class="selecBox" id="consulMiembroId" type="submit "
+                                                style="border: 0; background: transparent ">
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
 
 
