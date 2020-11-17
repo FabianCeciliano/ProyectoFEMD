@@ -223,8 +223,8 @@ export class Controller {
         return zones;
     } 
     public getAllBranches(){
-        //let zones : String [] =  this.movement.getStructure().getAllBranches();
-        return [];
+        let branches : String [] =  this.movement.getStructure().getAllBranches();
+        return branches;
     }
     public getBranches(zoneName:String):String[]{
         let branches:String[] = this.movement.getStructure().getBranches(zoneName);
@@ -257,7 +257,11 @@ export class Controller {
     
     public getGroups(zoneName : String, branchId : number): String[]{
         let groups: String[] = this.movement.getStructure().getGroups(zoneName, branchId);
-        console.log(groups);
+        return groups;
+    }
+    
+    public getAllGroups(): String[]{
+        let groups: String[] = this.movement.getStructure().getAllGroups();
         return groups;
     } 
 

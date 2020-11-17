@@ -922,9 +922,7 @@ export class AsesorRotes {
 ////////////////////////////////////////////////////////////////////
 
 app.post("/getShowAlBl", function (req: Request, res: Response) {
-  var data = controller.getAllBranches() ; //controller.getAllBranchesInNeed();
-  data.push("Tela creiste wee")
-  console.log("AAAAAAAAAAAAAAAAAAAAA , ", data)
+  var data = controller.getAllGroups(); //controller.getAllBranchesInNeed();
   if (data.length>0) {
     res.send({ status: 1, dataP: data});
   } else {
@@ -1264,8 +1262,6 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
 
     app.post("/getMegaShowRamas", function (req: Request, res: Response) {
       var data = controller.getAllBranches() ; //controller.getAllBranchesInNeed();
-      data.push("Tela creiste wee")
-      console.log("EEEEEEEEEEEE , ", data)
       if (data.length>0) {
         res.send({ status: 1, grupos: data});
       } else {
@@ -1274,9 +1270,7 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
     });
 
     app.post("/getMegaShowGrupos", function (req: Request, res: Response) {
-      var data = controller.getAllBranches() ; //controller.getAllBranchesInNeed();
-      data.push("Tela creiste wee")
-      console.log("IIIIIIIIIIIIIIIIIIIII , ", data)
+      var data = controller.getAllGroups(); //controller.getAllBranchesInNeed();
       if (data.length>0) {
         res.send({ status: 1, grupos: data});
       } else {

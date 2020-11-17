@@ -653,6 +653,18 @@ export class Gestor {
         return groups;
     }
 
+    public getAllGroups(): String[] {
+        let groups: String[] = [];
+        for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
+            for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
+                    for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
+                        groups.push(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].name + "-" + this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id);
+                    }
+                }
+        }
+        return groups;
+    }
+
     // Le quita el rol de jefe de zona pero lo deja como miembro de la misma        //
     // Ya que siguie siendo jefe de rama                                            //
     public removeZoneChief(zoneName: String, pIdData: number): Boolean {
