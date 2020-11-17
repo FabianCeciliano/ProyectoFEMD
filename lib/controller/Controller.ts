@@ -8,6 +8,9 @@ import {Rol} from '../model/Rol'
 import { LeafComponent } from '../model/LeafComponent';
 
 export class Controller {
+    controller(): String[] {
+      throw new Error("Method not implemented.");
+    }
 
     private movementList:Movement[]=[];
     private movement:Movement;
@@ -99,6 +102,11 @@ export class Controller {
     public verEstructura(){
         this.movement.getStructure().verEstructura();
     }
+
+    public showEstruc(){
+        return this.movement.getStructure().getEst();
+    }
+
     public deleteMember(pIdData:number){
         this.movement.getMembers().deleteMiembro(pIdData);
         this.deleteMemberFromStructure(pIdData);
@@ -176,6 +184,11 @@ export class Controller {
         //this.movement.getStructure().assignZoneManagement(zoneName , firstPersonName, idFirstPerson , secondPersonName, idSecondPerson);
         //return true;
     };
+    public getMemberParticipation(pIData: number) : String[]{
+        let memberParticipation :String[] = this.movement.getStructure().getMemberParticipation(pIData);
+        console.log("gooooooood papi");
+        return memberParticipation;
+    }
     public assignBranchManagement( zoneName : String, idBranch : number, idMember:number ) :Boolean{
         var member:Member = this.movement.getMembers().getMember(idMember).clone();
         member.set_rol(Rol.BranchChief);
@@ -209,7 +222,10 @@ export class Controller {
         let zones: String[] = this.movement.getStructure().getZones();
         return zones;
     } 
-
+    public getAllBranches(){
+        //let zones : String [] =  this.movement.getStructure().getAllBranches();
+        return [];
+    }
     public getBranches(zoneName:String):String[]{
         let branches:String[] = this.movement.getStructure().getBranches(zoneName);
         return branches;
@@ -224,6 +240,12 @@ export class Controller {
         let monitors:String[] = [];
         monitors = this.movement.getMembers().getMonitors();
         return monitors;
+    }
+
+    public getAllMembers():String[]{
+        let members:String[] = [];
+        members = this.movement.getMembers().getAllMembers();
+        return members;
     }
 
     public getAllBranchesInNeed() : String[]{
@@ -246,9 +268,22 @@ export class Controller {
     public assignChief( pNombreNivel : String , pIdData : number){
 
     };
-    public authorizeMember(){
-        
+
+    public removeZoneChief(zoneName : String, pIdData : number){
+        this.movement.getStructure().removeZoneChief(zoneName, pIdData);
+        this.movement.getStructure().verEstructura();
     };
+
+    public removeBranchChief(zoneName : String, branchId : number ,pIdData : number){
+        this.movement.getStructure().removeBranchChief(zoneName, branchId, pIdData);
+        this.movement.getStructure().verEstructura();
+    };
+
+    public removeGroupChief(zoneName : String, branchId : number , idGroup : number ,pIdData : number){
+        this.movement.getStructure().removeGroupChief(zoneName, branchId, idGroup, pIdData);
+        this.movement.getStructure().verEstructura();
+    };
+
     public configBranch( pNombreRama : String):IComponent {
         return null
     };
