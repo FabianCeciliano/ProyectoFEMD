@@ -557,13 +557,13 @@ export class AsesorRotes {
       var zoneName = req.body.zonaName;
       var branchId = req.body.ramaId;
       var groupId = req.body.grupoId;
-      console.log("Body : ", req.body)
 
       let result = controller.consultGroupManagement(
         zoneName,
         Number(branchId),
         Number(groupId)
       );
+      console.log("Listas: ",result);
       if (result.listMembersChief.length > 0) {
         res.send({
           status: 1,
@@ -720,21 +720,27 @@ export class AsesorRotes {
     ////////////////////////////////////////////////////////////////////
     //                    ELIMINAR A CIERTO USUARIO                   // 
     ////////////////////////////////////////////////////////////////////
-
     app.post("/borrarUsuario", function (req: Request, res: Response) {
-      controller.deleteMember(Number(req.body.id));
+     
       if(req.body.zonaCheck){
+        controller.removeZoneChief(req.body.zona,Number(req.body.id));
+        res.send({ status: 1 });
 
       }
       else if(req.body.ramaCheck ){
-        
+        controller.removeBranchChief(req.body.zona, Number(req.body.rama),Number(req.body.id));
+        res.send({ status: 1 });
       }
       else if(req.body.grupoCheck ){
-        
-      }else{
+         controller.removeGroupChief(req.body.zona, Number(req.body.rama),Number(req.body.grupo),Number(req.body.id))
+         res.send({ status: 1 });
+      }else if(req.body.grupoCheck && req.body.ramaCheck && req.body.zonaCheck){
+        controller.deleteMember(Number(req.body.id));
         controller.printMembers();
         dbController.delete_user(req);
         res.send({ status: 1 });
+      }else{
+        res.send({ status: 0 });
       }
     
     });
@@ -948,12 +954,17 @@ export class AsesorRotes {
     app.post("/getMiembrosNivel", function (req: Request, res: Response) {
       console.log(req.body); //aqui se obtiene el tipo de nivel, y el id de ese nivel
       var data: String[] = [];
-      if (req.body.nivel == "Zona") {
-        data = controller.getZoneManagement(req.body.id);
-      } else if (req.body.nivel == "Rama") {
-        data = controller.getBranchManagement(Number(req.body.id));
+      if (req.body.nivel == "zona") {
+        data = controller.getZoneManagement(req.body.idNivel);
+      } else if (req.body.nivel == "rama") {
+        data = controller.getBranchManagement(Number(req.body.idNivel));
       } else {
-        data = controller.getGroupManagement(Number(req.body.id));
+        data = controller.getGroupManagement(Number(req.body.idNivel));
+      }
+      if(data.length > 0){
+        res.send({status:1,miembros:data});        
+      }else{
+        res.send({status:0});
       }
       //res.send({status:1,miembros:["juan","pedro","juanito"]});
     });
@@ -1168,7 +1179,11 @@ export class AsesorRotes {
       }
     });
 
+    app.post(" /getpatito", function (req: Request, res: Response) {
+      controller.verEstructura();
+    });
 
+   
   }
 }
 

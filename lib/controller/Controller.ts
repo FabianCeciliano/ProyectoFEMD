@@ -187,7 +187,10 @@ export class Controller {
         let zones: String[] = this.movement.getStructure().getZones();
         return zones;
     } 
-
+    public getAllBranches(){
+        //let zones : String [] =  this.movement.getStructure().getAllBranches();
+        return [];
+    }
     public getBranches(zoneName:String):String[]{
         let branches:String[] = this.movement.getStructure().getBranches(zoneName);
         return branches;
@@ -230,9 +233,22 @@ export class Controller {
     public assignChief( pNombreNivel : String , pIdData : number){
 
     };
-    public authorizeMember(){
-        
+
+    public removeZoneChief(zoneName : String, pIdData : number){
+        this.movement.getStructure().removeZoneChief(zoneName, pIdData);
+        this.movement.getStructure().verEstructura();
     };
+
+    public removeBranchChief(zoneName : String, branchId : number ,pIdData : number){
+        this.movement.getStructure().removeBranchChief(zoneName, branchId, pIdData);
+        this.movement.getStructure().verEstructura();
+    };
+
+    public removeGroupChief(zoneName : String, branchId : number , idGroup : number ,pIdData : number){
+        this.movement.getStructure().removeGroupChief(zoneName, branchId, idGroup, pIdData);
+        this.movement.getStructure().verEstructura();
+    };
+
     public configBranch( pNombreRama : String):IComponent {
         return null
     };
