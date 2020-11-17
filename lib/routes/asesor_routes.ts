@@ -15,29 +15,29 @@ export class AsesorRotes {
     //            VALIDACION DEL MOVIMIENTO CREADO                    // 
     ////////////////////////////////////////////////////////////////////
 
-    const movementValidation = async (req: Request, res: Response, next: any):Promise<void> => {
+    const movementValidation = async (req: Request, res: Response, next: any): Promise<void> => {
       var isCreated = controller.movementIsCreated();
       if (!isCreated) {
         console.log("Aun no instanciada");
-        var movementFromDb:IStructure=null;
-        var membersFromDb:IUser[]=[];
+        var movementFromDb: IStructure = null;
+        var membersFromDb: IUser[] = [];
 
-        await dbController.getOrganization().then((value)=>{
-          movementFromDb=value;
+        await dbController.getOrganization().then((value) => {
+          movementFromDb = value;
         })
 
-        await dbController.getAllMember().then((value)=>{
-          membersFromDb=value;
+        await dbController.getAllMember().then((value) => {
+          membersFromDb = value;
         })
-        
-        if(movementFromDb!=null){
+
+        if (movementFromDb != null) {
           var status: boolean = controller.createMovement(Number(movementFromDb.cedulaJuridica), movementFromDb.name, movementFromDb.webDirection, movementFromDb.coutry, Number(movementFromDb.phone));
-          if (membersFromDb.length>0) {//iterar e insertar en el gestor de miembros
+          if (membersFromDb.length > 0) {//iterar e insertar en el gestor de miembros
             console.log("Levantando miembros");
             membersFromDb.forEach(element => {
-              var facilitator=false;
-              if(element.facilitator=="true"){
-                facilitator=true;
+              var facilitator = false;
+              if (element.facilitator == "true") {
+                facilitator = true;
               }
               controller.addMember(Number(element.memberId), element.name, Number(element.telephone), element.email, element.direction, facilitator);
             })
@@ -47,7 +47,7 @@ export class AsesorRotes {
                 controller.createNewBranch(movementFromDb.zonas[zindex].name, Number(movementFromDb.zonas[zindex].ramas[bindex].id), movementFromDb.zonas[zindex].ramas[bindex].name);
                 for (let gindex = 0; gindex < movementFromDb.zonas[zindex].ramas[bindex].grupos.length; gindex++) {
                   controller.createNewGroup(movementFromDb.zonas[zindex].name, Number(movementFromDb.zonas[zindex].ramas[bindex].id), Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id), movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].name);
-                  
+
                   console.log("Asignando Los Miembros");
                   movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].miembros.forEach(element => {
                     controller.addMemberToGroup(
@@ -65,7 +65,7 @@ export class AsesorRotes {
                       Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id),
                       Number(element))
                   });
-                  
+
                   console.log("Asignando Los monitores");
                   movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].monitores.forEach(element => {
                     controller.changeToMonitor(
@@ -74,9 +74,9 @@ export class AsesorRotes {
                       Number(movementFromDb.zonas[zindex].ramas[bindex].grupos[gindex].id),
                       Number(element))
                   });
-  
+
                 }
-  
+
                 movementFromDb.zonas[zindex].ramas[bindex].jefes.forEach(element => {
                   controller.assignBranchManagement(
                     movementFromDb.zonas[zindex].name,
@@ -84,7 +84,7 @@ export class AsesorRotes {
                     Number(element)
                   )
                 })
-  
+
                 movementFromDb.zonas[zindex].ramas[bindex].monitores.forEach(element => {
                   controller.defineMonitor(
                     Number(element),
@@ -92,7 +92,7 @@ export class AsesorRotes {
                     Number(movementFromDb.zonas[zindex].ramas[bindex].id)
                   );
                 })
-  
+
               }
               movementFromDb.zonas[zindex].jefes.forEach(element => {
                 controller.assignZoneManagement(
@@ -100,16 +100,16 @@ export class AsesorRotes {
                   Number(element)
                 )
               })
-  
+
             }
-          }else{
+          } else {
             console.log("No levanto nada de los miembros")
           }
-        }else{
+        } else {
           console.log("No levanto nada de la estructura")
         }
 
-      }else{
+      } else {
         console.log("Estructura ya instanciada");
       }
       next();
@@ -263,7 +263,7 @@ export class AsesorRotes {
       var branches = controller.getAllBranchesInNeed();// NOMB-ID
       var monitores = controller.getAllMonitors();
 
-      if (branches.length > 0) {
+      if (branches.length > 0 && monitores.length > 0) {
         res.send({ status: 1, ramas: branches, monitor: monitores });
       } else {
         res.send({ status: 0, ramas: branches, monitor: monitores });
@@ -422,8 +422,9 @@ export class AsesorRotes {
     //           FORMULARIO 2 DE CONFORMAR COORDINACION               // 
     ////////////////////////////////////////////////////////////////////
     app.post('/getShowDataCCF2', function (req: Request, res: Response) {
-      var dataZone = controller.getZones();
+      var dataZone = controller.getZones(); ///[ ZONA1,ZONA2....]
       var dataBrach = controller.getBranches(dataZone[0]);
+      console.log("NAN------------>", dataBrach)//[ "rama-1" ,rama-2....]
       if (dataZone.length > 0) {
         res.send({ status: 1, zonas: dataZone, ramas: dataBrach });
       } else {
@@ -476,7 +477,7 @@ export class AsesorRotes {
     ////////////////////////////////////////////////////////////////////
     app.post("/asignarJefesRama", function (req: Request, res: Response) {
       var zoneName = req.body.nombreZona;
-      var branchId = req.body.idRama;
+      var branchId = String(req.body.idRama).split("-", 2)[1]
       var first_Chief_Id = req.body.jefe1;
       var second_Chief_Id = req.body.jefe2;
 
@@ -562,6 +563,7 @@ export class AsesorRotes {
         Number(branchId),
         Number(groupId)
       );
+      console.log("Listas: ",result);
       if (result.listMembersChief.length > 0) {
         res.send({
           status: 1,
@@ -579,8 +581,11 @@ export class AsesorRotes {
     ////////////////////////////////////////////////////////////////////
     app.post("/asignarJefesGrupo", function (req: Request, res: Response) {
       var zoneName = req.body.nombreZona;
-      var branchId = req.body.idRama;
-      var groupId = req.body.idGrupo;
+      var branchId = String(req.body.idRama).split("-", 2)[1]
+      var groupId = String(req.body.idGrupo).split("-", 2)[1]
+
+
+
       var first_Chief_Id = req.body.jefe1;
       var second_Chief_Id = req.body.jefe2;
 
@@ -698,11 +703,13 @@ export class AsesorRotes {
     ////////////////////////////////////////////////////////////////////
 
     app.post("/getShowUser", function (req: Request, res: Response) {
-      ////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////
+      var dataMember = controller.getAllMembers();
+      if (dataMember.length > 0) {
+        res.send({ status: 1, dataM: dataMember });
+      } else {
+        res.send({ status: 0, dataM: dataMember });
+      }
+
     });
 
 
@@ -713,15 +720,29 @@ export class AsesorRotes {
     ////////////////////////////////////////////////////////////////////
     //                    ELIMINAR A CIERTO USUARIO                   // 
     ////////////////////////////////////////////////////////////////////
-
     app.post("/borrarUsuario", function (req: Request, res: Response) {
-      //console.log(req.body)
-      controller.deleteMember(Number(req.body.id));
-      controller.printMembers();
-      ///                              ///
-      dbController.delete_user(req);
-      ///                              ///
-      res.send({ status: 1 });
+     
+      if(req.body.zonaCheck){
+        controller.removeZoneChief(req.body.zona,Number(req.body.id));
+        res.send({ status: 1 });
+
+      }
+      else if(req.body.ramaCheck ){
+        controller.removeBranchChief(req.body.zona, Number(req.body.rama),Number(req.body.id));
+        res.send({ status: 1 });
+      }
+      else if(req.body.grupoCheck ){
+         controller.removeGroupChief(req.body.zona, Number(req.body.rama),Number(req.body.grupo),Number(req.body.id))
+         res.send({ status: 1 });
+      }else if(req.body.grupoCheck && req.body.ramaCheck && req.body.zonaCheck){
+        controller.deleteMember(Number(req.body.id));
+        controller.printMembers();
+        dbController.delete_user(req);
+        res.send({ status: 1 });
+      }else{
+        res.send({ status: 0 });
+      }
+    
     });
 
 
@@ -755,6 +776,54 @@ export class AsesorRotes {
     ////////////////////////////////////////////////////////////////////
     //                        FORMULARIO CUATRO                        // 
     ////////////////////////////////////////////////////////////////////
+
+
+
+
+    ////////////////////////////////////////////////////////////////////
+    //                        MOSTRAR LOS DATOS                        // 
+    ////////////////////////////////////////////////////////////////////
+    app.post("/getShowDataMove", function (req: Request, res: Response) {
+
+      var dataMember = controller.getAllMembers();
+      var idBrach = String(dataMember[0]).split("-", 2);
+      var dataPrecedence = controller.consultMemberParticipation(Number(idBrach[1]));
+
+      console.log(dataPrecedence);
+
+      if (dataMember.length > 0) {
+        res.send({ status: 1, dataM: dataMember, dataP: dataPrecedence });
+      } else {
+        res.send({ status: 0, dataM: dataMember, dataP: dataPrecedence });
+      }
+
+    });
+
+    ////////////////////////////////////////////////////////////////////
+    //                        MOSTRAR LOS DATOS                        // 
+    ////////////////////////////////////////////////////////////////////
+    app.post("/getShowDataProcedence", function (req: Request, res: Response) {
+      var idBrach = String(req.body.id).split("-", 2);
+      var dataPrecedence = controller.getMemberParticipation(Number(idBrach[1]));
+      console.log(dataPrecedence);
+      if (dataPrecedence.length > 0) {
+        res.send({ status: 1, dataP: dataPrecedence });
+      } else {
+        res.send({ status: 0, dataP: dataPrecedence });
+      }
+
+    });
+
+
+
+
+
+
+
+
+
+
+
 
     ////////////////////////////////////////////////////////////////////
     //                       AUTORIZAR MOVIMIENTO                     // 
@@ -833,6 +902,23 @@ export class AsesorRotes {
     //                        FORMULARIO DOS                         // 
     ////////////////////////////////////////////////////////////////////
 
+
+
+
+    ////////////////////////////////////////////////////////////////////
+    //                    SHOW DATA EN FORMULARIO 2                   // 
+    ////////////////////////////////////////////////////////////////////
+    app.post("/getShowMemberConsult", function (req: Request, res: Response) {
+      var dataM = controller.getAllMembers();
+      if (dataM.length > 0){
+        res.send({status: 1,dataP:dataM});
+      } else {
+        res.send({ status: 0 });
+      }
+    });
+
+
+
     ////////////////////////////////////////////////////////////////////
     //                 PARTICIPACION DE UN MIEMBOR                    // 
     ////////////////////////////////////////////////////////////////////
@@ -868,12 +954,17 @@ export class AsesorRotes {
     app.post("/getMiembrosNivel", function (req: Request, res: Response) {
       console.log(req.body); //aqui se obtiene el tipo de nivel, y el id de ese nivel
       var data: String[] = [];
-      if (req.body.nivel == "Zona") {
-        data = controller.getZoneManagement(req.body.id);
-      } else if (req.body.nivel == "Rama") {
-        data = controller.getBranchManagement(Number(req.body.id));
+      if (req.body.nivel == "zona") {
+        data = controller.getZoneManagement(req.body.idNivel);
+      } else if (req.body.nivel == "rama") {
+        data = controller.getBranchManagement(Number(req.body.idNivel));
       } else {
-        data = controller.getGroupManagement(Number(req.body.id));
+        data = controller.getGroupManagement(Number(req.body.idNivel));
+      }
+      if(data.length > 0){
+        res.send({status:1,miembros:data});        
+      }else{
+        res.send({status:0});
       }
       //res.send({status:1,miembros:["juan","pedro","juanito"]});
     });
@@ -939,15 +1030,16 @@ export class AsesorRotes {
     //               EN AGREGAR MIEMBRO   AL INICIO                   //
     ////////////////////////////////////////////////////////////////////
     app.post('/getShowDataMember', function (req: Request, res: Response) {
+      var dataMM = controller.getAllMembers();
       var dataZone = controller.getZones();
       var dataBrach = controller.getBranches(dataZone[0]);
       var idBrach = String(dataBrach[0]).split("-", 2);
       var dataGrup = controller.getGroups(dataZone[0], Number(idBrach[1]));
 
-      if (dataZone.length > 0) {
-        res.send({ status: 1, zonas: dataZone, ramas: dataBrach, grupos: dataGrup });
+      if (dataMM.length > 0) {
+        res.send({ status: 1, zonas: dataZone, ramas: dataBrach, grupos: dataGrup, dataM: dataMM });
       } else {
-        res.send({ status: 0, zonas: dataZone, ramas: dataBrach, grupos: dataGrup });
+        res.send({ status: 0, zonas: dataZone, ramas: dataBrach, grupos: dataGrup, dataM: dataMM });
       }
 
     });
@@ -1031,7 +1123,7 @@ export class AsesorRotes {
 
     //*****************************************************************//
 
-    app.get("/asesorMain", movementValidation, function (req: Request, res: Response) {
+    app.get("/asesorMain", function (req: Request, res: Response) {
       res.render(path.resolve(htmlPath + "AsesorGeneral.html"));
     });
 
@@ -1076,15 +1168,23 @@ export class AsesorRotes {
       //res.send({monitores:["juan","perez"]});
     });
 
+    app.post("/getshowEst", function (req: Request, res: Response) {
+
+      var listaEst = controller.showEstruc();
+
+      if (listaEst.length > 0) {
+        res.send({ status: 1, dataE: listaEst });
+      } else {
+        res.send({ status: 0, dataE: listaEst });
+      }
+    });
+
+    app.post(" /getpatito", function (req: Request, res: Response) {
+      controller.verEstructura();
+    });
+
+   
   }
-
-
-
-
-
-
-
-
 }
 
 
