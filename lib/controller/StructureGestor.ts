@@ -232,6 +232,7 @@ export class Gestor {
                 dataEst.push('</br>');
                 dataEst.push("\t|_Email : ", this.structure.groupComposite[zindex].members[jindex].email);
                 dataEst.push('</br>');
+                dataEst.push('</br>');
             }
             for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
                 dataEst.push("\t  |__")
@@ -247,6 +248,7 @@ export class Gestor {
                     dataEst.push("\t\t\t|__Rol: ", this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[jindex].get_rol().toString());
                     dataEst.push('</br>');
                     dataEst.push("\t\t\t|__Email: ", this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[jindex].email);
+                    dataEst.push('</br>');
                     dataEst.push('</br>');
                 }
                 for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
