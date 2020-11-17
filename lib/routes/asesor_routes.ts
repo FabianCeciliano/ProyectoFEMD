@@ -751,15 +751,19 @@ export class AsesorRotes {
      
       if(req.body.zonaCheck){
         controller.removeZoneChief(req.body.zona,Number(req.body.id));
+        dbController.removeZoneChief(req.body.zona,req.body.id,controller.getActualMovementId());
         res.send({ status: 1 });
 
       }
       else if(req.body.ramaCheck ){
         controller.removeBranchChief(req.body.zona, Number(req.body.rama),Number(req.body.id));
+        dbController.removeBranchChief(req.body.zona, req.body.rama, req.body.id,controller.getActualMovementId())
         res.send({ status: 1 });
       }
       else if(req.body.grupoCheck ){
          controller.removeGroupChief(req.body.zona, Number(req.body.rama),Number(req.body.grupo),Number(req.body.id))
+         dbController.removeChiefGroupDB(req.body.zona, req.body.rama, 
+                          req.body.grupo, req.body.id, controller.getActualMovementId())
          res.send({ status: 1 });
       }else if(req.body.grupoCheck && req.body.ramaCheck && req.body.zonaCheck){
         controller.deleteMember(Number(req.body.id));
@@ -911,11 +915,30 @@ export class AsesorRotes {
     //                        FORMULARIO UNO                         // 
     ////////////////////////////////////////////////////////////////////
 
+
+
+////////////////////////////////////////////////////////////////////
+//                           SHOW ALL B                            // 
+////////////////////////////////////////////////////////////////////
+
+app.post("/getShowAlBl", function (req: Request, res: Response) {
+  var data = controller.getAllBranches() ; //controller.getAllBranchesInNeed();
+  data.push("Tela creiste wee")
+  console.log("AAAAAAAAAAAAAAAAAAAAA , ", data)
+  if (data.length>0) {
+    res.send({ status: 1, dataP: data});
+  } else {
+    res.send({ status: 0 });
+  }
+});
+
+
+
+
     ////////////////////////////////////////////////////////////////////
     //                       POSICION DE UN GRUPO                     // 
     ////////////////////////////////////////////////////////////////////
     app.post("/getGrupo", function (req: Request, res: Response) {
-      console.log(req.body);
       var data = controller.consultGroup(Number(req.body.id), req.body.nombre);
       if (data != null) {
         res.send({ status: 1, zona: data.ZoneName, rama: data.BranchName });
@@ -1229,7 +1252,41 @@ export class AsesorRotes {
       controller.verEstructura();
     });
 
-   
+    app.post("/getMegaShowZones", function (req: Request, res: Response) {
+      var data = controller.getZones(); //controller.getAllBranchesInNeed();
+      if (data.length>0) {
+        res.send({ status: 1, grupos: data});
+      } else {
+        res.send({ status: 0 });
+      }
+    });
+
+
+    app.post("/getMegaShowRamas", function (req: Request, res: Response) {
+      var data = controller.getAllBranches() ; //controller.getAllBranchesInNeed();
+      data.push("Tela creiste wee")
+      console.log("EEEEEEEEEEEE , ", data)
+      if (data.length>0) {
+        res.send({ status: 1, grupos: data});
+      } else {
+        res.send({ status: 0 });
+      }
+    });
+
+    app.post("/getMegaShowGrupos", function (req: Request, res: Response) {
+      var data = controller.getAllBranches() ; //controller.getAllBranchesInNeed();
+      data.push("Tela creiste wee")
+      console.log("IIIIIIIIIIIIIIIIIIIII , ", data)
+      if (data.length>0) {
+        res.send({ status: 1, grupos: data});
+      } else {
+        res.send({ status: 0 });
+      }
+    });
+
+
+
+
   }
 }
 

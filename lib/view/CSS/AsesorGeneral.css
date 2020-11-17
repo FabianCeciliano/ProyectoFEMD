@@ -369,7 +369,7 @@ p{
   
   .boxMin select {
     background-color: #0563af;
-    color: white;
+    color: rgba(0, 0, 0, 0.507);
     padding: 5px; 
     width: 200px;
     border: none;
@@ -415,7 +415,7 @@ p{
   
   .box select {
     background-color: #0563af;
-    color: white;
+    color: rgba(0, 0, 0, 0.507);
     padding: 12px; 
     width: 250px;
     border: none;

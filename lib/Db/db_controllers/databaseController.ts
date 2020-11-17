@@ -681,6 +681,85 @@ export class dbController {
       }
     }
   }
+  ////                                                                            ////
+  //                          Quitar Jefe en Zona                                 //
+  // Ejemplo de funcionamiento ... //
+  // dbController.removeZoneChief(req.body.zona,Number(req.body.id));
+  ////                                                                            ////
+  public removeZoneChief( nombreZona: String, idMemberToDelete: String, idMovement:number) {
+    if (
+      nombreZona != "" &&
+      idMemberToDelete != ""
+    ){
+      this.structures.quitZoneChief(
+        nombreZona,idMemberToDelete,idMovement,
+        (err: any, data: JSON) => {
+          if (err) {
+            console.log("Error en mongo");
+            //mongoError(err, res);
+          } else {
+            console.log(" Success !!!");
+            //successResponse("Zona Creada", data, res);
+          }
+        }
+      );
+    }
+  }
+
+  ////                                                                            ////
+  //                          Quitar Jefe en Rama                                   //
+  //                    Ejemplo de funcionamiento ...                                //
+  ////                                                                            ////
+  public removeBranchChief( nombreZona: String, 
+    branchId: String, idMemberToDelete: String, 
+    idMovement:number) {
+    if (
+      nombreZona != "" &&
+      idMemberToDelete != "" && 
+      branchId != ""
+    ){
+      this.structures.quitBranchChief(
+        nombreZona, branchId, idMemberToDelete,idMovement,
+        (err: any, data: JSON) => {
+          if (err) {
+            console.log("Error en mongo");
+            //mongoError(err, res);
+          } else {
+            console.log(" Success !!!");
+            //successResponse("Zona Creada", data, res);
+          }
+        }
+      );
+    }
+  }
+  ////                                                                            ////
+  //                          Quitar Jefe en Grupo                                   //
+  //                    Ejemplo de funcionamiento ...                                //
+  ////                                                                            ////
+  public removeChiefGroupDB 
+  ( nombreZona: String, 
+    branchId: String, groupId:String, idMemberToDelete: String, 
+    idMovement:number) {
+    if (
+      nombreZona != "" &&
+      idMemberToDelete != "" && 
+      branchId != ""
+    ){
+      this.structures.quitGroupChief(
+        nombreZona, branchId, groupId, idMemberToDelete, idMovement,
+        (err: any, data: JSON) => {
+          if (err) {
+            console.log("Error en mongo");
+            //mongoError(err, res);
+          } else {
+            console.log(" Success !!!");
+            //successResponse("Zona Creada", data, res);
+          }
+        }
+      );
+    }
+  }
+
 }
 
 export default new dbController();
