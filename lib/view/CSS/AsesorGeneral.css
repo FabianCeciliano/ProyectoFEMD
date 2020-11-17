@@ -488,9 +488,9 @@ p{
 
 
 pre.myTXT {
-    /* font-family: 'Roboto', sans-serif; */
+    /* font-family: 'Roboto', sans-serif;  */
     overflow-x:auto;
-    font-size: 35px;
+    font-size: 15px;
     overflow-y: auto;
     overflow-x: auto;
     border-radius: 20px;
