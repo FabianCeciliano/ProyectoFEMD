@@ -224,17 +224,17 @@ export class Gestor {
             dataEst.push( "   |___" + this.structure.groupComposite[zindex].name);
             dataEst.push('</br>');
             for (let jindex = 0; jindex < this.structure.groupComposite[zindex].members.length; jindex++) {
-                dataEst.push("\tJefe: ", this.structure.groupComposite[zindex].members[jindex].name);
+                dataEst.push("\t|_Jefe: ", this.structure.groupComposite[zindex].members[jindex].name);
                 dataEst.push('</br>');
-                dataEst.push("\t  Id    : ", this.structure.groupComposite[zindex].members[jindex].id.toString());
+                dataEst.push("\t|_Id    : ", this.structure.groupComposite[zindex].members[jindex].id.toString());
                 dataEst.push('</br>');
-                dataEst.push("\t  Rol    : ", this.structure.groupComposite[zindex].members[jindex].get_rol().toString());
+                dataEst.push("\t|_Rol    : ", this.structure.groupComposite[zindex].members[jindex].get_rol().toString());
                 dataEst.push('</br>');
-                dataEst.push("\t  Email : ", this.structure.groupComposite[zindex].members[jindex].email);
+                dataEst.push("\t|_Email : ", this.structure.groupComposite[zindex].members[jindex].email);
                 dataEst.push('</br>');
             }
             for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
-                dataEst.push("\t|__")
+                dataEst.push("\t  |__")
                 dataEst.push("RAMA:");
                 dataEst.push('</br>');
                 dataEst.push("\t\t|__"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].name)
@@ -255,11 +255,11 @@ export class Gestor {
                     dataEst.push('</br>');
                     dataEst.push("\t\t\t\t\t  |__"+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].name +", ID: "+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id);
                     dataEst.push('</br>');
-                    dataEst.push("\t\t\t\t\t\t")
+                    dataEst.push("\t\t\t\t\t\t\t|__")
                     dataEst.push("MIEMBRO:")
                     for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++) {
                         dataEst.push('</br>');
-                        dataEst.push("\t\t\t\t\t\t\t|___", this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].name +", Rol: "+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].get_rol().toString());
+                        dataEst.push("\t\t\t\t\t\t\t\t|___", this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].name +", Rol: "+this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].get_rol().toString());
                         dataEst.push('</br>');
                     }
                 }
