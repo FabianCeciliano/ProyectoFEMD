@@ -37,8 +37,8 @@ export class dbController {
     return usersFromDB;
   }
 
-  public async getOrganization():Promise<IStructure>{
-    var structureFromDB:IStructure=null;
+  public async getOrganization():Promise<IStructure[]>{
+    var structureFromDB:IStructure[]=null;
     var promise=this.structures.getOrganization();
     await promise.then((value)=>{
       structureFromDB = value
@@ -207,7 +207,7 @@ export class dbController {
       pPhone != ""
     ) {
       const someParams: IStructure = {
-        _id: 1,
+        _id: Number(cedulaJuridica),
         name: name,
         coutry: coutry,
         cedulaJuridica: cedulaJuridica,
@@ -233,9 +233,9 @@ export class dbController {
   ////                                                                                 ////
   /* Crear Estructura .. Insertar Zona ............................................. */
   // dbController.insertZone(req.body.zonaName, req.body.zonaName)
-  public insertZoneTree(zoneName: String) {
+  public insertZoneTree(zoneName: String, idMovement:number) {
     console.log("Creando zona");
-    if (zoneName) {
+    if (zoneName && idMovement!=null) {
       const someParams: IZone = {
         name: zoneName,
         id: zoneName,
@@ -243,7 +243,7 @@ export class dbController {
         jefes: [],
         ramas: [],
       };
-      this.structures.insertZone(someParams, (err: any, data: IZone) => {
+      this.structures.insertZone(someParams,idMovement, (err: any, data: IZone) => {
         if (err) {
           console.log("Error en mongo");
           //mongoError(err, res);
@@ -264,22 +264,16 @@ export class dbController {
   //dbController.insertBranchTree(req.body.zonaName, req.body.ids[index], req.body.branches[index])
   public insertBranchTree(
     nombreZona: String,
-    idRama: String,
-    nombreRama: String
+    ramas:IRama[],
+    idMovement:number
   ) {
-    if (nombreZona != "" && nombreRama != "" && idRama != "") {
-      const someParams: IRama = {
-        name: nombreRama,
-        id: idRama,
-        monitores: [],
-        miembros: [],
-        jefes: [],
-        grupos: [],
-      };
+    //console.log("Desde Rutas: ",ramas);
+    if (nombreZona != "" &&  idMovement!=null) {
       console.log(" -- BD : Rama creada con exito -- ");
       this.structures.insertBranch(
-        someParams,
+        ramas,
         nombreZona,
+        idMovement,
         (err: any, data: IRama) => {
           if (err) {
             console.log("Error en mongo");
@@ -307,7 +301,8 @@ export class dbController {
     pRama: String,
     pGrupo: String,
     pId: String,
-    pMonitor: String
+    pMonitor: String, 
+    idMovement:number
   ) {
     console.log("Creando Grupo");
     if (
@@ -315,7 +310,8 @@ export class dbController {
       pGrupo != "" &&
       pRama != "" &&
       pId != "" &&
-      pMonitor != ""
+      pMonitor != "" &&
+      idMovement != null
     ) {
       const someParams: IGroup = {
         name: pGrupo,
@@ -329,6 +325,7 @@ export class dbController {
         someParams,
         pZona,
         pRama,
+        idMovement,
         (err: any, data: IGroup) => {
           if (err) {
             console.log("Error en mongo");
@@ -355,14 +352,16 @@ export class dbController {
     zoneName: String,
     branchId: String,
     groupId: String,
-    memberId: String
+    memberId: String, 
+    idMovement:number
   ) {
     console.log("Verificando Info");
     if (
       zoneName != "" &&
       branchId != "" &&
       groupId != "" &&
-      memberId != ""
+      memberId != "" &&
+      idMovement !=null
     ) {
       console.log("Insertando Miembro");
       this.structures.insertMemberGroupImp(
@@ -370,6 +369,7 @@ export class dbController {
         branchId,
         groupId,
         memberId,
+        idMovement,
         (err: any, data: JSON) => {
           if (err) {
             console.log("Error en mongo");
@@ -396,14 +396,16 @@ export class dbController {
     zoneName: String,
     branchName: String,
     groupName: String,
-    memberId: String
+    memberId: String, 
+    idMovement:number
   ) {
     console.log("Verificando Info");
     if (
       zoneName != "" &&
       branchName != "" &&
       groupName != "" &&
-      memberId != ""
+      memberId != "" &&
+      idMovement != null
     ) {
       console.log("Insertando Miembro");
       this.structures.insertMonitorGroupImp(
@@ -411,6 +413,7 @@ export class dbController {
         branchName,
         groupName,
         memberId,
+        idMovement,
         (err: any, data: JSON) => {
           if (err) {
             console.log("Error en mongo");
@@ -436,15 +439,17 @@ export class dbController {
   public insertMonitorBranch(
     zoneName: String,
     branchName: String,
-    memberId: String
+    memberId: String, 
+    idMovement:number
   ) {
     console.log("Verificando Info");
-    if (zoneName != "" && branchName != "" && memberId != "") {
+    if (zoneName != "" && branchName != "" && memberId != "" && idMovement != null) {
       console.log("Insertando Miembro");
       this.structures.insertMonitorBranchImp(
         zoneName,
         branchName,
         memberId,
+        idMovement,
         (err: any, data: JSON) => {
           if (err) {
             console.log("Error en mongo");
@@ -478,10 +483,11 @@ export class dbController {
     branchId: String,
     groupId: String,
     memberId: String,
-    memberId2: String
+    memberId2: String, 
+    idMovement:number
   ) {
     console.log("Verificando Info");
-    if (zoneName != "" && branchId != "" && groupId != "") {
+    if (zoneName != "" && branchId != "" && groupId != "" && idMovement != null) {
       if (memberId != "") {
         console.log("Insertando Jefe en Grupo");
         this.structures.assignBossGroupImp(
@@ -489,6 +495,7 @@ export class dbController {
           branchId,
           groupId,
           memberId,
+          idMovement,
           (err: any, data: JSON) => {
             if (err) {
               console.log("Error en mongo");
@@ -507,6 +514,7 @@ export class dbController {
           branchId,
           groupId,
           memberId2,
+          idMovement,
           (err: any, data: JSON) => {
             if (err) {
               console.log("Error en mongo");
@@ -534,16 +542,18 @@ export class dbController {
     zoneName: String,
     branchId: String,
     memberId: String,
-    memberId2: String
+    memberId2: String, 
+    idMovement:number
   ) {
     console.log("Verificando Info");
-    if (zoneName != "" && branchId != "") {
+    if (zoneName != "" && branchId != "" && idMovement != null) {
       if (memberId != "") {
         console.log("Insertando Jefe en Rama");
         this.structures.assignBossBranchImp(
           zoneName,
           branchId,
           memberId,
+          idMovement,
           (err: any, data: JSON) => {
             if (err) {
               console.log("Error en mongo");
@@ -561,6 +571,7 @@ export class dbController {
           zoneName,
           branchId,
           memberId2,
+          idMovement,
           (err: any, data: JSON) => {
             if (err) {
               console.log("Error en mongo");
@@ -583,13 +594,14 @@ export class dbController {
   // Ejemplo de funcionamiento ... //
   // dbController.insertBossBranch(req.body.zoneName, req.body.memberId, req.body.memberId2)
   ////                                                                            ////
-  public assignBossZone(zoneName: String, memberId: String, memberId2: String) {
+  public assignBossZone(zoneName: String, memberId: String, memberId2: String, idMovement:number) {
     console.log("Verificando Info");
-    if (zoneName != "" && memberId != "") {
+    if (zoneName != "" && memberId != "" && idMovement!=null) {
       console.log("Insertando grupo");
       this.structures.assignBossZoneImp(
         zoneName,
         memberId,
+        idMovement,
         (err: any, data: JSON) => {
           if (err) {
             console.log("Error en mongo");
@@ -605,6 +617,7 @@ export class dbController {
       this.structures.assignBossZoneImp(
         zoneName,
         memberId2,
+        idMovement,
         (err: any, data: JSON) => {
           if (err) {
             console.log("Error en mongo");
@@ -631,7 +644,8 @@ export class dbController {
     zoneNameNew: String,
     newbrachId: String,
     newGroupId: String,
-    memberId: String
+    memberId: String, 
+    idMovement:number
   ) {
     console.log("Verificando Info");
     if (
@@ -640,7 +654,8 @@ export class dbController {
       newGroupId != "" &&
       newbrachId != "" &&
       oldGroupId != "" &&
-      zoneNameNew != ""
+      zoneNameNew != "" &&
+      idMovement != null
     ) {
       if (memberId != "") {
         console.log("Moviendo Miembro");
@@ -652,6 +667,7 @@ export class dbController {
           oldGroupId,
           newGroupId,
           memberId,
+          idMovement,
           (err: any, data: JSON) => {
             if (err) {
               console.log("Error en mongo");

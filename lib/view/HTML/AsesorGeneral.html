@@ -82,41 +82,41 @@
                 <!-- //////////////////////////////////////////////////////////////////// -->
                 <!--                        BOTONES IZQUIERDA                             -->
                 <!-- //////////////////////////////////////////////////////////////////// -->
-                <button type="submit" onclick="BCreateEstructura()" style="border: 0; background: transparent">
+                <button id="IdBCreateEstructura" type="submit" onclick="BCreateEstructura()" style="border: 0; background: transparent">
                     <img class="buttonList" src="../resources/BCrear Estructura.svg" alt="">
                 </button>
 
 
-                <button type="submit" onclick="BCreterup()" style="border: 0; background: transparent">
+                <button id="IdBCreterup" type="submit" onclick="BCreterup()" style="border: 0; background: transparent">
                     <img class="buttonList" src="../resources/BCrear Grupo.svg" alt="">
                 </button>
 
 
-                <button type="submit" onclick="BAsignarMonior()" style="border: 0; background: transparent">
+                <button id="IdBAsignarMonior" type="submit" onclick="BAsignarMonior()" style="border: 0; background: transparent">
                     <img class="buttonList" src="../resources/BAsig. Monitores.svg" alt="">
                 </button>
 
 
-                <button type="submit" onclick="BConformarCoordinacion()" style="border: 0; background: transparent">
+                <button id="IdBConformarCoordinacion" type="submit" onclick="BConformarCoordinacion()" style="border: 0; background: transparent">
                     <img class="buttonList" src="../resources/BConformar Coord.svg" alt="">
                 </button>
 
 
-                <button type="submit" onclick="BAdmMiembro()" style="border: 0; background: transparent">
+                <button id="IdBAdmMiembro" type="submit" onclick="BAdmMiembro()" style="border: 0; background: transparent">
                     <img class="buttonList" src="../resources/BAdmin. Miembros.svg" alt="">
                 </button>
 
-                <button type="submit" onclick="BConsultas()" style="border: 0; background: transparent">
+                <button id="IdBConsultas" type="submit" onclick="BConsultas()" style="border: 0; background: transparent">
                     <img class="buttonList" src="../resources/BConsultas.svg" alt="">
                 </button>
 
 
-                <button type="submit" onclick="BMovimiento()" style="border: 0; background: transparent">
+                <button id="IdBMovimiento" type="submit" onclick="BMovimiento()" style="border: 0; background: transparent">
                     <img class="buttonList" src="../resources/BMovimiento.svg" alt="">
                 </button>
 
 
-                <button type="submit" onclick="BAgregar()" style="border: 0; background: transparent">
+                <button id="IdBAgregar" type="submit" onclick="BAgregar()" style="border: 0; background: transparent">
                     <img class="buttonList" src="../resources/BAgregarMIembro.svg" alt="">
                 </button>
 
@@ -343,6 +343,33 @@
                             </button>
                         </div>
                     </div>
+
+
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                        LISTA CAMBIAR MOVIMIENTO                      -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="row justify-content-center p-4">
+                        <div class="col-1 align-self-center">
+                            <div class="box">
+                                <select class="selecBox" id="changeMovementList" type="submit "
+                                    style="border: 0; background: transparent ">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                            CAMBIAR                               -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="row justify-content-center">
+                        <div class="col-3 align-self-center  p-1">
+                            <button type="submit" onclick="cambiarMovimiento()"
+                                style="border: 0; background: transparent">
+                                <img class="mx-auto d-block " src="../resources/Faceptar.svg" alt="">
+                            </button>
+                        </div>
+                    </div>
+
 
 
                 </div>

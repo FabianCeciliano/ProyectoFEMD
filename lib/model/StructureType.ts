@@ -1,6 +1,6 @@
 export enum StructureType{
-    Branch,
+    Coordination,
     Zone,
-    Group,
-    Coordination
+    Branch,
+    Group
 }

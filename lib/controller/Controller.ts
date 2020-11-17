@@ -12,7 +12,18 @@ export class Controller {
       throw new Error("Method not implemented.");
     }
 
+    private movementList:Movement[]=[];
     private movement:Movement;
+
+    public selectMovement(idMovement:number):boolean{
+        for (let index = 0; index < this.movementList.length; index++) {
+            if(this.movementList[index].getMovementId()==idMovement){
+                this.movement=this.movementList[index];
+                return true;
+            }            
+        }
+        return false;
+    }
 
     public movementIsCreated():boolean{
         if(this.movement!=null){
@@ -21,12 +32,31 @@ export class Controller {
         return false;
     }
 
+    public getAllMovements():String[]{
+        var movements:String[] = [];
+        for (let index = 0; index < this.movementList.length; index++) {
+            movements.push(this.movementList[index].getMovementName()+"-"+this.movementList[index].getMovementId());
+        }
+        return movements;
+    }
+
+    public getActualMovementId():number{
+        return this.movement.getMovementId();
+    }
+
     public createMovement(cedJuridica:number, name:String, website :String, country : String,phoneNumber: number):boolean{
-        if(this.movement==null){
+        
+        var newMovement:Movement = new Movement(cedJuridica, name, website , country ,phoneNumber);
+        this.movementList.push(newMovement);
+        this.movement = newMovement;
+        
+        return true;
+
+        /*if(this.movement==null){
             this.movement = new Movement(cedJuridica, name, website , country ,phoneNumber);
             return true;
         }
-        return false;
+        return false;*/
     }
     public createNewZone (id:number, name:String) : Boolean {
         let result = this.movement.getStructure().addZone(new Composite_Level(id,name,StructureType.Zone))
@@ -37,6 +67,11 @@ export class Controller {
     };
     public createNewGroup (zoneName:String, branchId:number, id:number, name:String) : Boolean {
         return this.movement.getStructure().addGroup(new LeafComponent(id,name,StructureType.Group),zoneName,branchId);
+    };
+    
+    public existZone (name:String) : Boolean {
+        let result = this.movement.getStructure().existZone(name);
+        return result;
     };
 
     public addMonitor(zoneName:String, branchId:number, idGroup:number, idMonitor:number){

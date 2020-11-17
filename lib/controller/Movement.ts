@@ -26,6 +26,14 @@ export class Movement{
         this.gMembers = new MemberGestor();
     }
 
+    getMovementName():String{
+        return this.name;
+    }
+
+    getMovementId():number{
+        return this.cedJuridica;
+    }
+
     getStructure(){
         return this.gStructure;
     }
