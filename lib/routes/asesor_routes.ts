@@ -1004,11 +1004,12 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       console.log(req.body); //aqui se obtiene el tipo de nivel, y el id de ese nivel
       var data: String[] = [];
       if (req.body.nivel == "zona") {
+        console.log("-------------------->????? ", req.body.idNivel);
         data = controller.getZoneManagement(req.body.idNivel);
       } else if (req.body.nivel == "rama") {
-        data = controller.getBranchManagement(Number(req.body.idNivel));
+        data = controller.getBranchManagement(Number(String(req.body.idNivel).split("-", 2)[1]));
       } else {
-        data = controller.getGroupManagement(Number(req.body.idNivel));
+        data = controller.getGroupManagement(Number(String(req.body.idNivel).split("-", 2)[1]));
       }
       if(data.length > 0){
         res.send({status:1,miembros:data});        
