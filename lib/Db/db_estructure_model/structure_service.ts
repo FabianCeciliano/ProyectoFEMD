@@ -159,10 +159,7 @@ export default class StructureService {
     console.log(" -- Prueba Jefe en Grupo --");
     structures.update(
 	  {_id:idMovement},
-	  [
 		{ $push: { "zonas.$[elem].ramas.$[rma].grupos.$[grp].jefes": memberId } },
-		{ $push: { "zonas.$[elem].ramas.$[rma].miembros": memberId } }
-	  ],
       {
         arrayFilters: [
           { "elem.name": { $eq: zoneName } },
@@ -172,6 +169,29 @@ export default class StructureService {
         multi: true,
       },callback
     );
+    structures.update(
+      {_id:idMovement},
+      { $pull: { "zonas.$[elem].ramas.$[rma].grupos.$[grp].miembros": memberId } },
+        {
+          arrayFilters: [
+            { "elem.name": { $eq: zoneName } },
+            { "rma.id": { $eq: branchId } },
+            { "grp.id": { $eq: groupId } },
+          ],
+          multi: true,
+        },callback
+      );
+    structures.update(
+      {_id:idMovement},
+      { $push: { "zonas.$[elem].ramas.$[rma].miembros": memberId } },
+        {
+          arrayFilters: [
+            { "elem.name": { $eq: zoneName } },
+            { "rma.id": { $eq: branchId } }
+          ],
+          multi: true,
+        },callback
+      );
     console.log(" -- Jefe Insertado -- ");
   }
 
@@ -185,10 +205,7 @@ export default class StructureService {
     console.log(" -- Prueba Jefe en Rama --");
     structures.update(
 	  {_id:idMovement},
-	  [
 		{ $push: { "zonas.$[elem].ramas.$[rma].jefes": memberId } },
-		{ $push: { "zonas.$[elem].miembros": memberId } }
-	  ], 
       {
         arrayFilters: [
           { "elem.name": { $eq: zoneName } },
@@ -197,6 +214,27 @@ export default class StructureService {
         multi: true,
       },callback
     );
+    structures.update(
+      {_id:idMovement},
+      { $pull: { "zonas.$[elem].ramas.$[rma].miembros": memberId } },
+        {
+          arrayFilters: [
+            { "elem.name": { $eq: zoneName } },
+            { "rma.id": { $eq: branchId } },
+          ],
+          multi: true,
+        },callback
+      );
+    structures.update(
+      {_id:idMovement},
+       { $push: { "zonas.$[elem].miembros": memberId } },
+        {
+          arrayFilters: [
+            { "elem.name": { $eq: zoneName } },
+          ],
+          multi: true,
+        },callback
+      );
     console.log(" -- Jefe Insertado -- ");
   }
 
@@ -205,6 +243,11 @@ export default class StructureService {
     structures.update(
       {_id:idMovement},
       { $push: { "zonas.$[elem].jefes": memberId } },
+      { arrayFilters: [{ "elem.name": { $eq: zoneName } }], multi: true },callback
+    );
+    structures.update(
+      {_id:idMovement},
+      { $pull: { "zonas.$[elem].miembros": memberId } },
       { arrayFilters: [{ "elem.name": { $eq: zoneName } }], multi: true },callback
     );
     console.log(" -- Jefe Insertado -- ");
@@ -224,23 +267,28 @@ export default class StructureService {
     console.log(" -- BD: Prueba Movimiento de Miembro en Grupos --");
     structures.update(
 	  {_id:idMovement},
-	  [
 		{ $push: {"zonas.$[elem].ramas.$[rma].grupos.$[grp].miembros": memberId } },
-		{ $pull: {"zonas.$[oldelem].ramas.$[oldrma].grupos.$[oldgrp].miembros": memberId } }
-	  ],
-
       {
         arrayFilters: [
           { "elem.name": { $eq: newzoneName } },
           { "rma.id": { $eq: newbranchId } },
 		  { "grp.id": { $eq: newGroupId } },
-		  { "oldelem.name": { $eq: oldzoneName } },
-		  { "oldrma.id": { $eq: oldbranchId } },
-		  { "oldgrp.id": { $eq: oldGroupId } },
         ],
         multi: true,
       },callback
     );
+    structures.update(
+      {_id:idMovement},
+      { $pull: {"zonas.$[oldelem].ramas.$[oldrma].grupos.$[oldgrp].miembros": memberId } },
+      {
+      arrayFilters: [
+        { "oldelem.name": { $eq: oldzoneName } },
+        { "oldrma.id": { $eq: oldbranchId } },
+        { "oldgrp.id": { $eq: oldGroupId } },
+      ],
+      multi: true,
+    },callback
+  );
     console.log(" -- BD: Miembro Movido -- ");
   }
 
@@ -276,12 +324,7 @@ export default class StructureService {
 		console.log(" -- DB: Quiting Chief from Branch --");
 		structures.update(
 		  {_id:idMovement},
-		  [
 			{ $pull: { "zonas.$[elem].ramas.$[rma].jefes": memberId } },
-			{ $pull: { "zonas.$[elem].jefes": memberId } },
-			{ $pull: { "zonas.$[elem].miembros": memberId } },
-		  ],
-		  
 		  {
 			arrayFilters: [
 			  { "elem.name": { $eq: zoneName } },
@@ -289,7 +332,28 @@ export default class StructureService {
 			],
 			multi: true,
 		  },callback
-		);
+    );
+    structures.update(
+		  {_id:idMovement},
+			{ $pull: { "zonas.$[elem].jefes": memberId } },
+		  {
+			arrayFilters: [
+			  { "elem.name": { $eq: zoneName } },
+			],
+			multi: true,
+		  },callback
+    );
+    structures.update(
+		  {_id:idMovement},
+			{ $pull: { "zonas.$[elem].miembros": memberId } },
+		  {
+			arrayFilters: [
+			  { "elem.name": { $eq: zoneName } },
+			],
+			multi: true,
+		  },callback
+    );
+    
 		console.log(" -- DB: JEFE RAMA DESTITUIDO -- ");
 	  }
   
@@ -310,18 +374,54 @@ export default class StructureService {
 		console.log(" -- Prueba Jefe en Grupo --");
 		structures.update(
 		  {_id:idMovement},
-		  [
 			{ $pull: { "zonas.$[elem].ramas.$[rma].grupos.$[grp].jefes": memberId } },
-			{ $pull: { "zonas.$[elem].ramas.$[rma].miembros": memberId } },
-			{ $pull: { "zonas.$[elem].ramas.$[rma].jefes": memberId } },
-			{ $pull: { "zonas.$[elem].jefes": memberId } },
-			{ $pull: { "zonas.$[elem].miembros": memberId } }
-		  ],
 		  {
 			arrayFilters: [
 			  { "elem.name": { $eq: zoneName } },
 			  { "rma.id": { $eq: branchId } },
 			  { "grp.id": { $eq: groupId } },
+			],
+			multi: true,
+		  },callback
+    );
+    structures.update(
+		  {_id:idMovement},
+			{ $pull: { "zonas.$[elem].ramas.$[rma].miembros": memberId } },
+		  {
+			arrayFilters: [
+			  { "elem.name": { $eq: zoneName } },
+			  { "rma.id": { $eq: branchId } },
+			],
+			multi: true,
+		  },callback
+    );
+    structures.update(
+		  {_id:idMovement},
+			{ $pull: { "zonas.$[elem].ramas.$[rma].jefes": memberId } },
+		  {
+			arrayFilters: [
+			  { "elem.name": { $eq: zoneName } },
+			  { "rma.id": { $eq: branchId } },
+			],
+			multi: true,
+		  },callback
+    );
+    structures.update(
+		  {_id:idMovement},
+			{ $pull: { "zonas.$[elem].jefes": memberId } },
+		  {
+			arrayFilters: [
+			  { "elem.name": { $eq: zoneName } },
+			],
+			multi: true,
+		  },callback
+    );
+    structures.update(
+		  {_id:idMovement},	  
+			{ $pull: { "zonas.$[elem].miembros": memberId } },
+		  {
+			arrayFilters: [
+			  { "elem.name": { $eq: zoneName } },
 			],
 			multi: true,
 		  },callback

@@ -122,10 +122,8 @@ export class dbController {
       req.body.isDeleted)
     ) {
       const user_filter = { memberId: req.body.id };
-      let previous: IUser;
-      this.user.filterUser(user_filter, (err: any, user_data: IUser) => {
-        previous = user_data;
-      });
+      let previous;
+      previous = this.user.filterUser(user_filter, (err: any, user_data: IUser) => { });
       if (previous.name != "") {
         const user_params: IUser = {
           memberId: req.body.id,

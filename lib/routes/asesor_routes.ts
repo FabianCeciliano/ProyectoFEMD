@@ -71,9 +71,9 @@ export class AsesorRotes {
                       Number(element))
                   });
 
-                  console.log("Asignando Los monitores");
+                  console.log("Asignando Los monitores");//addMonitor? -> changeToMonitor
                   movementFromDb[movindex].zonas[zindex].ramas[bindex].grupos[gindex].monitores.forEach(element => {
-                    controller.changeToMonitor(
+                    controller.addMonitor(
                       movementFromDb[movindex].zonas[zindex].name,
                       Number(movementFromDb[movindex].zonas[zindex].ramas[bindex].id),
                       Number(movementFromDb[movindex].zonas[zindex].ramas[bindex].grupos[gindex].id),
