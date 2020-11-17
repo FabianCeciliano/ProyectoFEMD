@@ -266,7 +266,11 @@ export class Controller {
     } 
 
     public addMember(id:number,name:String,telephone:number,mail:String,direction:String,esMonitor:boolean){
-        this.movement.getMembers().addMember(id, name,telephone,mail, direction,esMonitor);
+        if(!this.movement.getMembers().idExist(id)){
+            this.movement.getMembers().addMember(id, name,telephone,mail, direction,esMonitor);
+            return true;
+        }
+        return false;
     }
 
     public assignChief( pNombreNivel : String , pIdData : number){

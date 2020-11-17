@@ -709,7 +709,7 @@ export class AsesorRotes {
     ////////////////////////////////////////////////////////////////////
     app.post("/agregarUsuario", function (req: Request, res: Response) {
       //console.log(req.body)
-      controller.addMember(
+      var created = controller.addMember(
         Number(req.body.id),
         req.body.name,
         Number(req.body.celular),
@@ -718,10 +718,16 @@ export class AsesorRotes {
         Boolean(req.body.esMonitor)
       );
       controller.printMembers();
-      ///                              ///
-      dbController.create_user(req);
-      ///                              ///
-      res.send({ status: 1 });
+
+      if(created){
+        ///                              ///
+        dbController.create_user(req);
+        ///                              ///
+        res.send({ status: 1 });
+      }else{
+        res.send({ status: 0 });
+      }
+      
     });
 
 

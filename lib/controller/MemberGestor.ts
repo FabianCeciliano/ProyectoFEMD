@@ -24,6 +24,14 @@ export class MemberGestor{
     public setDirection(direction : Direction) : void {};
     public getDirection() : Direction {return null};
 
+    public idExist(id:number){
+        for(let index = 0 ; index < this.members.length ; index++){
+            if(this.members[index].id==id){
+                return true;
+            } 
+        }
+        return false;
+    }
 
     public addMember(id:number, name:String, telephone:number, mail:String, direction:String,esMonitor:boolean){
         var member:Member = new Member(direction,Rol.groupMember,false,id,name,mail,telephone)
