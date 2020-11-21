@@ -137,7 +137,7 @@ export class Gestor {
                     if (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id == branchId) {
                         for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
                             if (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id == idGroup) {
-                                //this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].addMonitor(monitor);
+                                this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.push(monitor);
                             }
                         }
                     }
@@ -465,6 +465,7 @@ export class Gestor {
         }
         return false;
     };
+
     public assignBranchManagement(zoneName: String, idBranch: number, member: Member) {
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
             if (this.structure.groupComposite[zindex].name == zoneName) {
@@ -483,6 +484,7 @@ export class Gestor {
         }
         return false;
     };
+
     public assignGroupManagement(zoneName: String, idBranch: number, idGroup: number, member: Member) {
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
             if (this.structure.groupComposite[zindex].name == zoneName) {
@@ -494,6 +496,7 @@ export class Gestor {
                                 for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++) {
                                     if (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].id == member.id) {
                                         this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].set_rol(Rol.groupChief);
+                                        //
                                         return true;
                                     }
                                 }

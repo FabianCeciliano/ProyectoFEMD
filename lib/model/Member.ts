@@ -8,6 +8,14 @@ export class Member extends Person{
     private direction : String;
     private rol: Rol;
     private facilitador: boolean;
+    private _gruposMentoria: String[];
+    
+    public getgruposMentoria(): String[] {
+        return this._gruposMentoria;
+    }
+    public addGrupoMentoria(value: String ) {
+        this._gruposMentoria.push(value);
+    }
     
 
     constructor(direction : String,rol : Rol,facilitador : boolean,id:number,name:String,email:String,telephone:number){
