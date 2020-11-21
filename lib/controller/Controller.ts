@@ -292,28 +292,6 @@ export class Controller {
         this.movement.getStructure().verEstructura();
     };
 
-    public configBranch( pNombreRama : String):IComponent {
-        return null
-    };
-    public configZone( pNombreZona : String):IComponent {
-        return null
-    };
-    public configGroup( pNombreGrupo : String):IComponent {
-        return null
-    };
-    public displayMember( pIdData : number ): String{
-        return null
-    };
-    public showMemberLevel( pIdData : String ){
-
-    };
-    public requestMemberMovement( pNuevoNivel : String, pExNivel : String, pIdData : String ){
-
-    };
-    public newAffiliation(  pDatol : String, pIdData : number ){
-
-    };
-
 }
 
 export default new Controller();

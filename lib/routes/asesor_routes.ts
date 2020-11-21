@@ -982,7 +982,7 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       var data = controller.consultMemberParticipation(Number(req.body.id));
 
       if (
-        (data.zonas.length > 0 && data.ramas.length > 0, data.grupos.length > 0)
+        (data.zonas.length > 0 || data.ramas.length > 0 || data.grupos.length > 0)
       ) {
         res.send({
           status: 1,
@@ -993,7 +993,6 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       } else {
         res.send({ status: 0 });
       }
-
       //res.send({status:1,zonas:["zona1","zona2"],ramas:["rama1","rama2"],grupos:["grupo1","grupo2"]});
     });
 
