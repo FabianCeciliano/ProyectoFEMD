@@ -485,6 +485,35 @@ export class Gestor {
         return false;
     };
 
+    public quitarMonitor(zoneName: String, idBranch: number, idGroup: number, memberId: number) {
+        for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
+            if (this.structure.groupComposite[zindex].name == zoneName) {
+                for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
+                    if (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id == idBranch) {
+                        for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
+                            if (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id != idGroup) {
+                                for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++) {
+                                    if (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].id == memberId && (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].get_rol() == Rol.monitor || this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].get_facilitador()==true)) {
+                                        return false;//el mae esta como monitor en otro grupo, no lo puedo quitar
+                                    }
+                                }
+                            }
+
+                        }
+                        for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.length; mindex++) {
+                            if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[mindex].id==memberId){
+                                this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.splice(mindex,1);
+                                return true;
+                            }
+                        }
+                        //se elimina al mae...
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public assignGroupManagement(zoneName: String, idBranch: number, idGroup: number, member: Member) {
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
             if (this.structure.groupComposite[zindex].name == zoneName) {
@@ -492,15 +521,17 @@ export class Gestor {
                     if (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id == idBranch) {
                         this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.push(member);
 
-                        // monitor.long
-
-
                         for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
                             if (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id == idGroup) {
                                 for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++) {
+                                    if (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].get_rol() == Rol.monitor || this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].get_facilitador()==true){
+                                        this.quitarMonitor(zoneName,idBranch,idGroup,this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].id);
+                                        this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.splice(mindex,1);
+                                    }
+                                }
+                                for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++) {
                                     if (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].id == member.id) {
                                         this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].set_rol(Rol.groupChief);
-                                        //
                                         return true;
                                     }
                                 }
