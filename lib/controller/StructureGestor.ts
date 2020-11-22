@@ -491,6 +491,10 @@ export class Gestor {
                 for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
                     if (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id == idBranch) {
                         this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.push(member);
+
+                        // monitor.long
+
+
                         for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
                             if (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id == idGroup) {
                                 for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++) {
