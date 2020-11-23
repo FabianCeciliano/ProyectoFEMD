@@ -13,6 +13,19 @@ export class Gestor {
         this.structure = new Composite_Level(1, "Coordinacion", StructureType.Coordination);
     }
 
+    public addAssessor(direction : String,rol : Rol,facilitador : boolean,id:number,name:String,email:String,telephone:number){
+        this.structure.members.push(new Member(direction,rol,false,id,name,email,telephone));
+    }
+
+    public getAssesor() :Member{
+        for (let index = 0; index < this.structure.members.length; index++) {
+            if(this.structure.members[index].get_rol()==5){
+                return this.structure.members[index];
+            }
+        }
+        return null;
+    }
+
     public existZone(name: String) {
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
             if (this.structure.groupComposite[zindex].name == name) {
@@ -237,17 +250,31 @@ export class Gestor {
             auxRol = "monitor";
             return auxRol;
         }
+        else if (pData == 5){
+            auxRol = "Asesor";
+            return auxRol;
+        }
         else {
             return auxRol;
         }
     }
 
-
-
-
-
     public getEst() {
         let dataEst: String[] = [];
+        let assessor : Member = this.getAssesor();
+        dataEst.push("Jefatura de Movimiento");
+        dataEst.push('</br>');
+        for(let index = 0 ; index < this.structure.members.length ; index++){
+            dataEst.push("\t|_Nombre: ", this.structure.members[index].name);
+            dataEst.push('</br>');
+            dataEst.push("\t|_Id    : ", this.structure.members[index].id.toString());
+            dataEst.push('</br>');
+            dataEst.push("\t|_Rol    : ",this.getRol(this.structure.members[index].get_rol())); 
+            dataEst.push('</br>');
+            dataEst.push("\t|_Email : ", this.structure.members[index].email);
+            dataEst.push('</br>');
+            dataEst.push('</br>');
+        }
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
             dataEst.push("ZONA:");
             dataEst.push('</br>');
@@ -452,7 +479,8 @@ export class Gestor {
         }
     };
 
-    public assignZoneManagement(zoneName: String, idMember: number) {
+    public assignZoneManagement(zoneName: String, idMember: number, member: Member) {
+        this.structure.members.push(member);
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
             if (this.structure.groupComposite[zindex].name == zoneName) {
                 for (let mindex = 0; mindex < this.structure.groupComposite[zindex].members.length; mindex++) {

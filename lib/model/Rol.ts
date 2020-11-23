@@ -3,5 +3,6 @@ export enum Rol{
     zoneChief,
     groupChief,
     monitor,
-    groupMember 
+    groupMember,
+    assessor 
 }

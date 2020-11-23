@@ -44,19 +44,18 @@ export class Controller {
         return this.movement.getMovementId();
     }
 
-    public createMovement(cedJuridica:number, name:String, website :String, country : String,phoneNumber: number):boolean{
-        
+    public createMovement(cedJuridica:number, name:String, website :String, country : String,
+        phoneNumber: number, idAsesor : number, nombreAsesor : String, celularAsesor : number,
+        correoAsesor : String, direccionAsesor : String):boolean{
+            
         var newMovement:Movement = new Movement(cedJuridica, name, website , country ,phoneNumber);
+        newMovement.getStructure().addAssessor(direccionAsesor,Rol.assessor,false,idAsesor,nombreAsesor,correoAsesor,phoneNumber);
         this.movementList.push(newMovement);
         this.movement = newMovement;
         
+        
         return true;
 
-        /*if(this.movement==null){
-            this.movement = new Movement(cedJuridica, name, website , country ,phoneNumber);
-            return true;
-        }
-        return false;*/
     }
     public createNewZone (id:number, name:String) : Boolean {
         let result = this.movement.getStructure().addZone(new Composite_Level(id,name,StructureType.Zone))
@@ -178,15 +177,15 @@ export class Controller {
         return this.movement.getStructure().consultGroupManagement(zoneName,branchId,groupId); 
     }
     public assignZoneManagement( zoneName : String, idMember:number) :Boolean{
-
-        return this.movement.getStructure().assignZoneManagement(zoneName,idMember);
+        var member:Member = this.movement.getMembers().getMember(idMember).clone();
+        member.set_rol(Rol.zoneChief);
+        return this.movement.getStructure().assignZoneManagement(zoneName,idMember,member);
 
         //this.movement.getStructure().assignZoneManagement(zoneName , firstPersonName, idFirstPerson , secondPersonName, idSecondPerson);
         //return true;
     };
     public getMemberParticipation(pIData: number) : String[]{
         let memberParticipation :String[] = this.movement.getStructure().getMemberParticipation(pIData);
-        console.log("gooooooood papi");
         return memberParticipation;
     }
     public assignBranchManagement( zoneName : String, idBranch : number, idMember:number ) :Boolean{

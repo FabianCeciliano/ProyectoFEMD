@@ -33,7 +33,8 @@ export class AsesorRotes {
 
         if(movementFromDb.length>0){
           for (let movindex = 0; movindex < movementFromDb.length; movindex++) {
-            var status: boolean = controller.createMovement(Number(movementFromDb[movindex].cedulaJuridica), movementFromDb[movindex].name, movementFromDb[movindex].webDirection, movementFromDb[movindex].coutry, Number(movementFromDb[movindex].phone));
+            //var status: boolean = controller.createMovement(Number(movementFromDb[movindex].cedulaJuridica), movementFromDb[movindex].name, movementFromDb[movindex].webDirection, movementFromDb[movindex].coutry, Number(movementFromDb[movindex].phone));
+            var status: boolean = true;
             if (membersFromDb.length>0) {//iterar e insertar en el gestor de miembros
               console.log("Levantando miembros");
               membersFromDb.forEach(element => {
@@ -1042,13 +1043,18 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
     //                     FUNCION DEL BOTON                          //
     ////////////////////////////////////////////////////////////////////
     app.post("/crearMovimiento", function (req: Request, res: Response) {
-      //console.log(req.body)
+
       var status: boolean = controller.createMovement(
         Number(req.body.cedulaJuridica),
         req.body.nombre,
         req.body.web,
         req.body.pais,
-        Number(req.body.telefono)
+        Number(req.body.telefono),
+        Number(req.body.idAsesor),
+        req.body.nombreAsesor,
+        Number(req.body.celularAsesor),
+        req.body.correoAsesor,
+        req.body.direccionAsesor
       );
 
       if (status == true) {
