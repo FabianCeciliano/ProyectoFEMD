@@ -439,6 +439,30 @@ export class Gestor {
         return { zonas: ZoneList, ramas: BranchList, grupos: groupList };
     }
 
+
+    public consultMemberParticipationEliminar(pIdData: number) {
+        let ZoneList: String[] = [];
+        let BranchList: String[] = [];
+        let groupList: String[] = [];
+
+        for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
+            for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
+                for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
+                    for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++) {
+                        if (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].id == pIdData) {
+                            ZoneList = this.isIncluded(ZoneList, this.structure.groupComposite[zindex].name + "-");
+                            BranchList = this.isIncluded(BranchList, this.structure.groupComposite[zindex].getCompositeGroup()[bindex].name + "-" + this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id);
+                            groupList = this.isIncluded(groupList, this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].name + "-" + this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id);
+
+                        }
+                    }
+                }
+            }
+
+        }
+        return { zonas: ZoneList, ramas: BranchList, grupos: groupList };
+    }
+
     public getMemberParticipation(pIdData: number): String[] {
         let memberParticipation: String[] = [];
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
@@ -787,6 +811,11 @@ export class Gestor {
     // Ya que siguie siendo jefe de rama                                            //
     public removeZoneChief(zoneName: String, pIdData: number): Boolean {
         let result: Boolean = false;
+        for (let index = 0; index < this.structure.members.length; index++) {
+            if(this.structure.members[index].id == pIdData){
+                this.structure.members.splice(index, 1);
+            }
+        }
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
             if (this.structure.groupComposite[zindex].name == zoneName) {
                 for (let mindex = 0; mindex < this.structure.groupComposite[zindex].members.length; mindex++) {

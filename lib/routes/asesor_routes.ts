@@ -825,7 +825,7 @@ export class AsesorRotes {
 
       var dataMember = controller.getAllMembers();
       var idBrach = String(dataMember[0]).split("-", 2);
-      var dataPrecedence = controller.consultMemberParticipation(Number(idBrach[1]));
+      var dataPrecedence = controller.consultMemberParticipationEliminar(Number(idBrach[1]));
 
       console.log(dataPrecedence);
 
@@ -981,6 +981,25 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
     app.post("/getParticipacion", function (req: Request, res: Response) {
       console.log(req.body); //aqui se obtiene el id del miembro
       var data = controller.consultMemberParticipation(Number(req.body.id));
+
+      if (
+        (data.zonas.length > 0 || data.ramas.length > 0 || data.grupos.length > 0)
+      ) {
+        res.send({
+          status: 1,
+          zonas: data.zonas,
+          ramas: data.ramas,
+          grupos: data.grupos,
+        });
+      } else {
+        res.send({ status: 0 });
+      }
+      //res.send({status:1,zonas:["zona1","zona2"],ramas:["rama1","rama2"],grupos:["grupo1","grupo2"]});
+    });
+
+    app.post("/getParticipacionEliminar", function (req: Request, res: Response) {
+      console.log(req.body); //aqui se obtiene el id del miembro
+      var data = controller.consultMemberParticipationEliminar(Number(req.body.id));
 
       if (
         (data.zonas.length > 0 || data.ramas.length > 0 || data.grupos.length > 0)

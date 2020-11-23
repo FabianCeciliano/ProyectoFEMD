@@ -131,6 +131,9 @@ export class Controller {
     public consultMemberParticipation(pIdData:number){
         return this.movement.getStructure().consultMemberParticipation(pIdData);
     };
+    public consultMemberParticipationEliminar(pIdData:number){
+        return this.movement.getStructure().consultMemberParticipationEliminar(pIdData);
+    };
     public defineMonitor(coachId : number, zoneName:String, ramaId : number) : Boolean {
 
         //console.log("Id:",coachId," Zona:",zoneName,"Rama:",ramaId)
