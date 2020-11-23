@@ -44,8 +44,8 @@
     <div id="msgBG" onclick="off()">
         <div id="msg" onclick="off()">
             <h2 class="headertekst">Mensaje</h2>
-            <img src="https://icons-for-free.com/iconfiles/png/512/complete+done+green+success+valid+icon-1320183462969251652.png" alt="Paris"
-                class="center">
+            <img src="https://icons-for-free.com/iconfiles/png/512/complete+done+green+success+valid+icon-1320183462969251652.png"
+                alt="Paris" class="center">
             <h2 id="msgText" class="headertekst">NADA</h2>
         </div>
     </div>
@@ -267,15 +267,15 @@
                         <!-- //////////////////////////////////////////////////////////////////// -->
                         <!--                             COLUMNA UNO                              -->
                         <!-- //////////////////////////////////////////////////////////////////// -->
-
-                        <div class="col-6">
+                        <div class="col-4">
 
                             <!-- //////////////////////////////////////////////////////////////////// -->
                             <!--                             TITULO                                    -->
                             <!-- //////////////////////////////////////////////////////////////////// -->
 
                             <div class="row window0 p-3">
-                                <div class="col-12 align-self-center">
+                                <div class="col-2 align-self-center"></div>
+                                <div class="col-10 align-self-center">
                                     <img class="mx-auto d-block over" src="../resources/Crear Movimiento.svg">
                                 </div>
                             </div>
@@ -298,10 +298,11 @@
                             <!--                                  NOMBRE                              -->
                             <!-- //////////////////////////////////////////////////////////////////// -->
                             <div class="row  justify-content-center p-3">
-                                <div class="col-6 align-self-center">
+                                <div class="col-4 align-self-center">
                                     <img class="mx-auto d-block over" src="../resources/Nombre.svg">
                                 </div>
-                                <div class="col-6 align-self-center">
+
+                                <div class="col-4 align-self-center">
                                     <input class="myborderMedium-S" id="movimientoNombre" type="text "
                                         placeholder="Nombre" required>
                                 </div>
@@ -325,10 +326,10 @@
                             <!--                               PAIS                         -->
                             <!-- //////////////////////////////////////////////////////////////////// -->
                             <div class="row  justify-content-center p-3">
-                                <div class="col-6 align-self-center">
+                                <div class="col-3 align-self-center">
                                     <img class="mx-auto d-block over" src="../resources/Pais.svg">
                                 </div>
-                                <div class="col-6 align-self-center">
+                                <div class="col-3 align-self-center">
                                     <input class="myborderMedium-S" id="movimientoPais" type="text " placeholder="Pais"
                                         required>
                                 </div>
@@ -338,10 +339,10 @@
                             <!--                               TELEFONO                                 -->
                             <!-- //////////////////////////////////////////////////////////////////// -->
                             <div class="row  justify-content-center p-3">
-                                <div class="col-6 align-self-center">
+                                <div class="col-4 align-self-center">
                                     <img class="mx-auto d-block over" src="../resources/Telefono.svg">
                                 </div>
-                                <div class="col-6 align-self-center">
+                                <div class="col-4 align-self-center">
                                     <input class="myborderMedium-S" id="movimientoTelefono" type="text "
                                         placeholder="Telf" required>
                                 </div>
@@ -352,27 +353,141 @@
                             <!--                                BOTONES                               -->
                             <!-- //////////////////////////////////////////////////////////////////// -->
                             <div class="row justify-content-center">
-                                <div class="col-4 align-self-center  p-1">
+                                <div class="col-4 align-self-center"></div>
+                                <div class="col-7 align-self-center  p-1">
                                     <button type="submit" onclick="crearMovimiento()"
                                         style="border: 0; background: transparent">
                                         <img class="mx-auto d-block " src="../resources/Faceptar.svg" alt="">
                                     </button>
                                 </div>
                             </div>
-
-
-
                         </div>
+
 
 
 
                         <!-- //////////////////////////////////////////////////////////////////// -->
                         <!--                             COLUMNA DOS                             -->
                         <!-- //////////////////////////////////////////////////////////////////// -->
+                        <div class="col-4">
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <!--                                TITULO                                -->
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <div class="row justify-content-center">
+                                <div class="col-10 align-self-center">
+                                    <img class="mx-auto d-block over" src="../resources/FAInformación General.svg">
+                                </div>
+                            </div>
+
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <!--                                TITULO                                -->
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <div class="row  p-2">
+                                <div class="col-12">
+                                    <img class="mx-auto d-block over" src="../resources/FAIdentificación.svg">
+                                </div>
+                            </div>
+
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <!--                            TEXT AREA                                 -->
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <div class="row  justify-content-center">
+                                <input class="myborderMedium-S" id="nuevoUserId" type="text"
+                                    placeholder="Identificacion." required>
+                            </div>
+
+
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <!--                                TITULO                                -->
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <div class="row  p-2">
+                                <div class="col-12">
+                                    <img class="mx-auto d-block over" src="../resources/FANombre Completo.svg">
+                                </div>
+                            </div>
+
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <!--                            TEXT AREA                                 -->
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <div class="row  justify-content-center">
+                                <input class="myborderMedium-S" id="nuevoUserNombre" type="text "
+                                    placeholder="Nombre completo" required>
+                            </div>
+
+
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <!--                                TITULO                                -->
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <div class="row  p-2">
+                                <div class="col-12">
+                                    <img class="mx-auto d-block over" src="../resources/FANúmero Celular.svg">
+                                </div>
+                            </div>
+
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <!--                            TEXT AREA                                 -->
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <div class="row  justify-content-center">
+                                <input class="myborderMedium-S" id="nuevoUserCelular" type="text "
+                                    placeholder="Numero Celular" required>
+                            </div>
+
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <!--                                TITULO                                -->
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <div class="row  p-2">
+                                <div class="col-12">
+                                    <img class="mx-auto d-block over" src="../resources/FAE-Mail.svg">
+                                </div>
+                            </div>
+
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <!--                            TEXT AREA                                 -->
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <div class="row  justify-content-center">
+                                <input class="myborderMedium-S" id="nuevoUserMail" type="text " placeholder="E-Mail"
+                                    required>
+                            </div>
+
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <!--                                TITULO                                -->
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <div class="row  p-2">
+                                <div class="col-12">
+                                    <img class="mx-auto d-block over" src="../resources/FADirección Física.svg">
+                                </div>
+                            </div>
+
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <!--                            TEXT AREA                                 -->
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <div class="row  justify-content-center">
+                                <input class="myborderMedium-S" id="nuevoUserDireccion" type="text "
+                                    placeholder="Direccion" required>
+                            </div>
+
+
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <!--                            BOTON                                     -->
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <div class="row justify-content-center p-1">
+
+                                <div class="col-8 align-self-center">
+                                    <button class="about" type="submit" onclick="agregarUsuario()"
+                                        style="border: 0; background: transparent" class="social ">
+                                        <img class="mx-auto d-block" src="../resources/FAAgregar.svg" alt="">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
 
 
-                        <div class="col-6">
+
+                        <!-- //////////////////////////////////////////////////////////////////// -->
+                        <!--                             COLUMNA TRES                             -->
+                        <!-- //////////////////////////////////////////////////////////////////// -->
+                        <div class="col-4">
                             <!-- //////////////////////////////////////////////////////////////////// -->
                             <!--                             TITULO                                    -->
                             <!-- //////////////////////////////////////////////////////////////////// -->
@@ -400,7 +515,8 @@
                             <!--                            CAMBIAR                               -->
                             <!-- //////////////////////////////////////////////////////////////////// -->
                             <div class="row justify-content-center">
-                                <div class="col-5 align-self-center  p-4">
+                                <div class="col-2 align-self-center"></div>
+                                <div class="col-10 align-self-center  p-4">
                                     <button type="submit" onclick="cambiarMovimiento()"
                                         style="border: 0; background: transparent">
                                         <img class="mx-auto d-block " src="../resources/Faceptar.svg" alt="">
@@ -408,6 +524,11 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- //////////////////////////////////////////////////////////////////// -->
+                        <!-- FIN DE FORMULARIO -->
+                        <!-- //////////////////////////////////////////////////////////////////// -->
+
+
                     </div>
                 </div>
                 <!-- //////////////////////////////////////////////////////////////////// -->
