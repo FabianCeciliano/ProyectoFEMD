@@ -587,6 +587,9 @@ export class Gestor {
                                         return true;
                                     }
                                 }
+                                var temp:Member = member.clone();
+                                temp.set_rol(Rol.groupChief);
+                                this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.push(temp);
                             }
                         }
                     }

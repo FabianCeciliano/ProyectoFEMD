@@ -33,7 +33,7 @@ export class AsesorRotes {
 
         if(movementFromDb.length>0){
           for (let movindex = 0; movindex < movementFromDb.length; movindex++) {
-            //var status: boolean = controller.createMovement(Number(movementFromDb[movindex].cedulaJuridica), movementFromDb[movindex].name, movementFromDb[movindex].webDirection, movementFromDb[movindex].coutry, Number(movementFromDb[movindex].phone));
+            var status: boolean = controller.createMovement(Number(movementFromDb[movindex].cedulaJuridica), movementFromDb[movindex].name, movementFromDb[movindex].webDirection, movementFromDb[movindex].coutry, Number(movementFromDb[movindex].phone),1,"Nombre asesor",8888,"correo","direccion");
             var status: boolean = true;
             if (membersFromDb.length>0) {//iterar e insertar en el gestor de miembros
               console.log("Levantando miembros");
@@ -51,12 +51,30 @@ export class AsesorRotes {
               controller.createNewZone(Number(movementFromDb[movindex].zonas[zindex].id), movementFromDb[movindex].zonas[zindex].name);
               for (let bindex = 0; bindex < movementFromDb[movindex].zonas[zindex].ramas.length; bindex++) {
                 controller.createNewBranch(movementFromDb[movindex].zonas[zindex].name, Number(movementFromDb[movindex].zonas[zindex].ramas[bindex].id), movementFromDb[movindex].zonas[zindex].ramas[bindex].name);
+                
+                movementFromDb[movindex].zonas[zindex].ramas[bindex].monitores.forEach(element => {
+                  controller.defineMonitor(
+                    Number(element),
+                    movementFromDb[movindex].zonas[zindex].name,
+                    Number(movementFromDb[movindex].zonas[zindex].ramas[bindex].id)
+                  );
+                })
+
                 for (let gindex = 0; gindex < movementFromDb[movindex].zonas[zindex].ramas[bindex].grupos.length; gindex++) {
                   controller.createNewGroup(movementFromDb[movindex].zonas[zindex].name, Number(movementFromDb[movindex].zonas[zindex].ramas[bindex].id), Number(movementFromDb[movindex].zonas[zindex].ramas[bindex].grupos[gindex].id), movementFromDb[movindex].zonas[zindex].ramas[bindex].grupos[gindex].name);
                   
                   console.log("Asignando Los Miembros");
                   movementFromDb[movindex].zonas[zindex].ramas[bindex].grupos[gindex].miembros.forEach(element => {
                     controller.addMemberToGroup(
+                      movementFromDb[movindex].zonas[zindex].name,
+                      Number(movementFromDb[movindex].zonas[zindex].ramas[bindex].id),
+                      Number(movementFromDb[movindex].zonas[zindex].ramas[bindex].grupos[gindex].id),
+                      Number(element))
+                  });
+                  
+                  console.log("Asignando Los monitores");//addMonitor? -> changeToMonitor
+                  movementFromDb[movindex].zonas[zindex].ramas[bindex].grupos[gindex].monitores.forEach(element => {
+                    controller.addMonitor(
                       movementFromDb[movindex].zonas[zindex].name,
                       Number(movementFromDb[movindex].zonas[zindex].ramas[bindex].id),
                       Number(movementFromDb[movindex].zonas[zindex].ramas[bindex].grupos[gindex].id),
@@ -72,14 +90,6 @@ export class AsesorRotes {
                       Number(element))
                   });
 
-                  console.log("Asignando Los monitores");//addMonitor? -> changeToMonitor
-                  movementFromDb[movindex].zonas[zindex].ramas[bindex].grupos[gindex].monitores.forEach(element => {
-                    controller.addMonitor(
-                      movementFromDb[movindex].zonas[zindex].name,
-                      Number(movementFromDb[movindex].zonas[zindex].ramas[bindex].id),
-                      Number(movementFromDb[movindex].zonas[zindex].ramas[bindex].grupos[gindex].id),
-                      Number(element))
-                  });
 
                 }
   
@@ -89,14 +99,6 @@ export class AsesorRotes {
                     Number(movementFromDb[movindex].zonas[zindex].ramas[bindex].id),
                     Number(element)
                   )
-                })
-  
-                movementFromDb[movindex].zonas[zindex].ramas[bindex].monitores.forEach(element => {
-                  controller.defineMonitor(
-                    Number(element),
-                    movementFromDb[movindex].zonas[zindex].name,
-                    Number(movementFromDb[movindex].zonas[zindex].ramas[bindex].id)
-                  );
                 })
 
               }
