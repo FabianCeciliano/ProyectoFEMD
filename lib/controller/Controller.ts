@@ -159,13 +159,24 @@ export class Controller {
     };
     public swapGroup( preceZone:String,preceBranch:number,preceGroup:number,idMember:number,
         newZone:String,newBranch:number,newGroup:number):Boolean{
-        var member:Member = this.movement.getStructure().deleteMemberFromGroup(preceZone,preceBranch,preceGroup,idMember);
+        var member:Member;
+        var groupMember: Member;
+        var currentMember = this.movement.getStructure().getMember(idMember);
+
+        if(currentMember.get_rol() == 2){ //Group Chief
+            member = this.movement.getStructure().deleteGroupChief(preceZone,preceBranch,preceGroup,idMember);
+            groupMember =  this.movement.getStructure().deleteMemberFromGroup(preceZone,preceBranch,preceGroup,idMember);
+            member.set_rol(4); //Updates state from GroupChief to GroupMember
+        }else{
+            member =  this.movement.getStructure().deleteMemberFromGroup(preceZone,preceBranch,preceGroup,idMember);
+        }
+        
         console.log("Eliminado:",member)
         if(member!=null){
             return this.movement.getStructure().addMember(member,newZone,newBranch,newGroup);
         }
         return false;
-        //this.movement.getStructure().swapGroup(precedenceGroup, newGroup, pIdData);
+
     };
     public changeToMonitor(zoneName:String, branchId:number, idGroup:number, idMonitor:number){
         this.movement.getStructure().changeToMonitor(zoneName,branchId,idGroup,idMonitor);

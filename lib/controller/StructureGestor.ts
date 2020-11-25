@@ -202,6 +202,25 @@ export class Gestor {
         return null;
     }
 
+
+    public deleteGroupChief(zoneName: String, branchId: number, idGroup: number, pIdData: number): Member {
+        for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
+            if (this.structure.groupComposite[zindex].name == zoneName) {
+                for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
+                    if (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].id == branchId) {
+                        for (let index = 0; index < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.length; index++) {
+                            if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[index].get_rol() == 2){
+                                console.log("DELETING GROUP CHIEF PAPU")
+                                return this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.splice(index, 1)[0];
+                            }                            
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
     public verEstructura() {
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
             console.log("Zona: ", this.structure.groupComposite[zindex].name);
@@ -231,23 +250,23 @@ export class Gestor {
 
 
     public getRol(pData: number) {
-        var auxRol = "groupMember";
+        var auxRol = "Miembro de Grupo";
         if (pData == 0) {
-            auxRol = "BranchChief";
+            auxRol = "Jefe de Rama";
             return auxRol;
         }
         else if (pData == 1) {
-            auxRol = "zoneChief";
+            auxRol = "Jefe de Zona";
             return auxRol;
 
         }
         else if (pData == 2) {
-            auxRol = "groupChief";
+            auxRol = "Jefe de Grupo";
             return auxRol;
 
         }
         else if (pData == 3) {
-            auxRol = "monitor";
+            auxRol = "Monitor";
             return auxRol;
         }
         else if (pData == 5){
@@ -638,7 +657,8 @@ export class Gestor {
                 for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
                     for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++) {
                         if (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].id == idMember) {
-                            return Object.assign({}, this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex]);//Clones object
+                            //return Object.assign({}, this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex]);//Clones object
+                            return this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex]
                         }
                     }
                 }
@@ -824,7 +844,6 @@ export class Gestor {
                 for (let mindex = 0; mindex < this.structure.groupComposite[zindex].members.length; mindex++) {
                     if (this.structure.groupComposite[zindex].members[mindex].id == pIdData) {
                         this.structure.groupComposite[zindex].members[mindex].set_rol(Rol.BranchChief);
-                        console.log("BORRE UN JEFE DE ZONA");
                         return true;
                     }
                 }
