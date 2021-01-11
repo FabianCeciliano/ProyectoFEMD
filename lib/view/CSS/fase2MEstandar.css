@@ -48,12 +48,30 @@ p{
 #overlayAporteCCG{
     padding: 2%;
     border-radius: 10px;
+    display: none;
+    background-color: rgba(82, 96, 99, 0.425);
+    cursor: pointer;
+    width: auto;
+    height: 90%;
+}
+
+#overlayMGrups{
+    padding: 2%;
+    border-radius: 10px;
     display: block;
     background-color: rgba(82, 96, 99, 0.425);
     cursor: pointer;
     width: auto;
     height: 90%;
 }
+
+
+div.ex1 {
+    background-color: rgba(24, 26, 27, 0.342);
+    width: 1070px;
+    height: 350px;
+    overflow: scroll;
+  }
 
 
 
@@ -560,24 +578,7 @@ p{
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* MENU BAR */
 #showEstBG{
     display: none;
     position:absolute;
@@ -615,3 +616,102 @@ pre.myTXT {
     position: absolute;
     padding: 5%;
 }
+
+
+
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    width: 1040px;
+    height: 100px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    width: 1040px;
+    height: 100px;
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown a:hover {background-color: #ddd;}
+  .show {display: block;}
+
+
+
+
+
+
+
+  .dropbtnX {
+    /* background-image: "../resources/notificacion.svg";
+    border: none;
+    cursor: pointer; */
+
+    background-image: url("../resources/notificacion.svg"); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 0px 0px;  /* equivalent to 'top left' */
+    border: none;           /* assuming we don't want any borders */
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    height: 50px;           /* make this the size of your image */
+    padding-left: 50px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+  }
+  
+  .dropbtnX:hover, .dropbtnX:focus {
+    background-color: #2980B9;
+  }
+  
+  .dropdownX {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdownX-content {
+    width: 1040px;
+    height: 100px;
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdownX-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdownX a:hover {background-color: #ddd;}
+  .show {display: block;}
+
+
+

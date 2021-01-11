@@ -73,6 +73,11 @@
         <!-- //////////////////////////////////////////////////////////////////// -->
         <!--                    BANNER Y BOTONES SUPERIORES                       -->
         <!-- //////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
         <div class="row bannerbuttonList">
 
             <!--BANNER-->
@@ -86,7 +91,18 @@
 
             <!--SOBRE-->
             <div class="col-2 p-1">
-                <img onclick="showEst()" class="img-responsive eye p-3" src="../resources/notificacion.svg">
+
+                <div class="dropdownX p-2">
+                    <button onclick="myFunctionX()" class="dropbtnX"></button>
+                    <div id="myDropdownX" class="dropdownX-content">
+                        <a href="#home">Home</a>
+                        <a href="#about">About</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </div>
+
+                <!-- <img onclick="showEst()" class="img-responsive eye p-3" src="../resources/notificacion.svg"> -->
+
             </div>
 
             <!--SELECTBOX-->
@@ -211,8 +227,7 @@
                             <img class="mx-auto d-block over" src="../resources/F2Detalle.png">
                         </div>
                         <div class="col-6 align-self-center">
-                            <input class="myborderMedium-XL-L" id="" type="text " placeholder="Detalle"
-                                required>
+                            <input class="myborderMedium-XL-L" id="" type="text " placeholder="Detalle" required>
                         </div>
                     </div>
 
@@ -246,6 +261,60 @@
 
 
 
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!--                             MIS GRUPOS                               -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <div id="overlayMGrups">
+
+                    <div class="row ustify-content-center p-3">
+                        <div class="col-11">
+                            <img class="mx-auto d-block over" src="../resources/F2MisGrupos.svg">
+                        </div>
+                    </div>
+
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                          SCROLL AREA                                 -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="ex1">
+
+                        <!-- //////////////////////////////////////////////////////////////////// -->
+                        <!--                              MENU BAR                                -->
+                        <!-- //////////////////////////////////////////////////////////////////// -->
+                        <div class="dropdown p-2">
+                            <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+                            <div id="myDropdown" class="dropdown-content">
+                                <a href="#home">Home</a>
+                                <a href="#about">About</a>
+                                <a href="#contact">Contact</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                       FIN  SCROLL AREA                                 -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    </br>
+
+
+
+                </div>
+
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!--                          FIN DE MIS GRUPOS                           -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
             </div>
 
 
@@ -263,9 +332,10 @@
 
         </div>
     </div>
-
+    <script type="text/javascript" src="./backendFunctions.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js "
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx "
+        crossorigin="anonymous "></script>
 </body>
-
-</html>
 
 </html>
