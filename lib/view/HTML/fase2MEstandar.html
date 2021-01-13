@@ -1,0 +1,341 @@
+<!-- hola -->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@1,900&family=Roboto:ital,wght@1,900&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="../CSS/fase2MEstandar.css">
+    <title>Main Page FEMD</title>
+
+</head>
+
+<body>
+
+
+    <!-- //////////////////////////////////////////////////////////////////// -->
+    <!--                   MUESTRA LOS MENSAJES DE ERROR                       -->
+    <!-- //////////////////////////////////////////////////////////////////// -->
+    <div id="errorBG" onclick="off()">
+        <div id="error" onclick="off()">
+            <h2 class="headertekst">Error</h2>
+            <img src="https://www.nicepng.com/png/full/225-2255762_error404-error-404-icono-png.png" alt="Paris"
+                class="center">
+            <h2 id="msgError" class="headertekst">NADA</h2>
+        </div>
+    </div>
+
+
+
+    <!-- //////////////////////////////////////////////////////////////////// -->
+    <!--                    MUESTRA LAS NOTIFICACION                          -->
+    <!-- //////////////////////////////////////////////////////////////////// -->
+    <div id="msgBG" onclick="off()">
+        <div id="msg" onclick="off()">
+            <h2 class="headertekst">Mensaje</h2>
+            <img src="https://icons-for-free.com/iconfiles/png/512/complete+done+green+success+valid+icon-1320183462969251652.png"
+                alt="Paris" class="center">
+            <h2 id="msgText" class="headertekst">NADA</h2>
+        </div>
+    </div>
+
+    <!-- //////////////////////////////////////////////////////////////////// -->
+    <!--                      MUESTRA LA ESTRUCTURA                           -->
+    <!-- //////////////////////////////////////////////////////////////////// -->
+    <div id="showEstBG" onclick="off()">
+        <div id="showEst" onclick="off()">
+            <h2 class="headertekst">Estructura</h2>
+            <pre class="myTXT" id="msgData"></pre>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="container-fluid ">
+
+
+
+        <!-- //////////////////////////////////////////////////////////////////// -->
+        <!--                    BANNER Y BOTONES SUPERIORES                       -->
+        <!-- //////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+        <div class="row bannerbuttonList">
+
+            <!--BANNER-->
+            <div class="col-2 p-1">
+                <img class="img-responsive Ibanner" src="../resources/banner.svg">
+            </div>
+
+            <!--ESPACIO-->
+            <div class="col-7">
+            </div>
+
+            <!--SOBRE-->
+            <div class="col-2 p-1">
+
+                <div class="dropdownX p-2">
+                    <button onclick="myFunctionX()" class="dropbtnX"></button>
+                    <div id="myDropdownX" class="dropdownX-content">
+                        <a href="#home">Home</a>
+                        <a href="#about">About</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </div>
+
+                <!-- <img onclick="showEst()" class="img-responsive eye p-3" src="../resources/notificacion.svg"> -->
+
+            </div>
+
+            <!--SELECTBOX-->
+            <div>
+                </br></br>
+                <div class="boxMin">
+                    <select onclick="" class="selecBox" id="loging" type="submit "
+                        style="border: 0; background: transparent ">
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <!-- //////////////////////////////////////////////////////////////////// -->
+        <!--              FIN  DE  BANNER Y BOTONES SUPERIORES                    -->
+        <!-- //////////////////////////////////////////////////////////////////// -->
+
+
+
+
+        <div class="row bannerbuttonList">
+
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <!--                        BOTONES IZQUIERDA                             -->
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <div class="col-2 p-4">
+                <button id="IdBMovimiento" type="submit" onclick="BMovimiento()"
+                    style="border: 0; background: transparent">
+                    <img class="buttonList" src="../resources/F2Mis Grupos.svg" alt="">
+                </button>
+
+
+                <button id="IdBCreateEstructura" type="submit" onclick="BCreateEstructura()"
+                    style="border: 0; background: transparent">
+                    <img class="buttonList" src="../resources/F2Env.Aporte.svg" alt="">
+                </button>
+
+                <button id="IdBAdmMiembro" type="submit" onclick="BAdmMiembro()"
+                    style="border: 0; background: transparent">
+                    <img class="buttonList" src="../resources/F2Noticias.svg" alt="">
+                </button>
+
+
+                <button id="IdBAsignarMonior" type="submit" onclick="BAsignarMonior()"
+                    style="border: 0; background: transparent">
+                    <img class="buttonList" src="../resources/F2R.Participación.svg" alt="">
+                </button>
+            </div>
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <!--                    FIN DE  BOTONES IZQUIERDA                         -->
+            <!-- //////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <!--                              MARCO GRIS                              -->
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <div class="col-10">
+                <br>
+
+
+
+
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!--                               APORTE CCG                             -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <div id="overlayAporteCCG">
+
+                    <div class="row ustify-content-center p-3">
+                        <div class="col-11">
+                            <img class="mx-auto d-block over" src="../resources/F2Aporte CCG.svg">
+                        </div>
+                    </div>
+
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                                  TITULO                              -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="row  justify-content-center p-3">
+                        <div class="col-2 align-self-center">
+                            <img class="mx-auto d-block over" src="../resources/F2Titulo_.svg">
+                        </div>
+                        <div class="col-6 align-self-center">
+                            <input class="myborderMedium-XL" id="movimientoCedula" type="text " placeholder="Titulo"
+                                required>
+                        </div>
+                    </div>
+
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                                  TIPO                                -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="row  justify-content-center p-3">
+
+                        <div class="col-2"></div>
+
+                        <div class="col-2 align-self-center">
+                            <img class="mx-auto d-block over" src="../resources/F2TIPO_.svg">
+                        </div>
+
+                        <div class="col-2"></div>
+
+                        <div class="col-6 align-self-center">
+                            <div class="boxXL">
+                                <select onclick="showRamasMember()" class="selecBox" id="zonaMiembro1" type="submit "
+                                    style="border: 0; background: transparent ">
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                                  TIPO                                -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="row  justify-content-center p-3">
+                        <div class="col-2 align-self-center">
+                            <img class="mx-auto d-block over" src="../resources/F2Detalle.png">
+                        </div>
+                        <div class="col-6 align-self-center">
+                            <input class="myborderMedium-XL-L" id="" type="text " placeholder="Detalle" required>
+                        </div>
+                    </div>
+
+
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                                BOTONES                               -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="row  justify-content-center p-4">
+                        <div class="col-12 align-self-center"></div>
+                        <button type="submit" onclick="agregarMiembroAGrupo()"
+                            style="border: 0; background: transparent">
+                            <img class="mx-auto d-block " src="../resources/F2Cancelar.svg" alt="">
+                        </button>
+                        <button type="submit" onclick="agregarMiembroAGrupo()"
+                            style="border: 0; background: transparent">
+                            <img class="mx-auto d-block " src="../resources/F2Enviar.svg" alt="">
+                        </button>
+                    </div>
+                </div>
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!--                          FIN DE  APORTE CCG                          -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!--                             MIS GRUPOS                               -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <div id="overlayMGrups">
+
+                    <div class="row ustify-content-center p-3">
+                        <div class="col-11">
+                            <img class="mx-auto d-block over" src="../resources/F2MisGrupos.svg">
+                        </div>
+                    </div>
+
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                          SCROLL AREA                                 -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="ex1">
+
+                        <!-- //////////////////////////////////////////////////////////////////// -->
+                        <!--                              MENU BAR                                -->
+                        <!-- //////////////////////////////////////////////////////////////////// -->
+                        <div class="dropdown p-2">
+                            <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+                            <div id="myDropdown" class="dropdown-content">
+                                <a href="#home">Home</a>
+                                <a href="#about">About</a>
+                                <a href="#contact">Contact</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                       FIN  SCROLL AREA                                 -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    </br>
+
+
+
+                </div>
+
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!--                          FIN DE MIS GRUPOS                           -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+    <script type="text/javascript" src="./backendFunctions.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js "
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx "
+        crossorigin="anonymous "></script>
+</body>
+
+</html>
