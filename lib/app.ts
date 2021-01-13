@@ -9,6 +9,15 @@ import controller from './controller/Controller'
 
 require('dotenv').config({path: 'variables.env'});
 var path = require('path');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+
+declare module "express-session" {
+   interface Session {
+     user: string;
+     //loggedIn:Boolean;
+   }
+ }
 
 class App {
 
@@ -23,6 +32,16 @@ class App {
       this.app.use(express.static(path.resolve(__dirname+'../..')));
       this.app.use(express.static(path.resolve(__dirname+'../../lib/view')));
       this.app.use(express.static(path.resolve(__dirname+'../../lib/view/HTML')));
+      this.app.use(cookieParser());
+      this.app.use(session({
+         key: 'user_sid',
+         secret: 'somerandonstuffs',
+         resave: false,
+         saveUninitialized: false,
+         cookie: {
+             expires: 600000
+         }
+     }));
       this.app.engine('html', require('ejs').renderFile);
       this.config();
       this.mongoSetup();

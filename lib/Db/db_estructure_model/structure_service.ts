@@ -4,6 +4,7 @@ import { IStructure } from "./struc_model";
 import structures from "./struc_schema";
 import { IGroup } from "./grupo_model";
 import { Request, response, Response } from "express";
+import { verify } from "crypto";
 
 export default class StructureService {
   /*
@@ -77,7 +78,7 @@ export default class StructureService {
     idMovement:number,
     callback: any
   ) {
-    console.log(" -- Prueba Miembro en Grupo --");
+    console.log("-- Prueba Miembro en Grupo --");
     console.log(zoneName, branchId, groupId, memberId)
     structures.update(
       {_id:idMovement},
@@ -427,6 +428,244 @@ export default class StructureService {
 		  },callback
 		);
 		console.log(" -- Jefe Insertado -- ");
-	} 
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  //    FUNCIONES PARA NECESARIOS PARA OBTENER EL ROL SEGUN ALGUN ID                             //
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  public delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  //    Verificar si un id esta en el nivel principal                                            //
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+
+  public async isAsesor(memberId:String):Promise<Boolean>{
+    var isAsesor:Boolean = null;
+
+    await structures.find({"miembros":memberId},function(err,response:IStructure[]){
+      if (err) {
+        console.log("Error al obtener 'isAsesor'"); 
+      } else {
+        if(response.length>0){
+          isAsesor=true;
+        }else{
+          isAsesor=false
+        }
+        // for (let index = 0; index < response.length; index++) {
+        //   if(response[index].miembros.find(element=>element==memberId)){
+        //     movementId=response[index]._id;
+        //   }
+        // }
+      }      
+    })
+    this.delay(1000);
+
+    return isAsesor;
+
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  //    Verifica si el id es algun tipo de jefe o monitor y una que ejecura todas                //
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+
+  public async isZoneChief(memberId:String):Promise<Boolean>{
+    var isChief:Boolean = null;
+
+    await structures.find({"zonas.jefes":memberId},function(err,response:IStructure[]){
+      if(err){
+        console.log("Error al obtener 'isZoneChief'")
+      }else{
+        if(response.length>0){
+          isChief=true;
+          console.log(response);
+        }else{
+          isChief=false
+          console.log("lista vacia");
+        }
+      }
+    })
+    this.delay(1000);
+
+    return isChief;
+
+  }
+
+  public async isBranchChief(memberId:String):Promise<Boolean>{
+    var isChief:Boolean = null;
+
+    await structures.find({"zonas.ramas.jefes":memberId},function(err,response:IStructure[]){
+      if(err){
+        console.log("Error al obtener 'isBranchChief'")
+      }else{
+        if(response.length>0){
+          isChief=true;
+          console.log(response);
+        }else{
+          isChief=false
+          console.log("lista vacia");
+        }
+      }
+    })
+    this.delay(1000);
+
+    return isChief;
+
+  }
+
+  public async isGroupChief(memberId:String):Promise<Boolean>{
+    var isChief:Boolean = null;
+
+    await structures.find({"zonas.ramas.grupos.jefes":memberId},function(err,response:IStructure[]){
+      if(err){
+        console.log("Error al obtener 'isGroupChief'")
+      }else{
+        if(response.length>0){
+          isChief=true;
+          console.log(response);
+        }else{
+          isChief=false
+          console.log("lista vacia");
+        }
+      }
+    })
+    this.delay(1000);
+
+    return isChief;
+
+  }
+
+  public async isMonitor(memberId:String):Promise<Boolean>{
+    var isChief:Boolean = null;
+
+    await structures.find({"zonas.ramas.monitores":memberId},function(err,response:IStructure[]){
+      if(err){
+        console.log("Error al obtener 'isMonitor'")
+      }else{
+        if(response.length>0){
+          isChief=true;
+          console.log(response);
+        }else{
+          isChief=false
+          console.log("lista vacia");
+        }
+      }
+    })
+    this.delay(1000);
+
+    return isChief;
+
+  }
+
+  public async isSomeChief(memberId:String):Promise<Boolean>{
+    var isChief:Boolean = null;
+
+    await this.isZoneChief(memberId).then(async (value)=>{
+      if(!value){
+        await this.isBranchChief(memberId).then(async (value)=>{
+          if(!value){
+            await this.isGroupChief(memberId).then(async (value)=>{
+              if(!value){
+                await this.isMonitor(memberId).then((value)=>{
+                  if(!value){
+                    isChief=false
+                  }else{
+                    isChief=true
+                  }
+                })
+              }else{
+                isChief=true
+              }
+            })
+          }else{
+            isChief=true
+          }
+        })
+      }else{
+        isChief=true
+      }
+    })
+    this.delay(1000);
+
+    return isChief
+
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  //    Verifica si el id miembro de un grupo, para el rol mas simple                            //
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+
+  public async isGroupMember(memberId:String):Promise<Boolean>{
+    var isMember:Boolean = null;
+
+    await structures.find({"zonas.ramas.grupos.miembros":memberId},function(err,response:IStructure[]){
+      if(err){
+        console.log("Error al obtener 'isMonitor'")
+      }else{
+        if(response.length>0){
+          isMember=true;
+          console.log(response);
+        }else{
+          isMember=false
+          console.log("lista vacia");
+        }
+      }
+    })
+    this.delay(1000);
+
+    return isMember;
+
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  //    FUNCION QUE UNE A LAS ANTERIORES PARA OBTENER EL ROL EN SI                               //
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+
+  public async getMemberRol(memberId:String):Promise<Number>{
+    var typeRol:Number = null;
+
+    await this.isAsesor(memberId).then(async (value)=>{
+      if(!value){
+        await this.isSomeChief(memberId).then(async (value)=>{
+          if(!value){
+            await this.isGroupMember(memberId).then((value)=>{
+              if(value){
+                typeRol=3 // rol del miembro de grupo
+              }
+            })
+          }else{
+            typeRol=2 // rol de los jefes y monitores
+          }
+        })
+      }else{
+        typeRol=1 // rol del Asesor general y comite
+      }
+    })
+    this.delay(1000);
+
+    //while(typeRol==null){}
+    return typeRol;
+
+  }
+
+
+  
+  public _addAsesor(
+    idAsesor: String,
+    idMovement:number,
+    callback: any
+  ) {
+    console.log("-- Adding asesor to structure --");
+    //structures.update({_id:idMovement}, {$push: { miembros: idAsesor  } },callback);
+
+    structures.update(
+      {_id:idMovement},
+      { $push: { "miembros": idAsesor } },
+      { arrayFilters: [], multi: true },callback
+    );
+
+    console.log(" -- Miembro Insertado -- ");
+  }
+
 
 }

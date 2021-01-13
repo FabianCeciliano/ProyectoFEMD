@@ -17,6 +17,10 @@ export class Gestor {
         this.structure.members.push(new Member(direction,rol,false,id,name,email,telephone));
     }
 
+    public addAssesor(member:Member){
+        this.structure.members.push(member);
+    }
+
     public getAssesor() :Member{
         for (let index = 0; index < this.structure.members.length; index++) {
             if(this.structure.members[index].get_rol()==5){
