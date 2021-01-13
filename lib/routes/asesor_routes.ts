@@ -6,6 +6,7 @@ import dbController from "../Db/db_controllers/databaseController";
 import { IStructure } from "../Db/db_estructure_model/struc_model";
 import { IUser } from "../Db/db_user_model/member_model";
 import { IRama } from "../Db/db_estructure_model/rama_model";
+import { ContributionType } from "model/ContributionType";
 
 
 export class AsesorRotes {
@@ -1309,6 +1310,30 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       } else {
         res.send({ status: 0 });
       }
+    });
+
+
+        ////////////////////////////////////////////////////////////////////
+    //                      AGREGAR UN NUEVO USUARIO                  // 
+    ////////////////////////////////////////////////////////////////////
+    app.post("/enviarAporte", function (req: Request, res: Response) {
+      //console.log(req.body)
+
+      var submitted = controller.addNewContribution(
+        req.body.id,
+        req.body.name,
+        req.body.celular
+      );
+
+      if(submitted){
+        //Guardamos en DB?
+        //dbController.create_user(req);
+        ///                              ///
+        res.send({ status: 1 });
+      }else{
+        res.send({ status: 0 });
+      }
+      
     });
 
 

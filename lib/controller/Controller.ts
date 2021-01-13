@@ -305,6 +305,10 @@ export class Controller {
         this.movement.getStructure().verEstructura();
     };
 
+    public addNewContribution (emissor:String, type:String, description:String) : Boolean {
+        return this.movement.addContribution(emissor, type, description);
+    };
+
 }
 
 export default new Controller();

@@ -1,5 +1,8 @@
 import { Gestor } from './StructureGestor';
 import { MemberGestor } from './MemberGestor';
+import { Cupula } from '../model/Cupula';
+import { Contribution } from '../model/Contribution';
+import { ContributionType } from 'model/ContributionType';
 
 export class Movement{
 
@@ -15,6 +18,7 @@ export class Movement{
     private internationalGrowth :boolean;
     private gStructure:Gestor;
     private gMembers:MemberGestor;
+    private cupula : Cupula;
 
     constructor(cedJuridica:number, name:String, website :String, country : String,phoneNumber: number){
         this.cedJuridica = cedJuridica;
@@ -24,6 +28,7 @@ export class Movement{
         this.phoneNumber = phoneNumber;
         this.gStructure = new Gestor();
         this.gMembers = new MemberGestor();
+        this.cupula = new Cupula();
     }
 
     getMovementName():String{
@@ -44,6 +49,11 @@ export class Movement{
 
     getMember(idMember:number){
         return this.gMembers.getMember(idMember);
+    }
+
+    addContribution(emissor:String, type:String, description:String) : Boolean{
+    let contribution = new Contribution(emissor, type, description);
+    return this.cupula.addContribution(contribution);
     }
 
 }
