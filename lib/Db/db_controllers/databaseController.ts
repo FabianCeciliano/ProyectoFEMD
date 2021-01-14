@@ -46,9 +46,9 @@ export class dbController {
     return structureFromDB;
   }
   
-    ///                                                                   ///
-  //                          Validate User                                //
-  //                  validar que existan las credenciales en la base      //
+  ///                                                                   ///
+  //                         Validate User                               //
+  //               validar que existan las credenciales en la base       //
   ///                                                                   ///
   public async validateUser(user: String, password: String):Promise<String>{
     var idMember:String=null;

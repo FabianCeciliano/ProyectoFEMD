@@ -11,30 +11,6 @@ import {AccesDirector} from "../controller/AccesDirector"
 export class CommonRoutes {
     public route(app: Application) {
 
-        app.get('/prueba', function (req: Request, res: Response) {
-            //res.send({ message: 'Hola amigos'});
-            var promise=dbController.getAllMember();
-            promise.then((value)=>{
-                if(value.length>0){
-                    console.log(value);
-                }else{
-                    console.log("vacio");
-                }
-            })
-        });
-
-        app.get('/prueba2', function (req: Request, res: Response) {
-            //res.send({ message: 'Hola amigos'});
-            var promise=dbController.getOrganization();
-            promise.then((value)=>{
-                if(value!=null){
-                    console.log(value);
-                }else{
-                    console.log("no hay estructura");
-                }
-            })
-        });
-
         app.get('/', function (req: Request, res: Response) {
             //res.send({ message: 'Hola amigos'});
             res.send("hi");
@@ -45,12 +21,16 @@ export class CommonRoutes {
             res.render(path.resolve(htmlPath+'mainPage.html'));
         });
 
+        app.get('/miembroEstandar',function(req: Request, res: Response){
+            res.render(path.resolve(htmlPath+'fase2MEstandar.html'));            
+        })
+
         app.get('/singup',function(req: Request, res: Response){
             res.render(path.resolve(htmlPath+'singUp.html'));            
         })
 
         app.post('/singup',function(req: Request, res: Response){
-            
+            var userId = req.body.userId;
             var username = req.body.userName;
             var password = req.body.password;
 

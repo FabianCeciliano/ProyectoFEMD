@@ -190,7 +190,7 @@
                             <img class="mx-auto d-block over" src="../resources/F2Emisor_.svg">
                         </div>
                         <div class="col-6 align-self-center">
-                            <input class="myborderMedium-XL" id="movimientoCedula" type="text " placeholder="Emisor"
+                            <input class="myborderMedium-XL" id="emisorAporte" type="text " placeholder="Emisor"
                                 required>
                         </div>
                     </div>
@@ -210,11 +210,11 @@
 
                         <div class="col-6 align-self-center">
                             <div class="boxXL">
-                                <select onclick="showRamasMember()" class="selecBox" id="zonaMiembro1" type="submit "
+                                <select onclick="showRamasMember()" class="selecBox" id="tipoAporte" type="submit "
                                     style="border: 0; background: transparent ">
                                     <option value="Petitoria">Petitoria</option>
                                     <option value="Agradecimiento">Agradecimiento</option>
-                                    <option value="Contribucion">Contribucion</option>
+                                    <option value="Ofrecimiento">Contribucion</option>
                                 </select>
                             </div>
                         </div>
@@ -229,7 +229,7 @@
                             <img class="mx-auto d-block over" src="../resources/F2Detalle.png">
                         </div>
                         <div class="col-6 align-self-center">
-                            <input class="myborderMedium-XL-L" id="" type="text " placeholder="Detalle" required>
+                            <input class="myborderMedium-XL-L" id="descripcionAporte" type="text " placeholder="Detalle" required>
                         </div>
                     </div>
 
@@ -239,11 +239,7 @@
                     <!-- //////////////////////////////////////////////////////////////////// -->
                     <div class="row  justify-content-center p-4">
                         <div class="col-12 align-self-center"></div>
-                        <button type="submit" onclick="agregarMiembroAGrupo()"
-                            style="border: 0; background: transparent">
-                            <img class="mx-auto d-block " src="../resources/F2Cancelar.svg" alt="">
-                        </button>
-                        <button type="submit" onclick="agregarMiembroAGrupo()"
+                        <button type="submit" onclick="enviarNuevoAporte()"
                             style="border: 0; background: transparent">
                             <img class="mx-auto d-block " src="../resources/F2Enviar.svg" alt="">
                         </button>

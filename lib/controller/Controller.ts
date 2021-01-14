@@ -312,6 +312,24 @@ export class Controller {
         this.movement.getStructure().verEstructura();
     };
 
+    public addNewContribution (emissor:String, type:String, description:String) : Boolean {
+        return this.movement.addContribution(emissor, type,description);
+    };
+
+    public addAssesorToCupule (idAsesor : number, nombreAsesor : String, celularAsesor : number, correoAsesor : String, direccionAsesor : String ) : Boolean {
+  
+        return this.movement.setAsessorToCupule(idAsesor, nombreAsesor, celularAsesor, correoAsesor, direccionAsesor);
+    };
+
+    public addZoneChiefToCupule(  idMember:number ) : Boolean{
+
+        var member:Member = this.movement.getMembers().getMember(idMember).clone();
+        return this.movement.addComitteeMember(member);
+
+    }
+
+
+
 }
 
 export default new Controller();

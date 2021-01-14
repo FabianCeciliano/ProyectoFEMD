@@ -60,7 +60,7 @@
         </div>
     </div>
 
-    
+
 
 
 
@@ -126,9 +126,10 @@
                     <img class="buttonList" src="../resources/BConsultas.svg" alt="">
                 </button>
 
-                <!-- <button type="submit" onclick="" style="border: 0; background: transparent">
-                    <img class="buttonList" src="../resources/verEstructura.svg" alt="">
-                </button> -->
+                <button id="IdBandejaApote" type="submit" onclick="BAporte()"
+                    style="border: 0; background: transparent">
+                    <img class="buttonList" src="../resources/FFBBandejaAporte.svg" alt="">
+                </button>
 
             </div>
 
@@ -138,6 +139,44 @@
             <!-- //////////////////////////////////////////////////////////////////// -->
             <div class="col-10">
                 <br><br><br>
+
+
+
+                  <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!--                            BANDEJA APORTE                                 -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <div id="overlayBandejaAporte">
+
+                    <div class="row ustify-content-center p-3">
+                        <div class="col-11">
+                            <img class="mx-auto d-block over" src="../resources/FFBandeja de aportes.svg">
+                        </div>
+                    </div>
+
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                          SCROLL AREA                                 -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="ex1" id="scrollAreaAporte">
+
+
+                    </div>
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                       FIN  SCROLL AREA                                 -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    </br>
+                </div>
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!--                           FIN BANDEJA APORTE                              -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+
 
 
                 <!-- //////////////////////////////////////////////////////////////////// -->
@@ -289,7 +328,7 @@
                                 <div class="col-6 align-self-center">
                                     <img class="mx-auto d-block over" src="../resources/Ced. Juridica.svg">
                                 </div>
-                                <div class="col-6 align-self-center">
+                                <div class="col-6 align-self-center">r
                                     <input class="myborderMedium-S" id="movimientoCedula" type="text "
                                         placeholder="Ced Juridica" required>
                                 </div>
@@ -2002,7 +2041,7 @@
                             <!-- //////////////////////////////////////////////////////////////////// -->
                             <!--                         BOTONES DEL 1 AL 3                            -->
                             <!-- //////////////////////////////////////////////////////////////////// -->
-                            <div class="row justify-content-center p-3">
+                            <div class="row justify-content-center p-2">
                                 <button class="about" type="submit" onclick="BFormularioConsultaUNo()"
                                     style="border: 0; background: transparent" class="social ">
                                     <img class="mx-auto d-block Boton" src="../resources/BPosiconGrupo.svg">
@@ -2010,7 +2049,7 @@
                             </div>
 
 
-                            <div class="row justify-content-center p-5">
+                            <div class="row justify-content-center p-2">
                                 <button class="about" type="submit" onclick="BFormularioConsultaDos()"
                                     style="border: 0; background: transparent" class="social ">
                                     <img class="mx-auto d-block Boton" src="../resources/BParticipacionGrupo.svg"
@@ -2019,12 +2058,27 @@
                             </div>
 
                             <!-- ///// -->
-                            <div class="row justify-content-center p-3">
+                            <div class="row justify-content-center p-2">
                                 <button class="about" type="submit" onclick="BFormularioConsultaTres()"
                                     style="border: 0; background: transparent" class="social ">
                                     <img class="mx-auto d-block Boton" src="../resources/BmiembroPorNivel.svg" alt="">
                                 </button>
                             </div>
+
+
+                            <!-- ///// -->
+                            <div class="row justify-content-center p-2">
+                                <button class="about" type="submit" onclick="BFormularioAA()"
+                                    style="border: 0; background: transparent" class="social ">
+                                    <img class="mx-auto d-block Boton" src="../resources/reportesdeAporets.svg" alt="">
+                                </button>
+                            </div>
+
+
+
+
+
+
                         </div>
 
 
@@ -2381,6 +2435,124 @@
                             <!--                                FIN DE FORMULARIO                     -->
                             <!-- //////////////////////////////////////////////////////////////////// -->
 
+     
+     
+     
+     
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <!--                  FORMULARIO  REPORTE DE APORTES                      -->
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <div id="FormularioRA">
+
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <!--                                TITULO                                 -->
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+
+                                <div class=" row p-2 ">
+                                    <div class="col-12 ">
+                                        <img class="mx-auto d-block over " src="../resources/FF2Reporte de Aportes.svg ">
+                                    </div>
+                                </div>
+
+
+
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <!--                                TITULO                                 -->
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <div class="row p-2 ">
+                                    <div class="col-12 ">
+                                        <img class="mx-auto d-block over " src="../resources/FF2Seleccionar Mes.svg">
+                                    </div>
+                                </div>
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <!--                                TEXT AREA                              -->
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <div class="row justify-content-center p-4">
+                                    <div class="col-1 align-self-center">
+                                        <div class="boxMin">
+                                            <select class="selecBox" id="consulGrupoName" type="submit "
+                                                style="border: 0; background: transparent ">
+                                                <option value="Enero">Enero</option>
+                                                <option value="Febrero">Febrero</option>
+                                                <option value="Marzo">Marzo</option>
+                                                <option value="Abril">Abril</option>
+                                                <option value="Mayo">Mayo</option>
+                                                <option value="Junio">Junio</option>
+                                                <option value="Julio">Julio</option>
+                                                <option value="Agosto">Agosto</option>
+                                                <option value="Setiembre">Setiembre</option>
+                                                <option value="Octubre">Octubre</option>
+                                                <option value="Noviembre">Noviembre</option>
+                                                <option value="Diciembre">Diciembre</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <!--                                TITULO                                 -->
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <div class="row p-2 ">
+                                    <div class="col-12 ">
+                                        <img class="mx-auto d-block over " src="../resources/FF2Tipo de Reporte.png">
+                                    </div>
+                                </div>
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <!--                                TEXT AREA                              -->
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <div class="row justify-content-center p-4">
+                                    <div class="col-1 align-self-center">
+                                        <div class="boxMin">
+                                            <select class="selecBox" id="consulGrupoName" type="submit "
+                                                style="border: 0; background: transparent ">
+                                                <option value="Petitoria">Petitoria</option>
+                                                <option value="Agradecimiento">AGradecimiento</option>
+                                                <option value="Ofrecimiento">Ofrecimiento</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <!--                                TITULO                                 -->
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <div class="row justify-content-center ">
+                                    <div class="col-12 ">
+                                        <img class="mx-auto d-block Boton3" src="../resources/FF2Descripción del Reporte.png ">
+                                    </div>
+                                </div>
+
+                              
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <!--                                TEXT AREA                              -->
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <div class="row justify-content-center p-2">
+                                    <input class="Bigmyborders" id="Descripción del Reporte" type="text "
+                                        placeholder="Descripción del Reporte">
+                                </div>
+
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <!--                                BOTON                                 -->
+                                <!-- //////////////////////////////////////////////////////////////////// -->
+                                <div class="row justify-content-center p-3 ">
+                                    <div class="col-6 align-self-center">
+                                        <button class="about " type="submit " onclick="consulGrupoFun()"
+                                            style="border: 0; background: transparent " class="social ">
+                                            <img class="mx-auto d-block" src="../resources/FFBoton.svg " alt=" ">
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                                
+                            </div>
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+                            <!--                           FIN DE FORMULARIO  RA                      -->
+                            <!-- //////////////////////////////////////////////////////////////////// -->
+
+
 
 
                         </div>
@@ -2412,4 +2584,4 @@
 
 </html>
 
-</html>
+</html>o

@@ -396,7 +396,12 @@ export class AsesorRotes {
           Number(String(first_Chief_Id).split("-", 2)[1])
         );
         if (result) {
-          ///                                                                      ///
+          ///
+
+          controller.addZoneChiefToCupule(
+            Number(String(first_Chief_Id).split("-", 2)[1])
+          );
+                                                                                ///
           dbController.assignBossZone(
             zoneName,
             String(first_Chief_Id).split("-", 2)[1],
@@ -418,7 +423,17 @@ export class AsesorRotes {
           Number(String(second_Chief_Id).split("-", 2)[1])
         );
         if (result && result2) {
-          ///                                                                      ///
+          ///
+          
+          controller.addZoneChiefToCupule(
+            Number(String(first_Chief_Id).split("-", 2)[1])
+          );
+
+          controller.addZoneChiefToCupule(
+            Number(String(second_Chief_Id).split("-", 2)[1])
+          );
+          
+          ///
           dbController.assignBossZone(
             zoneName,
             String(first_Chief_Id).split("-", 2)[1],
@@ -1078,6 +1093,14 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
         Number(req.body.telefono)
       );
 
+      controller.addAssesorToCupule(
+        Number(req.body.idAsesor),
+        req.body.nombreAsesor,
+        Number(req.body.celularAsesor),
+        req.body.correoAsesor,
+        req.body.direccionAsesor
+      );
+
       controller.addMember(Number(req.body.idAsesor),req.body.nombreAsesor,Number(req.body.celularAsesor),req.body.correoAsesor,req.body.direccionAsesor,false);
       controller.addAsesor(Number(req.body.idAsesor));
 
@@ -1315,6 +1338,29 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       } else {
         res.send({ status: 0 });
       }
+    });
+
+
+    //////////////////////////////////////////////////////////////////////////
+    //                      AGREGAR UN NUEVO APORTE                        // 
+    ////////////////////////////////////////////////////////////////////
+    app.post("/enviarAporte", function (req: Request, res: Response) {
+        
+      var submitted = controller.addNewContribution(
+        req.body.emissor,
+        req.body.tipo,
+        req.body.descripcion
+      );
+
+      if(submitted){
+        //Guardamos en DB?
+        //dbController.create_user(req);
+        ///                              ///
+        res.send({ status: 1 });
+      }else{
+        res.send({ status: 0 });
+      }
+      
     });
 
 
