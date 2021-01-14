@@ -1397,7 +1397,7 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       
       var month = req.body.month;
       var reportType = req.body.reportType;
-
+      console.log("XD: "+ month + reportType );
       var report = controller.generateReport(month, reportType);
       console.log("EL REPORTEEEEE: "+report);
 

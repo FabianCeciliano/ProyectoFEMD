@@ -5,39 +5,30 @@ import { ContributionType } from './ContributionType';
 
 export class CategoryReport implements Strategy{
 
-    private petitoryCount : number;
-    private contributionCount : number;
-    private offeringCount : number;
-    private gratitudeCount : number;
-    private reportDate : Date;
-    private actualMonth : String;
-
     constructor(){
-        
     }
-
 
     generateReport(contributionRepository: Contribution[], month : String, assesorName : String): String {
         var report = "\n\n\n Buenas Señor(a): "+assesorName+"\n\n";
-        this.petitoryCount = 0;
-        this.offeringCount = 0;
-        this.gratitudeCount = 0;
+        var petitoryCount = 0;
+        var offeringCount = 0;
+        var gratitudeCount = 0;
 
         contributionRepository.forEach(function (currentContribution) {
-            if(currentContribution.getMonth() == month){
+            if(currentContribution.getMonth().toLowerCase() == month){
                 if(currentContribution.getType() == ContributionType.Agradecimiento){
-                    this.gratitudeCount ++;
+                    gratitudeCount ++;
                 }
                 if(currentContribution.getType() == ContributionType.Ofrecimiento){
-                    this.offeringCount ++;
+                    offeringCount ++;
                 }
                 if(currentContribution.getType() == ContributionType.Petitoria){
-                    this.petitoryCount ++;
+                    petitoryCount ++;
                 }
             }
           });
-        report += "En el mes de "+ month + "se recibieron: "+ this.gratitudeCount + " aportes de gratitud, "
-         + this.offeringCount + " aportes de ofrecimiento y " + this.petitoryCount + " aportes de petitorios." ;
+        report += "En el mes de "+ month + "se recibieron: "+ gratitudeCount + " aportes de gratitud, "
+         + offeringCount + " aportes de ofrecimiento y " + petitoryCount + " aportes de petitoria." ;
         return report;
     }
 

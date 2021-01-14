@@ -32,26 +32,24 @@ export class Contribution{
     }
 
     public getMonth() : String{
-        var monthInt = new Intl.DateTimeFormat("en-US", { month: "long" }).format;
-        var monthName = monthInt(this.date.getMonth()); 
-        console.log(monthName);
-        return monthName;
+        var  months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        return months[this.date.getMonth()]; // "July" (or current month) 
     }
 
-    public getType() : ContributionType{
+    public getType() : ContributionType {
         return this.type;
-    }
-
-    public getEmissor() : String {
-        return this.emissor;
     }
 
     public getDate() : String {
         return this.date.toString();
     }
 
-    public getDescription() : String {
+    public getDescription() :  String {
         return this.description;
+    }
+
+    public getEmissor() : String {
+        return this.emissor;
     }
 
 }
