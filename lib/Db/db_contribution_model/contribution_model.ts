@@ -5,7 +5,7 @@ export interface IContribution {
     descripcion : String;
 }
     
-export const IContribution = {
+export const IContributionC = {
     emissor: String,
     type : String,
     date : String,

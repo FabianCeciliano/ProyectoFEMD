@@ -1104,14 +1104,6 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
         req.body.direccionAsesor
       );
 
-      controller.addAssesorToCupule(
-        Number(req.body.idAsesor),
-        req.body.nombreAsesor,
-        Number(req.body.celularAsesor),
-        req.body.correoAsesor,
-        req.body.direccionAsesor
-      );
-
       controller.addMember(Number(req.body.idAsesor),req.body.nombreAsesor,Number(req.body.celularAsesor),req.body.correoAsesor,req.body.direccionAsesor,false);
       controller.addAsesor(Number(req.body.idAsesor));
 
