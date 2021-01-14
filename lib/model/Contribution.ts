@@ -39,7 +39,6 @@ export class Contribution{
         return this.type;
     }
     
-
 }
 
 

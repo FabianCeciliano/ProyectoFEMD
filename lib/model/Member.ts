@@ -2,9 +2,10 @@
 import {Direction} from './Direction';
 import { Rol } from './Rol';
 import {Person} from './Person';
+import Subscriber from './Subscriber';
 
 
-export class Member extends Person{
+export class Member extends Person implements Subscriber{
     private direction : String;
     private rol: Rol;
     private facilitador: boolean;
@@ -23,6 +24,9 @@ export class Member extends Person{
         this.direction=direction;
         this.rol=rol;
         this.facilitador=facilitador;
+    }
+    agregarNoticia(id: Number): Boolean {
+        throw new Error('Method not implemented.');
     }
 
     public clone():Member{

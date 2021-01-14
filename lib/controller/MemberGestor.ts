@@ -2,6 +2,7 @@ import {Direction} from '../model/Direction';
 import {Member} from '../model/Member';
 import { StructureType } from '../model/StructureType';
 import { Rol } from '../model/Rol';
+import { Cupula } from 'model/Cupula';
 
 
 export class MemberGestor{

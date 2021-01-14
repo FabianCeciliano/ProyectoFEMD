@@ -7,6 +7,7 @@ export class CategoryReport implements Strategy{
 
     private report : String;
     private petitoryCount : number;
+    private contributionCount : number;
     private offeringCount : number;
     private gratitudeCount : number;
     private reportDate : Date;
@@ -18,7 +19,6 @@ export class CategoryReport implements Strategy{
 
 
     generateReport(contributionRepository: Contribution[], month : String, assesorName : String): String {
-
         this.report = "\n\n\n Buenas Señor(a): "+assesorName+"\n\n";
         this.petitoryCount = 0;
         this.offeringCount = 0;

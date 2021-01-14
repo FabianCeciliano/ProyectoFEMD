@@ -6,7 +6,9 @@ import dbController from "../Db/db_controllers/databaseController";
 import { IStructure } from "../Db/db_estructure_model/struc_model";
 import { IUser } from "../Db/db_user_model/member_model";
 import { IRama } from "../Db/db_estructure_model/rama_model";
+import { ContributionType } from "model/ContributionType";
 import { request } from "http";
+
 
 
 export class AsesorRotes {
@@ -824,6 +826,7 @@ export class AsesorRotes {
         req.body.direccion,
         Boolean(req.body.esMonitor)
       );
+    
       controller.printMembers();
       ///                              ///
       // dbController.update_user(req)
@@ -1101,8 +1104,17 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
         req.body.direccionAsesor
       );
 
+      controller.addAssesorToCupule(
+        Number(req.body.idAsesor),
+        req.body.nombreAsesor,
+        Number(req.body.celularAsesor),
+        req.body.correoAsesor,
+        req.body.direccionAsesor
+      );
+
       controller.addMember(Number(req.body.idAsesor),req.body.nombreAsesor,Number(req.body.celularAsesor),req.body.correoAsesor,req.body.direccionAsesor,false);
       controller.addAsesor(Number(req.body.idAsesor));
+
 
       if (status == true) {
         ///                                                                                 ///
@@ -1341,9 +1353,11 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
     });
 
 
-    //////////////////////////////////////////////////////////////////////////
-    //                      AGREGAR UN NUEVO APORTE                        // 
+
+     ////////////////////////////////////////////////////////////////////
+    //                            ENVIAR APORTE                        // 
     ////////////////////////////////////////////////////////////////////
+
     app.post("/enviarAporte", function (req: Request, res: Response) {
         
       var submitted = controller.addNewContribution(

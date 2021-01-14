@@ -96,10 +96,8 @@ export class Controller {
             return false
         }
 
-        
-            //let member = new Member(direction,rol,facilitador,id,name,email,telephone);
-        //this.insertMember(member);
-            
+        //let member = new Member(direction,rol,facilitador,id,name,email,telephone);
+        //this.insertMember(member);    
         //this.movement.getStructure().addMember(member,zoneName,branchName,groupName);
     };
     public insertMember (member:Member){
@@ -328,8 +326,5 @@ export class Controller {
 
     }
 
-
-
 }
 
-export default new Controller();

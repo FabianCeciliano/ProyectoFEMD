@@ -23,13 +23,9 @@ export class MonthlyReport implements Strategy{
                 this.totalCount ++;
             }
           });
-        this.report += "En el mes de "+ this.actualMonth + "se recibieron un total de "+ this.totalCount + " aportes." 
-        console.log(this.report);
+        this.report += "En el mes de " + this.actualMonth + " se recibieron " + this.totalCount +" aportes." 
         return this.report;
-
     }
-
-    
 
 }
 
