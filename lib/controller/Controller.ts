@@ -45,18 +45,25 @@ export class Controller {
     }
 
     public createMovement(cedJuridica:number, name:String, website :String, country : String,
-        phoneNumber: number, idAsesor : number, nombreAsesor : String, celularAsesor : number,
-        correoAsesor : String, direccionAsesor : String):boolean{
+        phoneNumber: number):boolean{
             
         var newMovement:Movement = new Movement(cedJuridica, name, website , country ,phoneNumber);
-        newMovement.getStructure().addAssessor(direccionAsesor,Rol.assessor,false,idAsesor,nombreAsesor,correoAsesor,phoneNumber);
         this.movementList.push(newMovement);
         this.movement = newMovement;
-        
         
         return true;
 
     }
+
+    public addAsesor(idAsesor : number){
+        
+        var assesor:Member = this.movement.getMember(idAsesor).clone();
+        this.movement.getStructure().addAssesor(assesor);
+
+        return true;
+
+    }
+
     public createNewZone (id:number, name:String) : Boolean {
         let result = this.movement.getStructure().addZone(new Composite_Level(id,name,StructureType.Zone))
         return result;
@@ -321,4 +328,3 @@ export class Controller {
 
 }
 
-export default new Controller();

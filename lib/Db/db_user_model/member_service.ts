@@ -1,4 +1,4 @@
-import { IUser } from './member_model';
+import { IUser, IUserC } from './member_model';
 import users from './member_schema';
 
 export default class UserService {
@@ -37,4 +37,25 @@ export default class UserService {
         })
         return usersFromDB;
     }
+
+    public delayy(ms: number) {
+        return new Promise( resolve => setTimeout(resolve, ms) );
+    }
+
+    public async validateUser(userName:String,password:String):Promise<String>{
+        var userId:String = null;
+
+        var x = await users.find({name:userName,telephone:password},async function(err,result:IUser[]){//NO "name" sino "userName" y No "telephone" sino "password"
+            if(err){
+                console.log("Error al validar usuario");
+            }else{
+                if(result.length>0){
+                    userId=result[0].memberId;
+                }
+            }
+        })
+
+        return userId;
+    }
+    
 }

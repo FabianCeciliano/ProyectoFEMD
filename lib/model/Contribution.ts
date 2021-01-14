@@ -34,8 +34,11 @@ export class Contribution{
         console.log(monthName);
         return monthName;
     }
-    
 
+    public getType() : ContributionType{
+        return this.type;
+    }
+    
 }
 
 

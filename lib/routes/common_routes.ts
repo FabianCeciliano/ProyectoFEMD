@@ -1,44 +1,19 @@
 import { Application, Request, Response } from 'express';
 var path = require('path');
+var session=require('express-session');
 const htmlPath = __dirname+'../../../lib/view/HTML/';
 import controller from '../controller/Controller'
 import dbController from "../Db/db_controllers/databaseController";
 
+import {Proxy} from  "../controller/Proxy";
+import {AccesDirector} from "../controller/AccesDirector"
+
 export class CommonRoutes {
     public route(app: Application) {
 
-        // Mismatch URL
-        /*app.all('*', function (req: Request, res: Response) {
-            res.status(404).send({ error: true, message: 'Check your URL please' });
-        });*/
-
-        app.get('/prueba', function (req: Request, res: Response) {
-            //res.send({ message: 'Hola amigos'});
-            var promise=dbController.getAllMember();
-            promise.then((value)=>{
-                if(value.length>0){
-                    console.log(value);
-                }else{
-                    console.log("vacio");
-                }
-            })
-        });
-
-        app.get('/prueba2', function (req: Request, res: Response) {
-            //res.send({ message: 'Hola amigos'});
-            var promise=dbController.getOrganization();
-            promise.then((value)=>{
-                if(value!=null){
-                    console.log(value);
-                }else{
-                    console.log("no hay estructura");
-                }
-            })
-        });
-
         app.get('/', function (req: Request, res: Response) {
             //res.send({ message: 'Hola amigos'});
-            res.render("hi");
+            res.send("hi");
         });
 
         app.get('/main', function (req: Request, res: Response) {
@@ -46,49 +21,77 @@ export class CommonRoutes {
             res.render(path.resolve(htmlPath+'mainPage.html'));
         });
 
+        app.get('/miembroEstandar',function(req: Request, res: Response){
+            res.render(path.resolve(htmlPath+'fase2MEstandar.html'));            
+        })
+
+        app.get('/singup',function(req: Request, res: Response){
+            res.render(path.resolve(htmlPath+'singUp.html'));            
+        })
+
+        app.post('/singup',function(req: Request, res: Response){
+            var userId = req.body.userId;
+            var username = req.body.userName;
+            var password = req.body.password;
+
+        })
+
         app.get('/login', function (req: Request, res: Response) {
             //res.send({ message: 'Hola amigos'});
             res.render(path.resolve(htmlPath+'LogIn.html'));
         });
+
+        app.post('/login', async function (req: Request, res: Response) {
+            console.log(req.body);
+            var facade = new Proxy(new AccesDirector());
+            //res.send(facade.verifyAcces(req.body.userName,req.body.password));
+            var memberId:String = null;
+            await facade.verifyAcces(req.body.userName,req.body.password).then((value)=>{
+                memberId=value;
+            })
+            
+            if(memberId==""){
+                console.log("usuario no autorizado");
+                res.send({ status: 0 });// 0 es que no es un usuario, creo que deberia ser redireccionado al singUp
+            }else{
+                var memberRol:String = null;
+                await facade.getRol(memberId).then((value)=>{
+                    memberRol=value
+                })
+                if(memberRol!=null){
+                    res.send({ status: 1 , route:memberRol});
+                }else{
+                    res.send({ status: 2 });// 2 es que no tiene rol, so...?
+                }
+            }
+
+            /*if((req.body.userName=="fabian" && req.body.password=="123")){
+                req.session.user="fabian";
+                res.send("10/10");
+            }else{
+                res.send({ status: 1 , route:"/main"});
+            }*/
+            
+        });
         
+        app.get('/comprobar', function (req: Request, res: Response) {
+            if(req.session.user){
+                res.send("iniciada");
+            }else{
+                res.send("no Iniciada");
+            }
+            
+        });
+
+        app.get('/logOut', function (req: Request, res: Response) {
+            req.session.user=null;
+            res.send("logOuting")
+        });
+
         app.get('/about', function (req: Request, res: Response) {
             //res.send({ message: 'Hola amigos'});
             res.render(path.resolve(htmlPath+'about.html'));
         });
-
-        /*app.get('/asesorMain', function (req: Request, res: Response) {
-            //res.send({ message: 'Hola amigos'});
-            res.render(path.resolve(htmlPath+'AsesorGeneral.html'));
-        });
-
-        app.post('/resasesorMain', function (req: Request, res: Response) {
-            //res.send({ message: 'Hola amigos'});
-            //res.sendFile(path.resolve(htmlPath+'asesorGeneralMainPage.html'));
-            console.log(req.body);
-            console.log(req.body.zonaName);
-            console.log(req.body.branches);
-            res.send("jeje");
-        });
-
-        app.post('/crearEstructura', function (req: Request, res: Response) {
-            controller.createNewZone(null,req.body.zonaName,null);
-            //manda a la base...
-            for (let index = 0; index < req.body.branches.length; index++) {
-                controller.createNewBranch(req.body.zonaName,null,req.body.branches[index],null);
-                //manda a la base...
-            }
-            controller.verEstructura();
-            console.log("---------------------------------------------")
-        });
-
-        app.post('/userMain', function (req: Request, res: Response) {
-            //res.send({ message: 'Hola amigos'});
-            res.sendFile(path.resolve(htmlPath+'userMainPage.html'));
-        });
-
-        app.get('/hi', function (req: Request, res: Response) {
-            res.sendFile(path.resolve(htmlPath+'index.html'));
-        });*/
 
     }
 }

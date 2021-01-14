@@ -46,6 +46,33 @@ export class dbController {
     return structureFromDB;
   }
   
+  ///                                                                   ///
+  //                         Validate User                               //
+  //               validar que existan las credenciales en la base       //
+  ///                                                                   ///
+  public async validateUser(user: String, password: String):Promise<String>{
+    var idMember:String=null;
+    var x = await this.user.validateUser(user,password).then((value)=>{
+      idMember = value
+    })
+    
+    return idMember;
+  }
+
+      ///                                                                ///
+  //                          getMemberRol                                //
+  //                  obtener el rol mas alto de un miembro               //
+  ///                                                                   ///
+  
+  public async getMemberRol(memberId:String):Promise<Number>{
+    var typeRol:Number = null;
+
+    await this.structures.getMemberRol(memberId).then((value)=>{
+      typeRol=value;
+    })
+
+    return typeRol;
+  }
 
   ///                                                                   ///
   //                          Create User                                //
@@ -89,6 +116,48 @@ export class dbController {
     }
   }
 
+  ///                                                                   ///
+  //                          Create Asesor                              //
+  ///                                                                   ///
+  public createAsesor(req: Request) {
+    // this check whether all the filds were send through the erquest or not
+    if (
+      req.body.nombreAsesor &&
+      req.body.correoAsesor &&
+      req.body.celularAsesor &&
+      req.body.idAsesor &&
+      req.body.direccionAsesor
+    ) {
+      //console.log(req)
+      const user_params: IUser = {
+        memberId: req.body.idAsesor,
+        name: req.body.nombreAsesor,
+        email: req.body.correoAsesor,
+        telephone: req.body.celularAsesor,
+        facilitator: "false",
+        rol: "asesor",
+        direction: req.body.direccionAsesor,
+      };
+      //console.log("Aqui1");
+      this.user.createUser(user_params,
+        (err: any, data: JSON) => {
+          if (err) {
+            console.log("Error en mongo");
+            //mongoError(err, res);
+          } else {
+            console.log(" Success !!!");
+            //successResponse("Zona Creada", data, res);
+          }
+        });
+    } else {
+      console.log(" -- BD : Parametros insuficientes -- ");
+      // error response if some fields are missing in request body
+      //insufficientParameters(res);
+    }
+  }
+  ///                                                                   ///
+  //                          Get User                                   //
+  ///                                                                   ///
   public get_user(req: Request) {
     if (req.body.id) {
       const user_filter = { memberId: req.body.id };
@@ -634,7 +703,6 @@ export class dbController {
   //                                  Movimientos                                      //
   ////                                                                                 ////
   ////                                                                                 ////
-
   public moveMemberGroups(
     zoneName: String,
     oldbrachId: String,
@@ -679,6 +747,7 @@ export class dbController {
       }
     }
   }
+
   ////                                                                            ////
   //                          Quitar Jefe en Zona                                 //
   // Ejemplo de funcionamiento ... //
@@ -730,6 +799,7 @@ export class dbController {
       );
     }
   }
+
   ////                                                                            ////
   //                          Quitar Jefe en Grupo                                   //
   //                    Ejemplo de funcionamiento ...                                //
@@ -757,6 +827,34 @@ export class dbController {
       );
     }
   }
+
+  ////                                                                            ////
+  //                                  Add asesor                                    //
+  ////                                                                            ////
+  public addAsesor 
+  ( idAsesor: String, 
+    idMovement: number) {
+    if (
+      idAsesor != "" && idMovement != null
+    ){
+      this.structures._addAsesor(
+        idAsesor, idMovement,
+        (err: any, data: JSON) => {
+          if (err) {
+            console.log("Error en mongo");
+            //mongoError(err, res);
+          } else {
+            console.log(" Success !!!");
+            //successResponse("Zona Creada", data, res);
+          }
+        }
+      );
+    }
+  }  
+  
+  ////                                                                            ////
+  //                                                                                //
+  ////                                                                            ////
 
 }
 
