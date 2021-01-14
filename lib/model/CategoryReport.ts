@@ -16,7 +16,7 @@ export class CategoryReport implements Strategy{
     }
 
 
-    generateReport(contributionRepository: Contribution[]): String {
+    generateReport(contributionRepository: Contribution[], month : String, assesorName : String): String {
         throw new Error('Method not implemented.');
     }
 

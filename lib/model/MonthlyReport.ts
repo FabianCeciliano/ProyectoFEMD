@@ -13,8 +13,20 @@ export class MonthlyReport implements Strategy{
     }
 
 
-    generateReport(contributionRepository: Contribution[]): String {
-        throw new Error('Method not implemented.');
+    generateReport(contributionRepository: Contribution[], actualMonth : String, assesorName : String): String {
+
+        this.report = "\n\n\n Buenas Señor(a): "+assesorName+"\n\n";
+        this.totalCount = 0;
+        
+        contributionRepository.forEach(function (currentContribution) {
+            if(currentContribution.getMonth() == actualMonth){
+                this.totalCount ++;
+            }
+          });
+        this.report += "En el mes de " + this.actualMonth + " se recibieron " + this.totalCount +" aportes." 
+        return this.report;
+        
+
     }
 
 }

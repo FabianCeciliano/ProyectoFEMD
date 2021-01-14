@@ -392,7 +392,12 @@ export class AsesorRotes {
           Number(String(first_Chief_Id).split("-", 2)[1])
         );
         if (result) {
-          ///                                                                      ///
+          ///
+
+          controller.addZoneChiefToCupule(
+            Number(String(first_Chief_Id).split("-", 2)[1])
+          );
+                                                                                ///
           dbController.assignBossZone(
             zoneName,
             String(first_Chief_Id).split("-", 2)[1],
@@ -414,7 +419,17 @@ export class AsesorRotes {
           Number(String(second_Chief_Id).split("-", 2)[1])
         );
         if (result && result2) {
-          ///                                                                      ///
+          ///
+          
+          controller.addZoneChiefToCupule(
+            Number(String(first_Chief_Id).split("-", 2)[1])
+          );
+
+          controller.addZoneChiefToCupule(
+            Number(String(second_Chief_Id).split("-", 2)[1])
+          );
+          
+          ///
           dbController.assignBossZone(
             zoneName,
             String(first_Chief_Id).split("-", 2)[1],
@@ -805,6 +820,7 @@ export class AsesorRotes {
         req.body.direccion,
         Boolean(req.body.esMonitor)
       );
+    
       controller.printMembers();
       ///                              ///
       // dbController.update_user(req)
@@ -1079,6 +1095,14 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
         req.body.direccionAsesor
       );
 
+      controller.addAssesorToCupule(
+        Number(req.body.idAsesor),
+        req.body.nombreAsesor,
+        Number(req.body.celularAsesor),
+        req.body.correoAsesor,
+        req.body.direccionAsesor
+      );
+
       if (status == true) {
         ///                                                                                 ///
         dbController.createOrganization(
@@ -1317,12 +1341,11 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
     //                      AGREGAR UN NUEVO USUARIO                  // 
     ////////////////////////////////////////////////////////////////////
     app.post("/enviarAporte", function (req: Request, res: Response) {
-      //console.log(req.body)
-
+        
       var submitted = controller.addNewContribution(
-        req.body.id,
-        req.body.name,
-        req.body.celular
+        req.body.emissor,
+        req.body.tipo,
+        req.body.descripcion
       );
 
       if(submitted){

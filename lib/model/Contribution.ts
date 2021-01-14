@@ -5,14 +5,14 @@ export class Contribution{
 
     private type : ContributionType;
     private description : String;
-    private date: String;
+    private date: Date;
     private emissor : String;
     
     constructor(emissor:String, type:String, description:String){
         this.emissor = emissor;
         this.type = ContributionType.Agradecimiento;
         this.description = description;
-        this.date = new Date().toLocaleDateString();
+        this.date = new Date();
         this.setType(type);
     }
 
@@ -25,6 +25,14 @@ export class Contribution{
         else if(type=="Ofrecimiento"){
             this.type = ContributionType.Ofrecimiento;
         }
+    }
+
+    public getMonth() : String{
+
+        var monthInt = new Intl.DateTimeFormat("en-US", { month: "long" }).format;
+        var monthName = monthInt(this.date.getMonth()); 
+        console.log(monthName);
+        return monthName;
     }
     
 

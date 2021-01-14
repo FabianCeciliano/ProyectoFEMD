@@ -89,10 +89,8 @@ export class Controller {
             return false
         }
 
-        
-            //let member = new Member(direction,rol,facilitador,id,name,email,telephone);
-        //this.insertMember(member);
-            
+        //let member = new Member(direction,rol,facilitador,id,name,email,telephone);
+        //this.insertMember(member);    
         //this.movement.getStructure().addMember(member,zoneName,branchName,groupName);
     };
     public insertMember (member:Member){
@@ -306,8 +304,20 @@ export class Controller {
     };
 
     public addNewContribution (emissor:String, type:String, description:String) : Boolean {
-        return this.movement.addContribution(emissor, type, description);
+        return this.movement.addContribution(emissor, type,description);
     };
+
+    public addAssesorToCupule (idAsesor : number, nombreAsesor : String, celularAsesor : number, correoAsesor : String, direccionAsesor : String ) : Boolean {
+  
+        return this.movement.setAsessorToCupule(idAsesor, nombreAsesor, celularAsesor, correoAsesor, direccionAsesor);
+    };
+
+    public addZoneChiefToCupule(  idMember:number ) : Boolean{
+
+        var member:Member = this.movement.getMembers().getMember(idMember).clone();
+        return this.movement.addComitteeMember(member);
+
+    }
 
 }
 

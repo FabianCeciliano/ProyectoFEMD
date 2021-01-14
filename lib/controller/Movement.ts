@@ -3,6 +3,8 @@ import { MemberGestor } from './MemberGestor';
 import { Cupula } from '../model/Cupula';
 import { Contribution } from '../model/Contribution';
 import { ContributionType } from 'model/ContributionType';
+import { Member } from '../model/Member';
+import { Rol } from '../model/Rol';
 
 export class Movement{
 
@@ -52,8 +54,18 @@ export class Movement{
     }
 
     addContribution(emissor:String, type:String, description:String) : Boolean{
-    let contribution = new Contribution(emissor, type, description);
-    return this.cupula.addContribution(contribution);
-    }
+        var contribution = new Contribution(emissor, type, description);
+        return this.cupula.addContribution(contribution);
+    };
+
+    setAsessorToCupule(idAsesor : number, nombreAsesor : String, celularAsesor : number, correoAsesor : String, direccionAsesor : String) : Boolean{
+        
+        return this.cupula.addAssessor( new Member (direccionAsesor, Rol.assessor, false, idAsesor, nombreAsesor, correoAsesor, celularAsesor));
+    };
+
+    addComitteeMember( member : Member) : Boolean{
+        
+        return this.cupula.addCommitteeMember(member);
+    };
 
 }
