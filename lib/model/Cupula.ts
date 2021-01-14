@@ -16,8 +16,13 @@ export class Cupula{
     constructor(){
         this.contributionRepository = [];
         this.committee = [];
-
+        this.reportGenerator = null;
     }
+
+    public getContributions():Contribution[]{
+        return this.contributionRepository;
+    }
+
     public addAssessor(assesor : Member): Boolean {
         if(assesor!=null){
             this.assesor = assesor;
@@ -26,7 +31,7 @@ export class Cupula{
         }
         return false;
     };
-    public addContribution(cont : Contribution) : boolean {
+    public addContribution(cont : Contribution) : Boolean {
         if(cont!=null){
             this.contributionRepository.push(cont);
             console.log(this.contributionRepository);
@@ -45,22 +50,22 @@ export class Cupula{
         console.log(this.committee);
         return false;
     };
+    
     public downloadRepository() : void {};
-    public setStrategy (strategy : Strategy) : void {};
-    public createReport(opt : String, actualMonth : String) : Boolean {
+    
+    public setStrategy (strategy : Strategy) : void {
+        this.reportGenerator = strategy;
+    };
+    public createReport(opt : String, actualMonth : String) : String {
         if(opt == "Mensual"){
             var reporteMensual = new MonthlyReport();
             this.setStrategy(reporteMensual);
-            this.reportGenerator.generateReport(this.contributionRepository, actualMonth, this.assesor.getName());
-            return true;
-            
+            return this.reportGenerator.generateReport(this.contributionRepository, actualMonth, this.assesor.getName());
         }else if(opt == "Categoria"){
             var reporteCategoria = new CategoryReport();
             this.setStrategy(reporteCategoria);
-            this.reportGenerator.generateReport(this.contributionRepository, actualMonth, this.assesor.getName());
-            return true;
+            return this.reportGenerator.generateReport(this.contributionRepository, actualMonth, this.assesor.getName());
         };
-        return false;
     };
 
 }

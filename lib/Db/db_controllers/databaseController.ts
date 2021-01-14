@@ -8,6 +8,8 @@ import {
 } from "../common/service";
 import UserService from "../db_user_model/member_service";
 import StructureService from "../db_estructure_model/structure_service";
+import ContributionService from "../db_contribution_model/contribution_service";
+import { IContribution } from "../db_contribution_model/contribution_model";
 import { IStructure } from "../db_estructure_model/struc_model";
 import { IUser, IUserC } from "../db_user_model/member_model";
 import { IZone } from "../db_estructure_model/zone_model";
@@ -17,6 +19,7 @@ import { IGroup } from "../db_estructure_model/grupo_model";
 export class dbController {
   private user: UserService = new UserService();
   private structures: StructureService = new StructureService();
+  private contribution: ContributionService = new ContributionService();
 
   ////                                                                                 ////
   ////                                                                                 ////
@@ -852,9 +855,85 @@ export class dbController {
     }
   }  
   
-  ////                                                                            ////
-  //                                                                                //
-  ////                                                                            ////
+  // ! ================================================================================================ //
+  // ! Contributions ================================================================================== //
+  // ! ================================================================================================ //
+
+  ///                                                                                   ///
+  //                                  Create Contribution                                //
+  ///                                                                                   ///
+
+  public createContribution( emissor: String, type: String, date: String, description: String ) {
+    if ( emissor && type && date && description ) {
+      const contrib_params: IContribution = {
+          emissor: emissor,
+          type: type,
+          date: date,
+          descripcion: description,
+          deleted: false
+        };
+      this.contribution.uploadContribution(contrib_params,
+        (err: any, data: JSON) => {
+          if (err) {
+            console.log("Error en mongo");
+          } else {
+            console.log(" Contribution Uploaded !!!");
+          }
+        });
+    } else {
+      console.log(" -- BD : Parametros insuficientes -- ");
+    }
+  }
+
+  ///                                                                                   ///
+  //                                "Delete" Contribution                                //
+  ///                                                                                   ///
+  public delete_Contribution(date: String) {
+    if (
+      date != ""
+    ) {
+      const contributionQuery = { date: date };
+      let previous;
+
+      previous = this.contribution.findContribution(contributionQuery, (err: any, contrib_data: IContribution) => { });
+      if (previous.emissor != "") {
+        const contrib_params: IContribution = {
+          emissor: previous.emissor,
+          type: previous.type,
+          date: date,
+          descripcion: previous.description,
+          deleted: true
+        };
+        this.contribution.updateContribution(contrib_params,
+          (err: any, data: JSON) => {
+            if (err) {
+              console.log("Error en mongo");
+              //mongoError(err, res);
+            } else {
+              console.log(" Contribution \"Deleted\" from DB !!!");
+              //successResponse("Zona Creada", data, res);
+            }
+          });
+      } else {
+        console.log("Not user found");
+      }
+    } else {
+      console.log("User cannot be updated");
+    }
+  }
+
+  ///                                                                                   ///
+  //                                Get All Contributions                                //
+  ///                                                                                   ///
+  public async getAllContributions() : Promise <IContribution[]> {
+    var contributionsDB:IContribution[] = null;
+    var promise = this.contribution.getAllContributions();
+    await promise.then((value) => {
+      contributionsDB = value
+    })
+    return contributionsDB;
+  }
+  // ! Contributions ================================================================================== //
 
 }
 

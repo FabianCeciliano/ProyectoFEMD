@@ -6,6 +6,8 @@ import { StructureType } from '../model/StructureType';
 import { Direction } from '../model/Direction'
 import {Rol} from '../model/Rol'
 import { LeafComponent } from '../model/LeafComponent';
+import { Contribution } from 'model/Contribution';
+
 
 export class Controller {
     controller(): String[] {
@@ -310,8 +312,8 @@ export class Controller {
         this.movement.getStructure().verEstructura();
     };
 
-    public addNewContribution (emissor:String, type:String, description:String) : Boolean {
-        return this.movement.addContribution(emissor, type,description);
+    public addNewContribution (emissor:String, type:String, description:String) : Contribution {
+         return this.movement.addContribution(emissor, type, description);
     };
 
     public addAssesorToCupule (idAsesor : number, nombreAsesor : String, celularAsesor : number, correoAsesor : String, direccionAsesor : String ) : Boolean {
@@ -324,6 +326,17 @@ export class Controller {
         var member:Member = this.movement.getMembers().getMember(idMember).clone();
         return this.movement.addComitteeMember(member);
 
+    }
+
+
+    //Funciones de aportes
+
+    public getContributions():Contribution[]{
+        return this.movement.getContribution();
+    }
+
+    public generateReport(month : String , reportType : String) :String {
+        return this.movement.generateContributionReport(month, reportType);
     }
 
 }

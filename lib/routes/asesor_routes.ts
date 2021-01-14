@@ -1358,11 +1358,51 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
         req.body.descripcion
       );
 
-      if(submitted){
+      if(submitted!=null){
+        dbController.createContribution(submitted.getEmissor(), submitted.getType().toString(),
+                                          submitted.getDate(), submitted.getDescription());
+        res.send({ status: 1 });
+      }else{
+        res.send({ status: 0 });
+      }
+      
+    });
+
+
+    //////////////////////////////////////////////////////////////////////////
+    //                            CONSULTAR APORTES                        // 
+    /////////////////////////////////////////////////////////////////////////
+
+    app.post("/consultarAportes", function (req: Request, res: Response) {
+        
+      var contributions = controller.getContributions();
+
+      if(contributions){
         //Guardamos en DB?
         //dbController.create_user(req);
         ///                              ///
-        res.send({ status: 1 });
+        res.send({ status: 1 ,  listContributions:contributions});
+      }else{
+        res.send({ status: 0 });
+      }
+      
+    });
+
+
+        //////////////////////////////////////////////////////////////////////////
+    //                            GENERAR REPORTE                           // 
+    /////////////////////////////////////////////////////////////////////////
+
+    app.post("/generarReporte", function (req: Request, res: Response) {
+      
+      var month = req.body.month;
+      var reportType = req.body.reportType;
+
+      var report = controller.generateReport(month, reportType);
+      console.log("EL REPORTEEEEE: "+report);
+
+      if(report!=null){
+        res.send({ status: 1 ,  message:report});
       }else{
         res.send({ status: 0 });
       }

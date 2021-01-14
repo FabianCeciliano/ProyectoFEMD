@@ -4,40 +4,33 @@ import contributions from './contribution_schema';
 
 export default class ContributionService {
 
-    public createContribution(someparams: IContribution, callback: any) {
-        //console.log("Aqui2");
+    public uploadContribution(someparams: IContribution, callback: any) {
         const _session = new contributions(someparams);
-        //console.log("Aqui3");
         _session.save(callback);
-        //console.log("Aqui4");
-    }
-/*
-    public filterUser(query: any, callback: any) {
-        return users.findOne(query, callback);
     }
 
-    public updateUser(user_params: IUser, callback: any) {
-        const query = { id: user_params.memberId };
-        users.findOneAndUpdate(query, user_params, callback);
-    }
-    
-    public deleteContribution( id: String, callback: any ) {
-        const query = { memberId: id };
-        users.deleteOne(query, callback);
+    public updateContribution(contrib_params: IContribution, callback: any) {
+        const query = { date: contrib_params.date };
+        contributions.findOneAndUpdate(query, contrib_params, callback);
     }
 
-    public async getAllMembersImp():Promise<IUser[]>{
-        var usersFromDB:IUser[]=null;
-        await users.find(function(err, result:IUser[]) {
+    public findContribution(query: any, callback: any) {
+        return contributions.findOne(query, callback);
+    }
+
+    public async getAllContributions():Promise<IContribution[]>{
+        var contributionsFromDB:IContribution[]=null;
+        await contributions.find( { deleted: false } ,function(err, result:IContribution[]) {
             if (err) {
                 console.log(err); 
             } else {
-            //console.log(result);
-            usersFromDB=result;
+                contributionsFromDB=result;
             }
         })
-        return usersFromDB;
+        return contributionsFromDB;
     }
+
+/*    
 
     public delayy(ms: number) {
         return new Promise( resolve => setTimeout(resolve, ms) );

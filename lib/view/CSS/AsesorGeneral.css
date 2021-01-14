@@ -63,6 +63,30 @@ div.ex1 {
     height: 90%;
 }
 
+/*-------------------------------MENSAJES-GENERAL--------------------------*/
+#msgGEN{
+    display: none;
+    position:absolute;
+    top:0;
+    left:0;
+    width: 100%;
+     z-index:1;
+     height: 100%;
+     background-color: rgba(158, 148, 207, 0.801);
+  }
+  #msgGENE{
+    display: none;
+    margin: auto;
+    border-radius: 20px;
+    position: absolute;
+    top: 50px; 
+    left: 280px;
+    bottom: 50px; 
+    right: 280px;
+    background-color: rgba(255, 255, 255, 0.616);
+    color: rgb(0, 0, 0);
+    z-index:5;
+  }
 
 
 #overlayMovimiento{

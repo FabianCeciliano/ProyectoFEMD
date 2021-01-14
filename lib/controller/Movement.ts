@@ -53,10 +53,15 @@ export class Movement{
         return this.gMembers.getMember(idMember);
     }
 
-    addContribution(emissor:String, type:String, description:String) : Boolean{
+    addContribution(emissor:String, type:String, description:String) : Contribution {
         var contribution = new Contribution(emissor, type, description);
-        return this.cupula.addContribution(contribution);
+        this.cupula.addContribution(contribution);
+        return contribution;
     };
+
+    getContribution(){
+        return this.cupula.getContributions()
+    }
 
     setAsessorToCupule(idAsesor : number, nombreAsesor : String, celularAsesor : number, correoAsesor : String, direccionAsesor : String) : Boolean{
         
@@ -67,5 +72,9 @@ export class Movement{
         
         return this.cupula.addCommitteeMember(member);
     };
+
+    generateContributionReport( month : String, reportType : String) : String{
+        return this.cupula.createReport(reportType, month);
+    }
 
 }

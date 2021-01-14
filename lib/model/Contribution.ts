@@ -6,14 +6,18 @@ export class Contribution{
     private type : ContributionType;
     private description : String;
     private date: Date;
+    private deleted : Boolean;
     private emissor : String;
     
     constructor(emissor:String, type:String, description:String){
         this.emissor = emissor;
         this.type = ContributionType.Agradecimiento;
         this.description = description;
-        this.date = new Date();
         this.setType(type);
+        this.deleted = false;
+        this.date = new Date(); //"11/10/2016, 11:49:36 AM"
+        console.log(this.date);
+
     }
 
     private setType(type:String) : void{
@@ -28,7 +32,6 @@ export class Contribution{
     }
 
     public getMonth() : String{
-
         var monthInt = new Intl.DateTimeFormat("en-US", { month: "long" }).format;
         var monthName = monthInt(this.date.getMonth()); 
         console.log(monthName);
@@ -38,7 +41,19 @@ export class Contribution{
     public getType() : ContributionType{
         return this.type;
     }
-    
+
+    public getEmissor() : String {
+        return this.emissor;
+    }
+
+    public getDate() : String {
+        return this.date.toString();
+    }
+
+    public getDescription() : String {
+        return this.description;
+    }
+
 }
 
 

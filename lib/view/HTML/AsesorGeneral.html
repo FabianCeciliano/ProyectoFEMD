@@ -60,6 +60,16 @@
         </div>
     </div>
 
+    <!-- //////////////////////////////////////////////////////////////////// -->
+    <!--                  MUESTRA LAS NOTIFICACION GENERAL                    -->
+    <!-- //////////////////////////////////////////////////////////////////// -->
+    <div id="msgGEN" onclick="off()">
+        <div id="msgGENE" onclick="off()">
+            <h2 class="headertekst">Mensaje</h2>
+            <h2 id="msgTextGENE" class="headertekst">NADA</h2>
+        </div>
+    </div>
+
 
 
 
@@ -142,7 +152,7 @@
 
 
 
-                  <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
                 <!-- //////////////////////////////////////////////////////////////////// -->
                 <!-- //////////////////////////////////////////////////////////////////// -->
                 <!--                            BANDEJA APORTE                                 -->
@@ -2435,10 +2445,10 @@
                             <!--                                FIN DE FORMULARIO                     -->
                             <!-- //////////////////////////////////////////////////////////////////// -->
 
-     
-     
-     
-     
+
+
+
+
                             <!-- //////////////////////////////////////////////////////////////////// -->
                             <!--                  FORMULARIO  REPORTE DE APORTES                      -->
                             <!-- //////////////////////////////////////////////////////////////////// -->
@@ -2450,7 +2460,8 @@
 
                                 <div class=" row p-2 ">
                                     <div class="col-12 ">
-                                        <img class="mx-auto d-block over " src="../resources/FF2Reporte de Aportes.svg ">
+                                        <img class="mx-auto d-block over "
+                                            src="../resources/FF2Reporte de Aportes.svg ">
                                     </div>
                                 </div>
 
@@ -2470,7 +2481,7 @@
                                 <div class="row justify-content-center p-4">
                                     <div class="col-1 align-self-center">
                                         <div class="boxMin">
-                                            <select class="selecBox" id="consulGrupoName" type="submit "
+                                            <select class="selecBox" id="formularioMes" type="submit "
                                                 style="border: 0; background: transparent ">
                                                 <option value="Enero">Enero</option>
                                                 <option value="Febrero">Febrero</option>
@@ -2504,11 +2515,10 @@
                                 <div class="row justify-content-center p-4">
                                     <div class="col-1 align-self-center">
                                         <div class="boxMin">
-                                            <select class="selecBox" id="consulGrupoName" type="submit "
+                                            <select class="selecBox" id="formularioReporte" type="submit "
                                                 style="border: 0; background: transparent ">
-                                                <option value="Petitoria">Petitoria</option>
-                                                <option value="Agradecimiento">AGradecimiento</option>
-                                                <option value="Ofrecimiento">Ofrecimiento</option>
+                                                <option value="Mensual">Mensual</option>
+                                                <option value="Categoria">Categoria</option>
                                             </select>
                                         </div>
                                     </div>
@@ -2520,16 +2530,17 @@
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <div class="row justify-content-center ">
                                     <div class="col-12 ">
-                                        <img class="mx-auto d-block Boton3" src="../resources/FF2Descripción del Reporte.png ">
+                                        <img class="mx-auto d-block Boton3"
+                                            src="../resources/FF2Descripción del Reporte.png ">
                                     </div>
                                 </div>
 
-                              
+
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <!--                                TEXT AREA                              -->
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <div class="row justify-content-center p-2">
-                                    <input class="Bigmyborders" id="Descripción del Reporte" type="text "
+                                    <input class="Bigmyborders" id="reporte" type="text "
                                         placeholder="Descripción del Reporte">
                                 </div>
 
@@ -2538,7 +2549,7 @@
                                 <!-- //////////////////////////////////////////////////////////////////// -->
                                 <div class="row justify-content-center p-3 ">
                                     <div class="col-6 align-self-center">
-                                        <button class="about " type="submit " onclick="consulGrupoFun()"
+                                        <button class="about " type="submit " onclick="generarReporte()"
                                             style="border: 0; background: transparent " class="social ">
                                             <img class="mx-auto d-block" src="../resources/FFBoton.svg " alt=" ">
                                         </button>
@@ -2546,7 +2557,7 @@
                                 </div>
 
 
-                                
+
                             </div>
                             <!-- //////////////////////////////////////////////////////////////////// -->
                             <!--                           FIN DE FORMULARIO  RA                      -->

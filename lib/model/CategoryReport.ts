@@ -5,7 +5,6 @@ import { ContributionType } from './ContributionType';
 
 export class CategoryReport implements Strategy{
 
-    private report : String;
     private petitoryCount : number;
     private contributionCount : number;
     private offeringCount : number;
@@ -19,7 +18,7 @@ export class CategoryReport implements Strategy{
 
 
     generateReport(contributionRepository: Contribution[], month : String, assesorName : String): String {
-        this.report = "\n\n\n Buenas Señor(a): "+assesorName+"\n\n";
+        var report = "\n\n\n Buenas Señor(a): "+assesorName+"\n\n";
         this.petitoryCount = 0;
         this.offeringCount = 0;
         this.gratitudeCount = 0;
@@ -37,9 +36,9 @@ export class CategoryReport implements Strategy{
                 }
             }
           });
-        this.report += "En el mes de "+ month + "se recibieron: "+ this.gratitudeCount + " aportes de gratitud, "
+        report += "En el mes de "+ month + "se recibieron: "+ this.gratitudeCount + " aportes de gratitud, "
          + this.offeringCount + " aportes de ofrecimiento y " + this.petitoryCount + " aportes de petitorios." ;
-        return this.report;
+        return report;
     }
 
 }
