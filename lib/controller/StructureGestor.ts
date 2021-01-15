@@ -922,6 +922,14 @@ export class Gestor {
         }
     }
 
+    public getSubscribers(subscribers : String, ruta : String){
+        var subscribers = Member[];
+        
+
+        
+
+    }
+
     public add(pDato: IComponent): void { };
     public delete(pDato: IComponent): void { };
     public search(pDato: IComponent): void { };

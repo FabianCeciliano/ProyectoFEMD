@@ -5,6 +5,7 @@ import { Contribution } from '../model/Contribution';
 import { ContributionType } from 'model/ContributionType';
 import { Member } from '../model/Member';
 import { Rol } from '../model/Rol';
+import { Forum } from '../model/Forum';
 
 export class Movement{
 
@@ -21,6 +22,7 @@ export class Movement{
     private gStructure:Gestor;
     private gMembers:MemberGestor;
     private cupula : Cupula;
+    private foro : Forum;
 
     constructor(cedJuridica:number, name:String, website :String, country : String,phoneNumber: number){
         this.cedJuridica = cedJuridica;
@@ -31,6 +33,7 @@ export class Movement{
         this.gStructure = new Gestor();
         this.gMembers = new MemberGestor();
         this.cupula = new Cupula();
+        this.foro = new Forum();
     }
 
     getMovementName():String{
@@ -75,6 +78,10 @@ export class Movement{
 
     generateContributionReport( month : String, reportType : String) : String{
         return this.cupula.createReport(reportType, month);
+    }
+
+    createNewChannel(cuerpo : String , asunto : String , nivel : String ,ruta : String){
+        return this.foro.createChannel(cuerpo, asunto, nivel, ruta);
     }
 
 }

@@ -10,9 +10,9 @@ export class Member extends Person implements Subscriber{
     private direction : String;
     private rol: Rol;
     private facilitador: boolean;
-    private _gruposMentoria: String[];
+    private _gruposMentoria: String[]; //deprecated
     private notificacionesUsuario : MyNotification[];
-    
+
     public getgruposMentoria(): String[] {
         return this._gruposMentoria;
     }
@@ -26,6 +26,7 @@ export class Member extends Person implements Subscriber{
         this.direction=direction;
         this.rol=rol;
         this.facilitador=facilitador;
+        this.notificacionesUsuario=[];
     }
     
     agregarNoticia(notification: MyNotification): Boolean {

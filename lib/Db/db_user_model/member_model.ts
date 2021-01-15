@@ -1,3 +1,4 @@
+import { INotificationC, INotification } from '../db_notification_model/notification_model';
 export interface IUser {
     memberId: String;
     name: String;
@@ -6,6 +7,8 @@ export interface IUser {
     facilitator: String;
     rol: String;
     direction: String;
+    password: String;
+    notifications: INotification[];
 }
 
 export const IUserC = {
@@ -15,5 +18,7 @@ export const IUserC = {
     telephone: String,
     facilitator: String,
     rol: String,
-    direction: String
+    direction: String,
+    password: String,
+    notifications: [INotificationC]
 }

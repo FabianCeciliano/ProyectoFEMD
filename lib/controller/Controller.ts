@@ -340,11 +340,21 @@ export class Controller {
     }
 
     //Funciones de Noticias
+    public sendNewNotifications(cuerpo : String , asunto : String , nivel : String ,ruta : String) :String {
+        
+        //createChannel
+        var newChannel = this.movement.createNewChannel(cuerpo, asunto, nivel, ruta);
 
-    public sendCurrentNews(cuerpo : String , asunto : String , ruta : String) :String {
-        //return this.movement.notifyCurrentNews(cuerpo , asunto, ruta);
-        return "";
+        //subscribePublishers //ZONA-RAMA1-GRUPO1
+        var subscribers = this.movement.getStructure().getSubscribers(nivel, ruta); // [member, member, member]
+
+        //notifySubscribers
+        return this.movement.
+
+
     }
+
+
 
 
 }

@@ -8,8 +8,8 @@ export class Publisher{
     private subscribers : Subscriber [];
     private ruta : String;
 
-    constructor(){
-        
+    constructor(ruta : String){
+        this.ruta = ruta;
     }
 
     subscribe(params: Subscriber) : void {}
