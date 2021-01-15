@@ -2,18 +2,11 @@ import { Publisher } from './Publisher';
 
 export class Form {
 
-    private zones : Publisher;
-    private branches : Publisher;
-    private groups : Publisher;
+    private canales : Publisher[];
 
     constructor(){
-        
+        this.canales = [];
     }
-
-    notifyZones() : void {}
-    notifyBranhes() : void {}
-    notifyGroups() : void {}
-    
 
 }
 

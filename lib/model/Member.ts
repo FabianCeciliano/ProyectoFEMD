@@ -1,8 +1,9 @@
 
-import {Direction} from './Direction';
+import { Direction } from './Direction';
 import { Rol } from './Rol';
-import {Person} from './Person';
+import { Person } from './Person';
 import Subscriber from './Subscriber';
+import { MyNotification } from './MyNotification';
 
 
 export class Member extends Person implements Subscriber{
@@ -10,6 +11,7 @@ export class Member extends Person implements Subscriber{
     private rol: Rol;
     private facilitador: boolean;
     private _gruposMentoria: String[];
+    private notificacionesUsuario : MyNotification[];
     
     public getgruposMentoria(): String[] {
         return this._gruposMentoria;
@@ -26,11 +28,12 @@ export class Member extends Person implements Subscriber{
         this.facilitador=facilitador;
     }
     
-    agregarNoticia(id: Number): Boolean {
-        throw new Error('Method not implemented.');
+    agregarNoticia(notification: MyNotification): Boolean {
+        this.notificacionesUsuario.push(notification);
+        return true;
     }
 
-    public clone():Member{
+    public clone() : Member{
         return new Member(this.direction,this.rol,this.facilitador,this.id,this.name,this.email,this.telephone);
     }
 

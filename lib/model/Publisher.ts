@@ -1,27 +1,22 @@
 import { Contribution } from './Contribution';
 import Subscriber from './Subscriber';
-import {Notification} from './Notification';
+import {MyNotification} from './MyNotification';
 
 
-export class Publisher implements Subscriber{
+export class Publisher{
 
     private subscribers : Subscriber [];
-    private notifications : Notification [];
+    private ruta : String;
 
     constructor(){
         
     }
 
-    
-    subscribe() : void {}
+    subscribe(params: Subscriber) : void {}
 
-    unsubscribe() : void {}
+    unsubscribe(params: Subscriber) : void {}
 
-    notifySubscriber() : void {}
-
-    agregarNoticia(id: Number): Boolean {
-        throw new Error('Method not implemented.');
-    }
+    notifySubscribers() : void {}
 
 }
 

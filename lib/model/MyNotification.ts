@@ -1,9 +1,11 @@
-export class Notification {
+export class MyNotification {
 
-    private nombres : String;
+    private nombre : String;
     private idPersona : Number;
     private currentDate : Date;
     private mensaje : String;
+    private idNotification : Number;
+    private estado : Boolean; 
 
     constructor(){
         

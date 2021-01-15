@@ -1421,7 +1421,7 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       var nivel = req.body.nivelNoticia;
       var ruta = req.body.rutaNoticia;
       
-      var noticiaEnviada = controller.enviarNuevaNoticia(cuerpo, asunto, ruta);
+      var noticiaEnviada ;//= controller.enviarNuevaNoticia(cuerpo, asunto, ruta);
       
       if(noticiaEnviada){
         res.send({ status: 1});

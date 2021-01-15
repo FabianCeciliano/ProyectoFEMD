@@ -342,7 +342,8 @@ export class Controller {
     //Funciones de Noticias
 
     public sendCurrentNews(cuerpo : String , asunto : String , ruta : String) :String {
-        return this.movement.notifyCurrentNews(cuerpo , asunto, ruta);
+        //return this.movement.notifyCurrentNews(cuerpo , asunto, ruta);
+        return "";
     }
 
 

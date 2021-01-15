@@ -1,6 +1,5 @@
-import { Contribution } from "./Contribution";
-
+import { MyNotification } from './MyNotification';
 export default interface Subscriber {
     
-    agregarNoticia( id : Number): Boolean
+    agregarNoticia( notification : MyNotification): Boolean
 }
