@@ -25,6 +25,7 @@ export class Member extends Person implements Subscriber{
         this.rol=rol;
         this.facilitador=facilitador;
     }
+    
     agregarNoticia(id: Number): Boolean {
         throw new Error('Method not implemented.');
     }

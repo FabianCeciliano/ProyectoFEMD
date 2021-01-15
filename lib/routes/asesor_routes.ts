@@ -1410,6 +1410,28 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
     });
 
 
+    ///////////////////////////////////////////////////////////////////////////
+    //                            NUEVA NOTICIA                             // 
+    /////////////////////////////////////////////////////////////////////////
+
+    app.post("/nuevaNoticia", function (req: Request, res: Response) {
+      
+      var cuerpo = req.body.cuerpoNoticia;
+      var asunto = req.body.asuntoNoticia;
+      var nivel = req.body.nivelNoticia;
+      var ruta = req.body.rutaNoticia;
+      
+      var noticiaEnviada = controller.enviarNuevaNoticia(cuerpo, asunto, ruta);
+      
+      if(noticiaEnviada){
+        res.send({ status: 1});
+      }else{
+        res.send({ status: 0 });
+      }
+      
+    });
+
+
 
 
   }

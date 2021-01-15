@@ -339,6 +339,13 @@ export class Controller {
         return this.movement.generateContributionReport(month, reportType);
     }
 
+    //Funciones de Noticias
+
+    public sendCurrentNews(cuerpo : String , asunto : String , ruta : String) :String {
+        return this.movement.notifyCurrentNews(cuerpo , asunto, ruta);
+    }
+
+
 }
 
 export default new Controller();

@@ -27,7 +27,7 @@ export class CategoryReport implements Strategy{
                 }
             }
           });
-        report += "En el mes de "+ month + "se recibieron: "+ gratitudeCount + " aportes de gratitud, "
+        report += "En el mes de "+ month + " se recibieron: "+ gratitudeCount + " aportes de gratitud, "
          + offeringCount + " aportes de ofrecimiento y " + petitoryCount + " aportes de petitoria." ;
         return report;
     }
