@@ -1025,23 +1025,7 @@ export class Gestor {
         var ruta:String[]=[]
         
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
-            // for para jefatura de zona
-            for (let mindex = 0; mindex < this.structure.groupComposite[zindex].members.length; mindex++){
-                if(this.structure.groupComposite[zindex].members[mindex].id==emissor){
-                    return [this.structure.groupComposite[zindex].name];
-                }
-            }
-            // FIN for para jefatura de zona
-
             for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
-                // for para jefatura de zona
-                for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.length; mindex++){
-                    if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[mindex].id==emissor){
-                        return [this.structure.groupComposite[zindex].name,this.structure.groupComposite[zindex].getCompositeGroup()[bindex].name];
-                    }
-                }
-                // FIN for para jefatura de zona
-
                 for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
                     //for para miembros de grupos
                     for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++){

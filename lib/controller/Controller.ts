@@ -357,7 +357,7 @@ export class Controller {
             this.movement.assignSubscribers(subscribers);
             
             // get the whole route
-            var route = this.movement.getStructure().getRoute(Number(emisor)); // ["Zona1 ", "Rama1","Grupo1"] 
+            var route = this.movement.getStructure().getRoute(Number(emisor)); // ["Zona1", "Rama1","Grupo1"] 
 
             //create the message
             var mensaje = new MyNotification(asunto, cuerpo, emisor);

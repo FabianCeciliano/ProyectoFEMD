@@ -1419,7 +1419,7 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       var nivel = req.body.nivelNoticia;
       var ruta = req.body.rutaNoticia;
       //app
-      var noticiaEnviada = controller.sendNewNotifications(cuerpo, asunto, "emisorAlambrado", nivel, ruta); // el emisor se toma del session
+      var noticiaEnviada = controller.sendNewNotifications(cuerpo, asunto, "3", nivel, ruta); // el emisor se toma del session
       
       if(noticiaEnviada!=null){
         noticiaEnviada.idsubscribers.forEach(element => {

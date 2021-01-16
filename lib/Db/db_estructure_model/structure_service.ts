@@ -194,6 +194,19 @@ export default class StructureService {
         },callback
       );
     console.log(" -- Jefe Insertado -- ");
+    structures.update(
+      { _id:idMovement },
+      { $set: { "zonas.$[elem].ramas.$[rma].grupos.$[grp].monitores": [] } },
+      {
+        arrayFilters: [
+          { "elem.name": { $eq: zoneName } },
+          { "rma.id": { $eq: branchId } },
+          { "grp.id": { $eq: groupId } },
+        ],
+        multi: true,
+      },callback
+    );
+    console.log(" -- Monitores deberia de estar vacía -- ");
   }
 
   public assignBossBranchImp(
