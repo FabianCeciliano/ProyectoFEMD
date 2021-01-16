@@ -3,6 +3,7 @@ import {Member} from '../model/Member';
 import { StructureType } from '../model/StructureType';
 import { Rol } from '../model/Rol';
 import { Cupula } from 'model/Cupula';
+import { MyNotification } from 'model/MyNotification';
 
 
 export class MemberGestor{
@@ -97,6 +98,35 @@ export class MemberGestor{
 
     public printMembers(){
         console.log(this.members);
+    }
+
+    public getSubscribers(idMembers:Number[]) : Member[]{
+        
+        var subscribers : Member[]=[];
+    
+        idMembers.forEach(idMember=>{
+            this.members.forEach(member=>{
+                if(member.id==idMember){
+                    subscribers.push(member);
+                }
+            })
+        })
+
+        return subscribers;
+        
+    }
+
+    public getNoticias( id : Number){
+        var misNoticias : MyNotification[]=[];
+
+        this.members.forEach(element=>{
+            if(element.id==id){
+                misNoticias=element.getNotifications();
+            }
+        })
+
+        return misNoticias;
+
     }
 
 }

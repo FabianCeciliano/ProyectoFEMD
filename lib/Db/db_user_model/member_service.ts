@@ -1,5 +1,6 @@
 import { IUser, IUserC } from './member_model';
 import users from './member_schema';
+import { INotification } from "../db_notification_model/notification_model";
 
 export default class UserService {
 
@@ -57,5 +58,31 @@ export default class UserService {
 
         return userId;
     }
-    
+
+    // ! ======================================================================================================//
+    // ! Notifications ========================================================================================//
+    // ! ======================================================================================================//
+
+    ///                                                                                       ///
+    //                              InsertNotification                                         //
+    ///                                                                                       ///
+    public insertNotification(notification: INotification, suscriber: String, callback: any){
+        console.log(">> BD --> Metiendo la notificacion en la persona");
+        users.update({ memberId:suscriber }, {$push: { notifications: notification  } },callback);
+    }
+
+    ///                                                                                       ///
+    //                               Update Notification State                                 //
+    ///                                                                                       ///
+    public updateNotification(notificationDate: String, suscriberId: String, callback: any){
+        console.log(" >> BD --> Actualizando estado de la notificacion");
+        users.updateOne(
+            { memberId:suscriberId},
+            { $set: { "notifications.$[elem].estado": true } },
+            { arrayFilters: [{ "elem.currentDate": { $eq: notificationDate } }], multi: true },callback
+          );
+    }
+
+    // ! Notifications ======================================================================================================//
+
 }

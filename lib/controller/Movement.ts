@@ -36,6 +36,10 @@ export class Movement{
         this.foro = new Forum();
     }
 
+    getForum(){
+        return this.foro;
+    }
+
     getMovementName():String{
         return this.name;
     }
@@ -80,8 +84,14 @@ export class Movement{
         return this.cupula.createReport(reportType, month);
     }
 
-    createNewChannel(cuerpo : String , asunto : String , nivel : String ,ruta : String){
-        return this.foro.createChannel(cuerpo, asunto, nivel, ruta);
+    createNewChannel() : Boolean{
+        return this.foro.createChannel();
     }
+
+    assignSubscribers(members:Member[]){
+        this.foro.setSubscribers(members);
+    }
+
+
 
 }

@@ -7,7 +7,7 @@ import { Direction } from '../model/Direction'
 import {Rol} from '../model/Rol'
 import { LeafComponent } from '../model/LeafComponent';
 import { Contribution } from 'model/Contribution';
-
+import { MyNotification } from '../model/MyNotification';
 
 export class Controller {
     controller(): String[] {
@@ -340,18 +340,41 @@ export class Controller {
     }
 
     //Funciones de Noticias
-    public sendNewNotifications(cuerpo : String , asunto : String , nivel : String ,ruta : String) :String {
+    public sendNewNotifications(cuerpo : String , asunto : String, emisor : String , nivel : String ,ruta : String) {
         
-        //createChannel
-        var newChannel = this.movement.createNewChannel(cuerpo, asunto, nivel, ruta);
+        //se crea el canal del movimiento
+        this.movement.createNewChannel();
 
-        //subscribePublishers //ZONA-RAMA1-GRUPO1
-        var subscribers = this.movement.getStructure().getSubscribers(nivel, ruta); // [member, member, member]
+        //se obtienen los miembros de la ruta de entrada
+        var idsubscribers = this.movement.getStructure().getSubscribers(nivel, ruta); // [0, 1, 2]
 
-        //notifySubscribers
-        return this.movement.
+        if(idsubscribers.length!=0){
+            var subscribers = this.movement.getMembers().getSubscribers(idsubscribers);
+            console.log("Imprimiendo subscribers:  ")
+            console.log(subscribers);
+    
+            //se setean los miembros como susbscribers
+            this.movement.assignSubscribers(subscribers);
+            
+            // get the whole route
+            var route = this.movement.getStructure().getRoute(Number(emisor)); // ["Zona1 ", "Rama1","Grupo1"] 
 
+            //create the message
+            var mensaje = new MyNotification(asunto, cuerpo, emisor);
+            mensaje.formatNotification(route);
+    
+            //Se notifica el mensaje a los susbscribers
+            this.movement.getForum().getPublisher().notifySuscibrers(mensaje);
+            
+            return {idsubscribers:idsubscribers,mensaje:mensaje};
+        }
 
+        return null;
+
+    }
+
+    public getNoticias( id : Number){
+        return this.movement.getMembers().getNoticias(id);
     }
 
 

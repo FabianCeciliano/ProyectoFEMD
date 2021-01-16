@@ -34,7 +34,7 @@ export default class StructureService {
     console.log("Prueba");
     structures.update({_id:idMovement}, {$push: { zonas: someParams  } },callback);
     console.log("Despues");
-}
+  }
 
   public insertBranch(someParams: IRama[], nombreZona: String, idMovement:number, callback: any) {
     console.log("Prueba");

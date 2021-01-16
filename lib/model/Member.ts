@@ -44,6 +44,12 @@ export class Member extends Person implements Subscriber{
     public getEmail(){
         return this.email;
     }
+
+    public getNotifications():MyNotification[]{
+
+        return this.notificacionesUsuario;
+    }
+
     public getDirection():String{
         return this.direction;
     }

@@ -15,20 +15,20 @@ import { IUser, IUserC } from "../db_user_model/member_model";
 import { IZone } from "../db_estructure_model/zone_model";
 import { IRama } from "../db_estructure_model/rama_model";
 import { IGroup } from "../db_estructure_model/grupo_model";
+import { MyNotification } from "../../model/MyNotification";
+import { INotification } from "../db_notification_model/notification_model";
 
 export class dbController {
+
   private user: UserService = new UserService();
   private structures: StructureService = new StructureService();
   private contribution: ContributionService = new ContributionService();
 
-  ////                                                                                 ////
-  ////                                                                                 ////
-  //                               User Handling                                         //
-  ////                                                                                 ////
-  ////                                                                                 ////
+  // ! ================================================================================================ //
+  // ! Retrieve Information From Database============================================================== //
+  // ! ================================================================================================ //
   ///                                                                   ///
-  //                          Create User                                //
-  //                  dbController.create_user(req)                      //
+  //                       Get All Members                               //
   ///                                                                   ///
   
   public async getAllMember():Promise<IUser[]>{
@@ -40,6 +40,9 @@ export class dbController {
     return usersFromDB;
   }
 
+  ///                                                                   ///
+  //                       Get All Structure                             //
+  ///                                                                   ///
   public async getOrganization():Promise<IStructure[]>{
     var structureFromDB:IStructure[]=null;
     var promise=this.structures.getOrganization();
@@ -77,6 +80,9 @@ export class dbController {
     return typeRol;
   }
 
+  // ! ================================================================================================ //
+  // ! User Handling ================================================================================== //
+  // ! ================================================================================================ //
   ///                                                                   ///
   //                          Create User                                //
   //                  dbController.create_user(req)                      //
@@ -100,6 +106,8 @@ export class dbController {
         facilitator: String(req.body.esMonitor),
         rol: "groupMember",
         direction: req.body.direccion,
+        password: "",
+        notifications: [],
       };
       //console.log("Aqui1");
       this.user.createUser(user_params,
@@ -140,6 +148,8 @@ export class dbController {
         facilitator: "false",
         rol: "asesor",
         direction: req.body.direccionAsesor,
+        password: "",
+        notifications: [],
       };
       //console.log("Aqui1");
       this.user.createUser(user_params,
@@ -181,7 +191,7 @@ export class dbController {
   }
 
   ///                                                                                   ///
-  //                        Cambia lo que ud le meta del miembro                         //
+  //                              Update User Information                                //
   ///                                                                                   ///
   public update_user(req: Request) {
     if (
@@ -209,6 +219,8 @@ export class dbController {
             ? String(req.body.esMonitor)
             : previous.facilitator,
           rol: req.body.rol ? req.body.rol : previous.rol,
+          password: previous.password,
+          notifications: previous.notifications
         };
         this.user.updateUser(user_params,
           (err: any, data: JSON) => {
@@ -250,11 +262,9 @@ export class dbController {
     }
   }
 
-  ////                                                                                 ////
-  ////                                                                                 ////
-  //                            Organization Methods                                     //
-  ////                                                                                 ////
-  ////                                                                                 ////
+  // ! ================================================================================================ //
+  // ! Organization Methods =========================================================================== //
+  // ! ================================================================================================ //
 
 
   ////                                                                                 ////
@@ -298,9 +308,8 @@ export class dbController {
 
   ////                                                                                 ////
   //                           Create / Insert New Zone                                  //
-  //                      //
-  //                      //
   ////                                                                                 ////
+
   /* Crear Estructura .. Insertar Zona ............................................. */
   // dbController.insertZone(req.body.zonaName, req.body.zonaName)
   public insertZoneTree(zoneName: String, idMovement:number) {
@@ -329,9 +338,11 @@ export class dbController {
       );
     }
   }
-  ////                                                                            ////
-  //Crear Estructura .. Insertar Rama ............................................. */
-  //dbController.insertBranchTree(req.body.zonaName, req.body.ids[index], req.body.branches[index])
+  
+  ////                                                                                               ////
+  //                          Crear Estructura => Insertar Rama                                        //
+  //  dbController.insertBranchTree(req.body.zonaName, req.body.ids[index], req.body.branches[index])  //
+  ////                                                                                               ////
   public insertBranchTree(
     nombreZona: String,
     ramas:IRama[],
@@ -967,6 +978,46 @@ export class dbController {
   }
   // ! Contributions ================================================================================== //
 
+
+  // ! ================================================================================================ //
+  // ! Notifications ================================================================================== //
+  // ! ================================================================================================ //
+  ////                                                                                 ////
+  //                          Insert new Notification                                    //
+  ////                                                                                 ////
+
+  public insertNewNotification(idSuscriber: String, notification: MyNotification) {
+    console.log("Insertando Notificacion");
+    if (idSuscriber != "" && notification!=null) {
+      const newNotification: INotification = {
+        nombre: notification.getNewName(),
+        nombreEmisor: notification.getnombreEmisor(),
+        currentDate: notification.getDate(),
+        mensaje: notification.getMessage(),
+        estado: false,
+      };
+      this.user.insertNotification(newNotification,idSuscriber, (err: any, data: IZone) => {
+          console.log("Error en Mongo --> Creo");   
+        });
+      console.log(" -- BD : Zona creada con exito -- ");
+      }else {
+      console.log( " -- BD : Parametros insuficientes ");
+    }
+  }
+
+  ////                                                                                 ////
+  //                          Update Notification State                                  //
+  ////                                                                                 ////
+  public updateNotification(suscriberId: String, notificationDate: String){
+    console.log("Hola gente");
+    this.user.updateNotification(notificationDate, suscriberId, (err: any, data: IZone) => {
+      console.log(" >> BD --> Creo que cambio, o puede ser un msj de error");     
+    });
+  }
+
+  // ! Notifications ================================================================================== //
+
 }
 
 export default new dbController();
+

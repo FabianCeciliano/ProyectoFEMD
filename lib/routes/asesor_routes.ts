@@ -1397,9 +1397,7 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       
       var month = req.body.month;
       var reportType = req.body.reportType;
-      console.log("XD: "+ month + reportType );
       var report = controller.generateReport(month, reportType);
-      console.log("EL REPORTEEEEE: "+report);
 
       if(report!=null){
         res.send({ status: 1 ,  message:report});
@@ -1420,10 +1418,13 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       var asunto = req.body.asuntoNoticia;
       var nivel = req.body.nivelNoticia;
       var ruta = req.body.rutaNoticia;
+      //app
+      var noticiaEnviada = controller.sendNewNotifications(cuerpo, asunto, "emisorAlambrado", nivel, ruta); // el emisor se toma del session
       
-      var noticiaEnviada = controller.sendCurrentNews(cuerpo, asunto, nivel, ruta);
-      
-      if(noticiaEnviada){
+      if(noticiaEnviada!=null){
+        noticiaEnviada.idsubscribers.forEach(element => {
+          dbController.insertNewNotification(String(element), noticiaEnviada.mensaje);
+        });
         res.send({ status: 1});
       }else{
         res.send({ status: 0 });
@@ -1431,8 +1432,20 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       
     });
 
+    app.post("/getNoticias", function (req: Request, res: Response) {
+      
+      
+      var misNoticias = controller.getNoticias(3); // El parametro es el id del session
 
-
+      console.log("Mis noticias",misNoticias);
+      
+      if(misNoticias.length != 0){
+        res.send({ status: 1, noticias:misNoticias});
+      }else{
+        res.send({ status: 0 });
+      }
+      
+    });
 
   }
 }

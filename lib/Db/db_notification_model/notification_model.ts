@@ -1,17 +1,15 @@
 export interface INotification {
     nombre: String;
-    idPersona: Number;
+    nombreEmisor: String;
     currentDate: Date;
     mensaje: String;
-    idNotification: Number;
     estado: Boolean; 
 }
 
 export const INotificationC = {
     nombre: String,
-    idPersona: Number,
+    nombreEmisor: String,
     currentDate: Date,
     mensaje: String,
-    idNotification: Number,
     estado: Boolean,
 }
