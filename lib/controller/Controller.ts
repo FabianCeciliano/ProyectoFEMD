@@ -360,7 +360,7 @@ export class Controller {
             var route = this.movement.getStructure().getRoute(Number(emisor)); // ["Zona1", "Rama1","Grupo1"] 
 
             //create the message
-            var mensaje = new MyNotification(asunto, cuerpo, emisor);
+            var mensaje = new MyNotification(asunto, cuerpo, this.movement.getMembers().getMember(Number(emisor)).name );
             mensaje.formatNotification(route);
     
             //Se notifica el mensaje a los susbscribers
