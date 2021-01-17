@@ -95,6 +95,17 @@ p{
   height: 90%;
 }
 
+#overlayConsultarNodo{
+  padding: 2%;
+  border-radius: 10px;
+  display: none;
+  background-color: rgba(82, 96, 99, 0.425);
+  cursor: pointer;
+  width: auto;
+  height: 90%;
+
+}
+
 
 #overlayParticipacion{
   padding: 2%;

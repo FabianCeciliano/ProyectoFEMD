@@ -393,6 +393,10 @@ export class Controller {
         return this.movement.getStructure().consultarRamasZonas(idSesion);
     }
 
+    public consultarNodo(ruta : String){
+        return this.movement.getStructure().consultarNodo(ruta);
+    }
+
 
     // ! New ... used in Complete Deletion of Members ----------------------------------------------------------------------------------------- //
     public consultMemberParticipation2DeleteBD(pIdData:number){

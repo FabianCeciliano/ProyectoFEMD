@@ -1043,13 +1043,6 @@ export class Gestor {
                         }
                         // FIN for para jefatura de zona
 
-                        for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
-                            //for para miembros de grupos
-                            for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++){
-                                this.isMemberIncluded(subscribers,this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].id);
-                            }
-                            // FIN for para jefatura de zona
-                        }
                     }                    
                 }
             }

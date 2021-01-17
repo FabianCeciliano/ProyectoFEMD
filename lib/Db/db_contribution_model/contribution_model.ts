@@ -1,4 +1,5 @@
 export interface IContribution {
+    idMovimiento: 
     emissor: String,
     type : String,
     date : String,

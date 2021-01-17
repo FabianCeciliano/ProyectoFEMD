@@ -153,12 +153,20 @@
                     <img class="buttonList" src="../resources/FF2NN.svg" alt="">
                 </button>
 
-                 <button id="IdBResumen" type="submit" onclick="BJefeMonitor()" style="border: 0; background: transparent">
+                <button id="IdBResumen" type="submit" onclick="BJefeMonitor()"
+                    style="border: 0; background: transparent">
                     <img class="buttonList" src="../resources/RParticipacion.svg" alt="">
                 </button>
 
-                <button id="IdBResumen" type="submit" onclick="BRamasZonas()" style="border: 0; background: transparent">
+                <button id="IdBResumen" type="submit" onclick="BRamasZonas()"
+                    style="border: 0; background: transparent">
                     <img class="buttonList" src="../resources/RamasZonas.svg" alt="">
+                </button>
+
+
+                <button id="IdBResumen" type="submit" onclick="BConsultarNodo()"
+                    style="border: 0; background: transparent">
+                    <img class="buttonList" src="../resources/ffConsultaNodo.svg" alt="">
                 </button>
 
             </div>
@@ -534,7 +542,7 @@
                     <!--                          SCROLL AREA                                 -->
                     <!-- //////////////////////////////////////////////////////////////////// -->
                     <div class="ex1" id="scrollZonaRamas">
-          
+
                     </div>
                     <!-- //////////////////////////////////////////////////////////////////// -->
                     <!--                       FIN  SCROLL AREA                                 -->
@@ -542,6 +550,80 @@
                     </br>
 
                 </div>
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!--                            FIN  ZONA RAMAS                           -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+
+
+
+
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!--                           CONSULTAR NODO                             -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <div id="overlayConsultarNodo">
+
+                    <div class="row justify-content-center p-3">
+                        <div class="col-11">
+                            <img class="mx-auto d-block over" src="../resources/FFVermiembrosnodo.svg">
+                        </div>
+                    </div>
+
+
+
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                                  TIPO                                -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="row  justify-content-center p-3">
+                        <div class="col-2 align-self-center">
+                            <img class="mx-auto d-block over" src="../resources/FFrutaNodo.png">
+                        </div>
+                        <div class="col-6 align-self-center">
+                            <input class="myborders" id="rutaNodo" type="text " placeholder="ZONA-RAMA-GRUPO"
+                                required>
+                        </div>
+                    </div>
+
+
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                                  TIPO                                -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="row  justify-content-center p-3">
+                        <div class="col-6 align-self-center">
+                            <input class="myborderMedium-XL-L" id="infoNodo" type="text " placeholder="Cuerpo"
+                                required>
+                        </div>
+                    </div>
+
+
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                                 BOTON                                -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="row justify-content-center p-1">
+                        <div class="col-3 align-self-center">
+                            <button type="submit" onclick="BConsultar()" style="border: 0; background: transparent">
+                                <img class="mx-auto d-block " src="../resources/ffConsultar.svg" alt="">
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!--                          FIN DE CONSULTAR NODO                       -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+
+
 
             </div>
 

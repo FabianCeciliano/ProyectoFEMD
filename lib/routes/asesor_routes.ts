@@ -21,7 +21,7 @@ export class AsesorRotes {
 
     const movementValidation = async (req: Request, res: Response, next: any): Promise<void> => {
       var isCreated = controller.movementIsCreated();
-      if (!isCreated) {
+      if ( !isCreated ) {
         console.log("Aun no instanciada");
         var movementFromDb:IStructure[]=[];
         var membersFromDb:IUser[]=[];
@@ -119,11 +119,11 @@ export class AsesorRotes {
             }
           
           }
-        }else{
+        } else {
           console.log("No levanto nada de la estructura");
           res.send({status:0});
         }
-      }else{
+      } else {
         console.log("Estructura ya instanciada");
         res.send({status:1});
       }
@@ -1512,6 +1512,21 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       
       if(misRamasZonas != null){
         res.send({ status: 1, nombresNivel:misRamasZonas.nombresNivel,miembros:misRamasZonas.miembros});
+      }else{
+        res.send({ status: 0 });
+      }
+      
+    });
+
+    app.post("/consultarNodo", function (req: Request, res: Response) {
+      
+      
+      var members = controller.consultarNodo(req.body.ruta); // El parametro es el id del session
+
+      console.log("Mis miembros",members);
+      
+      if(members.length != 0){
+        res.send({ status: 1, members:members});
       }else{
         res.send({ status: 0 });
       }
