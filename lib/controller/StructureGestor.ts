@@ -1021,7 +1021,7 @@ export class Gestor {
         return subscribers;        
 
     }
-
+    //cambio
     public consultarNodo(ruta : String) : Number[]{
         var subscribers:Number[]=[];
         var rutaElem=ruta.split("-")
