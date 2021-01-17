@@ -8,6 +8,7 @@ import {Rol} from '../model/Rol'
 import { LeafComponent } from '../model/LeafComponent';
 import { Contribution } from 'model/Contribution';
 import { MyNotification } from '../model/MyNotification';
+import { IContribution } from '../Db/db_contribution_model/contribution_model';
 
 export class Controller {
     controller(): String[] {
@@ -397,6 +398,10 @@ export class Controller {
         return this.movement.getStructure().consultarNodo(ruta);
     }
 
+    public setDBContribution(contribution : IContribution){
+        return this.movement.reloadContribution(contribution);
+    }
+
 
     // ! New ... used in Complete Deletion of Members ----------------------------------------------------------------------------------------- //
     public consultMemberParticipation2DeleteBD(pIdData:number){
@@ -405,7 +410,7 @@ export class Controller {
     // ! New ... used in Complete Deletion of Members ----------------------------------------------------------------------------------------- //
 
 
-
+    
 
 
 

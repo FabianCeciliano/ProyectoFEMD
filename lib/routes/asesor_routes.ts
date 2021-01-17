@@ -6,6 +6,7 @@ import dbController from "../Db/db_controllers/databaseController";
 import { IStructure } from "../Db/db_estructure_model/struc_model";
 import { IUser } from "../Db/db_user_model/member_model";
 import { IRama } from "../Db/db_estructure_model/rama_model";
+import { IContribution } from "../Db/db_contribution_model/contribution_model";
 import { ContributionType } from "model/ContributionType";
 import { request } from "http";
 
@@ -23,8 +24,9 @@ export class AsesorRotes {
       var isCreated = controller.movementIsCreated();
       if ( !isCreated ) {
         console.log("Aun no instanciada");
-        var movementFromDb:IStructure[]=[];
-        var membersFromDb:IUser[]=[];
+        var movementFromDb : IStructure[]=[];
+        var membersFromDb : IUser[]=[];
+        var contributionsFromDB : IContribution[]=[];
 
         await dbController.getOrganization().then((value) => {
           movementFromDb = value;
@@ -32,6 +34,10 @@ export class AsesorRotes {
 
         await dbController.getAllMember().then((value) => {
           membersFromDb = value;
+        })
+
+        await dbController.getAllContributions().then((value) => {
+          contributionsFromDB = value;
         })
 
         if(movementFromDb.length>0){
@@ -117,6 +123,11 @@ export class AsesorRotes {
               })
 
             }
+            contributionsFromDB.forEach(element => {
+              if(Number(element.idMovimiento) == Number(movementFromDb[movindex].cedulaJuridica)){
+                controller.setDBContribution(element);
+              }
+            });
           
           }
         } else {
@@ -778,7 +789,6 @@ export class AsesorRotes {
     ////////////////////////////////////////////////////////////////////
     //                    ELIMINAR A CIERTO USUARIO                   // 
     ////////////////////////////////////////////////////////////////////
-    // ! NEW ================================================================================================================================== //
     app.post("/borrarUsuario", function (req: Request, res: Response) {
 
       // Borrado total
@@ -1367,7 +1377,7 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       );
 
       if(submitted!=null){
-        dbController.createContribution(submitted.getEmissor(), submitted.getType().toString(),
+        dbController.createContribution(controller.getActualMovementId(),submitted.getEmissor(), submitted.getType().toString(),
                                           submitted.getDate(), submitted.getDescription());
         res.send({ status: 1 });
       }else{
@@ -1521,7 +1531,7 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
     app.post("/consultarNodo", function (req: Request, res: Response) {
       
       
-      var members = controller.consultarNodo(req.body.ruta); // El parametro es el id del session
+      var members = controller.consultarNodo(req.body.ruta);
 
       console.log("Mis miembros",members);
       

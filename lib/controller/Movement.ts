@@ -6,6 +6,7 @@ import { ContributionType } from 'model/ContributionType';
 import { Member } from '../model/Member';
 import { Rol } from '../model/Rol';
 import { Forum } from '../model/Forum';
+import { IContribution } from "../Db/db_contribution_model/contribution_model";
 
 export class Movement{
 
@@ -23,7 +24,7 @@ export class Movement{
     private gMembers:MemberGestor;
     private cupula : Cupula;
     private foro : Forum;
-
+o
     constructor(cedJuridica:number, name:String, website :String, country : String,phoneNumber: number){
         this.cedJuridica = cedJuridica;
         this.name = name;
@@ -65,6 +66,11 @@ export class Movement{
         this.cupula.addContribution(contribution);
         return contribution;
     };
+
+    reloadContribution(contribution : IContribution){
+        return this.cupula.reloadContribution(contribution);
+
+    }
 
     getContribution(){
         return this.cupula.getContributions()

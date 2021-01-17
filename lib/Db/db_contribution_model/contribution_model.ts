@@ -1,5 +1,5 @@
 export interface IContribution {
-    idMovimiento: 
+    idMovimiento: String,
     emissor: String,
     type : String,
     date : String,
@@ -8,6 +8,7 @@ export interface IContribution {
 }
     
 export const IContributionC = {
+    idMovimiento: String,
     emissor: String,
     type : String,
     date : String,

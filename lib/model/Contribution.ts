@@ -19,6 +19,14 @@ export class Contribution{
         console.log(this.date);
 
     }
+    
+    public setAll(pEmissor:String, pType:String, pDescription:String, pDate:Date , pDeleted:Boolean) : void{
+        this.emissor = pEmissor;
+        this.setType(pType);
+        this.description = pDescription;
+        this.deleted = pDeleted;
+        this.date = pDate;
+    }
 
     private setType(type:String) : void{
         if(type=="Petitoria"){

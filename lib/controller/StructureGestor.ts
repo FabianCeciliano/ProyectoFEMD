@@ -420,10 +420,25 @@ export class Gestor {
         return list;
     }
 
+
     public isMemberIncluded(list: Number[], value: Number): Number[] {
         let flag: Boolean = false;
         for (let i = 0; i < list.length; i++) {
             if (list[i] == value) {
+                flag = true;
+            }
+        }
+        if (!flag) {
+            list.push(value);
+            return list;
+        }
+        return list;
+    }
+
+    public isMemberIncludedMember(list: Member[], value: Member): Member[] {
+        let flag: Boolean = false;
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].id == value.id) {
                 flag = true;
             }
         }
@@ -1022,8 +1037,8 @@ export class Gestor {
 
     }
     //cambio
-    public consultarNodo(ruta : String) : Number[]{
-        var subscribers:Number[]=[];
+    public consultarNodo(ruta : String) {
+        var subscribers:Member[]=[];
         var rutaElem=ruta.split("-")
         
         if(rutaElem.length==1){ //zona
@@ -1032,14 +1047,14 @@ export class Gestor {
                     // for para jefatura de zona
                     //isMemberIncluded
                     for (let mindex = 0; mindex < this.structure.groupComposite[zindex].members.length; mindex++){
-                        this.isMemberIncluded(subscribers,this.structure.groupComposite[zindex].members[mindex].id);
+                        this.isMemberIncludedMember(subscribers,this.structure.groupComposite[zindex].members[mindex]);
                     }
                     // FIN for para jefatura de zona
 
                     for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
                         // for para jefatura de zona
                         for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.length; mindex++){
-                            this.isMemberIncluded(subscribers,this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[mindex].id);
+                            this.isMemberIncludedMember(subscribers,this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[mindex]);
                         }
                         // FIN for para jefatura de zona
 
@@ -1059,13 +1074,13 @@ export class Gestor {
 
                             //Inserta los Miembros de la Rama
                             for (let bMindex = 0; bMindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.length; bMindex++) {
-                                this.isMemberIncluded(subscribers,this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[bMindex].id);
+                                this.isMemberIncludedMember(subscribers,this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[bMindex]);
                             }
                             //Itera los grupos
                             for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
                                 //Itera los miembros de cada grupo
                                 for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++) {
-                                    this.isMemberIncluded(subscribers,this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].id);
+                                    this.isMemberIncludedMember(subscribers,this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex]);
                                 }
                             }  
                         }
@@ -1087,7 +1102,7 @@ export class Gestor {
                                 //Encuentra grupo indicado
                                 if(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].id==Number(parseRoute[2])){
                                     for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++) {
-                                        this.isMemberIncluded(subscribers,this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].id);
+                                        this.isMemberIncludedMember(subscribers,this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex]);
                                     }
                                 }
                             }  
@@ -1145,6 +1160,7 @@ export class Gestor {
     public consultarGruposLiderazgo( idSesion : Number){
         var nombresGrupos:String[]=[];
         var miembros:Member[][]=[]
+        var roles : String [];
 
         for (let zindex = 0; zindex < this.structure.groupComposite.length; zindex++) {
             for (let bindex = 0; bindex < this.structure.groupComposite[zindex].getCompositeGroup().length; bindex++) {
@@ -1155,7 +1171,7 @@ export class Gestor {
                             && (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].get_rol()==Rol.monitor
                             || this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].get_rol()==Rol.groupChief))
                         {
-                            nombresGrupos.push(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].name);
+                            nombresGrupos.push(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].name + " "+ this.getRol(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members[mindex].get_rol()));
                             miembros.push(this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members);
                             break;
                         }

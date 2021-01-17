@@ -3,6 +3,7 @@ import { Contribution } from './Contribution';
 import { Member } from './Member';
 import { MonthlyReport } from './MonthlyReport';
 import Strategy from './Strategy';
+import { IContribution } from "../Db/db_contribution_model/contribution_model";
 
 
 export class Cupula{
@@ -21,6 +22,17 @@ export class Cupula{
 
     public getContributions():Contribution[]{
         return this.contributionRepository;
+    }
+
+    public reloadContribution(contribution: IContribution) {
+        var emissor = contribution.emissor;
+        var date = contribution.date;
+        var description = contribution.descripcion;
+        var type = contribution.type;
+        var otra = contribution.idMovimiento;
+        var deleted = contribution.deleted;
+        var newContribution = new Contribution(emissor,type,description);
+        newContribution.setAll(emissor, type, description, new Date(date.toString()), deleted);
     }
 
     public addAssessor(assesor : Member): Boolean {

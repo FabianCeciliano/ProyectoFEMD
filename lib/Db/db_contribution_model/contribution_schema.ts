@@ -3,6 +3,7 @@ import * as mongoose from 'mongoose';
 const contributionSchema = mongoose.Schema;
 
 const schema = new contributionSchema({
+    idMember: String,
     emissor: String,
     type : String,
     date : String,
