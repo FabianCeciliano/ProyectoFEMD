@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- d-flex justify-content-end-->
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="../CSS/singin.css">
+    <title>Main Page FEMD</title>
+
+</head>
+
+<body>
+
+    <!-- BANNER Y BOTONES -->
+    <div class="container-fluid ">
+
+        <div class="row  window1 ">
+
+            <div class="col-6 ">
+
+                <img class="img-responsive Ibanner" src="../resources/banner.svg">
+            </div>
+            <div class="col-6">
+                <div class="row">
+
+
+                    <!-- BOTON DE LOGING -->
+                    <div class="mx-auto d-block py-3" class="col-4">
+                        <button class="about" type="submit" onclick="location.href='/login'"
+                            style="border: 0; background: transparent" class="social ">
+                            <img src="../resources/Log In.svg" alt="">
+                        </button>
+                    </div>
+
+
+                    <!-- BOTON DE ABOUT -->
+                    <div class="mx-auto d-block py-3" class="col-3">
+                        <button class="about" type="submit" onclick="location.href='/about'"
+                            style="border: 0; background: transparent" class="social ">
+                            <img class="mx-auto d-block " src="../resources/About.svg">
+                        </button>
+                    </div>
+
+                    <!-- BOTON DE PROJECTS -->
+                    <div class="mx-auto d-block py-3" class="col-4">
+                        <button class="about" type="submit" onclick="location.href='/about'"
+                            style="border: 0; background: transparent" class="social ">
+                            <img src="../resources/Projects.svg" alt="">
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- LOGO -->
+    <div class="container-fluid">
+        <div id="FormularioSingin">
+
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <!--                                TITULO                                -->
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <div class="row  p-1">
+                <div class="col-12">
+                    <img class="mx-auto d-block over" src="../resources/FAInformación General.svg">
+                </div>
+            </div>
+
+
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <!--                                TITULO                                -->
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <div class="row  p-2">
+                <div class="col-12">
+                    <img class="mx-auto d-block over" src="../resources/FAIdentificación.svg">
+                </div>
+            </div>
+
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <!--                            TEXT AREA                                 -->
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <div class="row  justify-content-center">
+                <input class="myborderMedium-S" id="nuevoUserId" type="text" placeholder="Identificacion." required>
+            </div>
+
+
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <!--                                TITULO                                -->
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <div class="row  p-2">
+                <div class="col-12">
+                    <img class="mx-auto d-block over" src="../resources/FANombre Completo.svg">
+                </div>
+            </div>
+
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <!--                            TEXT AREA                                 -->
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <div class="row  justify-content-center">
+                <input class="myborderMedium-S" id="nuevoUserNombre" type="text " placeholder="Nombre completo"
+                    required>
+            </div>
+
+
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <!--                                TITULO                                -->
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <div class="row  p-2">
+                <div class="col-12">
+                    <img class="mx-auto d-block over" src="../resources/FANúmero Celular.svg">
+                </div>
+            </div>
+
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <!--                            TEXT AREA                                 -->
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <div class="row  justify-content-center">
+                <input class="myborderMedium-S" id="nuevoUserCelular" type="text " placeholder="Numero Celular"
+                    required>
+            </div>
+
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <!--                                TITULO                                -->
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <div class="row  p-2">
+                <div class="col-12">
+                    <img class="mx-auto d-block over" src="../resources/FAE-Mail.svg">
+                </div>
+            </div>
+
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <!--                            TEXT AREA                                 -->
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <div class="row  justify-content-center">
+                <input class="myborderMedium-S" id="nuevoUserMail" type="text " placeholder="E-Mail" required>
+            </div>
+
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <!--                                TITULO                                -->
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <div class="row  p-2">
+                <div class="col-12">
+                    <img class="mx-auto d-block over" src="../resources/FADirección Física.svg">
+                </div>
+            </div>
+
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <!--                            TEXT AREA                                 -->
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <div class="row  justify-content-center">
+                <input class="myborderMedium-S" id="nuevoUserDireccion" type="text " placeholder="Direccion" required>
+            </div>
+
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <!--                                TITULO                                -->
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <div class="row  p-2">
+                <div class="col-12">
+                    <img class="mx-auto d-block over" src="../resources/Password.svg">
+                </div>
+            </div>
+
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <!--                            TEXT AREA                                 -->
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <div class="row  justify-content-center">
+                <input class="myborderMedium-S" id="Password" type="text " placeholder="Direccion" required>
+            </div>
+
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <!--                            BOTON                                     -->
+            <!-- //////////////////////////////////////////////////////////////////// -->
+            <div class="row justify-content-center p-3">
+                <div class="col-3 align-self-center">
+                    <button class="about" type="submit" onclick="agregarUsuario()"
+                        style="border: 0; background: transparent" class="social ">
+                        <img class="BotonM" src="../resources/crearU.svg" alt="">
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript" src="./singinFunctions.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js "
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx "
+        crossorigin="anonymous "></script>
+</body>
+
+</html>
