@@ -377,7 +377,7 @@ export default class StructureService {
   //    tambien la quita de branch.jefes .... pero la deja en branch.members                     //
   /////////////////////////////////////////////////////////////////////////////////////////////////
   
-  public quitGroupChief(
+  public quitGroupChief (
 		zoneName: String,
 		branchId: String,
 		groupId: String,
@@ -680,5 +680,123 @@ export default class StructureService {
     console.log(" -- Miembro Insertado -- ");
   }
 
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  //    Quitar persona de la estructura                                                          //
+  /////////////////////////////////////////////////////////////////////////////////////////////////
 
+  public deleteCompleteMember( element: String, idMovement: Number, callback: any ) {
+    //"GRUPO-ZoneChief-idZona-idRama-idGrupo-idPersona"
+    var donde = element.split("-")[0];
+    ///                                                                            ///
+    if(donde == "ZONA"){
+      var role = element.split("-")[1];
+      var zoneName = element.split("-")[2];
+      var memberId = element.split("-")[3];
+      if ( role == "ZoneChief" ) {
+        structures.update(
+          {_id:idMovement},
+          { $pull: { "zonas.$[elem].jefes": memberId } },
+          { arrayFilters: [{ "elem.name": { $eq: zoneName } }], multi: true },callback
+        );
+      } else {
+        structures.update(
+          {_id:idMovement},
+          { $pull: { "zonas.$[elem].miembros": memberId } },
+          { arrayFilters: [{ "elem.name": { $eq: zoneName } }], multi: true },callback
+        );
+      }
+    ///                                                                            ///
+    }else if(donde == "RAMA"){
+      var role = element.split("-")[1];
+      var zoneName = element.split("-")[2];
+      var ramaId = element.split("-")[3];
+      var memberId = element.split("-")[4];
+      console.log("borrando de la Rama");
+      if ( role == "Monitor" ) {
+        structures.updateOne(
+          {_id:idMovement},
+          { $pull: { "zonas.$[elem].ramas.$[rma].monitores": memberId } },
+          {
+          arrayFilters: [
+            { "elem.name": { $eq: zoneName } },
+            { "rma.id": { $eq: ramaId } }
+          ],
+          multi: true,
+          },callback
+        );
+      } else if ( role == "BranchChief") {
+        structures.updateOne(
+          {_id:idMovement},
+          { $pull: { "zonas.$[elem].ramas.$[rma].jefes": memberId } },
+          {
+          arrayFilters: [
+            { "elem.name": { $eq: zoneName } },
+            { "rma.id": { $eq: ramaId } }
+          ],
+          multi: true,
+          },callback
+        );
+      } else {
+        structures.updateOne(
+          {_id:idMovement},
+          { $pull: { "zonas.$[elem].ramas.$[rma].miembros": memberId } },
+          {
+          arrayFilters: [
+            { "elem.name": { $eq: zoneName } },
+            { "rma.id": { $eq: ramaId } }
+          ],
+          multi: true,
+          },callback
+        );
+      }
+    ///                                                                            ///
+    }else{
+      var role = element.split("-")[1];
+      var zoneName = element.split("-")[2];
+      var ramaId = element.split("-")[3];
+      var groupId = element.split("-")[4];
+      var memberId = element.split("-")[5];
+    }
+    if ( role == "Monitor" ) {
+      structures.updateOne(
+        {_id:idMovement},
+        { $pull: { "zonas.$[elem].ramas.$[rma].grupos.$[grp].monitores": memberId } },
+        {
+        arrayFilters: [
+          { "elem.name": { $eq: zoneName } },
+          { "rma.id": { $eq: ramaId } },
+          { "grp.id": { $eq: groupId } },
+        ],
+        multi: true,
+        },callback
+      );
+    } else if ( role == "GroupChief") {
+      structures.updateOne(
+        {_id:idMovement},
+        { $pull: { "zonas.$[elem].ramas.$[rma].grupos.$[grp].jefes": memberId } },
+        {
+        arrayFilters: [
+          { "elem.name": { $eq: zoneName } },
+          { "rma.id": { $eq: ramaId } },
+          { "grp.id": { $eq: groupId } },
+        ],
+        multi: true,
+        },callback
+      );
+    } else {
+      structures.updateOne(
+        {_id:idMovement},
+        { $pull: { "zonas.$[elem].ramas.$[rma].grupos.$[grp].miembros": memberId } },
+        {
+        arrayFilters: [
+          { "elem.name": { $eq: zoneName } },
+          { "rma.id": { $eq: ramaId } },
+          { "grp.id": { $eq: groupId } },
+        ],
+        multi: true,
+        },callback
+      );
+    }
+
+  }
 }

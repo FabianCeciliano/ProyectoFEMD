@@ -1017,6 +1017,19 @@ export class dbController {
 
   // ! Notifications ================================================================================== //
 
+  public deleteSpecificUser(suscriber: String, movementId: Number){
+    this.structures.deleteCompleteMember(suscriber, 
+      movementId, (err: any, data: JSON) => {
+      if (err) {
+        console.log("Error en mongo");
+        //mongoError(err, res);
+      } else {
+        console.log(" Success !!!");
+        //successResponse("Zona Creada", data, res);
+      }
+    });
+  }
+
 }
 
 export default new dbController();

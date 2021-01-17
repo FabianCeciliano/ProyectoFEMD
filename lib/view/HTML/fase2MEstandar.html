@@ -64,7 +64,7 @@
     <!-- //////////////////////////////////////////////////////////////////// -->
     <div id="msgGEN" onclick="off()">
         <div id="msgGENE" onclick="off()">
-            <h2 class="headertekst">Mensaje</h2>
+            <h2 class="headertekst">-------------------MENSAJE------------------------</h2>
             <h2 id="msgTextGENE" class="headertekst">NADA</h2>
         </div>
     </div>
@@ -82,10 +82,6 @@
         <!--                    BANNER Y BOTONES SUPERIORES                       -->
         <!-- //////////////////////////////////////////////////////////////////// -->
         <div class="row bannerbuttonList">
-            <!--      BOTON PARA GENERAR MAS BOTONES                       -->
-            <button onclick="myFunctionInbox('holaa', 'reporte' )">Generate</button>
-
-
             <!--BANNER-->
             <div class="col-2 p-1">
                 <img class="img-responsive Ibanner" src="../resources/banner.svg">
@@ -155,6 +151,14 @@
 
                 <button id="IdBResumen" type="submit" onclick="BNNoticia()" style="border: 0; background: transparent">
                     <img class="buttonList" src="../resources/FF2NN.svg" alt="">
+                </button>
+
+                 <button id="IdBResumen" type="submit" onclick="BJefeMonitor()" style="border: 0; background: transparent">
+                    <img class="buttonList" src="../resources/RParticipacion.svg" alt="">
+                </button>
+
+                <button id="IdBResumen" type="submit" onclick="BRamasZonas()" style="border: 0; background: transparent">
+                    <img class="buttonList" src="../resources/RamasZonas.svg" alt="">
                 </button>
 
             </div>
@@ -282,7 +286,7 @@
                     <!-- //////////////////////////////////////////////////////////////////// -->
                     <!--                          SCROLL AREA                                 -->
                     <!-- //////////////////////////////////////////////////////////////////// -->
-                    <div class="ex1" id="scrollArea">
+                    <div class="ex1" id="scrollAreaMisGrupos">
 
                         <!-- //////////////////////////////////////////////////////////////////// -->
                         <!--                              MENU BAR                                -->
@@ -510,20 +514,36 @@
 
 
 
+
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!--                             ZONA RAMAS                               -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <!-- //////////////////////////////////////////////////////////////////// -->
+                <div id="overlayZonasRamas">
+
+                    <div class="row ustify-content-center p-3">
+                        <div class="col-11">
+                            <img class="mx-auto d-block over" src="../resources/RamasyZonas.svg">
+                        </div>
+                    </div>
+
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                          SCROLL AREA                                 -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <div class="ex1" id="scrollZonaRamas">
+          
+                    </div>
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    <!--                       FIN  SCROLL AREA                                 -->
+                    <!-- //////////////////////////////////////////////////////////////////// -->
+                    </br>
+
+                </div>
+
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         </div>
     </div>

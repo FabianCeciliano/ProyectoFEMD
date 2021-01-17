@@ -209,7 +209,7 @@ export class Controller {
         let memberParticipation :String[] = this.movement.getStructure().getMemberParticipation(pIData);
         return memberParticipation;
     }
-    public assignBranchManagement( zoneName : String, idBranch : number, idMember:number ) :Boolean{
+    public assignBranchManagement( zoneName : String, idBranch : number, idMember:number ) : Boolean{
         var member:Member = this.movement.getMembers().getMember(idMember).clone();
         member.set_rol(Rol.BranchChief);
         
@@ -218,7 +218,7 @@ export class Controller {
         //this.movement.getStructure().assignBranchManagement(branchName, idBranch , firstPersonName, idFirstPerson , secondPersonName, idSecondPerson);
         //return true;
     };
-    public assignGroupManagement( zoneName : String, idBranch : number, idGroup:number, idMember:number ) :Boolean{
+    public assignGroupManagement( zoneName : String, idBranch : number, idGroup:number, idMember:number ) : Boolean{
         
         var member:Member = this.movement.getMembers().getMember(idMember).clone();
         member.set_rol(Rol.groupChief);
@@ -376,6 +376,31 @@ export class Controller {
     public getNoticias( id : Number){
         return this.movement.getMembers().getNoticias(id);
     }
+
+    public consultarGrupos( idSesion : Number){
+        return this.movement.getStructure().consultarGrupos(idSesion);
+    }
+
+    public consultarGruposLiderazgo(idSesion : Number){
+        return this.movement.getStructure().consultarGruposLiderazgo(idSesion);
+    }
+
+    public generarResumenConsolidado(idSesion : Number){
+        return this.movement.getStructure().resumenConsolidado(idSesion);
+    }
+
+    public consultarRamasZonas(idSesion : Number){
+        return this.movement.getStructure().consultarRamasZonas(idSesion);
+    }
+
+
+    // ! New ... used in Complete Deletion of Members ----------------------------------------------------------------------------------------- //
+    public consultMemberParticipation2DeleteBD(pIdData:number){
+        return this.movement.getMovementId,this.movement.getStructure().getMemberSpecificParticipation(pIdData);
+    }
+    // ! New ... used in Complete Deletion of Members ----------------------------------------------------------------------------------------- //
+
+
 
 
 

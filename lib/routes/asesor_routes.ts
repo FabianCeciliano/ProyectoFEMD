@@ -778,33 +778,41 @@ export class AsesorRotes {
     ////////////////////////////////////////////////////////////////////
     //                    ELIMINAR A CIERTO USUARIO                   // 
     ////////////////////////////////////////////////////////////////////
+    // ! NEW ================================================================================================================================== //
     app.post("/borrarUsuario", function (req: Request, res: Response) {
-     
-      if(req.body.zonaCheck){
-        controller.removeZoneChief(req.body.zona,Number(req.body.id));
-        dbController.removeZoneChief(req.body.zona,req.body.id,controller.getActualMovementId());
-        res.send({ status: 1 });
 
-      }
-      else if(req.body.ramaCheck ){
-        controller.removeBranchChief(req.body.zona, Number(req.body.rama),Number(req.body.id));
-        dbController.removeBranchChief(req.body.zona, req.body.rama, req.body.id,controller.getActualMovementId())
-        res.send({ status: 1 });
-      }
-      else if(req.body.grupoCheck ){
-         controller.removeGroupChief(req.body.zona, Number(req.body.rama),Number(req.body.grupo),Number(req.body.id))
-         dbController.removeChiefGroupDB(req.body.zona, req.body.rama, 
-                          req.body.grupo, req.body.id, controller.getActualMovementId())
-         res.send({ status: 1 });
-      }else if(req.body.grupoCheck && req.body.ramaCheck && req.body.zonaCheck){
+      // Borrado total
+      if(req.body.grupoCheck && req.body.ramaCheck && req.body.zonaCheck){
         controller.deleteMember(Number(req.body.id));
         controller.printMembers();
         dbController.delete_user(req);
+        var data = controller.consultMemberParticipation2DeleteBD(Number(req.body.id));
+         data.forEach(element => {
+           dbController.deleteSpecificUser(element,controller.getActualMovementId());
+           console.log("Borrando --> " + element);
+
+         });
         res.send({ status: 1 });
       }else{
         res.send({ status: 0 });
       }
-    
+
+      if(req.body.zonaCheck && (!req.body.ramaCheck && !req.body.grupoCheck)){
+        controller.removeZoneChief(req.body.zona,Number(req.body.id));
+        dbController.removeZoneChief(req.body.zona,req.body.id,controller.getActualMovementId());
+        res.send({ status: 1 });
+      }
+      if(req.body.ramaCheck && (!req.body.zonaCheck && !req.body.grupoCheck)){
+        controller.removeBranchChief(req.body.zona, Number(req.body.rama),Number(req.body.id));
+        dbController.removeBranchChief(req.body.zona, req.body.rama, req.body.id,controller.getActualMovementId())
+        res.send({ status: 1 });
+      }
+      if(req.body.grupoCheck && (!req.body.zonaCheck && !req.body.ramaCheck)){
+         controller.removeGroupChief(req.body.zona, Number(req.body.rama),Number(req.body.grupo),Number(req.body.id))
+         dbController.removeChiefGroupDB(req.body.zona, req.body.rama, 
+                          req.body.grupo, req.body.id, controller.getActualMovementId())
+         res.send({ status: 1 });
+      }
     });
 
 
@@ -1446,6 +1454,88 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       }
       
     });
+
+    app.post("/consultarGrupos", function (req: Request, res: Response) {
+      
+      
+      var misGrupos = controller.consultarGrupos(3); // El parametro es el id del session
+
+      console.log("Mis grupos",misGrupos);
+      
+      if(misGrupos != null){
+        res.send({ status: 1, nombresGrupos:misGrupos.nombresGrupos,miembros:misGrupos.miembros});
+      }else{
+        res.send({ status: 0 });
+      }
+      
+    });
+
+
+    app.post("/consultarGruposLiderazgo", function (req: Request, res: Response) {
+      
+      
+      var misGruposLiderazgo = controller.consultarGruposLiderazgo(3); // El parametro es el id del session
+
+      console.log("Mis grupos",misGruposLiderazgo);
+      
+      if(misGruposLiderazgo != null){
+        res.send({ status: 1, nombresGrupos:misGruposLiderazgo.nombresGrupos,miembros:misGruposLiderazgo.miembros});
+      }else{
+        res.send({ status: 0 });
+      }
+      
+    });
+
+
+    
+    app.post("/resumenConsolidado", function (req: Request, res: Response) {
+      
+      
+      var resumenConsolidado = controller.generarResumenConsolidado(3); // El parametro es el id del session
+
+      console.log("Mi resumen",resumenConsolidado);
+      
+      if(resumenConsolidado != null){
+        res.send({ status: 1, resumenConsolidado : resumenConsolidado});
+      }else{
+        res.send({ status: 0 });
+      }
+      
+    });
+
+    app.post("/consultarRamasZonas", function (req: Request, res: Response) {
+      
+      
+      var misRamasZonas = controller.consultarRamasZonas(3); // El parametro es el id del session
+
+      console.log("Mis ramasZonas",misRamasZonas);
+      
+      if(misRamasZonas != null){
+        res.send({ status: 1, nombresNivel:misRamasZonas.nombresNivel,miembros:misRamasZonas.miembros});
+      }else{
+        res.send({ status: 0 });
+      }
+      
+    });
+
+
+    /*
+    app.post("/consultarLiderRamas", function (req: Request, res: Response) {
+      
+      
+      var liderandoRamas = controller.consultarLiderRamas(3); // El parametro es el id del session
+
+      console.log("Mis grupos",liderandoRamas);
+      
+      if(liderandoRamas != null){
+        res.send({ status: 1, nombresGrupos:misGruposLiderazgo.nombresGrupos,miembros:misGruposLiderazgo.miembros});
+      }else{
+        res.send({ status: 0 });
+      }
+      
+    });
+    */
+
 
   }
 }
