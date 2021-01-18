@@ -40,6 +40,7 @@ export class AsesorRotes {
           contributionsFromDB = value;
         })
 
+        // !   Crea la Estructura    //
         if(movementFromDb.length>0){
           for (let movindex = 0; movindex < movementFromDb.length; movindex++) {
             var status: boolean = controller.createMovement(Number(movementFromDb[movindex].cedulaJuridica), movementFromDb[movindex].name, movementFromDb[movindex].webDirection, movementFromDb[movindex].coutry, Number(movementFromDb[movindex].phone));
@@ -51,7 +52,7 @@ export class AsesorRotes {
                 if(element.facilitator=="true"){
                   facilitator=true;
                 }
-                controller.addMember(Number(element.memberId), element.name, Number(element.telephone), element.email, element.direction, facilitator);
+                controller.addMember(Number(element.memberId), element.name, Number(element.telephone), element.email, element.direction, facilitator, element.notifications);
               })
             }else{
               console.log("No levanto nada de los miembros");
