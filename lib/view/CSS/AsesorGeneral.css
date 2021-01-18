@@ -592,6 +592,15 @@ pre.myTXT {
     height: 90%;
 }
 
+
+.myborderMedium-XL-L{
+    border-radius: 5px;
+    height: 100px;
+    width: 500px;
+    left: 5%;
+}
+
+
 #overlayINBOX{
   padding: 2%;
   border-radius: 10px;
