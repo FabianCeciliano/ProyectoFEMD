@@ -74,8 +74,8 @@
     <!-- //////////////////////////////////////////////////////////////////// -->
     <div id="msgGEN" onclick="off()">
         <div id="msgGENE" onclick="off()">
-            <h2 class="headertekst">>--------------------------------------------------<</h2>
-            <h2 id="msgTextGENE" class="headertekst">NADA</h2>
+            <h2 class="headertekst">>--------------------------------------------------<< /h2>
+                    <h2 id="msgTextGENE" class="headertekst">NADA</h2>
         </div>
     </div>
 
@@ -86,45 +86,28 @@
 
     <div class="container-fluid ">
 
-
+      
 
         <!-- //////////////////////////////////////////////////////////////////// -->
         <!--                    BANNER Y BOTONES SUPERIORES                       -->
         <!-- //////////////////////////////////////////////////////////////////// -->
         <div class="row bannerbuttonList">
+
             <!--BANNER-->
-            <div class="col-2 p-1">
-                <img class="img-responsive Ibanner" src="../resources/banner.svg">
+            <div class="col-2">
+                <img onclick="showEst()" class="img-responsive eye p-3"
+                src="https://www.vippng.com/png/full/90-907924_icono-lupa-home-11-icono-de-una-lupa.png">
             </div>
 
             <!--ESPACIO-->
-            <div class="col-7">
-            </div>
-
-            <!--SOBRE-->
-            <div class="col-2 p-1">
-
-                <div class="dropdownX p-2">
-                    <button onclick="myFunctionX()" class="dropbtnX"></button>
-                    <div id="myDropdownX" class="dropdownX-content">
-                        <a href="#home">Home</a>
-                        <a href="#about">About</a>
-                        <a href="#contact">Contact</a>
-                    </div>
-                </div>
-
-                <!-- <img onclick="showEst()" class="img-responsive eye p-3" src="../resources/notificacion.svg"> -->
-
+            <div class="col-9">
             </div>
 
             <!--SELECTBOX-->
-            <div>
-                </br></br>
-                <div class="boxMin">
-                    <select onclick="" class="selecBox" id="loging" type="submit "
-                        style="border: 0; background: transparent ">
-                    </select>
-                </div>
+            <div class="col-1">
+                <button id="IdBMGrupos" type="submit" onclick="" style="border: 0; background: transparent">
+                    <img class="buttonList" src="../resources/salir.svg" alt="">
+                </button>
             </div>
 
         </div>
@@ -151,7 +134,7 @@
                 </button>
 
                 <button id="BVNoticias" type="submit" onclick="BVNoticias()" style="border: 0; background: transparent">
-                    <img class="buttonList" src="../resources/Noticias.svg" alt="">
+                    <img class="buttonList" src="../resources/FFVN.svg" alt="">
                 </button>
 
 
@@ -160,7 +143,7 @@
                 </button>
 
                 <button id="IdBResumen" type="submit" onclick="BNNoticia()" style="border: 0; background: transparent">
-                    <img class="buttonList" src="../resources/FF2NN.svg" alt="">
+                    <img class="buttonList" src="../resources/FFCN.svg" alt="">
                 </button>
 
                 <button id="IdBResumen" type="submit" onclick="BJefeMonitor()"
@@ -168,12 +151,14 @@
                     <img class="buttonList" src="../resources/RParticipacion.svg" alt="">
                 </button>
 
-                <button id="IdBResumen" type="submit" onclick="BRamasZonas()" style="border: 0; background: transparent">
+                <button id="IdBResumen" type="submit" onclick="BRamasZonas()"
+                    style="border: 0; background: transparent">
                     <img class="buttonList" src="../resources/RamasZonas.svg" alt="">
                 </button>
 
 
-                <button id="IdBResumen" type="submit" onclick="BConsultarNodo()" style="border: 0; background: transparent">
+                <button id="IdBResumen" type="submit" onclick="BConsultarNodo()"
+                    style="border: 0; background: transparent">
                     <img class="buttonList" src="../resources/ffConsultaNodo.svg" alt="">
                 </button>
 
@@ -594,8 +579,7 @@
                             <img class="mx-auto d-block over" src="../resources/FFrutaNodo.png">
                         </div>
                         <div class="col-6 align-self-center">
-                            <input class="myborders" id="rutaNodo" type="text " placeholder="ZONA-RAMA-GRUPO"
-                                required>
+                            <input class="myborders" id="rutaNodo" type="text " placeholder="ZONA-RAMA-GRUPO" required>
                         </div>
                     </div>
 
@@ -606,7 +590,8 @@
                     <div class="row  justify-content-center p-3">
                         <div class="col-6 align-self-center">
                             <!-- TODO: Cambiar este textarea por un overlay -->
-                            <textarea class="myborderMedium-XL-L"  id="infoNodo" rows = "5" cols = "60" name = "description">Cuerpo</textarea>
+                            <textarea class="myborderMedium-XL-L" id="infoNodo" rows="5" cols="60"
+                                name="description">Cuerpo</textarea>
                         </div>
                     </div>
 
