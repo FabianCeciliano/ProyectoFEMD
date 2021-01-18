@@ -296,6 +296,32 @@ export class AsesorRotes {
     //*****************************************************************//
 
 
+    ////////////////////////////////////////////////////////////////////
+    //                 FUNCION  PARA CARGAR DATOS EN                   //
+    //                         ASIGNAR MONITOR                        // 
+    ////////////////////////////////////////////////////////////////////
+    app.post("/changeStatus", function (req: Request, res: Response) {
+      
+      var notificationID =  req.body.PId;
+
+      var statusChange = controller.changeNotificationStatus(notificationID);
+
+      if(statusChange){
+        
+      }
+
+      if (branches.length > 0 && monitores.length > 0) {
+        res.send({ status: 1, ramas: branches, monitor: monitores });
+      } else {
+        res.send({ status: 0, ramas: branches, monitor: monitores });
+      }
+    });
+
+
+
+
+
+
 
 
     ////////////////////////////////////////////////////////////////////
@@ -1528,7 +1554,7 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
         res.send({ status: 0 });
       }
       
-    });
+    }); 
 
     app.post("/consultarNodo", function (req: Request, res: Response) {
       
