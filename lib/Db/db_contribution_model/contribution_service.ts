@@ -30,26 +30,4 @@ export default class ContributionService {
         return contributionsFromDB;
     }
 
-/*    
-
-    public delayy(ms: number) {
-        return new Promise( resolve => setTimeout(resolve, ms) );
-    }
-
-    public async validateUser(userName:String,password:String):Promise<String>{
-        var userId:String = null;
-
-        var x = await users.find({name:userName,telephone:password},async function(err,result:IUser[]){//NO "name" sino "userName" y No "telephone" sino "password"
-            if(err){
-                console.log("Error al validar usuario");
-            }else{
-                if(result.length>0){
-                    userId=result[0].memberId;
-                }
-            }
-        })
-
-        return userId;
-    }
-*/    
 }

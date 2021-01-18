@@ -64,7 +64,7 @@
     <!-- //////////////////////////////////////////////////////////////////// -->
     <div id="msgGEN" onclick="off()">
         <div id="msgGENE" onclick="off()">
-            <h2 class="headertekst">-------------------MENSAJE------------------------</h2>
+            <h2 class="headertekst">>--------------------------------------------------<</h2>
             <h2 id="msgTextGENE" class="headertekst">NADA</h2>
         </div>
     </div>
@@ -158,14 +158,12 @@
                     <img class="buttonList" src="../resources/RParticipacion.svg" alt="">
                 </button>
 
-                <button id="IdBResumen" type="submit" onclick="BRamasZonas()"
-                    style="border: 0; background: transparent">
+                <button id="IdBResumen" type="submit" onclick="BRamasZonas()" style="border: 0; background: transparent">
                     <img class="buttonList" src="../resources/RamasZonas.svg" alt="">
                 </button>
 
 
-                <button id="IdBResumen" type="submit" onclick="BConsultarNodo()"
-                    style="border: 0; background: transparent">
+                <button id="IdBResumen" type="submit" onclick="BConsultarNodo()" style="border: 0; background: transparent">
                     <img class="buttonList" src="../resources/ffConsultaNodo.svg" alt="">
                 </button>
 
@@ -597,8 +595,8 @@
                     <!-- //////////////////////////////////////////////////////////////////// -->
                     <div class="row  justify-content-center p-3">
                         <div class="col-6 align-self-center">
-                            <input class="myborderMedium-XL-L" id="infoNodo" type="text " placeholder="Cuerpo"
-                                required>
+                            <!-- TODO: Cambiar este textarea por un overlay -->
+                            <textarea class="myborderMedium-XL-L"  id="infoNodo" rows = "5" cols = "60" name = "description">\n hi \r\n hola</textarea>
                         </div>
                     </div>
 
@@ -608,7 +606,7 @@
                     <!-- //////////////////////////////////////////////////////////////////// -->
                     <div class="row justify-content-center p-1">
                         <div class="col-3 align-self-center">
-                            <button type="submit" onclick="BConsultar()" style="border: 0; background: transparent">
+                            <button type="submit" onclick="consultarNodo()" style="border: 0; background: transparent">
                                 <img class="mx-auto d-block " src="../resources/ffConsultar.svg" alt="">
                             </button>
                         </div>

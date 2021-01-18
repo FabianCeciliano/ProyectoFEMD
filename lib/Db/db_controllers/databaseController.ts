@@ -874,9 +874,10 @@ export class dbController {
   //                                  Create Contribution                                //
   ///                                                                                   ///
 
-  public createContribution( emissor: String, type: String, date: String, description: String ) {
+  public createContribution(idMovimiento: Number, emissor: String, type: String, date: String, description: String ) {
     if ( emissor && type && date && description ) {
       const contrib_params: IContribution = {
+          idMovimiento: idMovimiento.toString(),
           emissor: emissor,
           type: type,
           date: date,
@@ -909,6 +910,7 @@ export class dbController {
       previous = this.contribution.findContribution(contributionQuery, (err: any, contrib_data: IContribution) => { });
       if (previous.emissor != "") {
         const contrib_params: IContribution = {
+          idMovimiento: previous.idMovimiento,
           emissor: previous.emissor,
           type: previous.type,
           date: date,
@@ -957,6 +959,7 @@ export class dbController {
     
     contributionsDB.forEach(contributionA => {
       const contrib_params: IContribution = {
+        idMovimiento: contributionA.idMovimiento,
         emissor: contributionA.emissor,
         type: contributionA.type,
         date: contributionA.date,

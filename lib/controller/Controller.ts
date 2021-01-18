@@ -8,6 +8,8 @@ import {Rol} from '../model/Rol'
 import { LeafComponent } from '../model/LeafComponent';
 import { Contribution } from 'model/Contribution';
 import { MyNotification } from '../model/MyNotification';
+import { IContribution } from '../Db/db_contribution_model/contribution_model';
+import { INotification } from 'Db/db_notification_model/notification_model';
 
 export class Controller {
     controller(): String[] {
@@ -285,9 +287,9 @@ export class Controller {
         return groups;
     } 
 
-    public addMember(id:number,name:String,telephone:number,mail:String,direction:String,esMonitor:boolean){
+    public addMember(id:number,name:String,telephone:number,mail:String,direction:String,esMonitor:boolean, notifications: INotification[]){
         if(!this.movement.getMembers().idExist(id)){
-            this.movement.getMembers().addMember(id, name,telephone,mail, direction,esMonitor);
+            this.movement.getMembers().addMember(id, name, telephone, mail, direction, esMonitor, notifications);
             return true;
         }
         return false;
@@ -397,6 +399,10 @@ export class Controller {
         return this.movement.getStructure().consultarNodo(ruta);
     }
 
+    public setDBContribution(contribution : IContribution){
+        return this.movement.reloadContribution(contribution);
+    }
+
 
     // ! New ... used in Complete Deletion of Members ----------------------------------------------------------------------------------------- //
     public consultMemberParticipation2DeleteBD(pIdData:number){
@@ -405,7 +411,7 @@ export class Controller {
     // ! New ... used in Complete Deletion of Members ----------------------------------------------------------------------------------------- //
 
 
-
+    
 
 
 

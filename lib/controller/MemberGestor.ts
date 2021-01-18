@@ -4,6 +4,7 @@ import { StructureType } from '../model/StructureType';
 import { Rol } from '../model/Rol';
 import { Cupula } from 'model/Cupula';
 import { MyNotification } from 'model/MyNotification';
+import { INotification } from 'Db/db_notification_model/notification_model';
 
 
 export class MemberGestor{
@@ -35,14 +36,21 @@ export class MemberGestor{
         return false;
     }
 
-    public addMember(id:number, name:String, telephone:number, mail:String, direction:String,esMonitor:boolean){
+    public addMember(id:number, name:String, telephone:number, mail:String, direction:String,esMonitor:boolean, notificaciones: INotification[]){
         var member:Member = new Member(direction,Rol.groupMember,false,id,name,mail,telephone)
         member.set_facilitador(esMonitor);
         if(esMonitor){
             member.set_rol(Rol.monitor);
         }
+        if(notificaciones.length > 0){
+            notificaciones.forEach(element => {
+                // TODO crear la notificacion, y agregarla
+                //var notificacion = new MyNotification();
+            });
+        }
         this.members.push(member);
     }
+
     public updateMember (id:number,name:String,celular:number,mail:String,direccion:String,esMonitor:boolean) :Boolean {
         for(let index = 0 ; index < this.members.length ; index++){
             if(this.members[index].id==id){
