@@ -936,7 +936,7 @@ export class Gestor {
                             if (this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members[mindex].id == pIdData) {
                                 //  ELIMINA JEFE DE RAMA  //
                                 this.structure.groupComposite[zindex].getCompositeGroup()[bindex].members.splice(mindex, 1);
-                            }
+                            } //holisssss
                         }
                         for (let gindex = 0; gindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup().length; gindex++) {
                             for (let mindex = 0; mindex < this.structure.groupComposite[zindex].getCompositeGroup()[bindex].getCompositeGroup()[gindex].members.length; mindex++) {

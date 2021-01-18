@@ -302,19 +302,13 @@ export class AsesorRotes {
     ////////////////////////////////////////////////////////////////////
     app.post("/changeStatus", function (req: Request, res: Response) {
       
+      var userID = req.body.userID;
       var notificationID =  req.body.PId;
 
-      var statusChange = controller.changeNotificationStatus(notificationID);
+      var statusChange = controller.changeNotificationStatus(notificationID, userID);
+      dbController.updateNotification(userID, notificationID.toString());
 
-      if(statusChange){
-        
-      }
-
-      if (branches.length > 0 && monitores.length > 0) {
-        res.send({ status: 1, ramas: branches, monitor: monitores });
-      } else {
-        res.send({ status: 0, ramas: branches, monitor: monitores });
-      }
+      res.send({ status: 1});
     });
 
 
@@ -1481,12 +1475,12 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
     app.post("/getNoticias", function (req: Request, res: Response) {
       
       
-      var misNoticias = controller.getNoticias(3); // El parametro es el id del session
+      var misNoticias = controller.getNoticias(3); 
 
       console.log("Mis noticias",misNoticias);
       
       if(misNoticias.length != 0){
-        res.send({ status: 1, noticias:misNoticias});
+        res.send({ status: 1, noticias:misNoticias,idMember:3}); // El parametro es el id del session
       }else{
         res.send({ status: 0 });
       }

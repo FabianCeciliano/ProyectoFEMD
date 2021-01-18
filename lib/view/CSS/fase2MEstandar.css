@@ -805,3 +805,93 @@ pre.myTXT {
 
 
 
+  #overlayAgregarMiembro{
+    padding: 2%;
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(82, 96, 99, 0.425);
+    cursor: pointer;
+    width: auto;
+    height: 90%;
+}
+
+#overlayMovimiento{
+  padding: 2%;
+  border-radius: 10px;
+  display: none;
+  background-color: rgba(82, 96, 99, 0.425);
+  cursor: pointer;
+  width: auto;
+  height: 90%;
+}
+
+#overlayConsultasVarias
+{
+  padding: 2%;
+  border-radius: 10px;
+  display: none;
+  background-color: rgba(82, 96, 99, 0.425);
+  cursor: pointer;
+  width: auto;
+  height: 90%;
+}
+#overlayConformarCoordinacion
+{
+  padding: 2%;
+  border-radius: 10px;
+  display: none;
+  background-color: rgba(82, 96, 99, 0.425);
+  cursor: pointer;
+  width: auto;
+  height: 90%;
+}
+#overlayCrearESt
+{
+  padding: 2%;
+  border-radius: 10px;
+  display: none;
+  background-color: rgba(82, 96, 99, 0.425);
+  cursor: pointer;
+  width: auto;
+  height: 90%;
+}
+#overlayCrearGrupo
+{
+  padding: 2%;
+  border-radius: 10px;
+  display: none;
+  background-color: rgba(82, 96, 99, 0.425);
+  cursor: pointer;
+  width: auto;
+  height: 90%;
+}
+#overlayAdmMiembros
+{
+  padding: 2%;
+  border-radius: 10px;
+  display: none;
+  background-color: rgba(82, 96, 99, 0.425);
+  cursor: pointer;
+  width: auto;
+  height: 90%;
+}
+#overlayAsignarMonitor
+{
+  padding: 2%;
+  border-radius: 10px;
+  display: none;
+  background-color: rgba(82, 96, 99, 0.425);
+  cursor: pointer;
+  width: auto;
+  height: 90%;
+}
+#overlayBandejaAporte
+{
+  padding: 2%;
+  border-radius: 10px;
+  display: none;
+  background-color: rgba(82, 96, 99, 0.425);
+  cursor: pointer;
+  width: auto;
+  height: 90%;
+}

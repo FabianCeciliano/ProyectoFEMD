@@ -24,7 +24,7 @@ export class Movement{
     private gMembers:MemberGestor;
     private cupula : Cupula;
     private foro : Forum;
-o
+
     constructor(cedJuridica:number, name:String, website :String, country : String,phoneNumber: number){
         this.cedJuridica = cedJuridica;
         this.name = name;

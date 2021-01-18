@@ -16,6 +16,14 @@ export class MyNotification {
         this.nombreEmisor = nombreEmisor;
     }
 
+    public setAll(pNombre:String, pNombreEmisor:String, pMensaje:String, estado:Boolean, date:Date){
+        this.nombre = pNombre;
+        this.mensaje = pMensaje;
+        this.estado = estado;
+        this.currentDate = date;
+        this.nombreEmisor = pNombreEmisor;
+    }
+
 
     formatNotification(route : String[]) : void { //[ " ", " ", " "]
         var message = "";

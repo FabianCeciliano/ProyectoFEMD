@@ -410,6 +410,10 @@ export class Controller {
     }
     // ! New ... used in Complete Deletion of Members ----------------------------------------------------------------------------------------- //
 
+    public changeNotificationStatus( pID: String , userID : Number){
+        return this.movement.getMembers().changeNotStatus(pID, userID);
+    }
+    
 
     
 
