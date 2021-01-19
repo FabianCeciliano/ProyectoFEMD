@@ -30,4 +30,10 @@ export default class ContributionService {
         return contributionsFromDB;
     }
 
+    public async deleteAllContributionsFalse(callback: any){
+        contributions.updateMany(
+            { deleted: false },
+            { $set: { deleted: true } }, callback);
+    }
+
 }

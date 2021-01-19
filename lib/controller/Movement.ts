@@ -98,6 +98,10 @@ export class Movement{
         this.foro.setSubscribers(members);
     }
 
+    downloadRepository(){
+        return this.cupula.downloadRepository();
+    }
+
 
 
 }

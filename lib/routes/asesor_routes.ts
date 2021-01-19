@@ -127,7 +127,7 @@ export class AsesorRotes {
             contributionsFromDB.forEach(element => {
               console.log("Opt: "+Number(element.idMovimiento) + " Contra --> " + Number(movementFromDb[movindex].cedulaJuridica));
               
-              if(Number(element.idMovimiento) == Number(movementFromDb[movindex].cedulaJuridica)){
+              if(Number(element.idMovimiento) == Number(movementFromDb[movindex].cedulaJuridica) && element.deleted != true){
                 controller.setDBContribution(element);
                 console.log("Introduciendo contribucion " + element);
               }
@@ -1596,5 +1596,21 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       }
       
     });
+
+    app.post("/limpiarRepositorio", async function (req: Request, res: Response) {
+      
+      var success = controller.downloadRepository();
+      dbController.deleteAllContributions();
+
+      console.log("Succes de despues --> "+ success);
+
+      if(success){
+        res.send({ status: 1 });
+      }else{  
+        res.send({ status: 0 });  
+      }
+      
+    });
+
   };
 }

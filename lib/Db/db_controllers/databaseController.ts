@@ -971,38 +971,53 @@ export class dbController {
     return contributionsDB;
   }
 
-  ///                                                                                   ///
-  //                                "Delete" Contributions                               //
-  ///                                                                                   ///
-  public async deleteAllContributions() {
-    var contributionsDB: IContribution[] = null;
-    var promise = this.contribution.getAllContributions();
-    await promise.then((value) => {
-      contributionsDB = value
-    });
-    
-    contributionsDB.forEach(contributionA => {
-      const contrib_params: IContribution = {
-        idMovimiento: contributionA.idMovimiento,
-        emissor: contributionA.emissor,
-        type: contributionA.type,
-        date: contributionA.date,
-        descripcion: contributionA.descripcion,
-        deleted: true
-      }
-      this.contribution.updateContribution(contrib_params,
-        (err: any, data: JSON) => {
-          if (err) {
-            console.log("Error en mongo");
-            //mongoError(err, res);
-          } else {
-            console.log(" Contribution \"Deleted\" from DB !!!");
-            //successResponse("Zona Creada", data, res);
-          }
+
+
+  // ///                                                                                   ///
+  // //                                "Delete" Contributions                               //
+  // ///                                                                                   ///
+  public async deleteAllContributions() {  
+    this.contribution.deleteAllContributionsFalse(
+      (err: any, data: JSON) => {
+        if (err) {
+          console.log("Error en mongo");
+          //mongoError(err, res);
+        } else {
+          console.log(" Contribution \"Deleted\" from DB !!!");
+          //successResponse("Zona Creada", data, res);
         }
-      );
-    })
+      }
+    ); 
   }
+  // public async deleteAllContributions() {
+  //   var contributionsDB: IContribution[] = null;
+  //   var promise = this.contribution.getAllContributions();
+  //   await promise.then((value) => {
+  //     contributionsDB = value
+  //   });
+    
+  //   contributionsDB.forEach(contributionA => {
+  //     const contrib_params: IContribution = {
+  //       idMovimiento: contributionA.idMovimiento,
+  //       emissor: contributionA.emissor,
+  //       type: contributionA.type,
+  //       date: contributionA.date,
+  //       descripcion: contributionA.descripcion,
+  //       deleted: true
+  //     }
+  //     this.contribution.updateContribution(contrib_params,
+  //       (err: any, data: JSON) => {
+  //         if (err) {
+  //           console.log("Error en mongo");
+  //           //mongoError(err, res);
+  //         } else {
+  //           console.log(" Contribution \"Deleted\" from DB !!!");
+  //           //successResponse("Zona Creada", data, res);
+  //         }
+  //       }
+  //     );
+  //   })
+  // }
   // ! Contributions ================================================================================== //
 
 

@@ -424,11 +424,10 @@ export class Controller {
         return currentUser.name;
     }
     
-
+    public downloadRepository() : Boolean {
+        return this.movement.downloadRepository();
+    }
     
-
-
-
 }
 
 export default new Controller();

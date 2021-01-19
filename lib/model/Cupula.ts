@@ -64,7 +64,14 @@ export class Cupula{
         return false;
     };
     
-    public downloadRepository() : void {};
+    public downloadRepository() : Boolean {
+        var contributionSize = this.contributionRepository.length;
+        for(let i=0; i< contributionSize ; i++){
+            this.contributionRepository.pop();
+        }
+        console.log("REPO: "+this.contributionRepository);
+        return true;
+    };
     
     public setStrategy (strategy : Strategy) : void {
         this.reportGenerator = strategy;
