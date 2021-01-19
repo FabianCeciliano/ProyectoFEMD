@@ -17,7 +17,31 @@
 </head>
 
 <body>
+      <!-- //////////////////////////////////////////////////////////////////// -->
+    <!--                   MUESTRA LOS MENSAJES DE ERROR                       -->
+    <!-- //////////////////////////////////////////////////////////////////// -->
+    <div id="errorBG" onclick="off()">
+        <div id="error" onclick="off()">
+            <h2 class="headertekst">Error</h2>
+            <img src="https://www.nicepng.com/png/full/225-2255762_error404-error-404-icono-png.png" alt="Paris"
+                class="center">
+            <h2 id="msgError" class="headertekst">NADA</h2>
+        </div>
+    </div>
 
+    <!-- //////////////////////////////////////////////////////////////////// -->
+    <!--                    MUESTRA LAS NOTIFICACION                          -->
+    <!-- //////////////////////////////////////////////////////////////////// -->
+    <div id="msgBG" onclick="off()">
+        <div id="msg" onclick="off()">
+            <h2 class="headertekst">Mensaje</h2>
+            <img src="https://icons-for-free.com/iconfiles/png/512/complete+done+green+success+valid+icon-1320183462969251652.png"
+                alt="Paris" class="center">
+            <h2 id="msgText" class="headertekst">NADA</h2>
+        </div>
+    </div>
+
+   
     <!-- BANNER Y BOTONES -->
     <div class="container-fluid ">
 
@@ -71,7 +95,7 @@
             <!-- //////////////////////////////////////////////////////////////////// -->
             <div class="row  p-1">
                 <div class="col-12">
-                    <img class="mx-auto d-block over" src="../resources/FAInformación General.svg">
+                    <img class="mx-auto d-block over" src="../resources/RegistrarseTitle.svg">
                 </div>
             </div>
 
@@ -90,74 +114,6 @@
             <!-- //////////////////////////////////////////////////////////////////// -->
             <div class="row  justify-content-center">
                 <input class="myborderMedium-S" id="nuevoUserId" type="text" placeholder="Identificacion." required>
-            </div>
-
-
-            <!-- //////////////////////////////////////////////////////////////////// -->
-            <!--                                TITULO                                -->
-            <!-- //////////////////////////////////////////////////////////////////// -->
-            <div class="row  p-2">
-                <div class="col-12">
-                    <img class="mx-auto d-block over" src="../resources/FANombre Completo.svg">
-                </div>
-            </div>
-
-            <!-- //////////////////////////////////////////////////////////////////// -->
-            <!--                            TEXT AREA                                 -->
-            <!-- //////////////////////////////////////////////////////////////////// -->
-            <div class="row  justify-content-center">
-                <input class="myborderMedium-S" id="nuevoUserNombre" type="text " placeholder="Nombre completo"
-                    required>
-            </div>
-
-
-            <!-- //////////////////////////////////////////////////////////////////// -->
-            <!--                                TITULO                                -->
-            <!-- //////////////////////////////////////////////////////////////////// -->
-            <div class="row  p-2">
-                <div class="col-12">
-                    <img class="mx-auto d-block over" src="../resources/FANúmero Celular.svg">
-                </div>
-            </div>
-
-            <!-- //////////////////////////////////////////////////////////////////// -->
-            <!--                            TEXT AREA                                 -->
-            <!-- //////////////////////////////////////////////////////////////////// -->
-            <div class="row  justify-content-center">
-                <input class="myborderMedium-S" id="nuevoUserCelular" type="text " placeholder="Numero Celular"
-                    required>
-            </div>
-
-            <!-- //////////////////////////////////////////////////////////////////// -->
-            <!--                                TITULO                                -->
-            <!-- //////////////////////////////////////////////////////////////////// -->
-            <div class="row  p-2">
-                <div class="col-12">
-                    <img class="mx-auto d-block over" src="../resources/FAE-Mail.svg">
-                </div>
-            </div>
-
-            <!-- //////////////////////////////////////////////////////////////////// -->
-            <!--                            TEXT AREA                                 -->
-            <!-- //////////////////////////////////////////////////////////////////// -->
-            <div class="row  justify-content-center">
-                <input class="myborderMedium-S" id="nuevoUserMail" type="text " placeholder="E-Mail" required>
-            </div>
-
-            <!-- //////////////////////////////////////////////////////////////////// -->
-            <!--                                TITULO                                -->
-            <!-- //////////////////////////////////////////////////////////////////// -->
-            <div class="row  p-2">
-                <div class="col-12">
-                    <img class="mx-auto d-block over" src="../resources/FADirección Física.svg">
-                </div>
-            </div>
-
-            <!-- //////////////////////////////////////////////////////////////////// -->
-            <!--                            TEXT AREA                                 -->
-            <!-- //////////////////////////////////////////////////////////////////// -->
-            <div class="row  justify-content-center">
-                <input class="myborderMedium-S" id="nuevoUserDireccion" type="text " placeholder="Direccion" required>
             </div>
 
             <!-- //////////////////////////////////////////////////////////////////// -->
@@ -180,8 +136,8 @@
             <!--                            BOTON                                     -->
             <!-- //////////////////////////////////////////////////////////////////// -->
             <div class="row justify-content-center p-3">
-                <div class="col-3 align-self-center">
-                    <button class="about" type="submit" onclick="agregarUsuario()"
+                <div class="col-3 align-self-center"> 
+                    <button class="about" type="submit" onclick="registrarse()"
                         style="border: 0; background: transparent" class="social ">
                         <img class="BotonM" src="../resources/crearU.svg" alt="">
                     </button>

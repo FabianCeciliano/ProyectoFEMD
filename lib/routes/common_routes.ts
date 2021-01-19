@@ -22,14 +22,18 @@ export class CommonRoutes {
         });
 
         app.get('/miembroEstandar',function(req: Request, res: Response){
+            res.render(path.resolve(htmlPath+'fase2Estandar.html'));            
+        });
+
+        app.get('/miembroJefes',function(req: Request, res: Response){
             res.render(path.resolve(htmlPath+'fase2MEstandar.html'));            
-        })
+        });
 
-        app.get('/singup',function(req: Request, res: Response){
-            res.render(path.resolve(htmlPath+'singUp.html'));            
-        })
+        app.get('/signup',function(req: Request, res: Response){
+            res.render(path.resolve(htmlPath+'singin.html'));            
+        });
 
-        app.post('/singup',function(req: Request, res: Response){
+        app.post('/signup',function(req: Request, res: Response){
             var userId = req.body.userId;
             var username = req.body.userName;
             var password = req.body.password;
@@ -49,10 +53,10 @@ export class CommonRoutes {
             await facade.verifyAcces(req.body.userName,req.body.password).then((value)=>{
                 memberId=value;
             })
-            
-            if(memberId==""){
+            console.log("IdFromDb:",memberId);
+            if(memberId==null){
                 console.log("usuario no autorizado");
-                res.send({ status: 0 });// 0 es que no es un usuario, creo que deberia ser redireccionado al singUp
+                res.send({ status: 0, route:"/signup" });// 0 es que no es un usuario, creo que deberia ser redireccionado al singUp
             }else{
                 var memberRol:String = null;
                 await facade.getRol(memberId).then((value)=>{
@@ -60,17 +64,12 @@ export class CommonRoutes {
                 })
                 if(memberRol!=null){
                     res.send({ status: 1 , route:memberRol});
+                    req.session.user=memberId.toString();
+                    console.log("La sesion: "+req.session.user);
                 }else{
                     res.send({ status: 2 });// 2 es que no tiene rol, so...?
                 }
             }
-
-            /*if((req.body.userName=="fabian" && req.body.password=="123")){
-                req.session.user="fabian";
-                res.send("10/10");
-            }else{
-                res.send({ status: 1 , route:"/main"});
-            }*/
             
         });
         

@@ -14,7 +14,7 @@ var session = require('express-session');
 
 declare module "express-session" {
    interface Session {
-     user: string;
+     user: String;
      //loggedIn:Boolean;
    }
  }

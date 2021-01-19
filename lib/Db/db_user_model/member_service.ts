@@ -16,9 +16,21 @@ export default class UserService {
         return users.findOne(query, callback);
     }
 
+    public async setPassword_ (memberId: String, pPassword: String, callback: any) {
+        const query = { memberId: memberId };
+        const res = await users.updateOne(query, { password: pPassword });
+        console.log("Cuantity of results matched : " + res.n); // Number of documents matched
+        //console.log("Cuantity of results modified : " res.nModified); // Number of documents modified 
+        if(res.n != 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public updateUser(user_params: IUser, callback: any) {
-        const query = { id: user_params.memberId };
-        users.findOneAndUpdate(query, user_params, callback);
+        const query = { memberId: user_params.memberId };
+        users.updateOne(query, user_params, callback);
     }
     
     public deleteUser( id: String, callback: any ) {
@@ -46,7 +58,7 @@ export default class UserService {
     public async validateUser(userName:String,password:String):Promise<String>{
         var userId:String = null;
 
-        var x = await users.find({name:userName,telephone:password},async function(err,result:IUser[]){//NO "name" sino "userName" y No "telephone" sino "password"
+        var x = await users.find({memberId:userName,password:password},async function(err,result:IUser[]){//NO "name" sino "userName" y No "telephone" sino "password"
             if(err){
                 console.log("Error al validar usuario");
             }else{

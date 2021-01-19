@@ -4,10 +4,10 @@ import { INotification, INotificationC } from '../db_notification_model/notifica
 const userSchema = mongoose.Schema;
 
 const schema = new userSchema({
-    memberId: Number,
+    memberId: String,
     name: String,
     email: String,
-    telephone: Number,
+    telephone: String,
     facilitator: String,
     is_deleted: {
         type: String,
@@ -15,6 +15,7 @@ const schema = new userSchema({
     },
     rol: String,
     direction: String,
+    password: String,
     notifications: [INotificationC]
 });
 

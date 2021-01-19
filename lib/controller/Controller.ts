@@ -413,6 +413,12 @@ export class Controller {
     public changeNotificationStatus( pID: String , userID : Number){
         return this.movement.getMembers().changeNotStatus(pID, userID);
     }
+
+    public getCurrentUserName( pID : number ) : String {
+        var currentUser = this.movement.getMember(pID);
+        console.log("El valorsito: "+ currentUser.name);
+        return currentUser.name;
+    }
     
 
     

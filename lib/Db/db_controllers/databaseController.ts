@@ -99,14 +99,14 @@ export class dbController {
     ) {
       //console.log(req)
       const user_params: IUser = {
-        memberId: req.body.id,
+        memberId: req.body.id.toString(),
         name: req.body.name,
         email: req.body.mail,
         telephone: req.body.celular,
         facilitator: String(req.body.esMonitor),
         rol: "groupMember",
         direction: req.body.direccion,
-        password: "",
+        password: "hola",
         notifications: [],
       };
       //console.log("Aqui1");
@@ -122,8 +122,6 @@ export class dbController {
         });
     } else {
       console.log(" -- BD : Parametros insuficientes -- ");
-      // error response if some fields are missing in request body
-      //insufficientParameters(res);
     }
   }
 
@@ -159,6 +157,7 @@ export class dbController {
             //mongoError(err, res);
           } else {
             console.log(" Success !!!");
+            
             //successResponse("Zona Creada", data, res);
           }
         });
@@ -191,6 +190,30 @@ export class dbController {
   }
 
   ///                                                                                   ///
+  //                                     Set Password                                    //
+  ///                                                                                   ///
+  public async setPassword(id:String, password:String) : Promise<Boolean> {
+    let returning = false;
+    if ( password != "" && id != "" ) {
+      const user_filter = { memberId: id };
+      let previous;
+      previous = this.user.filterUser(user_filter, (err: any, user_data: IUser) => {});
+      if (previous.name != "") {
+        var res = await this.user.setPassword_(id, password,
+          (err: any, data: JSON) => {  });
+        return res;
+      } else {
+        console.log("Not user found SET PASSWORD");
+      }
+    } else {
+      console.log("User cannot be updated");
+    }
+    console.log(returning);
+    return returning;
+  }
+
+
+  ///                                                                                   ///
   //                              Update User Information                                //
   ///                                                                                   ///
   public update_user(req: Request) {
@@ -219,7 +242,7 @@ export class dbController {
             ? String(req.body.esMonitor)
             : previous.facilitator,
           rol: req.body.rol ? req.body.rol : previous.rol,
-          password: previous.password,
+          password: req.body.password ? req.body.password : previous.password,//
           notifications: previous.notifications
         };
         this.user.updateUser(user_params,

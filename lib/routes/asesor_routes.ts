@@ -1459,7 +1459,7 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       var nivel = req.body.nivelNoticia;
       var ruta = req.body.rutaNoticia;
       //app
-      var noticiaEnviada = controller.sendNewNotifications(cuerpo, asunto, "3", nivel, ruta); // el emisor se toma del session
+      var noticiaEnviada = controller.sendNewNotifications(cuerpo, asunto, req.session.user, nivel, ruta); // el emisor se toma del session
       
       if(noticiaEnviada!=null){
         noticiaEnviada.idsubscribers.forEach(element => {
@@ -1475,12 +1475,12 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
     app.post("/getNoticias", function (req: Request, res: Response) {
       
       
-      var misNoticias = controller.getNoticias(3); 
+      var misNoticias = controller.getNoticias(Number(req.session.user)); 
 
       console.log("Mis noticias",misNoticias);
       
       if(misNoticias.length != 0){
-        res.send({ status: 1, noticias:misNoticias,idMember:3}); // El parametro es el id del session
+        res.send({ status: 1, noticias:misNoticias,idMember:Number(req.session.user)}); // El parametro es el id del session
       }else{
         res.send({ status: 0 });
       }
@@ -1523,7 +1523,7 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
     app.post("/resumenConsolidado", function (req: Request, res: Response) {
       
       
-      var resumenConsolidado = controller.generarResumenConsolidado(3); // El parametro es el id del session
+      var resumenConsolidado = controller.generarResumenConsolidado(Number(req.session.user)); // El parametro es el id del session
 
       console.log("Mi resumen",resumenConsolidado);
       
@@ -1538,7 +1538,7 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
     app.post("/consultarRamasZonas", function (req: Request, res: Response) {
       
       
-      var misRamasZonas = controller.consultarRamasZonas(3); // El parametro es el id del session
+      var misRamasZonas = controller.consultarRamasZonas(Number(req.session.user)); // El parametro es el id del session
 
       console.log("Mis ramasZonas",misRamasZonas);
       
@@ -1550,9 +1550,19 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       
     }); 
 
+
+    
+
+    app.post("/getName", function (req: Request, res: Response) {
+      var pID = req.body.pId;
+      console.log("IdAbuscar:",Number(req.session.user))
+      console.log("La sesion 2: "+req.session.user);
+      var members = controller.getCurrentUserName(123);
+      res.send({ members:members});
+    });
+
     app.post("/consultarNodo", function (req: Request, res: Response) {
-      
-      
+    
       var members = controller.consultarNodo(req.body.ruta);
 
       console.log("Mis miembros",members);
@@ -1565,27 +1575,19 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       
     });
 
+    app.post("/registrarse", async function (req: Request, res: Response) {
+      
+      //var userCreation = dbController.create_user(req);
+      var success = await dbController.setPassword(req.body.id, req.body.password);
 
-    /*
-    app.post("/consultarLiderRamas", function (req: Request, res: Response) {
-      
-      
-      var liderandoRamas = controller.consultarLiderRamas(3); // El parametro es el id del session
+      console.log("Succes de despues --> "+ success);
 
-      console.log("Mis grupos",liderandoRamas);
-      
-      if(liderandoRamas != null){
-        res.send({ status: 1, nombresGrupos:misGruposLiderazgo.nombresGrupos,miembros:misGruposLiderazgo.miembros});
-      }else{
-        res.send({ status: 0 });
+      if(success){
+        res.send({ status: 1 });
+      }else{  
+        res.send({ status: 0 });  
       }
       
     });
-    */
-
-
-  }
+  };
 }
-
-
-

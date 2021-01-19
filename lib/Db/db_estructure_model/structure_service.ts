@@ -570,22 +570,16 @@ export default class StructureService {
 
   }
 
-  public async isSomeChief(memberId:String):Promise<Boolean>{
+  public async isSomeChief(memberId:String): Promise<Boolean> {
     var isChief:Boolean = null;
 
-    await this.isZoneChief(memberId).then(async (value)=>{
+    await this.isBranchChief(memberId).then(async (value)=>{
       if(!value){
-        await this.isBranchChief(memberId).then(async (value)=>{
+        await this.isGroupChief(memberId).then(async (value)=>{
           if(!value){
-            await this.isGroupChief(memberId).then(async (value)=>{
+            await this.isMonitor(memberId).then((value)=>{
               if(!value){
-                await this.isMonitor(memberId).then((value)=>{
-                  if(!value){
-                    isChief=false
-                  }else{
-                    isChief=true
-                  }
-                })
+                isChief=false
               }else{
                 isChief=true
               }
@@ -598,7 +592,8 @@ export default class StructureService {
         isChief=true
       }
     })
-    this.delay(1000);
+    
+    this.delay(1000); // :D
 
     return isChief
 
@@ -639,15 +634,21 @@ export default class StructureService {
 
     await this.isAsesor(memberId).then(async (value)=>{
       if(!value){
-        await this.isSomeChief(memberId).then(async (value)=>{
+        await this.isZoneChief(memberId).then(async (value)=>{
           if(!value){
-            await this.isGroupMember(memberId).then((value)=>{
-              if(value){
-                typeRol=3 // rol del miembro de grupo
+            await this.isSomeChief(memberId).then(async (value)=>{
+              if(!value){
+                await this.isGroupMember(memberId).then((value)=>{
+                  if(value){
+                    typeRol=3 // rol del miembro de grupo
+                  }
+                })
+              }else{
+                typeRol=2 // rol de los jefes y monitores
               }
             })
           }else{
-            typeRol=2 // rol de los jefes y monitores
+            typeRol=1
           }
         })
       }else{

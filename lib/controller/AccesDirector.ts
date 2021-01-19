@@ -69,7 +69,7 @@ export class AccesDirector implements IProxy{
 
         switch(memberRol){
             case 1: return "/asesorMain"
-            case 2: return "/vistaJefeMonitor"
+            case 2: return "/miembroJefes"
             case 3: return "/miembroEstandar"
             default: return null
         }
