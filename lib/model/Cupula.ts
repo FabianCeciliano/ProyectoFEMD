@@ -33,6 +33,7 @@ export class Cupula{
         var deleted = contribution.deleted;
         var newContribution = new Contribution(emissor,type,description);
         newContribution.setAll(emissor, type, description, new Date(date.toString()), deleted);
+        this.contributionRepository.push(newContribution);
     }
 
     public addAssessor(assesor : Member): Boolean {
@@ -72,11 +73,11 @@ export class Cupula{
         if(opt == "Mensual"){
             var reporteMensual = new MonthlyReport();
             this.setStrategy(reporteMensual);
-            return this.reportGenerator.generateReport(this.contributionRepository, actualMonth, this.assesor.getName());
+            return this.reportGenerator.generateReport(this.contributionRepository, actualMonth);
         }else if(opt == "Categoria"){
             var reporteCategoria = new CategoryReport();
             this.setStrategy(reporteCategoria);
-            return this.reportGenerator.generateReport(this.contributionRepository, actualMonth, this.assesor.getName());
+            return this.reportGenerator.generateReport(this.contributionRepository, actualMonth);
         };
     };
 

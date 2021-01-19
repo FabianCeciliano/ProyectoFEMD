@@ -10,6 +10,7 @@ import { Contribution } from 'model/Contribution';
 import { MyNotification } from '../model/MyNotification';
 import { IContribution } from '../Db/db_contribution_model/contribution_model';
 import { INotification } from 'Db/db_notification_model/notification_model';
+import { AsesorRotes } from 'routes/asesor_routes';
 
 export class Controller {
     controller(): String[] {
@@ -61,7 +62,10 @@ export class Controller {
 
     public addAsesor(idAsesor : number){
         
-        var assesor:Member = this.movement.getMember(idAsesor).clone();
+        //var assesor: Member = this.movement.getMember(idAsesor).clone();
+        console.log("Agregando id",idAsesor);
+        var assesor: Member = this.movement.getMembers().getMember(idAsesor).clone();
+        console.log(this.movement.getMembers().getMember(idAsesor).clone().getName())
         this.movement.getStructure().addAssesor(assesor);
 
         return true;

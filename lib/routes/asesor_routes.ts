@@ -125,8 +125,11 @@ export class AsesorRotes {
 
             }
             contributionsFromDB.forEach(element => {
+              console.log("Opt: "+Number(element.idMovimiento) + " Contra --> " + Number(movementFromDb[movindex].cedulaJuridica));
+              
               if(Number(element.idMovimiento) == Number(movementFromDb[movindex].cedulaJuridica)){
                 controller.setDBContribution(element);
+                console.log("Introduciendo contribucion " + element);
               }
             });
           
@@ -1136,15 +1139,16 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
         Number(req.body.telefono)
       );
 
-      controller.addAssesorToCupule(
+      /*controller.addAssesorToCupule(
         Number(req.body.idAsesor),
         req.body.nombreAsesor,
         Number(req.body.celularAsesor),
         req.body.correoAsesor,
         req.body.direccionAsesor
-      );
+      );*/
 
-      controller.addMember(Number(req.body.idAsesor),req.body.nombreAsesor,Number(req.body.celularAsesor),req.body.correoAsesor,req.body.direccionAsesor,false,[]);
+      controller.addMember(Number(req.body.idAsesor),req.body.nombreAsesor,
+        Number(req.body.celularAsesor),req.body.correoAsesor,req.body.direccionAsesor,false,[]);
       controller.addAsesor(Number(req.body.idAsesor));
 
 
@@ -1155,11 +1159,12 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
           req.body.pais,
           req.body.cedulaJuridica,
           req.body.web,
-          req.body.telefono
+          req.body.telefono,
+          Number(req.body.idAsesor)
         );
         
         dbController.createAsesor(req);
-        dbController.addAsesor(req.body.idAsesor,Number(req.body.cedulaJuridica));
+        //dbController.addAsesor(req.body.idAsesor,Number(req.body.cedulaJuridica));
         ///                                                                                 ///
         res.send({ status: 1 });
       } else {
@@ -1417,6 +1422,8 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
         
       var contributions = controller.getContributions();
 
+      console.log("Donde "+contributions);
+
       if(contributions){
         //Guardamos en DB?
         //dbController.create_user(req);
@@ -1438,6 +1445,7 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
       var month = req.body.month;
       var reportType = req.body.reportType;
       var report = controller.generateReport(month, reportType);
+      console.log("REPORTE :" + report);
 
       if(report!=null){
         res.send({ status: 1 ,  message:report});

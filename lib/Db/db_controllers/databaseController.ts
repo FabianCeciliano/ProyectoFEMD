@@ -300,7 +300,8 @@ export class dbController {
     coutry: String,
     cedulaJuridica: String,
     webDirection: String,
-    pPhone: String
+    pPhone: String,
+    idAssessor: number
   ) {
     if (
       name != "" &&
@@ -316,7 +317,7 @@ export class dbController {
         cedulaJuridica: cedulaJuridica,
         webDirection: webDirection,
         phone: pPhone,
-        miembros: [],
+        miembros: [idAssessor.toString()],
         zonas: [],
       };
       this.structures.setOrganizationParams(someParams);

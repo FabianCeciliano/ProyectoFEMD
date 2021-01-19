@@ -34,7 +34,7 @@ export class Member extends Person implements Subscriber{
         return true;
     }
 
-    public clone() : Member{
+    public clone() : Member {
         return new Member(this.direction,this.rol,this.facilitador,this.id,this.name,this.email,this.telephone);
     }
 

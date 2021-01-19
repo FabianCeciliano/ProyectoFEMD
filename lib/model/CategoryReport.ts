@@ -8,8 +8,8 @@ export class CategoryReport implements Strategy{
     constructor(){
     }
 
-    generateReport(contributionRepository: Contribution[], month : String, assesorName : String): String {
-        var report = "\n\n\n Buenas Señor(a): "+assesorName+"\n\n";
+    generateReport(contributionRepository: Contribution[], month : String): String {
+        var report = "\n\n\n Buenas Asesor(a)";
         var petitoryCount = 0;
         var offeringCount = 0;
         var gratitudeCount = 0;

@@ -669,15 +669,8 @@ export default class StructureService {
     idMovement:number,
     callback: any
   ) {
-    console.log("-- Adding asesor to structure --");
-    //structures.update({_id:idMovement}, {$push: { miembros: idAsesor  } },callback);
-
-    structures.update(
-      {_id:idMovement},
-      { $push: { "miembros": idAsesor } },
-      { arrayFilters: [], multi: true },callback
-    );
-
+    console.log("-- Adding asesor to structure --",idAsesor);
+    structures.update({_id:idMovement}, {$push: { miembros: idAsesor } },callback);
     console.log(" -- Miembro Insertado -- ");
   }
 
