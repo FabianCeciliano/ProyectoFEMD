@@ -1556,8 +1556,7 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
     app.post("/getName", function (req: Request, res: Response) {
       var pID = req.body.pId;
       console.log("IdAbuscar:",Number(req.session.user))
-      console.log("La sesion 2: "+req.session.user);
-      var members = controller.getCurrentUserName(123);
+      var members = controller.getCurrentUserName(Number(req.session.user));
       res.send({ members:members});
     });
 

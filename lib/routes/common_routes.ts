@@ -63,9 +63,9 @@ export class CommonRoutes {
                     memberRol=value
                 })
                 if(memberRol!=null){
-                    res.send({ status: 1 , route:memberRol});
                     req.session.user=memberId.toString();
                     console.log("La sesion: "+req.session.user);
+                    res.send({ status: 1 , route:memberRol});  
                 }else{
                     res.send({ status: 2 });// 2 es que no tiene rol, so...?
                 }
