@@ -1498,7 +1498,7 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
     app.post("/consultarGrupos", function (req: Request, res: Response) {
       
       
-      var misGrupos = controller.consultarGrupos(3); // El parametro es el id del session
+      var misGrupos = controller.consultarGrupos(Number(req.session.user)); // El parametro es el id del session
 
       console.log("Mis grupos",misGrupos);
       
@@ -1514,7 +1514,7 @@ app.post("/getShowAlBl", function (req: Request, res: Response) {
     app.post("/consultarGruposLiderazgo", function (req: Request, res: Response) {
       
       
-      var misGruposLiderazgo = controller.consultarGruposLiderazgo(3); // El parametro es el id del session
+      var misGruposLiderazgo = controller.consultarGruposLiderazgo(Number(req.session.user)); // El parametro es el id del session
 
       console.log("Mis grupos",misGruposLiderazgo);
       
